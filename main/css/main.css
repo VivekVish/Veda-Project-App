@@ -217,16 +217,10 @@ nav#coursenav.lessonNav ul li ul li
 {
 	font-size: 0.65em;
 }
-
-nav#coursenav.lessonNav div ul li:hover
-{
-	color: #000;
-}
-
 nav#coursenav.lessonNav div ul li ul li:hover
 {
-	color: #FFF;
 	cursor: pointer;
+    text-decoration: underline;
 }
 
 nav#coursenav ul li:last-of-type
@@ -433,7 +427,7 @@ nav#coursenav h2
 	display: none;
 	position: fixed;
 	width: 20em;
-	background: #CCF;
+	background: #EEF;
 	border: 2px solid #FFF;
 	z-index: 5;
 	

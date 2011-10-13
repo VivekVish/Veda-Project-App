@@ -39,20 +39,22 @@ footer li
 }
 
 /* Course Navigation */
-
 nav#coursenav
 {
-	background-color: #99F;	
+    color: #FFF;
+    background-color: #000;
+    background-color: rgba(0,0,0,0.9);	
 }
 
 nav#coursenav ul li
 {
 	font-weight: bold;
-	background-color: #CCF;
+	background-color: #000;
 }
 
 nav#coursenav ul li:hover
 {
+    color: white;
 	-moz-box-shadow: 0px 0px 3em #fff;
 	-webkit-box-shadow: 0px 0px 3em #fff;
 	box-shadow: 0px 0px 3em #fff;
@@ -61,15 +63,26 @@ nav#coursenav ul li:hover
 
 nav#coursenav.lessonNav ul li
 {
-	background-color: #99F;	
+	background-color: #000;
+    background-color: rgba(0,0,0,0);	
 }
 
 nav#coursenav.lessonNav ul li:hover
 {
-	color: #fff;
+	color: white;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
+}
+
+nav#coursenav.lessonNav div ul li:hover
+{
+	color: #FFF;
+}
+
+nav#coursenav.lessonNav div ul li ul li:hover
+{
+	color: #FFF;
 }
 
 /* Note bar */
@@ -83,7 +96,7 @@ nav#coursenav.lessonNav ul li:hover
 
 #content
 {
-	background-color: #EEF;
+	background-color: #FFF;
 }
 
 /* Page Nav */
