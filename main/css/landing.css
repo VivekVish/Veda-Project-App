@@ -1,0 +1,14 @@
+#content a
+{
+    color: blue;
+}
+
+#content a:hover
+{
+    text-decoration: underline;
+}
+
+#content a:visited
+{
+    color: purple;
+}

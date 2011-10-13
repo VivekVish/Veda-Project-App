@@ -1,0 +1,191 @@
+/* Graph Editor */
+
+#lightbox.graphLightbox
+{
+	display: block;
+	width: 57em;
+	height: 40em;
+}
+
+#lightbox.graphLightbox h4
+{
+	margin-bottom: 0.2em;
+}
+
+#graphEditorHolder>div:first-of-type
+{
+	position: relative;
+	height: 20em;
+	width: 30em;
+}
+
+#graphEditorHolder>div:first-of-type>div.ilo
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align:  center;
+}
+
+#graphEditorHolder>div:last-of-type
+{
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+}
+
+/* Graph Parameters */
+#graphParameters
+{
+	position: relative;
+	top: -20em;
+	left: 31em;
+	width: 24em;
+}
+
+#lightbox.graphLightbox #graphEditorHolder h5
+{
+	background-image: none;
+	font-size: 1em;	
+	font-weight: bold;
+}
+
+#graphParameters>div
+{
+	background-color: #EEF;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: black solid 0.1em;
+	margin-top: 0.3em;
+}
+
+#graphParameters>div li, #graphParameters>div h5, #graphParameters>div a
+{
+	padding-left: 0.5em;
+}
+
+#graphParameters>div a
+{
+	position: relative;
+	top: -0.25em;
+}
+
+#graphParameters #graphXAxis input[type="text"], #graphParameters #graphYAxis input[type="text"], #graphParameters #graphProperties input[type="text"]
+{
+	width: 4em;
+}
+
+
+
+#graphParameters #graphXAxis label, #graphParameters #graphYAxis label, #graphParameters #graphFunctions label, #graphParameters #graphProperties label
+{
+	width: 4em;	
+}
+
+/* X axis */
+#graphParameters #graphXAxis
+{
+	display: inline-block;
+	height: 7.5em;
+	width: 10em;
+}
+
+/* Y Axis */
+#graphParameters #graphYAxis
+{
+	display: inline-block;
+	float: right;
+	height: 7.5em;
+	width: 10em;
+}
+
+/* Graph Properties */
+#graphParameters #graphProperties
+{
+	position: relative;
+	height: 4.8em;
+	width: 24em;
+}
+
+#graphParameters #graphProperties li:not(:last-of-type)
+{
+	display:inline;
+	padding-right: 0.6em;
+}
+
+#graphParameters #graphProperties li:last-of-type
+{
+	position: absolute;
+	bottom: 0.25em;
+}
+
+#graphParameters #graphProperties input[type="text"]
+{
+	position: relative;
+	top: -0.2em;	
+}
+
+#graphParameters #graphProperties input[type="text"]
+{
+	width: 3em;	
+}
+
+/* Graph Functions */
+#graphParameters #graphFunctions
+{
+	width: 24em;	
+}
+
+#graphParameters #graphFunctions ul
+{
+	margin-bottom: 0.5em;
+}
+
+#graphEditorHolder .deleteGraphFunction
+{
+	cursor: pointer;	
+}
+
+#graphEditorHolder #insertGraphFunction
+{
+	cursor: pointer;
+	color: blue;
+	text-decoration: underline;
+}
+
+#graphParameters #graphFunctions input[type="text"]
+{
+	width: 6em;	
+	margin-right: 0.2em;
+}
+
+#graphParameters #graphFunctions input[type="text"]:first-of-type
+{
+	margin-right: 1em;
+}
+
+#graphParameters #graphFunctions img
+{
+	position: relative;
+	top: 0.4em;	
+}
+
+/* Error Message Box */
+#graphErrorMessages>div
+{
+	width: 29.5em;
+	margin-top: 1em;
+	background-color: #ED9B92;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: black solid 0.1em;
+	padding-left: 0.5em;
+}
+
+#graphErrorMessages
+{
+	position: absolute;
+}

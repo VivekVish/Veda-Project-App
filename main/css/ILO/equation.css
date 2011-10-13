@@ -1,0 +1,39 @@
+/* Equation Editor */
+
+textarea#equationText
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 5em;
+}
+
+#equationImageHolder
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 6em;
+	min-height: 2em;
+	background-color: #FFF;
+	border: dashed black 0.1em;
+}
+
+#equationImage
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+div.equationEditorButton:hover>div:not(:first-of-type)
+{
+	z-index: 10;
+}
+
+div.ilo[data-ilotype="equation"]
+{
+	
+}

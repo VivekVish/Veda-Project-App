@@ -1,0 +1,16 @@
+/* CSS Reset */
+
+html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, code, address, variable, form, fieldset, blockquote, section, article, nav, aside, hgroup, header, footer, figure, figcaption
+{
+ padding: 0;
+ margin: 0;
+ font-size: 100%;
+ font-weight: normal;
+}
+table { border-collapse: collapse; border-spacing: 0; }
+td, th, caption { font-weight: normal; text-align: left; }
+img, fieldset { border: 0; }
+ul, ol { padding-left: 1.4em; list-style: none; margin-left: 0; padding-left: 0; }
+q:before, q:after { content:''; }
+section, header, footer, article, aside, nav, figcaption{ display: block; }
+a { color: #000; text-decoration: none; }

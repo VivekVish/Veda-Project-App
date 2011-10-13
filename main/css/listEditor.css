@@ -1,0 +1,106 @@
+#content>section
+{
+    width: 80%;
+}
+
+#content ul.listEditor
+{
+	margin-left: 2em;
+	width: 100%;
+}
+
+/* Topmost header line */
+#content #listEditorHeader
+{
+	position: relative;
+	top: 0.25em;
+	margin-left: 2em;
+	width: 100%;
+	display: inline-block;
+	height: 1.75em;
+	background: #4c4c4c;
+	background: -moz-linear-gradient(top, #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(12%,#595959), color-stop(25%,#666666), color-stop(39%,#474747), color-stop(50%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(76%,#2b2b2b), color-stop(91%,#1c1c1c), color-stop(100%,#131313));
+	background: -webkit-linear-gradient(top, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%);
+}
+
+/* Image Icons */
+#content #listEditorHeader img, #content ul.listEditor img
+{
+	height: 1em;
+	width: 1em;
+	float: right;
+	margin-top: 0.25em;
+	cursor: pointer;
+}
+
+#content #listEditorHeader span:last-of-type img, #content ul.listEditor span:last-of-type img
+{
+	margin-right: 0.25em;
+}
+
+/* Highest span within section list */
+#content ul.listEditor>li>span
+{
+	display: inline-block;
+	width: 100%;
+	padding: 0.25em 0 0.25em 0;
+	background: #fcfff4;
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead));
+	background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+}
+
+/* Provide spacing for empty list */
+#content ul.lessonList
+{
+	min-height: 1em;
+	background-color: white;
+}
+
+/* First of sub-spans */
+#content ul.listEditor>li>span>span:first-of-type, #content ul.listEditor>li>ul>li>span>span:first-of-type, #content #listEditorHeader>span:first-of-type
+{
+	display: inline-block;
+	width: 2%;
+	height: 100%;
+}
+
+/* Last of sub-spans */
+#content ul.listEditor>li>span>span:last-of-type, #content ul.listEditor>li>ul>li>span>span:last-of-type, #content #listEditorHeader>span:last-of-type
+{
+	display: inline-block;
+	width: 20%;
+	float: right;
+}
+
+#content ul.listEditor li
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#content ul.listEditor li ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+/* Editing name inputs */
+#content ul.listEditor>li>span>input.sectionName, #content ul.listEditor>li>ul>li>span>input.lessonName
+{
+	width: 70%;
+}
+
+/* Highest span within lesson list */
+#content ul.listEditor>li>ul>li>span
+{
+	display: inline-block;
+	width: 100%;
+	padding: 0.25em 0 0.25em 0;
+	background: #fcfff4;
+	background: -moz-linear-gradient(top, #fcfff4 0%, #e9e9ce 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce));
+	background: -webkit-linear-gradient(top, #fcfff4 0%,#e9e9ce 100%);
+}

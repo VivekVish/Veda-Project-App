@@ -1,0 +1,88 @@
+/* Questions */
+div#content > section
+{
+	padding: 0;
+}
+
+.question
+{
+	position: relative;
+	width: 80%;
+	left: 10%;
+	margin-top: 1em;
+	padding: 1em 0 1em 0;
+}
+
+.question .questioncontent
+{
+	padding-left: 1.5em;	
+}
+
+.question .answerfield
+{
+	padding-left: 1.5em;	
+}
+
+.question .answerfield.multchoice ol
+{
+	margin-top: 0;
+	padding-top: 0;
+	padding-right: 1.5em;
+}
+
+.question .answerfield.multchoice ol li
+{
+	padding: 0.5em 2em 0.5em 0.5em;
+	margin: 0.5em 0 0.5em 0;
+	border: 0.15em black solid;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	cursor: pointer;
+}
+
+.question .answerfield.multchoice ol li p
+{
+	display: inline;
+	padding: 0;
+}
+
+.question .answerfield.multchoice ol li .letter
+{
+	float: left;
+	position: absolute;
+	left: 1.5em;
+}
+
+div.submitdiv
+{
+	position: relative;
+	width: 80%;
+	left: 10%;
+}
+
+button.submitanswer, button.editQuestion
+{
+	margin-top: 2em;
+	float: right;
+	
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1em;
+	font-weight: bold;
+	padding: .5em 2em .55em;
+}
+
+.answerfield.multchoice ol li
+{
+	list-style-type: none;
+}
+
+.fillintheblank>input:not([type="radio"])
+{
+	border-radius: 0.25em;
+	background-clip: padding-box;
+	border: solid black 0.1em;
+	height: 1.8em;
+}

@@ -1,0 +1,58 @@
+html, body
+{
+	height: 100%;
+}
+
+#splash
+{
+	text-align: center; 
+	margin-top: 25px;
+}
+
+#loginBox
+{
+	margin-top: 25px;
+	text-align: center; 
+}
+
+#ie
+{
+    margin-top: 25px;
+    width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 21px;
+}
+
+#ie div
+{
+    margin-top: 20px;
+}
+
+#ie div a
+{
+    display: inline-block;
+    height: 120px;
+    width: 110px;
+    margin-right: 30px;
+}
+
+a#firefox
+{
+    background: url('../img/browser-logos.jpeg') 0 0;
+}
+
+a#chrome
+{
+    background: url('../img/browser-logos.jpeg') -347px 0;
+}
+
+a#opera
+{
+    background: url('../img/browser-logos.jpeg') -232px 0;
+}
+
+a#safari
+{
+    background: url('../img/browser-logos.jpeg') -463px 0;
+}

@@ -1,0 +1,10 @@
+#questionEditorViewer
+{
+	position: fixed;
+	height: 15em;
+	left: 15%;
+	width: 85%;
+	bottom: 4em;
+	z-index: 2;
+	border-top: solid black 0.2em;
+}

@@ -1,0 +1,14 @@
+div#content ul.revisionHistory a
+{
+    color: blue;
+}
+
+div#content ul.revisionHistory a:visited
+{
+    color: #800080;
+}
+
+div#content ul.revisionHistory a:hover
+{
+    text-decoration: underline;
+}

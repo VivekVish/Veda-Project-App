@@ -1,0 +1,136 @@
+.ilo[data-ilotype="staticimage"]>div.imageFrame, #imageEditorHolder #imageHolder
+{
+	display: block;
+	background-color: #69F;
+	padding: 0.5em;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: 0.2em black solid;
+}
+
+.ilo[data-ilotype="staticimage"][data-frame="none"]>div.imageFrame, #imageEditorHolder #imageHolder[data-frame="none"]
+{
+    background-color: transparent;
+    border: none;
+}
+
+.ilo[data-ilotype="staticimage"] .highlightILO
+{
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+}
+
+.ilo[data-ilotype="staticimage"] .editILO, .ilo[data-ilotype="staticimage"] .deleteILO
+{
+	top: 0.2em;
+	margin-left: 0.15em;
+}
+
+.ilo[data-ilotype="staticimage"]
+{
+	display: block;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+}
+
+.ilo[data-ilotype="staticimage"][data-position="center"]
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ilo[data-ilotype="staticimage"][data-position="right"]
+{
+	margin-left: 0.2em;
+	float: right;
+}
+
+.ilo[data-ilotype="staticimage"][data-position="left"]
+{
+	margin-right: 0.2em;
+	float: left;	
+}
+
+.ilo[data-ilotype="staticimage"] img, #imageHolder img
+{
+	display: block;
+}
+
+.ilo[data-ilotype="staticimage"] figcaption, #imageHolder figcaption
+{
+	font-size: 0.85em;
+}
+
+#imageEditorHolder
+{
+	height: 40em;
+	padding-top: 0.3em;
+}
+
+#imageEditorHolder>div
+{
+	width: 30em;
+	height: 30em;
+}
+
+#imageInfoHolder
+{
+	position: absolute;
+	top: 2.95em;
+	left: 32.9em;	
+	background-color: #EEF;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: black solid 0.1em;
+	margin-top: 0.3em;
+	width: 26em;
+	padding: 0.4em;
+}
+
+#imageInfoHolder li:nth-last-of-type(2)
+{
+	position: relative;
+}
+
+label[for="imageCaption"]
+{
+	position: relative;
+}
+
+#imageInfoHolder h5
+{
+	font-weight: bold;
+}
+
+#imageInfoHolder li
+{
+	padding-bottom: 0.3em;
+}
+
+#imageInfoHolder li:last-of-type label:nth-of-type(n+2)
+{
+	width: 4.5em;
+}
+
+#imageEditorHolder>div:last-of-type
+{
+	position: absolute;
+	right: 1em;
+	top: 37em;	
+}
+
+#lightbox.imageLightbox
+{
+	height: 40em;
+	width: 62em;
+}
+
+#imageWidth
+{
+	width: 3em;	
+}

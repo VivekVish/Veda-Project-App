@@ -1,0 +1,145 @@
+/*Page related styles for you to view*/
+
+.aligntocenter {
+margin: 0.5em auto;
+border: 2px solid #A22;
+width: 90%;
+position: relative;
+height: 500px;
+}
+
+.fixedsize {
+width: 400px;
+height: auto;
+position: relative;
+color: black;
+padding: 1px;
+}
+
+.version 
+{
+background: #999;
+color: white;
+font-size: 75%;
+padding: 0 0.4em 0 0.3em;
+}
+
+/* general page style ends here */
+
+/* Scroll Bar Master Styling Starts Here */
+
+.scrollgeneric
+{
+line-height: 1px;
+font-size: 1px;
+position: absolute;
+}
+
+.vscrollerbase, .vscrollerbar 
+{
+	width: 15px;
+	top: 0px;
+	background: none;
+}
+
+.vscrollerbar 
+{
+	left: 0px;
+}
+
+.hscrollerbase, .hscrollerbar 
+{
+	height: 15px;
+	left: 0px;
+	background: none;
+}
+
+
+.hscrollerbar 
+{
+	top: 0px;
+}
+
+.vscrollerbar, .hscrollerbar 
+{
+/*padding information of these elements are only used for
+padding of the scroll-bar with respect to the scroll base,
+the padding will automatically be turned off by the script*/
+padding: 5px;
+/* z-index for scrollbars no longer has to be given as of version
+1.7.5 for correct operation, but it is still recommended, as this
+decides the z-index for content.*/
+z-index: 2;
+}
+
+.vscrollerbarbeg 
+{
+/*top image holder for vertical scroll bar*/
+background: url(../img/flexcrollred/vscroller.png) 0px -10px;
+width: 15px;
+height: auto;
+top: 0px;
+}
+
+.vscrollerbarend {
+/*bottom image holder for vertical scroll bar*/
+background: url(../img/flexcrollred/vscroller.png);
+width: 15px;
+height: 10px;
+}
+
+.hscrollerbarbeg {
+background: url(../img/flexcrollred/hscroller.png) -10px 0px;
+height: 15px;
+width: auto;
+left: 0;
+}
+
+.hscrollerbarend {
+background: url(../img/flexcrollred/hscroller.png);
+height: 15px;
+width: 10px;
+}
+
+/* Following are OPTIONAL */
+
+.vscrollerbase, .hscrollerbase {
+background-color: #D1DDCB;
+background-image: url(../img/flexcrollred/scrollbaseback.png);
+
+}
+
+.hscrollerbasebeg {
+left: 0px;
+top: 0px;
+height: 15px;
+background: url(../img/flexcrollred/scrollbases.png) -22px 0px no-repeat;
+}
+
+.hscrollerbaseend {
+top: 0px;
+height: 15px;
+width: 7px;
+background: url(../img/flexcrollred/scrollbases.png) 0% 0% no-repeat;
+}
+
+.vscrollerbasebeg {
+top: 0px;
+width: 15px;
+background: url(../img/flexcrollred/scrollbases.png) -7px -8px no-repeat;
+}
+
+.vscrollerbaseend {
+height: 7px;
+width: 15px;
+background: url(../img/flexcrollred/scrollbases.png) -7px 0px no-repeat;
+}
+
+.scrollerjogbox {
+width: 15px;
+height: 15px;
+bottom: 0px;
+right: 0px;
+background: white url(../img/flexcrollred/scrolljog.png) 50% 50%;
+}
+
