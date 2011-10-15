@@ -53,16 +53,8 @@ var equation =
 				createEquationStarted = true;
 				if(typeof(targetEquation) == 'undefined')
 				{
-					if(insertionPoint.startContainer.tagName=="P"&&$(insertionPoint.startContainer).html()=="")
-					{
-						targetEquation = document.createElement('div');
-						ilo.insertILO(insertionPoint, targetEquation, "replaceWith");
-					}
-					else
-					{
-						targetEquation = document.createElement('span');
-                        ilo.insertILO(insertionPoint, targetEquation, "insertNode");
-					}
+                    targetEquation = document.createElement('span');
+                    ilo.insertILO(insertionPoint, targetEquation, "insertNode");
 					
 					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()});
 				}
