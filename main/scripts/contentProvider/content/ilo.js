@@ -174,10 +174,13 @@ var ilo =
                 break;
             case "insertNode":
                 insertionPoint.insertNode(ILOPlaceholder);
-                var newRange = document.createRange();
-                newRange.setStartAfter(ILOPlaceholder);
-                newRange.setEndAfter(ILOPlaceholder);
-                rangeTraverse.setCurrentRange(newRange);
+                if(!$.browser.webkit)
+                {
+                    var newRange = document.createRange();
+                    newRange.setStartAfter(ILOPlaceholder);
+                    newRange.setEndAfter(ILOPlaceholder);
+                    rangeTraverse.setCurrentRange(newRange);
+                }
                 break;
             case "replaceWith":
                 $(insertionPoint.startContainer).replaceWith(ILOPlaceholder);
