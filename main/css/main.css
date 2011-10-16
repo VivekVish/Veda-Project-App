@@ -156,9 +156,14 @@ nav#coursenav
 
 nav#coursenav>div
 {
-	overflow-y: scroll;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	height: 100%;
+}
+
+nav#coursenav>div:hover
+{
+    overflow-y: auto;
 }
 
 nav#coursenav>div>div#upToPreviousNavLevel

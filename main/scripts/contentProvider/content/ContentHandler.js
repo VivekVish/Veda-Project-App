@@ -123,6 +123,13 @@ function ContentHandler()
 							materialProvider.insertSection(6);
 						}
 						break;
+                    case 83:
+                        if(thisObject.keyPressed['ctrl'])
+                        {
+                            e.preventDefault();
+                            materialProvider.submitContent();
+                        }
+                        break;
 				}
 				break;
 		}

@@ -507,6 +507,33 @@ function BaseHandler()
 							contentState.undo();
 						}
 						break;
+                    // Hyphen
+                    /*case 109: case 189:
+                        var currentRange = rangeTraverse.getCurrentRange();
+
+                        if(currentRange.collapsed&&currentRange.startOffset>0)
+                        {
+                            var newRange = currentRange.cloneRange();
+                            var startNode = currentRange.startContainer;
+                            if(!$(startNode).is('*'))
+                            {
+                                startNode = $(currentRange.startContainer).parent()[0];
+                            }
+                            var startOffset = currentRange.startOffset-1;
+                            newRange.setStart(startNode, startOffset);
+                            if(newRange.toString()=="-")
+                            {
+                                e.preventDefault();
+                                newRange.deleteContents();
+                                newRange.insertNode(document.createTextNode($('<div />').html('&mdash;').remove().text()));
+                                console.log(startNode);
+                                console.log(startOffset);
+                                newRange.setStart(startNode,startOffset+1);
+                                newRange.setEnd(startNode,startOffset+1);
+                                rangeTraverse.setCurrentRange(newRange);                                
+                            }
+                        }
+                        break;*/
 				}
 				break;
 			case 'keyup':

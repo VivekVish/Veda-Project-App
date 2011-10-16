@@ -292,7 +292,7 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
 		$providerName = strtolower($auth_info['profile']['providerName']);
 		$identity = urlencode(preg_replace('/\//','FORWARDSLASHCODE',$auth_info['profile']['identifier']));
 		$result = $api->get("/user/{$providerName}/{$identity}/");
-        
+
 		if($result=="<user>User Not Found.</user>")
 		{
 			$_SESSION['requestusername']=true;
