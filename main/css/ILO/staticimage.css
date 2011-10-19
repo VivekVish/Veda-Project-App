@@ -76,11 +76,13 @@
 	height: 30em;
 }
 
-#imageInfoHolder
+#imageTabs
 {
+    font-size: 1em;
 	position: absolute;
 	top: 2.95em;
-	left: 32.9em;	
+	left: 32.9em;
+    height: 17em;
 	background-color: #EEF;
 	-moz-border-radius: 0.4em;
 	-webkit-border-radius: 0.4em;
@@ -92,12 +94,37 @@
 	padding: 0.4em;
 }
 
+#imageTabs li
+{
+    list-style: none;
+}
+
+#imageInfoHolder
+{
+	position: absolute;
+	top: 22.95em;
+	left: 32.9em;	
+	background-color: #EEF;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: black solid 0.1em;
+	width: 26em;
+	padding: 0.4em;
+}
+
+#courseImages select, #userImages select
+{
+    min-width: 15em;
+}
+
 #imageInfoHolder li:nth-last-of-type(2)
 {
 	position: relative;
 }
 
-label[for="imageCaption"]
+label[for="imageCaption"], label[for="imageCitation"]
 {
 	position: relative;
 }
@@ -117,6 +144,11 @@ label[for="imageCaption"]
 	width: 4.5em;
 }
 
+#imageInfoHolder input, #imageInfoHolder textarea
+{
+    margin-left:0.1em;
+}
+
 #imageEditorHolder>div:last-of-type
 {
 	position: absolute;
@@ -133,4 +165,24 @@ label[for="imageCaption"]
 #imageWidth
 {
 	width: 3em;	
+}
+
+#lightbox #unobtrusive, #lightbox #imageFilename
+{
+    display: inline;
+}
+
+#lightbox #imageFilename
+{
+    max-width: 15em;
+}
+
+#lightbox #uploadImage
+{
+    float: right;
+}
+
+#lightbox #imageTabs
+{
+    background-image: none;
 }

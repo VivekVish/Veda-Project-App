@@ -26,7 +26,7 @@
                 <span class="CPsublist">
                 	<li title="Insert Equation (Ctrl+Shift+E)" id="insertEquation">{html_image file='img/contenticons/insertEquation.gif'}</li>
                     <li title="Insert Graph (Ctrl+Shift+G)" id="insertGraph">{html_image file='img/contenticons/insertGraph.gif'}</li>
-                    <!--<li title="Insert Image (Ctrl+Shift+I)" id="insertImage">{html_image file='img/contenticons/insertImage.gif'}</li>-->
+                    <li title="Insert Image (Ctrl+Shift+I)" id="insertImage">{html_image file='img/contenticons/insertImage.gif'}</li>
                 </span>
 {if isset($type)}
                 <span class="CPfunctions">

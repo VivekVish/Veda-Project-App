@@ -10,9 +10,11 @@
 var staticimage =
 {
     imageUploadForm: '<form action="resources/imageUpload.php" method="post" name="unobtrusive" id="unobtrusive" enctype="multipart/form-data">'+
-							'<p><input type="file" name="filename" id="imageFilename" value="filename" /></p>'+
-                            '<input type="text" name="imageName" id="imageName" />'+
-                            '<button id="uploadImage" type="submit">Upload Image</button>'+
+							'<ul><li><label for="imageFilename">File</label><input type="file" name="filename" id="imageFilename" value="filename" /></li>'+
+                            '<li><label for="imageName">Name</label><input type="text" name="imageName" id="imageName" /></li>'+
+                            '<li><label for="imageLicense">License</label><select id="imageLicense" name="imageLicense" /></li>'+
+                            '<li><label for="imageCitation">Citation</label><textarea id="imageCitation" name="imageCitation" rows=3 columns=60 /></li>'+
+                            '<li><button id="uploadImage" type="submit">Upload Image</button></li></ul>'+
                      '</form>',
 	// DESC: creates a lightbox in which the content provider can edit or add an image
 	// PARAMETER: targetImage is the ILO to be edited.  If it is undefined, a new ILO will be added after the start container of the caret position
@@ -113,6 +115,59 @@ var staticimage =
 				$('#imageWidth').val(5);
 			}	
 		}
+        
+        function loadCourseImages()
+        {
+            if($('#courseImages select').children().size()==1)
+            {
+                var positionArray = $('#content').attr('data-location').replace(/^\/data\/material\/|\/$/g,'').split('/');
+                var payload = {"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2]};
+                $.ajax({url:'resources/getCourseImages.php', data: payload, success: function(data)
+                {
+                    try
+                    {
+                        var courseImages = $.parseJSON(data);
+                        $.each(courseImages, function(index,imageRow)
+                        {
+                            var newOption = $('<option></option>');
+                            newOption.attr('value',imageRow.imageId);
+                            newOption.html(imageRow.name);
+                            $('#courseImages select').append(newOption);
+                        });
+                    }
+                    catch(e)
+                    {
+                        new Message(data);
+                    }
+                }});
+            }
+        }
+        
+        function loadUserImages()
+        {
+            if($('#userImages select').children().size()==1)
+            {
+                $.ajax({url:'resources/getUserImages.php', success: function(data)
+                {
+                    try
+                    {
+                        var userImages = $.parseJSON(data);
+                        $.each(userImages, function(index,imageRow)
+                        {
+                            var newOption = $('<option></option>');
+                            newOption.attr('value',imageRow.imageId);
+                            newOption.html(imageRow.name);
+                            $('#userImages select').append(newOption);
+                        });
+                    }
+                    catch(e)
+                    {
+                        new Message(data);
+                    }
+                }});
+            }
+        }
+
 		
 		if($('#lightbox').size()>0)
 		{
@@ -129,28 +184,85 @@ var staticimage =
 			insertionPoint = rangeTraverse.parents('p,.ilo,:header,table,ul,li')[0];
 		}
 		
-		createLightBox('#content','Image Editor','<div id="imageEditorHolder"><div><div id="imageHolder"></div><div id="imageInfoHolder"></div></div></div>');
+		createLightBox('#content','Image Editor','<div id="imageEditorHolder"><div><div id="imageHolder"></div><div id="imageTabs"></div><div id="imageInfoHolder"></div></div></div>');
+        $('#imageTabs').append('<ul></ul>');
+        $('#imageTabs ul').append('<li><a href="#imageUploadForm">Upload Image</a></li>'+
+                                  '<li><a href="#courseImages">Course Images</a></li>'+
+                                  '<li><a href="#userImages">User Images</a></li>');
+        
+        $('#imageTabs').append('<div id="imageUploadForm"></div>');
+        $('#imageTabs').append('<div id="courseImages"></div>');
+        $('#imageTabs').append('<div id="userImages"></div>');
+        $('#imageUploadForm').append(staticimage.imageUploadForm);
+
+        $('#courseImages').append('<select><option value="" selected="selected"></option></select>');
+        $('#userImages').append('<select><option value="" selected="selected"></option></select>');
+        
+        $('#courseImages select, #userImages select').change(function(e)
+        {
+            if($(this).val()!="")
+            {
+                replaceLightBoxImage($(this).val());
+            }
+        });
+        
+        $('#imageTabs').tabs({show: function(e,ui)
+        {
+            if($(ui.panel).attr('id')=="courseImages")
+            {
+                loadCourseImages();
+            }
+            else if($(ui.panel).attr('id')=="userImages")
+            {
+                loadUserImages();
+            }
+        }});
+        
 		$('#imageInfoHolder').append('<h5>Image Properties</h5>');
 		$('#imageInfoHolder').append('<ul><li></li></ul>');
-		$('#imageInfoHolder ul').append('<li><label for="imageFilename">File</label>'+staticimage.imageUploadForm+'</li>');
-		$('#imageInfoHolder ul').append('<li><label for="imageWidth">Width</label><input id="imageWidth" type="text" maxlength=3 />%</li>');
-        $('#imageInfoHolder ul').append('<li><label for="imageIncludeFrame">Include Frame</label><input id="imageIncludeFrame" type="checkbox" value="includeFrame"</li>');
-		$('#imageInfoHolder ul').append('<li><label for="imageCaption">Caption</label><textarea id="imageCaption" rows=5 columns=60 /></li>');
-		$('#imageInfoHolder ul').append('<li><label>Position</label><input id="leftImagePosition" name="imagePosition" type="radio" value="left" /><label for="leftImagePosition">Left</label>'+
+		$('#imageInfoHolder ul').append('<li><label for="imageWidth">Width</label><input id="imageWidth" type="text" maxlength=3 />%</li>').
+                                 append('<li><label for="imageIncludeFrame">Include Frame</label><input id="imageIncludeFrame" type="checkbox" value="includeFrame"</li>').
+                                 append('<li><label for="imageCaption">Caption</label><textarea id="imageCaption" rows=5 columns=60 /></li>').
+                                 append('<li><label>Position</label><input id="leftImagePosition" name="imagePosition" type="radio" value="left" /><label for="leftImagePosition">Left</label>'+
 										      '<input id="centerImagePosition" name="imagePosition" type="radio" value="center" /><label for="centerImagePosition">Center</label>'+
 											  '<input id="rightImagePosition" name="imagePosition" type="radio" value="right" /><label for="rightImagePosition">Right</label></li>');
 		
 		$('#imageEditorHolder').append('<div><button class="cancel">Cancel</button><button class="create">Create</button></div>');
+        
+        $('#imageLicense').append('<option value="" selected="selected"></option>').
+                           append('<option value="gnu1.0">GNU 1.0</option>').
+                           append('<option value="gnu1.1">GNU 1.1</option>').
+                           append('<option value="gnu1.2">GNU 1.2</option>').
+                           append('<option value="gnu1.3">GNU 1.3</option>').
+                           append('<option value="CC">Creative Commons</option>').
+                           append('<option value="fairuse">Fair Use</option>').
+                           append('<option value="publicdomain">Public Domain</option>');
 		
         $('#imageHolder').append('<figure><figcaption></figcaption></figure>');
         $('label[for="imageCaption"]').css('top',$('#imageCaption').offset().top-$('label[for="imageCaption"]').offset().top);
+        $('label[for="imageCitation"]').css('top',$('#imageCitation').offset().top-$('label[for="imageCitation"]').offset().top);
         
         var positionArray = $('#content').attr('data-location').replace(/^\/data\/material\/|\/$/g,'').split('/');
         var payload = {"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2]};
         
         $('#unobtrusive').ajaxForm({data: payload, success:function(data)
         {
-            replaceLightBoxImage(data);
+            try
+            {
+                var imageData = $.parseJSON(data);
+                if("errorCode" in imageData)
+                {
+                    new Message(data);
+                }
+                else
+                {
+                    replaceLightBoxImage(imageData[0]);
+                }
+            }
+            catch(e)
+            {
+                new Message(data);
+            }
         }});
         
 		if(typeof(targetImage)!='undefined')

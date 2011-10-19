@@ -234,11 +234,7 @@ function saveImage($saveAsName)
 	}
     else
     {
-		echo "Error!";
-		foreach($errorList as $value)
-        {
-	    		echo $value.', ';
-		}
+		return "Error!".implode(' ',$errorList);
 	}
 }
 

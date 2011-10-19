@@ -30,8 +30,33 @@
     {
         $imageName = trim($_REQUEST['imageName']);
     }
+    else
+    {
+        die("You must enter an image name.");
+    }
+    if(isset($_REQUEST['imageCitation']) && !empty($_REQUEST['imageCitation']))
+    {
+        $imageCitation = trim($_REQUEST['imageCitation']);
+    }
+    else
+    {
+        die("You must enter an image citation.");
+    }
+    if(isset($_REQUEST['imageLicense']) && !empty($_REQUEST['imageLicense']))
+    {
+        $imageLicense = $_REQUEST['imageLicense'];
+    }
+    else
+    {
+        die("You must enter an image license.");
+    }
     
-    $payload = json_encode(array("imageName"=>$imageName,"coursePath"=>$coursePath,"username"=>$userId,"imageType"=>$file_ext));
+    if(!PathArray::isCharNum($imageName))
+    {
+        die("Image Names must include only letters, numbers, and underscores.");
+    }
+    
+    $payload = json_encode(array("imageName"=>$imageName,"imageLicense"=>$imageLicense,"imageCitation"=>$imageCitation,"coursePath"=>$coursePath,"username"=>$userId,"imageType"=>$file_ext));
 
     $api = new Api();
     
@@ -47,8 +72,24 @@
         {
             $imageFilename = $resultArray->imageId;
             $imgPath = saveImage($imageFilename);
-            $imgPathArray = explode('/',$imgPath);
-            echo end($imgPathArray);
+            if(preg_match('/Error\!/',$imgPath)==0)
+            {
+                $imgPathArray = explode('/',$imgPath);
+                die(json_encode(array(end($imgPathArray))));
+            }
+            else
+            {
+                $uri = "/data/material/uploads/image/{$resultArray->imageId}/";
+                $result = $api->delete($uri);
+                if($result=="Success.")
+                {
+                    die("Fatal Error.  Unable to upload file.");
+                }
+                else
+                {
+                    die("Fatal Error.  Please contact veda@vedaproject.org with Image Error Code $imageFilename.");
+                }
+            }
         }
         else
         {

@@ -78,6 +78,11 @@ class PathArray
     {
         return preg_match('/\//',$name)==0;
     }
+    
+    public static function isCharNum($string)
+    {
+        return preg_match('/^[a-zA-Z0-9_ ]+/',$name)==0;
+    }
 }
 	
 ?>
