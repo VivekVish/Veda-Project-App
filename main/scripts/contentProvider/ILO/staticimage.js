@@ -110,6 +110,10 @@ var staticimage =
 			{
 				$('#imageWidth').val(100);
 			}
+            else if($('#imageWidth').val()=="")
+            {
+                $('#imageWidth').val(30);
+            }
 			else if($('#imageWidth').val()<5)
 			{
 				$('#imageWidth').val(5);
@@ -291,6 +295,7 @@ var staticimage =
 			$("#centerImagePosition").attr("checked",true);
             $("#imageIncludeFrame").attr("checked",true);
             $("#imageHolder").attr("data-frame","frame");
+            $('#imageWidth').val(30);
 		}
         
         
@@ -342,11 +347,8 @@ var staticimage =
             if(!createImageStarted&&$('#imageHolder').find('img').size()>0)
 			{
 				createImageStarted = true;
-				var ILOArray = '<ilo ilotype="staticimage" width="'+$('#imageWidth').val()/100+'" position="'+$('input[name="imagePosition"]:checked').val()+'" frame="'+$("#imageHolder").attr("data-frame")+'">'+
-					   '<file>'+$('#imageHolder').attr('data-imagefile')+'</file>'+
-         			   '<imagecaption>'+$('#imageCaption').val()+'</imagecaption></ilo>';
-                   
-                var ILOArray = {'type':'image','version':'1.0','attributes':{'width':$('#imageWidth').val()/100,'frame':$("#imageHolder").attr("data-frame"),'position':$('input[name="imagePosition"]:checked').val()},'content':{'file':$('#imageHolder').attr('data-imagefile'),'caption':$('#imageCaption').val()}};
+
+                var ILOArray = {'type':'staticimage','version':'1.0','attributes':{'width':$('#imageWidth').val()/100,'frame':$("#imageHolder").attr("data-frame"),'position':$('input[name="imagePosition"]:checked').val()},'content':{'file':$('#imageHolder').attr('data-imagefile'),'caption':$('#imageCaption').val()}};
 
 				if(typeof(targetImage) == 'undefined')
 				{
@@ -358,7 +360,7 @@ var staticimage =
 				{
 					ilo.editILO($(targetImage).attr('id'),ILOArray);
 				}
-				
+                
 				checkValidWidth();
 				staticimageILO.display(targetImage);
 					
