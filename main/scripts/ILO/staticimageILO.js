@@ -29,12 +29,12 @@ var staticimageILO =
 		newFigure = $('<figure></figure>').append('<img src="img/contentImages/'+imageData['content']['file']+'" \\>');
         if($(targetImage).attr('data-frame')=='frame')
         {
-            newFigure.append('<figcaption>'+imageData['content']['caption']+'</figcaption>');
+            newFigure.append('<figcaption>'+$('<div />').html(imageData['content']['caption']).remove().text()+'</figcaption>');
         }
 		$(targetImage).append('<div class="imageFrame" data-position="'+imageData['attributes']['position']+'"></div>').children('div').append(newFigure);
 		if(typeof(imageData['attributes']['width'])!="undefined"&&imageData['attributes']['width']!="")
 		{
-			$(targetImage).find('img')[0].width = imageData['attributes']['width'] * $('#content').width();
+			$(targetImage).find('img')[0].width = imageData['attributes']['width'] * ($('#content').width()-parseInt($('#content>section').css('padding-left'))-parseInt($('#content>section').css('padding-right'))-parseInt($(targetImage).children('.imageFrame').css('padding-left'))-parseInt($(targetImage).children('.imageFrame').css('padding-right')));
 		}
 		
 		$(targetImage).children('div').width($(targetImage).find('img')[0].width);

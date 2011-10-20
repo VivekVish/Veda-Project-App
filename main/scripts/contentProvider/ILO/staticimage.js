@@ -47,6 +47,8 @@ var staticimage =
                 $('#imageHolder').width(arbVal2/imageHeight);
                 $('#imageHolder').height(imgHolderHeight+$('#imageHolder figcaption').height());
             }
+            
+            $(img).css('visibility','visible');
          }
         
 		function replaceLightBoxImage(imgFilename)
@@ -60,22 +62,19 @@ var staticimage =
             else
             {
                 $('#imageHolder').attr('data-imagefile',imgFilename);
-                $('#imageHolder figure').prepend('<img src="../img/contentImages/'+imgFilename+'" />');
+                $('#imageHolder figure').prepend('<img visibility="hidden" src="../img/contentImages/'+imgFilename+'" />');
                 var img = $('#imageHolder').find('img');
-                
-                img.css('visibility','hidden');
 
                 img.load(function(e)
                 {
                     setTimeout(function(){adjustLightBoxImageSize($('#imageHolder figure').children('img'))},10);
-                    $(this).css('visibility','visible');
                 });
             }
 		}
 		
 		function replaceLightBoxCaption(newCaption)
 		{
-			$('#imageHolder figure figcaption').html(newCaption);
+			$('#imageHolder figure figcaption').html($('<div />').html(newCaption).remove().text());
             
             var img = $('#imageHolder').find('img');
             if(img.size()>0)
