@@ -24,19 +24,15 @@ var staticimage =
 		ilo.checkForRepeatILOs();
 		var imageData = ILOContents.ILOArray[$(targetImage).attr('id')];
 		
-        function adjustLightBoxImageSize(img,imageHeight,imageWidth)
+        function adjustLightBoxImageSize(img)
         {
-            if(typeof(imageHeight)=='null'||typeof(imageWidth)=='null')
-            {
-                imageHeight = img.height;
-                imageWidth = img.width;
-            }
-
-            var arbVal1 = imageHeight*parseInt($('#imageEditorHolder>div').css('width'));
-            var arbVal2 = imageWidth*parseInt($('#imageEditorHolder>div').css('height'));
+            var imageWidth = img.width();
+            var imageHeight = img.height();
+            var arbVal1 = img.height()*$('#imageEditorHolder>div').first().width();
+            var arbVal2 = img.width()*$('#imageEditorHolder>div').first().height();
             var imgHolderHeight = $('#imageEditorHolder>div').height();
             var imgHolderWidth = $('#imageEditorHolder>div').width();
-
+            
             if(imageWidth>imageHeight)
             {
                 $(img).height(arbVal1/imageWidth);
@@ -64,20 +60,14 @@ var staticimage =
             else
             {
                 $('#imageHolder').attr('data-imagefile',imgFilename);
-                $('#imageHolder figure').prepend('<img src="../img/contentImages/'+imgFilename+'" \\>');
+                $('#imageHolder figure').prepend('<img src="../img/contentImages/'+imgFilename+'" />');
                 var img = $('#imageHolder').find('img');
                 
                 img.css('visibility','hidden');
-                
-                if($.browser!="mozilla")
-                {
-                    img[0].imgHeight = img[0].height;
-                    img[0].imgWidth = img[0].width;
-                }
 
                 img.load(function(e)
                 {
-                    adjustLightBoxImageSize(this,this.imgHeight,this.imgWidth);
+                    setTimeout(function(){adjustLightBoxImageSize($('#imageHolder figure').children('img'))},10);
                     $(this).css('visibility','visible');
                 });
             }
@@ -90,13 +80,7 @@ var staticimage =
             var img = $('#imageHolder').find('img');
             if(img.size()>0)
             {
-                if($.browser!="mozilla")
-                {
-                    img[0].imgHeight = img[0].height;
-                    img[0].imgWidth = img[0].width;
-                }
-                
-                adjustLightBoxImageSize(img,img[0].imgHeight,img[0].imgWidth);
+                adjustLightBoxImageSize(img);
             }
             else
             {
