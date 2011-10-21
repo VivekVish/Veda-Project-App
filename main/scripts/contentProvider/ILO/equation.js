@@ -67,7 +67,14 @@ var equation =
                 $('#equationText').die('keydown');
 				
 				$('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove()});
-				$('#overlay').fadeOut('fast',function() {$(this).remove();});
+				$('#overlay').fadeOut('fast',function() 
+                                             {
+                                                 $(this).remove();
+                                                 MathJax.Hub.Queue(function()
+                                                 {
+                                                     rangeTraverse.setCurrentRange(ilo.savedRange);
+                                                 });
+                                             });
 			}
         }
         

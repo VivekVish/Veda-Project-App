@@ -31,8 +31,9 @@ var rangeTraverse =
 		
 		if(opts.type == 'range')
 		{
-            window.getSelection().removeAllRanges();
-			window.getSelection().addRange(newRange);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(newRange);
 		}
 		else if(opts.type == 'nodeOffset')
 		{

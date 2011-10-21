@@ -8,6 +8,8 @@
 
 var ilo =
 {
+    // holds range that will be set once ILO is loaded
+    savedRange: null,
 	// DESC: Highlights a particular ILO by overlaying a translucent div with edit and delete buttons
 	// PARAMETER: ILOElement is the ILO to be selected
 	// RETURNS: void
@@ -174,13 +176,9 @@ var ilo =
                 break;
             case "insertNode":
                 insertionPoint.insertNode(ILOPlaceholder);
-                if(!$.browser.webkit)
-                {
-                    var newRange = document.createRange();
-                    newRange.setStartAfter(ILOPlaceholder);
-                    newRange.setEndAfter(ILOPlaceholder);
-                    rangeTraverse.setCurrentRange(newRange);
-                }
+                ilo.savedRange = document.createRange();
+                ilo.savedRange.setStartAfter(ILOPlaceholder);
+                ilo.savedRange.setEndAfter(ILOPlaceholder);
                 break;
             case "replaceWith":
                 $(insertionPoint.startContainer).replaceWith(ILOPlaceholder);
