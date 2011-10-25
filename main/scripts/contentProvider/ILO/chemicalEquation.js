@@ -33,7 +33,7 @@ var chemicalEquation =
 		$('#chemicalEqEditorHolder').append('<ul></ul>');
 		$('#chemicalEqEditorHolder ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
 		$('#chemicalEquationText').val(equationData);
-		newEquationEditor.updateEquation();
+		newChemicalEquationEditor.updateEquation();
 		$('#chemicalEquationEditor').show();
 		
 		$('#tempChemicalEquationEditor ul').children().remove().prependTo('#chemicalEqEditorHolder ul');
