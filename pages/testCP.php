@@ -1,7 +1,7 @@
 <?php
 	$quiz_id="5";
 	$title = "The Veda Project";
-	$ILOs = array("graph","equation","staticimage");
+	$ILOs = array("graph","equation","chemicalEquation","staticimage");
 	
 	$cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message","question","contentprovider","equationEditor");
 	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");

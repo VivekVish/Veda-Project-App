@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////
-// The graphILO class handles the display of graph ILOs as    //
-// well as events from users but not from content providers.  //
+// The equationILO object handles the display of equation     //
+// ILOs as well as events from users but not from content     //
+// providers.                                                 //
 //															  //
 // REQUIRES: jQuery, flot									  //
 ////////////////////////////////////////////////////////////////

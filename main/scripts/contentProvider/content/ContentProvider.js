@@ -106,6 +106,7 @@ function ContentProvider()
 	$('#CPtoolbar ul ul').css('left',insertSectionLeft);
 	
 	this.preloadEquationEditor();
+    this.preloadChemicalEquationEditor();
 	
 	
     $('#content').bind('paste',function(e)

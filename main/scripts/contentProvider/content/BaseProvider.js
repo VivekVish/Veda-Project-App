@@ -376,7 +376,7 @@ function BaseProvider()
 											['subset','subseteq','supset','supseteq','sqsubseteq','ni','in','notin'],
 											['sin','cos','tan','csc','sec','cot','arcsin','arccos','arctan','mod','log','ln'],
 											['dot','hat','check','grave','acute','tilde','bar','ddot','breve','vec','degrees'],
-											['wide_tilde','wide_hat','over_right_arrow','over_left_arrow','overline','underline','overbrace','underbrace'],
+											['wide_tilde','wide_hat','over_right_arrow','under_right_arrow','over_left_arrow','under_left_arrow','overline','underline','overbrace','underbrace'],
 											['left_arrow','Left_arrow','right_arrow','Right_arrow','left_right_arrow','left_harpoon_up','left_harpoon_down','right_harpoon_up',
 											 'right_harpoon_down','rightleft_harpoons','maps_to','overset_left_arrow','undrset_left_arrow','overset_right_arrow',
 											 'underset_right_arrow','overset','underset'],
@@ -397,6 +397,31 @@ function BaseProvider()
 							 };
 		
 		newEquationEditor = new equationEditor($('#equationText')[0],$('#equationImageHolder')[0],editorOptions);
+	}
+    
+    // DESC: Pre-loads the chemical equation editor to avoid button loading when the chemical equation editor lightbox is activated
+	// RETURNS: void
+	this.preloadChemicalEquationEditor = function()
+	{
+		$('body').first().append('<div id="tempChemicalEquationEditor"><ul></ul></div>');
+		$('#tempChemicalEquationEditor ul').append('<li><div id="chemicalEquationButtonLocation"></div></li>');
+		$('#tempChemicalEquationEditor ul').append('<li><textarea id="chemicalEquationText" rows="3" cols="40"></textarea></li>');
+		$('#tempChemicalEquationEditor ul').append('<li><div id="chemicalEquationImageHolder"><img id="chemicalEquationImage" align = "middle" /></div></li>');
+		
+		var editorOptions = {'buttons':[
+											'chem_subscript',
+                                            'chem_superscript',
+                                            'right_arrow',
+                                            'rightleft_harpoons',
+                                            'chem_under_right_arrow'
+									   ],
+							  'buttonLocation':document.getElementById('chemicalEquationButtonLocation'),
+							  'menuButtonsPerRow':9,
+							  'callback':function(){$('#tempChemicalEquationEditor').css('position','fixed').css('visibility','hidden')},
+                              'italics':false
+							 };
+		
+		newChemicalEquationEditor = new equationEditor($('#chemicalEquationText')[0],$('#chemicalEquationImageHolder')[0],editorOptions);
 	}
     
     if($('#content>section').size()>0)
@@ -489,6 +514,12 @@ function BaseProvider()
 	$('#insertEquation').click(function()
 	{
 		equation.editMode();
+	});
+    
+    // Insert Chemical Equation	
+	$('#insertChemicalEquation').click(function()
+	{
+		chemicalEquation.editMode();
 	});
 	
 	// Insert Graph

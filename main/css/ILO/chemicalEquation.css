@@ -1,0 +1,39 @@
+/* Equation Editor */
+
+textarea#chemicalEquationText
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 5em;
+}
+
+#chemicalEquationImageHolder
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 6em;
+	min-height: 2em;
+	background-color: #FFF;
+	border: dashed black 0.1em;
+}
+
+#chemicalEquationImage
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+div.chemicalEquationEditorButton:hover>div:not(:first-of-type)
+{
+	z-index: 10;
+}
+
+div.ilo[data-ilotype="chemicalEquation"]
+{
+	
+}

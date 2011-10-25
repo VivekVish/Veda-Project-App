@@ -4,7 +4,7 @@
 	$title = "The Veda Project";
 	$cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message");
 	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");
-	$ILOs = array("graph","equation","staticimage");
+	$ILOs = array("graph","equation","chemicalEquation","staticimage");
 	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar","general/addAllTrigFunctions","content/ILOContents","flot/jquery.flot.min","content/Content");
     $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
 	foreach($ILOs as $ilo)
