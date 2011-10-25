@@ -6,7 +6,7 @@
 
 var ILOContents =
 {
-	// stores ILO XML
+	// stores ILO information
 	ILOArray: new Object(),
 	
 	

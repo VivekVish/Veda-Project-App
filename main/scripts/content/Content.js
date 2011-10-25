@@ -40,7 +40,7 @@ function Content()
 				$('#notebar').width($(window).width() - $('#notebar').position().left - 3);
 			}
 			
-			newSize = $('#notebar').position().left - $('#content').position().left;
+			var newSize = $('#notebar').position().left - $('#content').position().left;
 			$('#content').width(newSize);
 			$('footer').width(newSize);
 			$('#usernav').width(newSize);
@@ -52,7 +52,7 @@ function Content()
 			if($('#notebar').width() < parseInt($(window).width() * 0.05))
 			{
 				$('#notebar').css('left',$(window).width());
-				newSize = $('#notebar').position().left - $('#content').position().left;
+				var newSize = $('#notebar').position().left - $('#content').position().left;
 				$('#content').width(newSize);
 				$('footer').width(newSize);
 				$('#usernav').width(newSize);
@@ -73,4 +73,16 @@ function Content()
     });
     // Display ILOs
 	ILOContents.getILOArray(iloIdArray,this.refreshILOs);
+    
+    var citationsArray = new Array();
+    
+    // DESC: loads citations using AJAX
+    // RETURNS: void
+    this.loadCitations = function()
+    {
+        $('.citation').each(function()
+        {
+            citationsArray.push($(this).attr('id'));
+        });
+    }
 }

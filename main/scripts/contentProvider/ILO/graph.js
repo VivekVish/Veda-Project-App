@@ -293,7 +293,7 @@ var graph =
 
 				if(typeof(targetGraph) == 'undefined')
 				{
-					targetGraph = document.createElement('span');
+					targetGraph = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetGraph,'after');
 					
 					ilo.createILO(targetGraph,newArray);

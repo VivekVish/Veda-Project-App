@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////
-// The BaseProvider object contains functions to add       //
+// The BaseProvider object contains functions to add          //
 // and manipulate standard objects (i.e. objects that aren't  //
 // ILOs).													  //
 ////////////////////////////////////////////////////////////////
@@ -7,6 +7,20 @@
 function BaseProvider()
 {
     var thisObject = this;
+    
+    // DESC: Creates the lightbox to insert a citation
+    // RETURNS: void
+    this.createCitationLightbox = function()
+    {
+        
+    }
+    
+    // DESC: Inserts a citation
+    // RETURNS: void
+    this.insertCitation = function()
+    {
+        
+    }
     
 	// DESC: Inserts a blockquote
     // RETURNS: void
