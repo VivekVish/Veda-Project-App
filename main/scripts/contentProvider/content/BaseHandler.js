@@ -422,6 +422,14 @@ function BaseHandler()
 							materialProvider.formatTextStyle("bold");
 						}
 						break;
+                    // C
+                    case 67:
+                        if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
+						{
+                            e.preventDefault();
+                            chemicalEquation.editMode();
+                        }
+                        break;
                     // E
                     case 69:
                         if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
