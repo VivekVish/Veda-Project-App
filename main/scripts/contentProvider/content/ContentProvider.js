@@ -111,8 +111,8 @@ function ContentProvider()
 	
     $('#content').bind('paste',function(e)
     {
-        thisObject.openPasteLightbox();
-        e.preventDefault();
+        /*thisObject.openPasteLightbox();
+        e.preventDefault();*/
     });
     
     

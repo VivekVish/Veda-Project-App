@@ -123,6 +123,7 @@ function ContentHandler()
 							materialProvider.insertSection(6);
 						}
 						break;
+                    // S
                     case 83:
                         if(thisObject.keyPressed['ctrl'])
                         {
