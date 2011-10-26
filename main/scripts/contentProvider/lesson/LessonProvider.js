@@ -18,6 +18,9 @@ function LessonProvider()
 	// RETURNS: void
 	this.submitContent = function()
 	{
+        // Perform some cleanup
+        $('.Apple-style-span').remove();
+        $('p>br').remove();
         var lessonPayload = thisObject.getPayload();
 
         $.ajax({url : 'resources/submitLesson.php', type: 'POST', data: lessonPayload, success:function(data)

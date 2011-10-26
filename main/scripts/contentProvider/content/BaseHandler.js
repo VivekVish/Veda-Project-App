@@ -336,8 +336,6 @@ function BaseHandler()
 	this.handleGeneralEvent=function(e)
 	{
 		ilo.deselectILO($('.selectedILO'));
-        $('.Apple-style-span').remove();
-        $('p>br').remove();
 		materialProvider.toggleStyleHighlighting();
 		
 		switch(e.type)

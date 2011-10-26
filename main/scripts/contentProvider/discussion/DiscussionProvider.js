@@ -16,6 +16,9 @@ function DiscussionProvider()
 	// RETURNS: void
 	this.submitContent = function()
 	{
+        // Perform some cleanup
+        $('.Apple-style-span').remove();
+        $('p>br').remove();
         var discussionPayload = thisObject.getPayload();
 
         $.ajax({url : 'resources/submitDiscussion.php', type: 'POST', data: discussionPayload, success:function(data)
