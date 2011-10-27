@@ -26,15 +26,22 @@ var graphILO =
 
 		$.each(graphData.content,function(index,functionVal)
 		{
-			graphFuncs[index] = {label:"",data:""};
-			graphFuncs[index].label = functionVal['label'].replace(/_/g,' ');
-			var dataPoints = [];
-			for(var i=0;i<graphProperties.points;i++)
-			{
-				x = (graphProperties.xmax-graphProperties.xmin)*i/(graphProperties.points-1)+graphProperties.xmin;
-				dataPoints.push([x,eval(graphILO.parseEquation(functionVal['function']))]);	
-			}
-			graphFuncs[index].data = dataPoints;
+            if("mapping" in functionVal)
+            {
+                
+            }
+            else if("function" in functionVal)
+            {
+                graphFuncs[index] = {label:"",data:""};
+                graphFuncs[index].label = functionVal['label'].replace(/_/g,' ');
+                var dataPoints = [];
+                for(var i=0;i<graphProperties.points;i++)
+                {
+                    x = (graphProperties.xmax-graphProperties.xmin)*i/(graphProperties.points-1)+graphProperties.xmin;
+                    dataPoints.push([x,eval(graphILO.parseEquation(functionVal['function']))]);	
+                }
+                graphFuncs[index].data = dataPoints;
+            }
 		});
         
 		$(targetGraph).children('.graphDisplay').remove();
@@ -375,7 +382,7 @@ var graphILO =
 				mouseDownPosition = {Xpos: e.pageX, Ypos: e.pageY, xmin: graphData.xmin, xmax: graphData.xmax, ymin: graphData.ymin, ymax: graphData.ymax }
 				break;
 			case "mousemove":
-				if(graphILO.mouseIsDown&&(typeof($(ILOContents.ILOArray[$(e.currentTarget).attr('id')].attr('scrollable'))=='undefined'||$(ILOContents.ILOArray[$(e.currentTarget).attr('id')]['attributes']['scrollable'])==true)))
+				if(graphILO.mouseIsDown&&(typeof($(ILOContents.ILOArray[$(e.currentTarget).attr('id')]['attributes']['scrollable'])=='undefined'||$(ILOContents.ILOArray[$(e.currentTarget).attr('id')]['attributes']['scrollable'])==true)))
 				{
 					var graphData = graphILO.checkAllGraphData(ILOContents.ILOArray[$(e.currentTarget).attr('id')]);
 					var graphWidth = $(e.currentTarget).width();

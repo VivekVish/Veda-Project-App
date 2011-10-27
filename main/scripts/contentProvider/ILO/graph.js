@@ -10,12 +10,16 @@
 
 var graph = 
 {
+    // Counts the number of functions in edit mode
+    functionCount: 0,
+    
 	// DESC: creates a lightbox in which the content provider can edit or add a graph
 	// PARAMETER: targetGraph is the ILO to be edited.  If it is undefined, a new ILO will be added at the caret position
 	// RETURNS: void
 	editMode: function(targetGraph)
 	{
 		ilo.checkForRepeatILOs();
+        graph.functionCount = 0;
 		var targetGraphContents = ILOContents.ILOArray[$(targetGraph).attr('id')];
 		
 		function updateGraph()
@@ -36,16 +40,17 @@ var graph =
 			
 			var updatedGraphFunctions = [];
 			
-			$('.graphFunctionEquations').each(function(index)
+			$('.graphFunctionEquations').each(function()
 			{
 				updatedGraphFunctions.push($(this).val());
 			});
 			
 			if(validateGraphInputs(updatedGraphData, updatedGraphFunctions))
 			{
+                console.log(ILOContents.ILOArray[$(lightBoxGraph).attr('id')]);
 				graphILO.setAllGraphData(ILOContents.ILOArray[$(lightBoxGraph).attr('id')]['attributes'], updatedGraphData);
 
-                ILOContents.ILOArray[$(lightBoxGraph).attr('id')]['content'] = {}
+                ILOContents.ILOArray[$(lightBoxGraph).attr('id')]['content'] = {};
                 
 				$('.graphFunctionEquations').each(function(index)
 				{
@@ -132,6 +137,26 @@ var graph =
 			
 			newInfoEntered=false;
 		}
+        
+        addGraphFunction.addingFunction = false;
+        function addGraphFunction(idNumber)
+		{
+			if($('#graphFunctions ul').children('li').size()<6&&!this.addingFunction)
+			{
+                this.addingFunction = true;
+                console.log($('#graphFunctions ul').children('li'));
+				var newGraphFunction = $('<li></li>');
+				
+				newGraphFunction.append('<label>Label</label>')
+								.append('<input class="graphFunctionLabels" type="text"/>')
+								.append('<label>Function</label>')
+								.append('<input class="graphFunctionEquations"type="text"/>')
+								.append('<img class="deleteGraphFunction" src="img/x.gif"></img>');
+				$('#graphFunctions ul').append(newGraphFunction);
+				graph.functionCount++;
+			}
+            this.addingFunction = false;
+		}
 		
 		if($('#lightbox').size()>0)
 		{
@@ -189,29 +214,11 @@ var graph =
 		
 		$('#graphErrorMessages').hide();
 		
-		var functionCount = 0;
-		
-		function addGraphFunction(idNumber)
-		{
-			if($('#graphFunctions ul').children('li').size()<6)
-			{
-				var newGraphFunction = $('<li></li>');
-				
-				newGraphFunction.append('<label for="function'+idNumber+'label">Label</label>')
-								.append('<input class="graphFunctionLabels" id="function'+idNumber+'label" type="text"/>')
-								.append('<label for="graphFunction'+idNumber+'">Function</label>')
-								.append('<input class="graphFunctionEquations" id="graphFunction'+idNumber+'" type="text"/>')
-								.append('<img class="deleteGraphFunction" src="img/x.gif"></img>');
-				$('#graphFunctions ul').append(newGraphFunction);
-				functionCount++;
-			}
-		}
-		
 		$.each(targetGraphContents['content'], function(index,functionVal)
         {
             addGraphFunction(index);
-			$('#graphFunctions ul').children(':last-child').children('#function'+index+'label').val(functionVal['label'].replace(/_/g,' '));
-			$('#graphFunctions ul').children(':last-child').children('#graphFunction'+index).val(functionVal['function']);
+			$('#graphFunctions ul').children(':last-child').children('.graphFunctionLabels').val(functionVal['label'].replace(/_/g,' '));
+			$('#graphFunctions ul').children(':last-child').children('.graphFunctionEquations').val(functionVal['function']);
         });
 		
 		$('.deleteGraphFunction').live('click',function(e)
@@ -222,7 +229,7 @@ var graph =
 		
 		$('#insertGraphFunction').live('click',function(e)
 		{
-			addGraphFunction(functionCount);
+			addGraphFunction(graph.functionCount);
 			updateGraph();
 		});
 		
