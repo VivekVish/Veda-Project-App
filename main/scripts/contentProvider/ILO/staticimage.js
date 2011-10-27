@@ -346,7 +346,9 @@ var staticimage =
                 
 				checkValidWidth();
 				staticimageILO.display(targetImage);
-					
+				
+                delete ILOContents.ILOArray['ilo-1'];
+                
 				$('#lightbox').fadeOut('fast',function() {$(this).remove();});
 				$('#overlay').fadeOut('fast',function() {$(this).remove();});
 			}
@@ -354,6 +356,7 @@ var staticimage =
         
         function cancel()
         {
+            delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
         }

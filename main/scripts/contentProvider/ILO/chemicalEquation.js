@@ -61,8 +61,9 @@ var chemicalEquation =
 				}
 				
 				chemicalEquationILO.display(targetChemicalEquation);
-                $('#chemicalEquationText').die('keydown');
 				
+                delete ILOContents.ILOArray['ilo-1'];
+                
 				$('#lightbox').fadeOut('fast',function() {$('#chemicalEqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempChemicalEquationEditor ul');$(this).remove()});
 				$('#overlay').fadeOut('fast',function() 
                                              {
@@ -77,7 +78,7 @@ var chemicalEquation =
         
         function cancel()
         {
-            $('#chemicalEquationText').die('keydown');
+            delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$('#chemicalEqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempChemicalEquationEditor ul');$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
         }
@@ -93,6 +94,7 @@ var chemicalEquation =
 			cancel();
 		});
         
+        $('#chemicalEquationText').die('keydown');
         $('#chemicalEquationText').live('keydown', function(e)
         {
             switch(e.keyCode)
