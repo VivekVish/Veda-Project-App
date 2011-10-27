@@ -14,7 +14,8 @@
                             {/section}
                         </ul>
                     </li>
-                    <!--<li title="Delete Section (Ctrl+Shift+D)" id="deleteSection">{html_image file='img/contenticons/deleteSection.png'}</li>-->
+                    <li title="Insert Info Box (Ctrl+Shift+B)" id="insertInfoBox">{html_image file='img/contenticons/insertInfoBox.png'}</li>
+                    <li title="Exit Info Box (Ctrl+Shift+X)" id="exitInfoBox" style="display:none;">{html_image file='img/contenticons/exitInfoBox.png'}</li>
                 </span>
                 <span class="CPsublist">
 					<li title="Insert Blockquote (Ctrl+Shift+Q)" id="insertBlockquote">{html_image file='img/contenticons/insertBlockquote.png'}</li>

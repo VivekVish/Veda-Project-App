@@ -416,7 +416,7 @@ function BaseHandler()
 						break;					
 					// B
 					case 66:
-						if(thisObject.keyPressed['ctrl'])
+						if(!thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
 						{
 							e.preventDefault();
 							materialProvider.formatTextStyle("bold");

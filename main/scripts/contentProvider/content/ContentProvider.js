@@ -3,44 +3,108 @@ function ContentProvider()
     var thisObject = this;
 	this.savedChanges=true;
     
-    // DESC: Opens paste lightbox
+    // DESC: Opens the lightbox that either inserts an infobox or adjusts the infobox type
     // RETURNS: void
-    this.openPasteLightbox = function()
+    this.openInfoBoxLightbox = function()
     {
-        if(rangeTraverse.within("#content")&&rangeTraverse.parents('.ilo,:header').size()==0)
+        var caretPositionRange = rangeTraverse.getCurrentRange();
+        var insertInfoBoxBox = $('<div id="insertInfoBoxBox"><ul></ul></div>');
+        insertInfoBoxBox.children('ul').append('<li><select></select></li>');
+        insertInfoBoxBox.find('ul>li>select').append('<option value="definition">Definition</option>').
+                                              append('<option value="theorem">Theorem</option>').
+                                              append('<option value="warning">Warning</option>').   
+                                              append('<option value="information">Information</option>');
+        insertInfoBoxBox.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
+        
+        if($(caretPositionRange.startContainer).parents('.infoBox').size()==0)
         {
-            var currentRange = rangeTraverse.getCurrentRange();
-            var pasteBox = $('<div id="pasteBox"><ul></ul></div>');
-            pasteBox.children('ul').append('<ul><p>Please paste your text here:</p></ul>');
-            pasteBox.children('ul').append('<ul><textarea></textarea></ul>');
-            pasteBox.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Paste</button></li>');
-            createLightBox('#content','Paste Text',pasteBox);
-            $('#pasteBox textarea').focus();
-
-            $('#pasteBox button.create').click(function()
+            createLightBox('#content','Create Info Box',insertInfoBoxBox);
+        
+            $('#insertInfoBoxBox button.create').click(function()
             {
-                contentState.saveState();
-                var textNode = document.createTextNode($('#pasteBox textarea').val());
-                currentRange.deleteContents();
-                if($(currentRange.startContainer).is('div,section'))
-                {
-                    currentRange.insertNode($('<p>').append(textNode)[0]);
-                }
-                else
-                {
-                    currentRange.insertNode(textNode);
-                }
-                $('#lightbox').fadeOut('fast',function() {$(this).remove();});
-                $('#overlay').fadeOut('fast',function() {$(this).remove();});
-                
-                contentState.saveState();
-            });
-
-            $('#pasteBox button.cancel').click(function()
-            {
+                thisObject.insertInfoBox($('#insertInfoBoxBox').find('select').val(),caretPositionRange);
                 $('#lightbox').fadeOut('fast',function() {$(this).remove();});
                 $('#overlay').fadeOut('fast',function() {$(this).remove();});
             });
+        }
+        else
+        {
+            createLightBox('#content','Change Info Box',insertInfoBoxBox);
+            
+            $('#insertInfoBoxBox button.create').click(function()
+            {
+                thisObject.changeInfoBoxType($('#insertInfoBoxBox').find('select').val(),$(caretPositionRange.startContainer).parents('.infoBox').first());
+                $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                $('#overlay').fadeOut('fast',function() {$(this).remove();});
+            });
+        }
+        
+		$('#insertInfoBoxBox button.cancel').click(function()
+		{
+			$('#lightbox').fadeOut('fast',function() {$(this).remove();});
+			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+		});
+    }
+    
+    // DESC: Inserts a div box at the current cursor level
+    // PARAMETER: boxType is the type of box that will be inserted
+    // PARAMETER: caretPositionRange is the range that contains the caret Position for the added box
+    // RETURNS: void
+    this.insertInfoBox = function(boxType,caretPositionRange)
+    {
+        if($(caretPositionRange.startContainer).parents('#content').size()>0&&$(caretPositionRange.startContainer).parents('.infoBox').size()==0)
+		{
+            var properStartPosition = false;
+			   
+			var insertNodeLocation = $(caretPositionRange.startContainer).parents('p,ul,ol,blockquote,table').last();
+            if(insertNodeLocation.size()==0&&$(caretPositionRange.startContainer).is('p,ul,ol,blockquote,table'))
+            {
+                insertNodeLocation = $(caretPositionRange.startContainer);
+            }
+			
+			if(insertNodeLocation.size()>0)
+			{
+				properStartPosition = true;
+			}
+			
+			if(properStartPosition)
+			{
+                contentState.saveState();
+				var newDiv = $('<div class="infoBox" data-infoboxtype="'+boxType+'"><p></p></div>');
+				
+				var toEndOfStartNode = caretPositionRange;				
+				toEndOfStartNode.setEndAfter(insertNodeLocation[0]);
+				insertNodeLocation.after(toEndOfStartNode.extractContents());
+				insertNodeLocation.after(newDiv);
+				
+				rangeTraverse.selectBefore($(newDiv).find('p')[0]);
+                contentState.saveState();
+                thisObject.toggleExitInfoBoxButton();
+			}
+        }
+    }
+    
+    // DESC: Adds a paragraph after the info box
+    // RETURNS: void
+    this.exitInfoBox = function()
+    {
+        if(rangeTraverse.within('.infoBox'))
+        {
+            var newParagraph = $('<p></p>');
+            rangeTraverse.parents('.infoBox').first().after(newParagraph);
+            rangeTraverse.selectBefore(newParagraph[0]);
+        }
+    }
+    
+    // DESC: Changes infoBox's data-infoboxtype attribute to boxType
+    // PARAMETER: boxType is the type of box that
+    // PARAMETER: caretPositionRange is the range that contains the caret Position for the added box
+    // RETURNS: void
+    this.changeInfoBoxType = function(boxType,infoBox)
+    {
+        if(infoBox.hasClass('infoBox'))
+        {
+            infoBox.attr('data-infoboxtype',boxType);
         }
     }
 	
@@ -82,6 +146,20 @@ function ContentProvider()
 		}
 	}
     
+    // DESC: Toggle the display of the exit info box button based on whether the cursor is in the exit info box
+    // RETURNS: void
+    this.toggleExitInfoBoxButton = function()
+    {
+        if(rangeTraverse.within('.infoBox'))
+        {
+            $('#exitInfoBox').show();
+        }
+        else
+        {
+            $('#exitInfoBox').hide();
+        }
+    }
+    
     // DESC: Gets payload for a submit or autosave
     // RETURNS: Object literal including path, content, and ILOs
     this.getPayload = function()
@@ -107,13 +185,6 @@ function ContentProvider()
 	
 	this.preloadEquationEditor();
     this.preloadChemicalEquationEditor();
-	
-	
-    $('#content').bind('paste',function(e)
-    {
-        /*thisObject.openPasteLightbox();
-        e.preventDefault();*/
-    });
     
     
     // Section Modifiers
@@ -121,6 +192,18 @@ function ContentProvider()
 	{
 		thisObject.insertSection($(this).attr('data-level'));
 	});
+    
+    // Insert Info Box Button
+    $('#insertInfoBox').click(function()
+    {
+        thisObject.openInfoBoxLightbox();
+    });
+    
+    // Exit Info Box Button
+    $('#exitInfoBox').click(function()
+    {
+        thisObject.exitInfoBox();
+    })
     
     $("#insertSection *[title]").data('tooltip',null);
     

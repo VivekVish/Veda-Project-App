@@ -74,7 +74,7 @@ function BaseProvider()
 				properStartPosition = true;
 			}
 			
-			if(properStartPosition&&$(caretPositionRange.startContainer).parents('#content').size()>0)
+			if(properStartPosition)
 			{
                 contentState.saveState();
 				var newTable = $('<table><tbody></tbody></table>');
@@ -105,7 +105,6 @@ function BaseProvider()
 	this.createInsertTableLightBox = function()
 	{
 		var caretPositionRange = rangeTraverse.getCurrentRange();
-        console.log(caretPositionRange);
 		var maxcolumns = 10;
 		var maxrows = 30;
 		var insertTableBox = $('<div id="insertTableBox"><ul></ul></div>');

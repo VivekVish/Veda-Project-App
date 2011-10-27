@@ -57,7 +57,8 @@ function ContentHandler()
 	// RETURNS: void
 	this.handleGeneralEvent=function(e)
 	{
-		parent.handleGeneralEvent(e);	
+		parent.handleGeneralEvent(e);
+        materialProvider.toggleExitInfoBoxButton();
 		
 		switch(e.type)
 		{
@@ -123,6 +124,14 @@ function ContentHandler()
 							materialProvider.insertSection(6);
 						}
 						break;
+                    // B
+					case 66:
+						if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
+						{
+							e.preventDefault();
+							materialProvider.openInfoBoxLightbox();
+						}
+						break;
                     // S
                     case 83:
                         if(thisObject.keyPressed['ctrl'])
@@ -131,6 +140,14 @@ function ContentHandler()
                             materialProvider.submitContent();
                         }
                         break;
+                    // X
+					case 88:
+						if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
+						{
+							e.preventDefault();
+							materialProvider.exitInfoBox();
+						}
+						break;
 				}
 				break;
 		}

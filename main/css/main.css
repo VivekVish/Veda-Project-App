@@ -529,3 +529,37 @@ nav#coursenav h2
 {
     text-align: center;
 }
+
+/* Info Box */
+.infoBox
+{
+    padding: 0.25em 0.25em 0 0.25em;
+    margin-bottom: 1em;
+    min-height: 1.5em;
+    border: 1px solid black;
+}
+
+#content .infoBox>*:last-of-type
+{
+    padding-bottom: 0.25em;
+}
+
+.infoBox[data-infoboxtype="definition"]
+{
+    background-color: #DDF;
+}
+
+.infoBox[data-infoboxtype="theorem"]
+{
+    background-color: #DFD;
+}
+
+.infoBox[data-infoboxtype="warning"]
+{
+    background-color: #FDD;
+}
+
+.infoBox[data-infoboxtype="information"]
+{
+    background-color: #FFD;
+}
