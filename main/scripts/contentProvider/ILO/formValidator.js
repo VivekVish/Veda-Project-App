@@ -76,7 +76,7 @@ var formValidator =
 		}
 		
 		// invalid characters
-		if(checkString.replace(/X|\.|x|e|pi|asin|acos|atan|acsc|asec|acot|sin|cos|tan|csc|sec|cot|abs|ln|log_|[0-9]|sqrt|\(|\)|\+|\-|\*|\/|\^|\|/g,"")!="")
+		if(checkString.replace(/X|\.|x|N|y|e|pi|asin|acos|atan|acsc|asec|acot|sin|cos|tan|csc|sec|cot|abs|ln|log_|[0-9]|sqrt|\(|\)|\+|\-|\*|\/|\^|\|/g,"")!="")
 		{
 			return "invalid characters or functions are present";
 		}
@@ -94,7 +94,7 @@ var formValidator =
 		}
 		
 		// ends with an operator or an opening parenthesis
-		if(checkString.search(/([\+]|[\-]|[\*]|[\/]|[\^]|[\(]|[a-w]|[A-W])$/)>-1)
+		if(checkString.search(/([\+]|[\-]|[\*]|[\/]|[\^]|[\(]|[a-hj-w]|[A-MO-W])$/)>-1)
 		{
 			return "an operator or an opening parenthesis ends the function";
 		}

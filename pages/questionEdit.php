@@ -14,7 +14,7 @@
 								 array("value"=>"wordFillInTheBlank","text"=>"Fill-in-the-blank"))));
 	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");
 	$ILOs = array("graph","equation","chemicalEquation","staticimage");
-	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","flot/jquery.flot.min","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
+	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
 							 "general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo","contentProvider/ILO/formValidator","content/Content","contentProvider/test/questionBlueprints","contentProvider/test/QuestionProvider","general/lightbox",
 							 "contentProvider/test/QuestionHandler","test/test","contentProvider/test/QuestionContent","contentProvider/test/CorrectAnswer","contentProvider/test/QuestionEditor",
 							 "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState");

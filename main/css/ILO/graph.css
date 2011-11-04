@@ -5,6 +5,7 @@
 	display: block;
 	width: 57em;
 	height: 40em;
+    overflow: hidden;
 }
 
 #lightbox.graphLightbox h4
@@ -33,15 +34,6 @@
 	right: 1em;
 }
 
-/* Graph Parameters */
-#graphParameters
-{
-	position: relative;
-	top: -20em;
-	left: 31em;
-	width: 24em;
-}
-
 #lightbox.graphLightbox #graphEditorHolder h5
 {
 	background-image: none;
@@ -49,15 +41,32 @@
 	font-weight: bold;
 }
 
-#graphParameters>div
+/* Graph Parameters */
+#graphParameters
 {
-	background-color: #EEF;
+	position: relative;
+	top: -20em;
+	left: 29em;
+	width: 28em;
+    height: 60em;
+    overflow: hidden;
+}
+
+#generalGraphParameters
+{
+    float: left;
+}
+
+#generalGraphParameters>div
+{
+	background-color: #EEE;
 	-moz-border-radius: 0.4em;
 	-webkit-border-radius: 0.4em;
 	border-radius: 0.4em;
 	-webkit-background-clip: padding-box;
 	border: black solid 0.1em;
 	margin-top: 0.3em;
+    width: 26em;
 }
 
 #graphParameters>div li, #graphParameters>div h5, #graphParameters>div a
@@ -71,16 +80,9 @@
 	top: -0.25em;
 }
 
-#graphParameters #graphXAxis input[type="text"], #graphParameters #graphYAxis input[type="text"], #graphParameters #graphProperties input[type="text"]
+#lightbox #generalGraphParameters input[type="text"], #lightbox #graphParameters label
 {
 	width: 4em;
-}
-
-
-
-#graphParameters #graphXAxis label, #graphParameters #graphYAxis label, #graphParameters #graphFunctions label, #graphParameters #graphProperties label
-{
-	width: 4em;	
 }
 
 /* X axis */
@@ -105,7 +107,7 @@
 {
 	position: relative;
 	height: 4.8em;
-	width: 24em;
+	width: 26em;
 }
 
 #graphParameters #graphProperties li:not(:last-of-type)
@@ -134,7 +136,7 @@
 /* Graph Functions */
 #graphParameters #graphFunctions
 {
-	width: 24em;	
+	width: 26em;
 }
 
 #graphParameters #graphFunctions ul
@@ -142,9 +144,20 @@
 	margin-bottom: 0.5em;
 }
 
-#graphEditorHolder .deleteGraphFunction
+#graphParameters #graphFunctions ul li
 {
-	cursor: pointer;	
+    position: relative;
+    
+}
+
+#lightbox #graphEditorHolder .deleteGraphFunction
+{
+	cursor: pointer;
+    position: absolute;
+    right: 1em;
+    top: 0.1em;
+    height: 1.25em;
+    width: 1.25em;
 }
 
 #graphEditorHolder #insertGraphFunction
@@ -152,6 +165,7 @@
 	cursor: pointer;
 	color: blue;
 	text-decoration: underline;
+    margin-left: 0.25em;
 }
 
 #graphParameters #graphFunctions input[type="text"]
@@ -165,10 +179,164 @@
 	margin-right: 1em;
 }
 
+#graphParameters #graphFunctions input[type="text"].graphFunctionEquations
+{
+	margin-right: 0.5em;
+}
+
 #graphParameters #graphFunctions img
 {
 	position: relative;
 	top: 0.4em;	
+}
+
+#graphParameters #graphFunctions .graphMapping
+{
+    cursor: pointer;
+	color: blue;
+	text-decoration: underline;
+    padding-right: 0.5em;
+}
+
+/* Graph Slider */
+#graphSlideHolder
+{
+    width: 53em;
+}
+
+/* Mapping Editor */
+#mappingEditor
+{
+    margin-left: 0.5em;
+	width: 26em;
+    float: left;
+}
+
+#mappingEditor ul li ul li
+{
+    padding-left: 0;
+    display: inline;
+}
+
+#lightbox #graphParameters #mappingEditor ul li label
+{
+    width: 5.15em;
+}
+
+#mappingEditor>#graphMappingSlides
+{
+    position: relative;
+    height: 12em;
+    width: 26.2em;
+    overflow: hidden;
+}
+
+#graphMappingSlideHolder
+{
+    height: 12em;
+}
+
+#mappingEditor>#graphMappingSlides>#graphMappingSlideHolder>div.slide
+{
+    background-color: #EEE;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	-webkit-background-clip: padding-box;
+	border: black solid 0.1em;
+	margin-top: 0.3em;
+    margin-right: 0.2em;
+    width: 26em;
+    float: left;
+}
+
+#lightbox #graphParameters #mappingEditor>#graphMappingSlides>#graphMappingSlideHolder>div.slide>ul>li:nth-of-type(2) label:nth-of-type(2)
+{
+    margin-left: 0.5em;
+    width: 4.5em;
+}
+
+#lightbox #graphParameters #mappingEditor ul li ul li input
+{
+    width: 3em;
+    margin-left: 0.2em;
+}
+
+#lightbox #graphParameters #mappingEditor ul li ul li:not(:last-of-type)
+{
+    margin-right: 1em;
+}
+
+#mappingEditor #backToGeneralGraphEditor, #mappingEditor #insertNewMappingObject
+{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+#mappingEditor #insertNewMappingObject
+{
+    float: right;
+}
+
+/* Slides */
+
+#lightbox #graphParameters .graphMappingSlideControl
+{
+    position: absolute;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+#lightbox #graphParameters .graphMappingSlideControl img
+{
+    height: 3em;
+    width: 1em;
+}
+
+#lightbox #graphParameters .graphMappingSlideControl#leftControl
+{
+    left: 4em;
+    top: 0;
+}
+
+#lightbox #graphParameters .graphMappingSlideControl#rightControl
+{
+    left: 21em;
+    top: 0;
+}
+
+#lightbox #mappingEditor #graphMappingNavigation
+{
+    width: 26em;
+    height: 3.2em;
+    position: relative;
+}
+
+#lightbox #mappingEditor #graphMappingNavigation #graphMappingIcons
+{
+    width: 16em;
+    height: 3.2em;
+    margin: auto;
+    background-color: black;
+    overflow: hidden;
+}
+
+#lightbox #mappingEditor #graphMappingNavigation #graphMappingIcons .slideIcon
+{
+    background-color: #FFF;
+    width: 3.2em;
+    height: 2em;
+    border: 0.2em solid #444;
+    margin: 0.5em 0.2em;
+    display: block;
+    float: left;
+    cursor: pointer;
+}
+
+#lightbox #mappingEditor #graphMappingNavigation #graphMappingIcons .slideIcon.selected
+{
+    border-color: #EE0;
 }
 
 /* Error Message Box */
