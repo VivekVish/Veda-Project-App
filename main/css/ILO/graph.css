@@ -339,6 +339,15 @@
     border-color: #EE0;
 }
 
+#lightbox #mappingEditor .deleteMappingObject
+{
+    float: right;
+    margin-right: 0.5em;
+    height: 1.25em;
+    width: 1.25em;
+    cursor: pointer;
+}
+
 /* Error Message Box */
 #graphErrorMessages>div
 {

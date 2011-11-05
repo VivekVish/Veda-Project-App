@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////
 // The graph namespace receives and processes events from     //
-// rangeTraverse.	When the caret is within a graph or   //
+// rangeTraverse.	When the caret is within a graph or       //
 // when a graph is clicked, the graph is highlighted,  		  //
 // and users have the option of editing or deleting the 	  //
 // graph. 												  	  //
@@ -47,14 +47,14 @@ var graph =
                                     .append('<label>Function</label>')
                                     .append('<input class="graphFunctionEquations"type="text"/>')
                                     .append('<span class="graphMapping">Mapping</span>')
-                                    .append('<img class="deleteGraphFunction" src="img/x.png"></img>');
+                                    .append('<img class="deleteGraphFunction" src="img/x.png" />');
                 }
                 else if(type=="mapping")
                 {
                     newGraphFunction.append('<label>Label</label>')
                                     .append('<input class="graphFunctionLabels" type="text"/>')
                                     .append('<span class="graphMapping">Edit Mapping</span>')
-                                    .append('<img class="deleteGraphFunction" src="img/x.png"></img>');
+                                    .append('<img class="deleteGraphFunction" src="img/x.png" />');
                 }
 				$('#graphFunctions ul').append(newGraphFunction);
 			}
@@ -444,7 +444,6 @@ var graph =
         $('#graphSlideHolder').animate({'marginLeft' : -($('#generalGraphParameters').outerWidth(true)+parseInt($('#mappingEditor').css('margin-left')))},300,'swing',function()
         {
             mappingNavigation.remove().prependTo(mappingEditor);
-            graphMappingEntity.updateSlideIcons(mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
             graphMappingEntity.updateMappingLink();
             graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
             graphMappingEntity.updateMappingSlidesWidth();
@@ -543,6 +542,20 @@ var graph =
             graphMappingEntity.slideIconPosition--;
             graphMappingEntity.updateSlideIconControlDisplay();
         });
+        
+        $('.slide .deleteMappingObject').die('click');
+        $('.slide .deleteMappingObject').live('click', function()
+        {
+            $(this).parents('.slide').first().remove();
+            graphMappingEntity.updateMappingLink();
+            graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
+            graphMappingEntity.updateMappingSlidesWidth();
+            graph.updateGraph();
+            if(graphMappingEntity.currentPosition==graphMappingEntity.numberOfSlides)
+            {
+                graphMappingEntity.selectSlide(graphMappingEntity.numberOfSlides-1);
+            }
+        });
     },
     
     // DESC: exits mapping mode and returns to general editing mode
@@ -573,43 +586,43 @@ var graphMappingEntity =
         var graphTypes = $("<select></select>").append(graphMappingEntity.graphTypes).children('option[value="'+typeOfGraph+'"]').attr('selected','selected').parent().remove().html();
         if(typeOfGraph=="function")
         {
-            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                    "<li><label>Formula</label><input name='formula' type='text' /><label>Inverted</label><input name='inverted' type='checkbox' /></li>"+
                    "<li><ul><li><label>Left Bound</label><input name='leftbound' type='text' /></li><li><label>Right Bound</label><input name='rightbound' type='text' /></li><li><label>Points</label><input name='points' type='text' /></li></ul></li>";
         }
         else if(typeOfGraph=="integral")
         {
-            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                "<li><label>Formula</label><input name='formula' type='text' /></li>"+
                "<li><ul><li><label>Left Bound</label><input name='leftbound' type='text' /></li><li><label>Right Bound</label><input name='rightbound' type='text' /></li><li><label>Points</label><input name='points' type='text' /></li></ul></li>"+
                "<li><ul><li><label>Left Limit</label><input name='leftlimit' type='text' /></li><li><label>Right Limit</label><input name='rightlimit' type='text' /></li></ul></li>";
         }
         else if(typeOfGraph=="asymptote")
         {
-             return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+             return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                "<li><label>Formula</label><input name='formula' type='text' /><label>Inverted</label><input name='inverted' type='checkbox' /></li>"+
                "<li><ul><li><label>Left Bound</label><input name='leftbound' type='text' /></li><li><label>Right Bound</label><input name='rightbound' type='text' /></li><li><label>Points</label><input name='points' type='text' /></li></ul></li>";
         }
         else if(typeOfGraph=="periodicasymptote")
         {
-            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                "<li><label>Formula</label><input name='formula' type='text' /><label>Inverted</label><input name='inverted' type='checkbox' /></li>";
         }
         else if(typeOfGraph=="polarequation")
         {
-            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                "<li><label>Formula</label><input name='formula' type='text' /></li>"+
                "<li><ul><li><label>Left Bound</label><input name='leftbound' type='text' /></li><li><label>Right Bound</label><input name='rightbound' type='text' /></li><li><label>Points</label><input name='points' type='text' /></li></ul></li>";
         }
         else if(typeOfGraph=="formulapoints")
         {
-             return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+             return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                    "<li><label>Formula</label><input name='formula' type='text' /><label>Inverted</label><input name='inverted' type='checkbox' /></li>"+
                    "<li><ul><li><label>Left Bound</label><input name='leftbound' type='text' /></li><li><label>Right Bound</label><input name='rightbound' type='text' /></li><li><label>Points</label><input name='points' type='text' /></li></ul></li>";
         }
         else if(typeOfGraph=="individualpoints")
         {
-            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select></li>"+
+            return "<li><label>Type</label><select class='graphTypes'>"+graphTypes+"</select><img class='deleteMappingObject' src='img/x.png' /></li>"+
                "<li><label>Points</label><textarea name='pointlist' rows='5' columns='30' /></li>"+
                "<li><label>Fill</label><input name='fill' type='checkbox' /></li>";
         }
