@@ -125,8 +125,16 @@ var graphILO =
                         
                         if(functionVal.type == "asymptote")
                         {
+                            newFunction.dashes = {show: false};
+                            newFunction.lines = {show: true, lineWidth:8};
+                            newFunction.color = graphILO.backgroundColor;
+                            newFunction.data = dataPoints;
+                            
+                            graphFuncs.push($.extend({},newFunction));
+                            
                             newFunction.dashes = {show: true};
                             newFunction.lines = {show: false};
+                            newFunction.color = graphILO.colors[index];
                         }
                         
                         newFunction.data = dataPoints;
