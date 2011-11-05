@@ -16,8 +16,8 @@ var graph =
 	editMode: function(targetGraph)
 	{
 		ilo.checkForRepeatILOs();
-		var targetGraphContents = ILOContents.ILOArray[$(targetGraph).attr('id')];
-		
+		var targetGraphContents = $.extend({},ILOContents.ILOArray[$(targetGraph).attr('id')]);
+
 		function updateParameters()
 		{
 			var lightBoxGraphSpecs = graphILO.checkAllGraphData(ILOContents.ILOArray[$(lightBoxGraph).attr('id')]);
@@ -90,7 +90,7 @@ var graph =
 		else
 		{
 			ILOContents.setILOArray($(lightBoxGraph).attr('id'),targetGraphContents);
-			var targetGraphData = graphILO.checkAllGraphData(ILOContents.ILOArray[$(targetGraph).attr('id')]);
+			var targetGraphData = graphILO.checkAllGraphData(targetGraphContents);
 			
 			graphILO.display(lightBoxGraph);
 			
