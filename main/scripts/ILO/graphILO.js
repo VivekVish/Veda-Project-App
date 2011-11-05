@@ -330,7 +330,6 @@ var graphILO =
                         var fillColor = ("fill" in functionVal && (functionVal.fill===true || functionVal.fill==="true")) ? graphILO.colors[index] : graphILO.backgroundColor;
                         newFunction.lines = {show: false};
                         newFunction.points = {show: true, symbol : pointSymbol, fill : true, fillColor: fillColor};
-                        
                         newFunction.data = eval("["+functionVal["pointlist"]+"]");
                         graphFuncs.push(newFunction);
                     }

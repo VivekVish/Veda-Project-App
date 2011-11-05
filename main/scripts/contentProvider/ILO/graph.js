@@ -678,7 +678,7 @@ var graphMappingEntity =
             if("points" in functionVal){newSlide.find('[name="points"]').val(functionVal.points)}
             if("leftLimitOfIntegration" in functionVal){newSlide.find('[name="leftlimit"]').val(functionVal.leftLimitOfIntegration)}
             if("rightLimitOfIntegration" in functionVal){newSlide.find('[name="rightlimit"]').val(functionVal.rightLimitOfIntegration)}
-            if("pointlist" in functionVal){newSlide.find('[name="pointlist"]').val(functionVal.pointlist)}
+            if("pointlist" in functionVal){newSlide.find('[name="pointlist"]').val(graphMappingEntity.formatPointText(functionVal.pointlist))}
             if("fill" in functionVal && (functionVal.fill===true || functionVal.fill==="true")){newSlide.find('[name="fill"]').attr('checked','checked')}
             
             mappingEditor.find("#graphMappingSlides>#graphMappingSlideHolder").append(newSlide);
@@ -774,7 +774,10 @@ var graphMappingEntity =
     // RETURNS: CSV-like listing
     formatPointText: function(points)
     {
-        return pointText.replace(/\],\[/g,"\n").replace(/[\[\]]/g,"");
+        if(typeof(points)!="undefined")
+        {
+            return points.replace(/\],\[/g,"\n").replace(/[\[\]]/g,"");
+        }
     },
     
     // DESC: updates the slide icons in the graph mapping navigation
@@ -813,7 +816,7 @@ var graphMappingEntity =
         var graphFuncs = graphILO.getGraphFunctions([{"mapping":[formula]}],graphProperties);
 
         var graphColor = graphILO.colors[$(graphMappingEntity.mappingLink).parents('li').first().prevAll('li').size()];
-        console.log(graphFuncs);
+
         $.each(graphFuncs,function(index)
         {
             graphFuncs[index].color = graphColor;
