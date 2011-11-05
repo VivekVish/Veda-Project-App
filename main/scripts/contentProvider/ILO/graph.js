@@ -410,6 +410,8 @@ var graph =
     // RETURNS: void
     enterMappingMode: function(mappingLink)
     {
+        graphMappingEntity.currentPosition = 0;
+        graphMappingEntity.slideIconPosition = 0;
         graphMappingEntity.mappingLink = mappingLink;
         var mappingEditor = $("<div id='mappingEditor'><div id='graphMappingSlides'><div id='graphMappingSlideHolder'></div></div><span id='backToGeneralGraphEditor'>&lt;&lt; Done</span><span id='insertNewMappingObject'>Insert New Object</span></div>");
         var mappingNavigation = $("<div id='graphMappingNavigation'><span class='graphMappingSlideControl' id='leftControl'><img src='img/left_arrow.png' /></span><div id='graphMappingIcons'><ul></ul></div><span class='graphMappingSlideControl' id='rightControl'><img src='img/right_arrow.png' /></span></div>");
@@ -445,6 +447,7 @@ var graph =
             graphMappingEntity.updateSlideIcons(mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
             graphMappingEntity.updateMappingLink();
             graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
+            graphMappingEntity.updateMappingSlidesWidth();
             graph.updateGraph();
             
             $('#graphMappingIcons ul').sortable();
