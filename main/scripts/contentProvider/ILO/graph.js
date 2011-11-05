@@ -462,12 +462,14 @@ var graph =
         
         $('#generalGraphParameters').fadeTo(300,0);
         
-        $('#backToGeneralGraphEditor').click(function()
+        $('#backToGeneralGraphEditor').die('click');
+        $('#backToGeneralGraphEditor').live('click',function()
         {
             graph.exitMappingMode();
         });
         
-        $('#insertNewMappingObject').click(function()
+        $('#insertNewMappingObject').die('click');
+        $('#insertNewMappingObject').live('click',function()
         {
             graphMappingEntity.insertNewMappingObject();
         });
