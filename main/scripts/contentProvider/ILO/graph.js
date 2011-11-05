@@ -34,18 +34,28 @@ var graph =
 			newInfoEntered=false;
 		}
         
-        function addGraphFunction()
+        function addGraphFunction(type)
 		{
 			if($('#graphFunctions ul').children('li').size()<6)
 			{
 				var newGraphFunction = $('<li></li>');
 				
-				newGraphFunction.append('<label>Label</label>')
-								.append('<input class="graphFunctionLabels" type="text"/>')
-								.append('<label>Function</label>')
-								.append('<input class="graphFunctionEquations"type="text"/>')
-                                .append('<span class="graphMapping">Mapping</span>')
-								.append('<img class="deleteGraphFunction" src="img/x.png"></img>');
+                if(type=="function")
+                {
+                    newGraphFunction.append('<label>Label</label>')
+                                    .append('<input class="graphFunctionLabels" type="text"/>')
+                                    .append('<label>Function</label>')
+                                    .append('<input class="graphFunctionEquations"type="text"/>')
+                                    .append('<span class="graphMapping">Mapping</span>')
+                                    .append('<img class="deleteGraphFunction" src="img/x.png"></img>');
+                }
+                else if(type=="mapping")
+                {
+                    newGraphFunction.append('<label>Label</label>')
+                                    .append('<input class="graphFunctionLabels" type="text"/>')
+                                    .append('<span class="graphMapping">Edit Mapping</span>')
+                                    .append('<img class="deleteGraphFunction" src="img/x.png"></img>');
+                }
 				$('#graphFunctions ul').append(newGraphFunction);
 			}
 		}
@@ -117,9 +127,18 @@ var graph =
 		
 		$.each(targetGraphContents['content'], function(index,functionVal)
         {
-            addGraphFunction();
-			$('#graphFunctions ul').children(':last-child').children('.graphFunctionLabels').val(functionVal['label'].replace(/_/g,' '));
-			$('#graphFunctions ul').children(':last-child').children('.graphFunctionEquations').val(functionVal['function']);
+            if("mapping" in functionVal)
+            {
+                addGraphFunction("mapping");
+                $('#graphFunctions ul').children(':last-child').children('.graphFunctionLabels').val(functionVal['label'].replace(/_/g,' '));
+                $('#graphFunctions ul').children(':last-child').children('.graphMapping')[0].mappingObject = functionVal.mapping;
+            }
+            else
+            {
+                addGraphFunction("function");
+                $('#graphFunctions ul').children(':last-child').children('.graphFunctionLabels').val(functionVal['label'].replace(/_/g,' '));
+                $('#graphFunctions ul').children(':last-child').children('.graphFunctionEquations').val(functionVal['function']);
+            }
         });
         
         $('#graphFunctions').append('<span id="insertGraphFunction">Insert New Function</a>');
@@ -141,7 +160,7 @@ var graph =
 
 		$('#insertGraphFunction').bind('click',function(e)
 		{
-			addGraphFunction();
+			addGraphFunction("function");
 			graph.updateGraph();
 		});
 		
@@ -377,8 +396,7 @@ var graph =
                 }
                 else
                 {
-                    value.label = $('.graphFunctionLabels:eq('+index+')').val().replace(/ /g,'_');
-                    ILOContents.ILOArray[$(lightBoxGraph).attr('id')]['content'][index] = {"mapping":value};
+                    ILOContents.ILOArray[$(lightBoxGraph).attr('id')]['content'][index] = {"mapping":value,'label':$('.graphFunctionLabels:eq('+index+')').val().replace(/ /g,'_')};
                 }
             });
 
@@ -412,8 +430,7 @@ var graph =
             // remove the function input box and change the mapping link text
             $(mappingLink).prev('.graphFunctionEquations').prev('label').remove();
             $(mappingLink).prev('.graphFunctionEquations').remove();
-            // FOLLOWING LINE NEEDS TO BE REPLACED WITH GENERAL READER
-            mappingLink.mappingObject = [{type:'function',formula:oldFormula}];
+            graphMappingEntity.updateMappingLink();
             $(mappingLink).text('Edit Mapping');
 
             // append the slide to the mapping editor
@@ -426,6 +443,9 @@ var graph =
         {
             mappingNavigation.remove().prependTo(mappingEditor);
             graphMappingEntity.updateSlideIcons(mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
+            graphMappingEntity.updateMappingLink();
+            graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
+            graph.updateGraph();
             
             $('#graphMappingIcons ul').sortable();
             
@@ -526,6 +546,7 @@ var graph =
     // RETURNS: void
     exitMappingMode: function()
     {
+        graphMappingEntity.updateMappingLink();
         $('#generalGraphParameters').fadeTo(0,1);
         $('.graphMappingSlideControl').animate({'marginLeft' : ($('#generalGraphParameters').outerWidth(true)+parseInt($('#mappingEditor').css('margin-left')))},0,'swing',function()
         {
@@ -648,13 +669,14 @@ var graphMappingEntity =
             var newSlide = $("<div class='slide'><h5>Mapping</h5><ul></ul></div>");
             newSlide.children('ul').append(graphMappingEntity.getMappingHTML(functionVal.type));
             if("formula" in functionVal){newSlide.find('[name="formula"]').val(functionVal.formula)}
-            if("inverted" in functionVal && functionVal.inverted){newSlide.find('[name="inverted"]').attr('checked','checked')}
+            if("inverted" in functionVal && (functionVal.inverted===true || functionVal.inverted==="true")){newSlide.find('[name="inverted"]').attr('checked','checked')}
             if("domain" in functionVal && "leftbound" in functionVal.domain){newSlide.find('[name="leftbound"]').val(functionVal.domain.leftbound)}
             if("domain" in functionVal && "rightbound" in functionVal.domain){newSlide.find('[name="rightbound"]').val(functionVal.domain.rightbound)}
             if("points" in functionVal){newSlide.find('[name="points"]').val(functionVal.points)}
             if("leftLimitOfIntegration" in functionVal){newSlide.find('[name="leftlimit"]').val(functionVal.leftLimitOfIntegration)}
             if("rightLimitOfIntegration" in functionVal){newSlide.find('[name="rightlimit"]').val(functionVal.rightLimitOfIntegration)}
             if("pointlist" in functionVal){newSlide.find('[name="pointlist"]').val(functionVal.pointlist)}
+            if("fill" in functionVal && (functionVal.fill===true || functionVal.fill==="true")){newSlide.find('[name="fill"]').attr('checked','checked')}
             
             mappingEditor.find("#graphMappingSlides>#graphMappingSlideHolder").append(newSlide);
         });

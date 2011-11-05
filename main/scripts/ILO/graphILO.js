@@ -33,7 +33,7 @@ var graphILO =
 		$(targetGraph).children('.graphDisplay').width(WINDOWHEIGHT * 0.5 * graphProperties.adjustwidth);
 		$(targetGraph).children('.graphDisplay').height(WINDOWHEIGHT * 1/3 * graphProperties.adjustheight);
 		$(targetGraph).children('function').hide();
-        
+
 		$.plot($(targetGraph).children('.graphDisplay'), graphFuncs,
 		{
 			series: 
@@ -74,15 +74,15 @@ var graphILO =
 		{
             if("mapping" in mappingVal)
             {
-                var mappingLabel = "label" in mappingVal.mapping ? mappingVal.mapping.label.replace(/_/g,' ') : "";
-                var newFunction = {data:"",label:mappingLabel,color:graphILO.colors[index]};
+                var mappingLabel = "label" in mappingVal ? mappingVal.label.replace(/_/g,' ') : "";
+                var newFunction = {data:"",color:graphILO.colors[index]};
 
                 $.each(mappingVal.mapping, function(funcIndex,functionVal)
                 {
                     var dataPoints = [];
                     var points = "points" in functionVal && functionVal.points!="" ? functionVal['points'] : graphProperties.points;
 
-                    var inverted = "inverted" in functionVal && functionVal.inverted!="" ? functionVal.inverted : false;
+                    var inverted = "inverted" in functionVal && functionVal.inverted!="" && (functionVal.inverted===true || functionVal.inverted=="true") ? true : false;
                     if(inverted)
                     {
                         var leftBound = "domain" in functionVal && "leftbound" in functionVal.domain && functionVal.domain.leftbound != ""? Math.max(graphProperties.ymin,functionVal.domain.leftbound) : graphProperties.ymin;
@@ -94,9 +94,15 @@ var graphILO =
                         var rightBound = "domain" in functionVal && "rightbound" in functionVal.domain && functionVal.domain.rightbound != "" ? Math.min(graphProperties.xmax,functionVal.domain.rightbound) : graphProperties.xmax;
                     }
                     
+                    if(funcIndex==0)
+                    {
+                        newFunction.label = mappingLabel;
+                    }
+
                     // GRAPHING FUNCTIONS AND ASYMPTOTES
                     if((functionVal.type == "function" || functionVal.type == "asymptote") && leftBound < rightBound)
                     {
+
                         var funcEquation = graphILO.parseEquation(functionVal["formula"]);
 
                         if(inverted)
@@ -124,7 +130,6 @@ var graphILO =
                         }
                         
                         newFunction.data = dataPoints;
-
                         graphFuncs.push(newFunction);
                     }
                     // GRAPHING INTEGRALS
@@ -265,7 +270,7 @@ var graphILO =
                     else if(functionVal.type=="formulapoints")
                     {
                         var pointSymbol = "symbol" in functionVal ? functionVal.symbol : "circle";
-                        var fillColor = ("fill" in functionVal && functionVal.fill) ? graphILO.colors[index] : graphILO.backgroundColor;
+                        var fillColor = ("fill" in functionVal && (functionVal.fill===true || functionVal.fill==="true")) ? graphILO.colors[index] : graphILO.backgroundColor;
                         newFunction.lines = {show: false};
                         newFunction.points = {show: true, symbol : pointSymbol, fill : true, fillColor: fillColor};
                         if("formula" in functionVal)
@@ -316,18 +321,19 @@ var graphILO =
                             
                             newFunction.data = dataPoints;
                         }
+                        
+                        graphFuncs.push(newFunction);
                     }
                     else if(functionVal.type=="individualpoints")
                     {
                         var pointSymbol = "symbol" in functionVal ? functionVal.symbol : "circle";
-                        var fillColor = ("fill" in functionVal && functionVal.fill) ? graphILO.colors[index] : graphILO.backgroundColor;
+                        var fillColor = ("fill" in functionVal && (functionVal.fill===true || functionVal.fill==="true")) ? graphILO.colors[index] : graphILO.backgroundColor;
                         newFunction.lines = {show: false};
                         newFunction.points = {show: true, symbol : pointSymbol, fill : true, fillColor: fillColor};
                         
                         newFunction.data = eval("["+functionVal["pointlist"]+"]");
+                        graphFuncs.push(newFunction);
                     }
-                    
-                    graphFuncs.push(newFunction);
                     
                     newFunction = {data:"",color:graphILO.colors[index]};
                 });
