@@ -812,7 +812,15 @@ var graphMappingEntity =
     {
         var graphFuncs = graphILO.getGraphFunctions([{"mapping":[formula]}],graphProperties);
 
-        graphFuncs[0].color = graphILO.colors[$(graphMappingEntity.mappingLink).parents('li').first().prevAll('li').size()];
+        var graphColor = graphILO.colors[$(graphMappingEntity.mappingLink).parents('li').first().prevAll('li').size()];
+        console.log(graphFuncs);
+        $.each(graphFuncs,function(index)
+        {
+            graphFuncs[index].color = graphColor;
+            if("lines" in graphFuncs[index]) {graphFuncs[index].lines.lineWidth = 1}
+            if("points" in graphFuncs[index]) {graphFuncs[index].points.radius = 1}
+            if("dashes" in graphFuncs[index]) {graphFuncs[index].dashes.lineWidth = 1}
+        })
 
         $.plot(graphIcon,graphFuncs,
         {

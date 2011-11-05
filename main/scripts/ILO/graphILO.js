@@ -228,7 +228,7 @@ var graphILO =
 
                                 newFunction.data = dataPoints;
                                 newFunction.dashes = {show: false};
-                                newFunction.lines = {show: true, lineWidth:7};
+                                newFunction.lines = {show: true, lineWidth:8};
                                 newFunction.color = graphILO.backgroundColor;
 
                                 graphFuncs.push($.extend({},newFunction));
