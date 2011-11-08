@@ -423,6 +423,13 @@ function BaseProvider()
 		newChemicalEquationEditor = new equationEditor($('#chemicalEquationText')[0],$('#chemicalEquationImageHolder')[0],editorOptions);
 	}
     
+    // DESC: fixes background color issues when something is pasted into another area with a different background color
+    // RETURNS: void
+    this.fixBackgroundColorAfterPaste = function()
+    {
+        $('div#content *').css({'background-color':''});
+    }
+    
     if($('#content>section').size()>0)
     {
         $('#content>section')[0].contentEditable = true;
@@ -434,6 +441,14 @@ function BaseProvider()
 	{
 		$('<p></p>').insertAfter('#content>section>h1');
 	}
+    
+    // Paste event
+    $('#content').bind('paste',function()
+    {
+        contentState.saveState();
+        setTimeout(thisObject.fixBackgroundColorAfterPaste,10);
+        setTimeout(contentState.saveState,11);
+    });
 	
 	// Creates undo / redo functionality
 	contentState = new ContentState();

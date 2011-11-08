@@ -19,7 +19,6 @@ function LessonProvider()
 	this.submitContent = function()
 	{
         // Perform some cleanup
-        $('.Apple-style-span').remove();
         $('p>br').remove();
         var lessonPayload = thisObject.getPayload();
 
