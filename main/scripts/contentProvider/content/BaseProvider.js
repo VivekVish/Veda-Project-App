@@ -423,11 +423,47 @@ function BaseProvider()
 		newChemicalEquationEditor = new equationEditor($('#chemicalEquationText')[0],$('#chemicalEquationImageHolder')[0],editorOptions);
 	}
     
-    // DESC: fixes background color issues when something is pasted into another area with a different background color
+    // DESC: fixes background color issues when something is pasted into another area with a different background color or when backspaced
+    //       into an area of a different color
     // RETURNS: void
-    this.fixBackgroundColorAfterPaste = function()
+    this.fixBackgroundColor = function()
     {
         $('div#content *').css({'background-color':''});
+    }
+    
+    // DESC: puts spans and text nodes that are "hanging" in .infoBox and section elements in paragraph elements
+    // RETURNS: void
+    this.cleanAfterPaste = function()
+    {
+        var adjacentElements = new Array();
+        function replaceHangingElements(element)
+        {
+            $(element).contents().each(function(index,value)
+            {
+                if(value.nodeType==3||$(value).is('span'))
+                {
+                    adjacentElements.push(value);
+                }
+                else if(adjacentElements.length>0)
+                {
+                    var replicateElements = $(adjacentElements).clone();
+                    var newParagraph = $('<p></p>');
+                    newParagraph.append(replicateElements);
+                    var jqueryElements = $(adjacentElements);
+                    jqueryElements.not(':first').remove();
+                    jqueryElements.replaceWith(newParagraph);
+
+                    adjacentElements = $();
+                }
+            });
+        }
+        
+        replaceHangingElements('div#content>section');
+        
+        $('#content .infoBox').each(function(i,val)
+        {
+            replaceHangingElements(val);
+        });
     }
     
     if($('#content>section').size()>0)
@@ -446,8 +482,9 @@ function BaseProvider()
     $('#content').bind('paste',function()
     {
         contentState.saveState();
-        setTimeout(thisObject.fixBackgroundColorAfterPaste,10);
-        setTimeout(contentState.saveState,11);
+        setTimeout(thisObject.fixBackgroundColor,10);
+        setTimeout(thisObject.cleanAfterPaste,11);
+        setTimeout(contentState.saveState,12);
     });
 	
 	// Creates undo / redo functionality

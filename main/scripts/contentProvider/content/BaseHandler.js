@@ -377,14 +377,26 @@ function BaseHandler()
                         if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0)
                         {
                             var previousTextHoldingElement = null;
-                            $('p,li,td,th,:header').each(function(index)
+                            $('#content>section p,li,td,th,:header').each(function(index)
                             {
-                                if(firstTextHoldingParent[0]==this)
+                                if(firstTextHoldingParent[0]==this&&index>0)
                                 {
                                     e.preventDefault();
+                                    var markedInfoBoxForDeletion = null;
+                                    if(firstTextHoldingParent.parent('.infoBox').size()==1&&firstTextHoldingParent.parent('.infoBox').contents().size()==1)
+                                    {
+                                        markedInfoBoxForDeletion = firstTextHoldingParent.parent('.infoBox');
+                                    }
                                     var textContents = firstTextHoldingParent.contents();
                                     $(previousTextHoldingElement).append(textContents);
                                     rangeTraverse.selectBefore(textContents[0]);
+                                    $(this).remove();
+                                    if(typeof(markedInfoBoxForDeletion)!="null")
+                                    {
+                                        markedInfoBoxForDeletion.remove();
+                                    }
+                                    
+                                    materialProvider.fixBackgroundColor();
                                     return false;
                                 }
                                 previousTextHoldingElement = this;
