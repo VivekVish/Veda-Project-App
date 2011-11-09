@@ -130,7 +130,7 @@ function BaseHandler()
                             var lineBreak = document.createElement("BR");
                             rangeSelection.insertNode(lineBreak);
                         }
-						else if(startNode.tagName=="LI"&&$(startNode).parent().parent('section').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){ return this.nodeType ==3}).size()==0)
+						else if(startNode.tagName=="LI"&&$(startNode).getStartContainer().parents('#content ul').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){ return this.nodeType ==3}).size()==0)
 						{
 							e.preventDefault();
 							newParagraph = $('<p></p>');
@@ -362,7 +362,6 @@ function BaseHandler()
 					}
 					else if(rangeTraverse.parents('.ilo').size()>0)
 					{
-						
 						var newParagraph = document.createElement('p');
 						rangeTraverse.parents('.ilo').after(newParagraph);
 						rangeTraverse.selectBefore(newParagraph);
@@ -374,6 +373,25 @@ function BaseHandler()
 				{
                     // Backspace
 					case 8:
+                        var firstTextHoldingParent = rangeTraverse.parents('p,li,td,th,:header').first();
+                        if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0)
+                        {
+                            var previousTextHoldingElement = null;
+                            $('p,li,td,th,:header').each(function(index)
+                            {
+                                if(firstTextHoldingParent[0]==this)
+                                {
+                                    e.preventDefault();
+                                    var textContents = firstTextHoldingParent.contents();
+                                    $(previousTextHoldingElement).append(textContents);
+                                    rangeTraverse.selectBefore(textContents[0]);
+                                    return false;
+                                }
+                                previousTextHoldingElement = this;
+                            });
+                            
+                        }
+                        
 						if(contentState.charactersTyped)
 						{
 							contentState.saveState();
