@@ -471,7 +471,7 @@ function BaseProvider()
         $('#content>section')[0].contentEditable = true;
     }
     
-	$('div.ilo, h1').attr('contenteditable',false);
+	$('.ilo, h1').attr('contenteditable',false);
 	
 	if($('#content>section').children().size()==1)
 	{
