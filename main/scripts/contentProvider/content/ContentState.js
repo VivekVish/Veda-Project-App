@@ -56,6 +56,7 @@ function ContentState()
 		{
 			$('#content>section').first().html(thisObject.stateArray[position].content);
 			ILOContents.ILOArray = thisObject.stateArray[position].ILOArray;
+            $('.ilo').empty();
 			baseContent.refreshILOs();
 			thisObject.statePosition = position;
             rangeTraverse.selectAfter($('#content>section').first().find('p,li').last()[0]);
