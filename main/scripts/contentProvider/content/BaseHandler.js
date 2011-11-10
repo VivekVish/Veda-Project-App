@@ -130,7 +130,7 @@ function BaseHandler()
                             var lineBreak = document.createElement("BR");
                             rangeSelection.insertNode(lineBreak);
                         }
-						else if(startNode.tagName=="LI"&&$(startNode.getStartContainer()).parents('#content ul').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){ return this.nodeType ==3}).size()==0)
+						else if(startNode.tagName=="LI"&&$(startNode).parents('#content ul').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){ return this.nodeType ==3}).size()==0)
 						{
 							e.preventDefault();
 							newParagraph = $('<p></p>');
