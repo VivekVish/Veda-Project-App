@@ -2,6 +2,7 @@
 
 # Includes
 require_once("config/main.inc.php");
+require_once("lib/PathArray.php");
 
 if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()))
 {
@@ -25,6 +26,9 @@ if (isset($_REQUEST['newOrder']) && !empty($_REQUEST['newOrder']))
 {
 	$newOrder = trim($_REQUEST['newOrder']);
 }
+
+PathArray::urlEncodePath($newPath);
+PathArray::urlEncodePath($oldPath);
 
 # Instantiate api class
 $api = new Api();

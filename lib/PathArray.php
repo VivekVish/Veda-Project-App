@@ -74,6 +74,18 @@ class PathArray
         }
     }
     
+    public static function urlEncodePath(&$path)
+    {
+        $uriArr = explode("/",trim($path,"/"));
+
+        foreach($uriArr as $key => $value)
+        {
+            $uriArr[$key] = urlencode($uriArr[$key]);
+        }
+
+        $path = "/".implode("/",$uriArr)."/";
+    }
+    
     public static function isNameValid($name)
     {
         return preg_match('/\//',$name)==0;
