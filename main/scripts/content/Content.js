@@ -17,6 +17,13 @@ function Content()
 			eval($(this).attr('data-ilotype')+'ILO.display(this)');
 		});
 	}
+    
+    // DESC: displays citations in bibliography and properly orders them
+    // RETURNS: void
+    this.refreshCitations = function()
+    {
+        
+    }
 	
 	// Fix Chrome / Safari text area height issue
 	if($.browser.webkit)

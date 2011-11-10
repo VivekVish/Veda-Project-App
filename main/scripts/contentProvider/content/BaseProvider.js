@@ -12,7 +12,27 @@ function BaseProvider()
     // RETURNS: void
     this.createCitationLightbox = function()
     {
-        
+        if(rangeTraverse.within('#content')&&rangeTraverse.within('p,li,td,th'))
+        {
+            var insertCitationLightbox = $('<div id="insertCitationLightbox"><ul></ul></div>');
+            insertCitationLightbox.children('ul').append($('<li><textarea id="citationText" rows="3" cols="20"></textarea></li>'));
+            insertCitationLightbox.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
+            
+            createLightBox('#content','Insert Citation',insertCitationLightbox);
+            
+            $('#insertCitationLightbox button.create').click(function()
+            {
+                thisObject.insertCitation();
+                $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                $('#overlay').fadeOut('fast',function() {$(this).remove();});
+            });
+
+            $('#insertCitationLightbox button.cancel').click(function()
+            {
+                $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                $('#overlay').fadeOut('fast',function() {$(this).remove();});
+            });
+        }
     }
     
     // DESC: Inserts a citation
@@ -519,7 +539,8 @@ function BaseProvider()
 	{
 		currentHandler.handleContentEvent(e);
 	});
-	
+    
+    // Toolbar actions
 	$('#CPtoolbar').mousedown(function(e)
 	{
 		e.preventDefault();
@@ -584,6 +605,12 @@ function BaseProvider()
 	{
 		staticimage.editMode();
 	});
+    
+    // Insert Citatoin
+    $('#insertCitation').click(function()
+    {
+        thisObject.createCitationLightbox();
+    });
     
     // Set Content Provider Tooltips
     $("span.CPsublist>li[title]").tooltip({position: "bottom center", opacity: 0.85, layout: '<div></div>', onBeforeShow: function()

@@ -23,6 +23,7 @@
                     <li title="Insert Unordered List (Ctrl+Shift+L)" id="insertUnorderedList">{html_image file='img/contenticons/insertUnorderedList.png'}</li>
                     <li title="Insert Table (Ctrl+Shift+U)" id="insertTable">{html_image file='img/contenticons/insertTable.png'}</li>
                     <li title="Delete Table (Ctrl+Shift+Y)" id="deleteTable">{html_image file='img/contenticons/deleteTable.png'}</li>
+                    <li title="Insert Citation (Ctrl+Shift+X)" id="insertCitation">{html_image file='img/contenticons/insertCitation.png'}</li>
                 </span>
                 <span class="CPsublist">
                 	<li title="Insert Equation (Ctrl+Shift+E)" id="insertEquation">{html_image file='img/contenticons/insertEquation.png'}</li>

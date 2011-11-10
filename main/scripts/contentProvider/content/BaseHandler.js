@@ -130,7 +130,7 @@ function BaseHandler()
                             var lineBreak = document.createElement("BR");
                             rangeSelection.insertNode(lineBreak);
                         }
-						else if(startNode.tagName=="LI"&&$(startNode).parents('#content ul').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){ return this.nodeType ==3}).size()==0)
+						else if(startNode.tagName=="LI"&&$(startNode).parents('#content ul').size()==1&&rangeSelection.startOffset==0&&$(startNode).filter(function(){return this.nodeType ==3}).size()==0)
 						{
 							e.preventDefault();
 							newParagraph = $('<p></p>');
@@ -374,7 +374,7 @@ function BaseHandler()
                     // Backspace
 					case 8:
                         var firstTextHoldingParent = rangeTraverse.parents('p,li,td,th,:header').first();
-                        if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0)
+                        if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0&&rangeTraverse.collapsed)
                         {
                             var previousTextHoldingElement = null;
                             $('#content>section p,li,td,th,:header').each(function(index)
@@ -414,7 +414,7 @@ function BaseHandler()
 						
 						break;
 					// Enter, Delete
-					case 13: case 46: 				
+					case 13: case 46:				
 						if(contentState.charactersTyped)
 						{
 							contentState.saveState();

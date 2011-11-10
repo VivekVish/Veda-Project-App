@@ -10,5 +10,4 @@
         <p>If you notice any bugs, please email me.  We still have a long way to go.  Thank you for your patience!</p>
         <iframe width="560" height="315" src="http://www.youtube.com/embed/r7E9lIBTReg?rel=0&amp;hd=1" frameborder="0" allowfullscreen></iframe>
     </section>
-    
 </div>
