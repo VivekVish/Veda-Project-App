@@ -29,7 +29,7 @@
                 	<li title="Insert Equation (Ctrl+Shift+E)" id="insertEquation">{html_image file='img/contenticons/insertEquation.png'}</li>
                     <li title="Insert Chemical Equation (Ctrl+Shift+C)" id="insertChemicalEquation">{html_image file='img/contenticons/insertChemicalEquation.png'}</li>
                     <li title="Insert Graph (Ctrl+Shift+G)" id="insertGraph">{html_image file='img/contenticons/insertGraph.png'}</li>
-                    <!--<li title="Insert Image (Ctrl+Shift+I)" id="insertImage">{html_image file='img/contenticons/insertImage.png'}</li>-->
+                    <li title="Insert Image (Ctrl+Shift+I)" id="insertImage">{html_image file='img/contenticons/insertImage.png'}</li>
                 </span>
 {if isset($type)}
                 <span class="CPfunctions">

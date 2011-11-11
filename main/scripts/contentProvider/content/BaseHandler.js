@@ -374,12 +374,12 @@ function BaseHandler()
                     // Backspace
 					case 8:
                         var firstTextHoldingParent = rangeTraverse.parents('p,li,td,th,:header').first();
-                        if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0&&rangeTraverse.collapsed)
+                        if(firstTextHoldingParent.contents()[0]==rangeTraverse.getStartContainer()&&rangeTraverse.getStartOffset()==0&&rangeTraverse.getCurrentRange().collapsed)
                         {
                             var previousTextHoldingElement = null;
-                            $('#content>section p,li,td,th,:header').each(function(index)
+                            $('#content>section p,#content>section li,#content>section td,#content>section th,#content>section h2,#content>section h3,#content>section h4,#content>section h5,#content>section h6,#content>section h7').each(function(index)
                             {
-                                if(firstTextHoldingParent[0]==this&&index>0)
+                                if(firstTextHoldingParent[0]==this&&previousTextHoldingElement!==null)
                                 {
                                     e.preventDefault();
                                     var markedInfoBoxForDeletion = null;
@@ -390,8 +390,8 @@ function BaseHandler()
                                     var textContents = firstTextHoldingParent.contents();
                                     $(previousTextHoldingElement).append(textContents);
                                     rangeTraverse.selectBefore(textContents[0]);
-                                    $(this).remove();
-                                    if(typeof(markedInfoBoxForDeletion)!="null")
+
+                                    if(markedInfoBoxForDeletion!==null)
                                     {
                                         markedInfoBoxForDeletion.remove();
                                     }
