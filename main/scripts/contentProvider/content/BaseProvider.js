@@ -39,7 +39,7 @@ function BaseProvider()
     // RETURNS: void
     this.insertCitation = function()
     {
-        
+        $.ajax({url : 'resources/nextCitationId.php'});
     }
     
 	// DESC: Inserts a blockquote
@@ -518,7 +518,7 @@ function BaseProvider()
 	
 	var listItemMarkedForRemoval = false;
 	
-    $('body').bind('keyup', function(e)
+    $(document).bind('keyup', function(e)
     {
         currentHandler.handleContentEvent(e);
     });

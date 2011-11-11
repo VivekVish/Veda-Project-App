@@ -22,7 +22,7 @@ function BaseHandler()
 	// RETURNS: void
 	this.handleContentEvent=function(e)
 	{
-        if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
+        if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
         {
             this.handleGeneralEvent(e);
             

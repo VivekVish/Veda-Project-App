@@ -112,7 +112,7 @@ var ilo =
 	// RETURNS: ILO id number (string in the form "ilo#")
 	getNewILOID: function()
 	{
-		return "ilo"+$.ajax({url:'resources/nextILOID.php',type:'GET',async:false}).responseText;
+		return "ilo"+$.ajax({url:'resources/nextILOId.php',type:'GET',async:false}).responseText;
 	},
 	
 	// DESC: edits an ILO by changing its ID and creating a new entry in the ILO XML array but retaining the old ILO XML
