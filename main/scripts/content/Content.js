@@ -7,6 +7,7 @@ function Content()
 {
     $('#content>section>h1').remove();
     $('#content>section').prepend("<h1>"+$('#content').attr('data-name')+"</h1>");
+    $('#content>section').after('<div id="bibliography"></div>');
 
     // DESC: displays each ILO on the page
 	// RETURNS: void
@@ -22,7 +23,31 @@ function Content()
     // RETURNS: void
     this.refreshCitations = function()
     {
+        $('div#bibliography').empty();
+        $('.citation').empty();
         
+        $('.citation').each(function(index)
+        {
+            if(index==0)
+            {
+                $('div#bibliography').append('<h2>Bibliography</h2><ol></ol>');
+            }
+            
+            $(this).text(parseInt(index)+1);
+            // Remove non-italics, non-bold, and non-underline text
+            var tempParagraph = $('<p>').append(citations.citationArray[$(this).attr('id')]);
+            tempParagraph.find('*:not(i,b,u)').remove();
+            var citationText = tempParagraph.remove().html();
+            $('div#bibliography ol').append('<li data-citationid="'+$(this).attr('id')+'">'+citationText+'</li>');
+        });
+        
+        $('div#bibliography li').each(function(index)
+        {
+            if($('#'+$(this).attr('data-citationid')).size()==0)
+            {
+                delete citations.citationArray[$(this).attr('data-citationid')];
+            }
+        });
     }
 	
 	// Fix Chrome / Safari text area height issue
@@ -78,8 +103,17 @@ function Content()
     {
         iloIdArray.push($(this).attr('id'));
     });
+    
+    var citationIdArray = new Array();
+    
+    $('.citation').each(function(index)
+    {
+        citationIdArray.push($(this).attr('id'));
+    });
     // Display ILOs
 	ILOContents.getILOArray(iloIdArray,this.refreshILOs);
+    // Display Citations
+    citations.getCitations(citationIdArray, this.refreshCitations);
     
     var citationsArray = new Array();
     

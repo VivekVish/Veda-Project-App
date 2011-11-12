@@ -16,5 +16,3 @@ $api->setAcceptType("application/json");
 
 $response = $api->get("/data/ilo/$ILOIds");
 echo $response;
-
-?>

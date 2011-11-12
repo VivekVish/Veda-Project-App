@@ -35,7 +35,16 @@ else
 	$ilos = json_encode(array());
 }
 
-$payload = json_encode(array("content"=>$lessonContent,"ilos"=>$ilos));
+if (isset($_REQUEST['citations']) && !empty($_REQUEST['citations']))
+{
+	$citations = json_encode($_REQUEST['citations']);
+}
+else
+{
+	$citations = json_encode(array());
+}
+
+$payload = json_encode(array("content"=>$lessonContent,"ilos"=>$ilos,"citations"=>$citations));
 
 $api = new Api();
 

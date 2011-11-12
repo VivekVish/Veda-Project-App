@@ -277,7 +277,7 @@ nav#coursenav h2
 }
 
 /* Content */
-#content>section
+#content>section, #content>div#bibliography
 {
 	padding: 1em;
 }
@@ -562,4 +562,11 @@ nav#coursenav h2
 .infoBox[data-infoboxtype="information"]
 {
     background-color: #FFD;
+}
+
+/* Citation */
+.citation
+{
+    font-size: 0.7em;
+    vertical-align: text-top;
 }

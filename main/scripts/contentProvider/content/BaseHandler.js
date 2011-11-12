@@ -522,6 +522,13 @@ function BaseHandler()
 							materialProvider.formatTextStyle("underline");
 						}
 						break;
+                    case 88:
+                        if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
+						{
+                            e.preventDefault();
+                            materialProvider.createCitationLightbox();
+                        }
+                        break;
 					// Y
 					case 89:
                         if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
@@ -581,6 +588,10 @@ function BaseHandler()
                 
 				switch(e.keyCode)
 				{
+                    //backspace, delete
+                    case 8: case 46:
+                        baseContent.refreshCitations();
+                        break;
 					// Shift
 					case 16:
 						thisObject.keyPressed['shift'] = false;

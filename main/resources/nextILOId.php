@@ -16,5 +16,3 @@ $api = new Api();
 $result = $api->get("/data/nextiloid/");
 
 echo $result;
-
-?>

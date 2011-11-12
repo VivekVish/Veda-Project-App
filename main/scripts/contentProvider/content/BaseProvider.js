@@ -12,6 +12,7 @@ function BaseProvider()
     // RETURNS: void
     this.createCitationLightbox = function()
     {
+        var currentRange = rangeTraverse.getCurrentRange();
         if(rangeTraverse.within('#content')&&rangeTraverse.within('p,li,td,th'))
         {
             var insertCitationLightbox = $('<div id="insertCitationLightbox"><ul></ul></div>');
@@ -22,7 +23,7 @@ function BaseProvider()
             
             $('#insertCitationLightbox button.create').click(function()
             {
-                thisObject.insertCitation();
+                thisObject.insertCitation($('#citationText').val(),currentRange);
                 $('#lightbox').fadeOut('fast',function() {$(this).remove();});
                 $('#overlay').fadeOut('fast',function() {$(this).remove();});
             });
@@ -37,9 +38,25 @@ function BaseProvider()
     
     // DESC: Inserts a citation
     // RETURNS: void
-    this.insertCitation = function()
+    this.insertCitation = function(citation,range)
     {
-        $.ajax({url : 'resources/nextCitationId.php'});
+        $.ajax({url : 'resources/nextCitationId.php', citation: citation, type: 'GET', success: function(data)
+        {
+            var reg = new RegExp("^[0-9]+$");
+            if(reg.test(data))
+            {
+                citations.setCitationsArray('citation'+data,this.citation);
+                console.log(this.citation);
+                range.insertNode($('<span id="citation'+data+'" class="citation"></span>')[0]);
+                $('.citation').attr('contenteditable',false);
+            }
+            else
+            {
+                new Message(data);
+            }
+            
+            baseContent.refreshCitations();
+        }});
     }
     
 	// DESC: Inserts a blockquote
@@ -484,6 +501,8 @@ function BaseProvider()
         {
             replaceHangingElements(val);
         });
+        
+        baseContent.refreshCitations();
     }
     
     if($('#content>section').size()>0)
@@ -491,7 +510,7 @@ function BaseProvider()
         $('#content>section')[0].contentEditable = true;
     }
     
-	$('.ilo, h1').attr('contenteditable',false);
+	$('.ilo, h1, .citation').attr('contenteditable',false);
 	
 	if($('#content>section').children().size()==1)
 	{

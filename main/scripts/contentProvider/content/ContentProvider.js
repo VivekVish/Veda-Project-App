@@ -168,13 +168,15 @@ function ContentProvider()
 
         var tempILOArray = $.extend({},ILOContents.ILOArray);
         delete tempILOArray['ilo-1'];
+        var tempCitationsArray = $.extend({},citations.citationArray);
         contentClone = $('#content>section').first().clone();
 		contentClone.find('.ilo').empty();
+        contentClone.find('.citation').empty();
         contentClone.children('h1').remove();
 		var contentHTML = contentClone.wrap('<div></div>').parent().html();
         var locationArray = $('#content').attr('data-location').replace(/^\/data\/material\/|\/$/g,'').split('/');
         contentClone.parent().remove();
-		var contentPayload = {lesson: locationArray[4], section:locationArray[3],course:locationArray[2], subject:locationArray[1],field:locationArray[0],content:contentHTML,ilos:tempILOArray};
+		var contentPayload = {lesson: locationArray[4], section:locationArray[3],course:locationArray[2], subject:locationArray[1],field:locationArray[0],content:contentHTML,ilos:tempILOArray,citations:tempCitationsArray};
 
         return contentPayload;
     }
@@ -185,7 +187,6 @@ function ContentProvider()
 	
 	this.preloadEquationEditor();
     this.preloadChemicalEquationEditor();
-    
     
     // Section Modifiers
 	$('#insertSection ul li').click(function()

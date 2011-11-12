@@ -39,6 +39,16 @@ else
 {
 	$ilos = json_encode(array());
 }
+
+if (isset($_REQUEST['citations']) && !empty($_REQUEST['citations']))
+{
+	$citations = json_encode($_REQUEST['citations']);
+}
+else
+{
+	$citations = json_encode(array());
+}
+
 // Only set on rename
 if (isset($_REQUEST['name']) && !empty($_REQUEST['name']))
 {
@@ -58,7 +68,7 @@ if(isset($newLesson)&&$newLesson)
 }
 else if(isset($lessonContent))
 {
-	$payload = json_encode(array("name"=>urldecode($lesson),"description"=>urldecode($lesson),"content"=>$lessonContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"newLesson"=>false));
+	$payload = json_encode(array("name"=>urldecode($lesson),"description"=>urldecode($lesson),"content"=>$lessonContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"newLesson"=>false,"citations"=>$citations));
 }
 else
 {

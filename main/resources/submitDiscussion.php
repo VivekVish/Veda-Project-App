@@ -29,6 +29,16 @@ else
 {
 	$ilos = json_encode(array());
 }
+
+if (isset($_REQUEST['citations']) && !empty($_REQUEST['citations']))
+{
+	$citations = json_encode($_REQUEST['citations']);
+}
+else
+{
+	$citations = json_encode(array());
+}
+
 // Only set on rename
 if (isset($_REQUEST['name']) && !empty($_REQUEST['name']))
 {
@@ -37,7 +47,7 @@ if (isset($_REQUEST['name']) && !empty($_REQUEST['name']))
 
 # Build payload XML
 
-$payload = json_encode(array("content"=>$discussionContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername()));
+$payload = json_encode(array("content"=>$discussionContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"citations"=>$citations));
 
 # Instantiate api class
 $api = new Api();

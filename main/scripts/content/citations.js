@@ -9,20 +9,25 @@ var citations =
     // Stores citations
     citationArray: new Object(),
     
-    getCitations: function(citationIds)
+    getCitations: function(citationIds,callback)
     {
         if(citationIds.length>0)
         {
             var citationPayload = {'citationIds':citationIds};
             $.ajax({url : 'resources/getCitations.php', type: 'GET', data: citationPayload, async: false, success: function(data)
             {
-                ILOContents.citationArray = $.parseJSON(data);
+                citations.citationArray = $.parseJSON(data);
+                callback.call();
             }});
         }
     },
 	
 	setCitationsArray: function(citationId, arrayContents)
 	{
-		citations.citationArray[citationId] = arrayContents;
+        var tempParagraph = $('<p>').append(arrayContents);
+        tempParagraph.find('*:not(i,b,u)').remove();
+        var citationText = tempParagraph.remove().html();
+        
+		citations.citationArray[citationId] = citationText;
 	}
 }

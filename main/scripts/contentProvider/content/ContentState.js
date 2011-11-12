@@ -57,7 +57,9 @@ function ContentState()
 			$('#content>section').first().html(thisObject.stateArray[position].content);
 			ILOContents.ILOArray = thisObject.stateArray[position].ILOArray;
             $('.ilo').empty();
+            $('.citation').empty();
 			baseContent.refreshILOs();
+            baseContent.refreshCitations();
 			thisObject.statePosition = position;
             rangeTraverse.selectAfter($('#content>section').first().find('p,li').last()[0]);
             thisObject.charactersTyped = false;

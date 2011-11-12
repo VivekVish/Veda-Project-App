@@ -3,7 +3,7 @@ $(document).ready(function()
 	document.execCommand("enableObjectResizing", false, 'false');
 	$('#content h1')[0].contentEditable = false;
 	
-	baseProvider.preloadEquationEditor();
+	materialProvider.preloadEquationEditor();
 	questionBlueprints.getQuestionXML();
 	
 	var counter = 0;

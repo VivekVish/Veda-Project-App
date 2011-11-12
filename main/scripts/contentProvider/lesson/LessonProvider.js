@@ -12,8 +12,6 @@ function LessonProvider()
     var thisObject = this;
     this.justSubmitted = thisObject.getPayload();
     
-    
-    
     // DESC: Submits the content to the database through the API using an AJAX call
 	// RETURNS: void
 	this.submitContent = function()

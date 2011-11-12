@@ -26,6 +26,7 @@ if (isset($_REQUEST['content']) && !empty($_REQUEST['content']))
 {
 	$lessonContent = htmlentities(trim($_REQUEST['content']));
 }
+
 if (isset($_REQUEST['ilos']) && !empty($_REQUEST['ilos']))
 {
 	$ilos = json_encode($_REQUEST['ilos']);
@@ -35,7 +36,16 @@ else
 	$ilos = json_encode(array());
 }
 
-$payload = json_encode(array("content"=>$lessonContent,"ilos"=>$ilos));
+if (isset($_REQUEST['citations']) && !empty($_REQUEST['citations']))
+{
+	$citations = json_encode($_REQUEST['citations']);
+}
+else
+{
+	$citations = json_encode(array());
+}
+
+$payload = json_encode(array("content"=>$lessonContent,"ilos"=>$ilos,"citations"=>$citations));
 
 $api = new Api();
 
