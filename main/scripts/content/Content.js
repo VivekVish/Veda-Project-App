@@ -40,14 +40,6 @@ function Content()
             var citationText = tempParagraph.remove().html();
             $('div#bibliography ol').append('<li data-citationid="'+$(this).attr('id')+'">'+citationText+'</li>');
         });
-        
-        $('div#bibliography li').each(function(index)
-        {
-            if($('#'+$(this).attr('data-citationid')).size()==0)
-            {
-                delete citations.citationArray[$(this).attr('data-citationid')];
-            }
-        });
     }
 	
 	// Fix Chrome / Safari text area height issue

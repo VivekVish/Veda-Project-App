@@ -169,6 +169,17 @@ function ContentProvider()
         var tempILOArray = $.extend({},ILOContents.ILOArray);
         delete tempILOArray['ilo-1'];
         var tempCitationsArray = $.extend({},citations.citationArray);
+        
+        baseContent.refreshILOs();
+        
+        $('div#bibliography li').each(function(index)
+        {
+            if($('#'+$(this).attr('data-citationid')).size()==0)
+            {
+                delete tempCitationsArray[$(this).attr('data-citationid')];
+            }
+        });
+        
         contentClone = $('#content>section').first().clone();
 		contentClone.find('.ilo').empty();
         contentClone.find('.citation').empty();
