@@ -4,7 +4,7 @@ div#content > section
 	padding: 0;
 }
 
-.question
+.question, .samplequestion
 {
 	position: relative;
 	width: 80%;

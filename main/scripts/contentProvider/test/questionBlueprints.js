@@ -24,29 +24,33 @@ var questionBlueprints =
 			"</genericparams>"+
 			"<contentblueprint>"+
 				"<p>Evaluate the following expression:</p>"+
-				"<span data-ilotype='equation' class='ilo' id='ilo7'></span>"+
+				"<span id='ilo3' data-ilotype='equation' class='ilo'></span>"+
 			"</contentblueprint>"+
 			"<correctanswerblueprint>"+
-				"<eval>``d/dx(`trigfunc`(`a`x^`b`))``</eval>"+
+				"\\(``simplify((x+`a`)*(x+`b`)/(x+`a`))``,x \\ne -`a`\\)"+
 			"</correctanswerblueprint>"+
 			"<answerfieldblueprint id=\"afb20\" type=\"multchoice\" choices=\"5\">"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo1'></span></answerblueprint>"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo2'></span></answerblueprint>"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo3'></span></answerblueprint>"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo4'></span></answerblueprint>"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo5'></span></answerblueprint>"+
-				"<answerblueprint><span data-ilotype='equation' class='ilo' id='ilo6'></span></answerblueprint>"+
-				"<answerblueprint position=\"last\" forceinclude=\"true\">None of the above</answerblueprint>"+
+				"<answerblueprint><span id='ilo1' data-ilotype='equation' class='ilo'></span></answerblueprint>"+
+				"<answerblueprint><span id='ilo2' data-ilotype='equation' class='ilo'></span></answerblueprint>"+
+                "<answerblueprint>None of the above</answerblueprint>"+
 			"</answerfieldblueprint>"+
 		"</questionblueprint>";
+    
+        $('.samplequestion .questioncontent').append('<span id="ilo4" data-ilotype="equation" class="ilo"></span>');
+        $('.samplequestion .answerfield ol').append('<li><span id="ilo5" data-ilotype="equation" class="ilo"></span></li>');
+        $('.samplequestion .answerfield ol').append('<li><span id="ilo6" data-ilotype="equation" class="ilo"></span></li>');
+        $('.samplequestion .answerfield ol').append('<li><span id="ilo7" data-ilotype="equation" class="ilo"></span></li>');
+        $('.samplequestion .answerfield ol').append('<li><span id="ilo8" data-ilotype="equation" class="ilo"></span></li>');
+        $('.samplequestion .answerfield ol').append('<li>None of the above</li>');
 		
-		ILOContents.ILOArray['ilo1'] = "<ilo ilotype='equation' eval='true'>``d/dx(`trigfunc`(`a`x^{\\bbox[yellow]{b}}))`` / `b`</ilo>";
-		ILOContents.ILOArray['ilo2'] = "<ilo ilotype='equation' eval='true'>``d/dx(`trigfunc`(`a`x^{`b`}))`` / (`b`*`a`*x^{`b`-1})</ilo>";
-		ILOContents.ILOArray['ilo3'] = "<ilo ilotype='equation' eval='true'>`trigfunc`(`a`x^{`b`}) * (`b`*`a`*x^{`b`-1})</ilo>";
-		ILOContents.ILOArray['ilo4'] = "<ilo ilotype='equation' eval='true'>-``d/dx(`trigfunc`(`a`x^{`b`}))``</ilo>";
-		ILOContents.ILOArray['ilo5'] = "<ilo ilotype='equation' eval='true'>``d/dx(`trigfunc`(`a`x^{`b`})`)`` / `b` * `c`</ilo>";
-		ILOContents.ILOArray['ilo6'] = "<ilo ilotype='equation' eval='true'>``d/dx(`trigfunc`(`a`x^{`b`}))`` / (`b`*`a`*x^{`b`-1}) * `d`</ilo>";
-		ILOContents.ILOArray['ilo7'] = "<ilo ilotype='equation'>d/dx `trigfunc`(`a`x^{`b`})</ilo>";
+		ILOContents.ILOArray['ilo1'] = {content:'x+`b`',type:'equation',version:'1.0'};
+		ILOContents.ILOArray['ilo2'] = {content:'x+`c`,x\\ne -`a`',type:'equation',version:'1.0'};
+        ILOContents.ILOArray['ilo3'] = {content:'\\frac{``simplify((x+`a`)*(x+`b`))``}{x+`a`}',type:'equation',version:'1.0'};
+        ILOContents.ILOArray['ilo4'] = {content:'\\frac{x^2-1}{x+1}',type:'equation',version:'1.0'};
+		ILOContents.ILOArray['ilo5'] = {content:'x-1, x \\ne -1',type:'equation',version:'1.0'};
+        ILOContents.ILOArray['ilo6'] = {content:'x+2, x \\ne -1',type:'equation',version:'1.0'};
+        ILOContents.ILOArray['ilo7'] = {content:'x-1',type:'equation',version:'1.0'};
+        ILOContents.ILOArray['ilo8'] = {content:'x+3, x \\ne -1',type:'equation',version:'1.0'};
 	},
 	
 	// DESC: sets the ILO XML of the ILO in question

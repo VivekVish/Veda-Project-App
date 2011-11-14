@@ -133,12 +133,12 @@ nav#coursenav.lessonNav div ul li ul li:hover
 
 #quiz
 {
-	background-color: #CCF;	
+	background-color: #FFF;	
 }
 
-.question
+.question, .samplequestion
 {
-	background-color: #EEF;	
+	background-color: #FFF;	
 	border: solid #06F;
 }
 

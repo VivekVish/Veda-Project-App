@@ -19,6 +19,7 @@ var ILOContents =
             {
                 ILOContents.ILOArray = $.parseJSON(data);
                 callback.call();
+                console.log(ILOContents.ILOArray);
             }});
         }
 	},

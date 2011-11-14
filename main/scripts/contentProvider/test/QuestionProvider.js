@@ -1,9 +1,13 @@
 $(document).ready(function()
 {
+    
+    ContentProvider.prototype = new BaseProvider();
+    ContentProvider.prototype.constructor = ContentProvider;
+    materialProvider = new ContentProvider();
+    
 	document.execCommand("enableObjectResizing", false, 'false');
 	$('#content h1')[0].contentEditable = false;
-	
-	materialProvider.preloadEquationEditor();
+    
 	questionBlueprints.getQuestionXML();
 	
 	var counter = 0;
@@ -13,15 +17,14 @@ $(document).ready(function()
 		questionEditor = new QuestionEditor($('.question')[counter],value);
 		counter++;
 	});
-	
-	
-	baseContent.refreshILOs();
-	$('.ilo').attr('contenteditable',false);
-	
-	MathJax.Hub.Config(
+    
+    MathJax.Hub.Config(
 	{    
 		extensions: ["tex2jax.js","TeX/bbox.js"]
 	})
+	
+	baseContent.refreshILOs();
+	$('.ilo').attr('contenteditable',false);
 	
 	$('#questionEditorViewer').tabs();
 });

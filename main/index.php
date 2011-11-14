@@ -53,14 +53,7 @@ else if ($userSession->isLoggedIn())
 				{
 					if($contentprovider)
 					{
-						if(isset($_REQUEST['questionblueprintid']))
-						{
-							require_once('pages/questionEdit.php');
-						}
-						else
-						{
-							require_once('pages/testOverview.php');
-						}
+                        require_once('pages/testOverview.php');
 					}
 					else
 					{
@@ -182,6 +175,13 @@ else if ($userSession->isLoggedIn())
 			}
 		}
 	}
+    else if(isset($_REQUEST['questionblueprintid']))
+    {
+        if($contentprovider)
+        {
+            require_once('pages/questionEdit.php');
+        }
+    }
 	else
 	{
 		require_once('pages/landing.php');
