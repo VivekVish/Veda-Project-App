@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////
 // The ilo namespace provides base functionality for editing  //
-// editing ILOs, including highlighting the ILO, and 		  //
-// providing edit and delete buttons.						  //
+// ILOs, including highlighting the ILO, and providing		  //
+// edit and delete buttons.                                   //
 //															  //
 // REQUIRES: jQuery											  //
 ////////////////////////////////////////////////////////////////

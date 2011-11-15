@@ -9,7 +9,10 @@ var ILOContents =
 	// stores ILO information
 	ILOArray: new Object(),
 	
-	
+	// DESC: fills the ILO array by getting ILOs from the server through an ajax request
+    // PARAMETER: ILOIds is an array of ILO ids
+    // PARAMETER: callback is the function to be called after the ajax request
+    // RETURNS: void
 	getILOArray: function(ILOIds,callback)
 	{
         if(ILOIds.length>0)
@@ -19,11 +22,14 @@ var ILOContents =
             {
                 ILOContents.ILOArray = $.parseJSON(data);
                 callback.call();
-                console.log(ILOContents.ILOArray);
             }});
         }
 	},
 	
+    // DESC: sets one particular ILOId's contents within the ILOArray to arrayContents
+    // DESC: ILOId is the ILO id to be set
+    // DESC: arrayContents is the array to put in ILOArray
+    // RETURNS: void
 	setILOArray: function(ILOId, arrayContents)
 	{
 		ILOContents.ILOArray[ILOId] = arrayContents;

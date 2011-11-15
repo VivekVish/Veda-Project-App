@@ -3,132 +3,137 @@ $(document).ready(function()
 	courseEditor = new CourseEditor();
 });
 
+this.actionStarted = false;
+this.navPosition = $('#coursenav').attr('data-navPosition');
+
+CourseEditor.prototype.isNameValid = function(nameToCheck)
+{
+    return nameToCheck.length>0&&nameToCheck.search(/\//)==-1;
+}
+
+CourseEditor.prototype.drawExpandButton = function()
+{
+    $('#content ul.sectionList>li>span>span:first-of-type');
+}
+
+CourseEditor.prototype.callNavReprocess = function()
+{
+    if($('#coursenav').attr('data-navPosition')==$('#listEditorHeader').attr('data-coursepath'))
+    {
+        navigationBar.processPosition($('#coursenav').attr('data-navPosition'));
+    }
+}
+
+CourseEditor.prototype.renameSection = function(sectionNameElement, newName)
+{
+    var thisObject = this;
+    
+    if(this.actionStarted === false)
+    {
+        this.actionStarted = true;
+        newName = $.trim(newName);
+        if(!this.isNameValid(newName))
+        {
+            var position = $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath');
+            var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
+            $(sectionNameElement).replaceWith('<span class="sectionName">'+positionArray[3].replace(/_/g,' ')+'</span>');
+            new Message("Name cannot contain special characters.",{type:'error'});
+            return;
+        }
+
+        var position = $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath');
+        var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
+        var payload = {'name':newName,"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3]};
+        if(payload.name.replace(/ /g,'_')==payload.section)
+        {
+            $(sectionNameElement).replaceWith('<span class="sectionName">'+payload.section.replace(/_/g,' ')+'</span>');
+            this.actionStarted = false;
+        }
+        else
+        {
+            $.ajax({url:'resources/submitSection.php', type: 'POST', data: payload, success: function(data)
+            {
+                if(data=="Success.")
+                {
+                    var newPositionName = newName.replace(/ /g,'_');
+                    positionArray[3] = newPositionName;
+                    $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath','/data/material/'+positionArray.join('/')+'/');
+                    $(sectionNameElement).parents('span[data-sectionpath]').next('ul.lessonList').find('li>span[data-lessonpath]').each(function(index)
+                    {
+                        var lessonPathArray = $(this).attr('data-lessonpath').split('/');
+                        lessonPathArray[6] = newPositionName;
+                        $(this).attr('data-lessonpath',lessonPathArray.join('/'));
+                    });
+
+                    $(sectionNameElement).replaceWith('<span class="sectionName">'+newName+'</span>');
+                    thisObject.callNavReprocess();
+                }
+                else
+                {
+                    $(sectionNameElement).replaceWith('<span class="sectionName">'+positionArray[3].replace(/_/g,' ')+'</span>');
+                    new Message(data);
+                }
+            }, complete: function(data)
+            {
+                thisObject.actionStarted = false;
+            }});
+        }
+    }
+}
+
+CourseEditor.prototype.renameLesson = function(lessonNameElement, newName)
+{
+    var thisObject = this;
+    
+    if(this.actionStarted === false)
+    {
+        this.actionStarted = true;
+        newName = $.trim(newName);
+        if(!this.isNameValid(newName))
+        {
+            var position = $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath');
+            var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
+            $(lessonNameElement).replaceWith('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>');
+            return;
+        }
+
+        var position = $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath');
+        var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
+        var payload = {'name':newName,"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3],"lesson":positionArray[4]};
+        if(payload.name.replace(/ /g,'_')==payload.lesson)
+        {
+            $(lessonNameElement).replaceWith('<span class="lessonName">'+payload.lesson.replace(/_/g,' ')+'</span>');
+            this.actionStarted = false;
+        }
+        else
+        {
+            $.ajax({url:'resources/submitLesson.php', type: 'POST', data: payload, success: function(data)
+            {
+                if(data=="Success.")
+                {
+                    var newPositionName = newName.replace(/ /g,'_');
+                    positionArray[4] = newPositionName;
+                    $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath','/data/material/'+positionArray.join('/')+'/');
+                    $(lessonNameElement).replaceWith('<span class="lessonName">'+newName+'</span>');
+
+                    thisObject.callNavReprocess();
+                    thisObject.actionStarted = false;
+                }
+                else
+                {
+                    $(lessonNameElement).replaceWith('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>');
+                    new Message(data);
+                    thisObject.actionStarted = false;
+                }
+            }});
+        }
+    }
+}
+
 function CourseEditor()
 {
 	var thisObject = this;
-    this.actionStarted = false;
-    this.navPosition = $('#coursenav').attr('data-navPosition');
     
-    this.isNameValid = function(nameToCheck)
-    {
-        return nameToCheck.length>0&&nameToCheck.search(/\//)==-1;
-    }
-	
-	this.drawExpandButton = function()
-	{
-		$('#content ul.sectionList>li>span>span:first-of-type');
-	}
-	
-	this.callNavReprocess = function()
-	{
-		if($('#coursenav').attr('data-navPosition')==$('#listEditorHeader').attr('data-coursepath'))
-		{
-			navigationBar.processPosition($('#coursenav').attr('data-navPosition'));
-		}
-	}
-	
-	this.renameSection = function(sectionNameElement, newName)
-	{
-		if(thisObject.actionStarted === false)
-		{
-			thisObject.actionStarted = true;
-            newName = $.trim(newName);
-            if(!thisObject.isNameValid(newName))
-            {
-                var position = $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath');
-                var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
-                $(sectionNameElement).replaceWith('<span class="sectionName">'+positionArray[3].replace(/_/g,' ')+'</span>');
-                new Message("Name cannot contain special characters.",{type:'error'});
-                return;
-            }
-            
-			var position = $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath');
-			var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
-			var payload = {'name':newName,"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3]};
-            if(payload.name.replace(/ /g,'_')==payload.section)
-            {
-                $(sectionNameElement).replaceWith('<span class="sectionName">'+payload.section.replace(/_/g,' ')+'</span>');
-                thisObject.actionStarted = false;
-            }
-            else
-            {
-                $.ajax({url:'resources/submitSection.php', type: 'POST', data: payload, success: function(data)
-                {
-                    if(data=="Success.")
-                    {
-                        var newPositionName = newName.replace(/ /g,'_');
-                        positionArray[3] = newPositionName;
-                        $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath','/data/material/'+positionArray.join('/')+'/');
-                        $(sectionNameElement).parents('span[data-sectionpath]').next('ul.lessonList').find('li>span[data-lessonpath]').each(function(index)
-                        {
-                            var lessonPathArray = $(this).attr('data-lessonpath').split('/');
-                            lessonPathArray[6] = newPositionName;
-                            $(this).attr('data-lessonpath',lessonPathArray.join('/'));
-                        });
-
-                        $(sectionNameElement).replaceWith('<span class="sectionName">'+newName+'</span>');
-                        thisObject.callNavReprocess();
-                    }
-                    else
-                    {
-                        $(sectionNameElement).replaceWith('<span class="sectionName">'+positionArray[3].replace(/_/g,' ')+'</span>');
-                        new Message(data);
-                    }
-                }, complete: function(data)
-                {
-                    thisObject.actionStarted = false;
-                }});
-            }
-		}
-	}
-	
-	this.renameLesson = function(lessonNameElement, newName)
-	{
-		if(thisObject.actionStarted === false)
-		{
-			thisObject.actionStarted = true;
-            newName = $.trim(newName);
-            if(!thisObject.isNameValid(newName))
-            {
-                var position = $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath');
-                var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
-                $(lessonNameElement).replaceWith('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>');
-                return;
-            }
-            
-			var position = $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath');
-			var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
-			var payload = {'name':newName,"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3],"lesson":positionArray[4]};
-            if(payload.name.replace(/ /g,'_')==payload.lesson)
-            {
-                $(lessonNameElement).replaceWith('<span class="lessonName">'+payload.lesson.replace(/_/g,' ')+'</span>');
-                thisObject.actionStarted = false;
-            }
-            else
-            {
-                $.ajax({url:'resources/submitLesson.php', type: 'POST', data: payload, success: function(data)
-                {
-                    if(data=="Success.")
-                    {
-                        var newPositionName = newName.replace(/ /g,'_');
-                        positionArray[4] = newPositionName;
-                        $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath','/data/material/'+positionArray.join('/')+'/');
-                        $(lessonNameElement).replaceWith('<span class="lessonName">'+newName+'</span>');
-
-                        thisObject.callNavReprocess();
-                        thisObject.actionStarted = false;
-                    }
-                    else
-                    {
-                        $(lessonNameElement).replaceWith('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>');
-                        new Message(data);
-                        thisObject.actionStarted = false;
-                    }
-                }});
-            }
-		}
-	}
-	
 	$('.sectionList').sortable().disableSelection();
 	$('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
 	

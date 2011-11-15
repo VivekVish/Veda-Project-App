@@ -9,6 +9,10 @@ var citations =
     // Stores citations
     citationArray: new Object(),
     
+    // DESC: fills the citation array by getting citations from the server through an ajax request
+    // PARAMETER: citationIds is an array of citation ids
+    // PARAMETER: callback is the function to be called after the ajax request
+    // RETURNS: void
     getCitations: function(citationIds,callback)
     {
         if(citationIds.length>0)
@@ -22,6 +26,10 @@ var citations =
         }
     },
 	
+    // DESC: sets one particular citationId's contents within the citationArray to arrayContents
+    // DESC: citationId is the citation id to be set
+    // DESC: arrayContents is the array to put in citationArray
+    // RETURNS: void
 	setCitationsArray: function(citationId, arrayContents)
 	{
         var tempParagraph = $('<p>').append(arrayContents);

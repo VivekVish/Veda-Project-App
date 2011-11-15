@@ -19,7 +19,7 @@
 	{
 		array_push($cssfiles,"contentprovider","equationEditor");
 		array_push($javascriptfiles,"jquery/jquery.form","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse","general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo",
-									"contentProvider/ILO/formValidator","contentProvider/content/ContentProvider","contentProvider/content/ContentHandler","general/lightbox","contentProvider/content/ContentState",
+									"contentProvider/ILO/formValidator","contentProvider/content/ContentProvider","contentProvider/content/ContentHandler","general/lightbox","contentProvider/content/ContentState","contentProvider/content/LessonDiscussionProvider",
                                     "contentProvider/lesson/LessonProvider");
 		foreach($ILOs as $ilo)
 		{

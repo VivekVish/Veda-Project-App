@@ -64,7 +64,7 @@ if (isset($_REQUEST['name']) && !empty($_REQUEST['name']))
 //$payload = "<lesson><name>$lesson</name><description>$lesson</description><active>true</active><content>$lessonContent</content><ilos>$ilos</ilos></lesson>";
 if(isset($newLesson)&&$newLesson)
 {
-    $payload = json_encode(array("name"=>urldecode($lesson),"description"=>urldecode($lesson),"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"newLesson"=>true));
+    $payload = json_encode(array("name"=>urldecode($lesson),"description"=>urldecode($lesson),"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"newLesson"=>true,"citations"=>$citations));
 }
 else if(isset($lessonContent))
 {
