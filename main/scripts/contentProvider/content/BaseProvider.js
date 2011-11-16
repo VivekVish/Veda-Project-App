@@ -130,6 +130,7 @@ BaseProvider.prototype.insertTable = function(rows, columns, caretPositionRange)
             insertNodeLocation.after(newTable);
 
             rangeTraverse.selectBefore($(newTable).find('td,th')[0]);
+            this.toggleTableButtons();
             contentState.saveState();
         }
     }
@@ -286,6 +287,102 @@ BaseProvider.prototype.addParagraph = function(opts)
 
             rangeTraverse.selectBefore(paragraph.next()[0]);
         }
+    }
+}
+
+// DESC: Adds a row to a table
+// RETURNS: void
+BaseProvider.prototype.insertTableRow = function()
+{
+    if(rangeTraverse.within('#content table tr'))
+    {
+        var parentRow = rangeTraverse.parents('#content table tr');
+        
+        var rowNumber = parentRow.prevAll().size()+1;
+        var numColumns = rangeTraverse.parents('#content table td,#content table th').siblings().size()+1;
+        
+        var newRow = parentRow.parents('table').first().find('tr:nth-child('+rowNumber+')').after('<tr></tr>').next();
+        
+        for(i=0;i<numColumns;i++)
+        {
+            newRow.append('<td></td>');
+        }
+    }
+}
+
+// DESC: Adds a column to a table
+// RETURNS: void
+BaseProvider.prototype.insertTableColumn = function()
+{
+    if(rangeTraverse.within('#content table td,#content table th'))
+    {
+        var parentCell = rangeTraverse.parents('#content table td,#content table th');
+        
+        var columnNumber = parentCell.prevAll().size()+1;
+        
+        parentCell.parents('table').first().find('tr td:nth-child('+columnNumber+'),tr th:nth-child('+columnNumber+')').after('<td></td>');
+    }
+}
+
+// DESC: Adds a row to a table
+// RETURNS: void
+BaseProvider.prototype.deleteTableRow = function()
+{
+    if(rangeTraverse.within('#content table tr'))
+    {
+        var parentRow = rangeTraverse.parents('#content table tr');
+        var columnNumber = rangeTraverse.parents('#content table td,#content table th').prevAll().size()+1;
+        var cursorRow = parentRow.next().size()==0 ? parentRow.prev() : parentRow.next();
+        var parentTable = parentRow.parents('#content table').first();
+        
+        parentRow.remove();
+        if(cursorRow.size()==0)
+        {
+            parentTable.remove();
+        }
+        else
+        {
+            rangeTraverse.selectBefore(cursorRow.children('td:nth-child('+columnNumber+'),th:nth-child('+columnNumber+')')[0]);
+        }
+    }
+}
+
+// DESC: Removes a column to a table
+// RETURNS: void
+BaseProvider.prototype.deleteTableColumn = function()
+{
+    if(rangeTraverse.within('#content table td,#content table th'))
+    {
+        var parentCell = rangeTraverse.parents('#content table td,#content table th');
+        var cursorCell = parentCell.next().size()==0 ? parentCell.prev() : parentCell.next();
+        
+        var columnNumber = parentCell.prevAll().size()+1;
+        var parentTable = parentCell.parents('table').first();
+        
+        parentTable.find('tr td:nth-child('+columnNumber+'),tr th:nth-child('+columnNumber+')').remove();
+        
+        if(parentTable.find('td,th').size()==0)
+        {
+            parentTable.remove();
+        }
+        else
+        {
+            rangeTraverse.selectBefore(cursorCell[0]);
+        }
+    }
+}
+
+// DESC: Toggle the display of the table buttons based on whether the cursor is in a table
+// RETURNS: void
+BaseProvider.prototype.toggleTableButtons = function()
+{
+    if(rangeTraverse.within('table'))
+    {
+        $('#deleteTable, #insertTableRow,#insertTableColumn,#deleteTableRow,#deleteTableColumn').show();
+    }
+    else
+    {
+        $('#deleteTable, #insertTableRow,#insertTableColumn,#deleteTableRow,#deleteTableColumn').hide();
     }
 }
 
@@ -605,7 +702,27 @@ BaseProvider.prototype.construct = function()
     $('#deleteTable').click(function()
     {
         thisObject.deleteTable();
-    })
+    });
+    
+    $('#insertTableRow').click(function()
+    {
+        thisObject.insertTableRow();
+    });
+    
+    $('#insertTableColumn').click(function()
+    {
+        thisObject.insertTableColumn();
+    });
+    
+    $('#deleteTableRow').click(function()
+    {
+        thisObject.deleteTableRow();
+    });
+    
+    $('#deleteTableColumn').click(function()
+    {
+        thisObject.deleteTableColumn();
+    });
 	
 	// Insert Equation	
 	$('#insertEquation').click(function()

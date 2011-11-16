@@ -151,7 +151,7 @@ ContentProvider.prototype.insertSection= function(level)
     }
 }
 
-// DESC: Toggle the display of the exit info box button based on whether the cursor is in the exit info box
+// DESC: Toggle the display of the exit info box button based on whether the cursor is in an info box
 // RETURNS: void
 ContentProvider.prototype.toggleExitInfoBoxButton = function()
 {

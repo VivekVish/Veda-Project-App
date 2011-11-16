@@ -330,6 +330,7 @@ BaseHandler.prototype.handleGeneralEvent=function(e)
     var thisObject = this;
     ilo.deselectILO($('.selectedILO'));
     materialProvider.toggleStyleHighlighting();
+    materialProvider.toggleTableButtons();
 
     switch(e.type)
     {

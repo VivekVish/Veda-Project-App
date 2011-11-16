@@ -22,7 +22,11 @@
                 	<li title="Insert Ordered List (Ctrl+Shift+O)" id="insertOrderedList">{html_image file='img/contenticons/insertOrderedList.png'}</li>
                     <li title="Insert Unordered List (Ctrl+Shift+L)" id="insertUnorderedList">{html_image file='img/contenticons/insertUnorderedList.png'}</li>
                     <li title="Insert Table (Ctrl+Shift+U)" id="insertTable">{html_image file='img/contenticons/insertTable.png'}</li>
-                    <li title="Delete Table (Ctrl+Shift+Y)" id="deleteTable">{html_image file='img/contenticons/deleteTable.png'}</li>
+                    <li title="Delete Table (Ctrl+Shift+Y)" id="deleteTable" style="display:none;">{html_image file='img/contenticons/deleteTable.png'}</li>
+                    <li title="Insert Table Row (Ctrl+Shift+P)" id="insertTableRow" style="display:none;">{html_image file='img/contenticons/insertTableRow.png'}</li>
+                    <li title="Insert Table Column (Ctrl+Shift+[)" id="insertTableColumn" style="display:none;">{html_image file='img/contenticons/insertTableColumn.png'}</li>
+                    <li title="Delete Table Row (Ctrl+Shift+])" id="deleteTableRow" style="display:none;">{html_image file='img/contenticons/deleteTableRow.png'}</li>
+                    <li title="Delete Table Column (Ctrl+Shift+\)" id="deleteTableColumn" style="display:none;">{html_image file='img/contenticons/deleteTableColumn.png'}</li>
                     <li title="Insert Citation (Ctrl+Shift+X)" id="insertCitation">{html_image file='img/contenticons/insertCitation.png'}</li>
                 </span>
                 <span class="CPsublist">
