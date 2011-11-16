@@ -628,7 +628,7 @@ BaseProvider.prototype.construct = function()
         contentState.saveState();
         setTimeout(thisObject.fixBackgroundColor,10);
         setTimeout(thisObject.cleanAfterPaste,11);
-        setTimeout(contentState.saveState,12);
+        setTimeout(function(){contentState.saveState()},12);
     });
 	
 	// Creates undo / redo functionality
