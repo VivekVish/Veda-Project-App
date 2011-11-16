@@ -175,8 +175,6 @@ ContentProvider.prototype.getPayload = function()
     delete tempILOArray['ilo-1'];
     var tempCitationsArray = $.extend({},citations.citationArray);
 
-    baseContent.refreshILOs();
-
     $('div#bibliography li').each(function(index)
     {
         if($('#'+$(this).attr('data-citationid')).size()==0)
