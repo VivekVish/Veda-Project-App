@@ -1,4 +1,4 @@
-        <div id="content" data-location="{$location}" data-name="{$name}">
+        <div id="content" data-location="{$location}" data-name="{$name}" contenteditable="true">
         	<section>            	
                 <h1>Question Editor</h1>
 				<select>
