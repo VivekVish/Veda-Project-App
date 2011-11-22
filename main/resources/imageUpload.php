@@ -83,7 +83,6 @@
                 $result = $api->delete($uri);
                 if($result=="Success.")
                 {
-                    var_dump($imgPath);die();
                     die("Fatal Error.  Unable to upload file.");
                 }
                 else
