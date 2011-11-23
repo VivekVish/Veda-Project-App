@@ -173,7 +173,7 @@ BaseHandler.prototype.handleBlockquoteEvent=function(e)
             {
                 // Enter
                 case 13:
-                    if(thisObject.keyPressed['shift'])
+                    if(this.keyPressed['shift'])
                     {
                         e.preventDefault();
                         materialProvider.addParagraph({sameLevelParagraph:true});
