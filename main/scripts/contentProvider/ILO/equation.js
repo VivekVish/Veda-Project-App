@@ -10,6 +10,9 @@
 
 var equation = 
 {	
+    // DESC: createEquationStarted is true if an equation has started to be added
+    createEquationStarted: false,
+    
 	// DESC: creates a lightbox in which the content provider can edit or add an equation
 	// PARAMETER: targetEquation is the ILO to be edited.  If it is undefined, a new ILO will be added at the caret position
 	// RETURNS: void
@@ -41,14 +44,14 @@ var equation =
 		
 		$('#tempEquationEditor ul').children().remove().prependTo('#EqEditorHolder ul');
 		
-		var createEquationStarted = false;
+		equation.createEquationStarted = false;
 		centerLightBox();
         
         $('#equationText').focus();
         
         function createEquation(targetEquation)
         {
-            if(!createEquationStarted)
+            if(!equation.createEquationStarted)
 			{
                 function afterILOCreation()
                 {
@@ -68,17 +71,18 @@ var equation =
                                                  });
                 }
                 
-				createEquationStarted = true;
+				equation.createEquationStarted = true;
 				if(typeof(targetEquation) == 'undefined')
 				{
                     targetEquation = document.createElement('span');
                     ilo.insertILO(insertionPoint, targetEquation, "insertNode");
 					
-					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation);
+					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(targetEquation){equation.createEquationStarted = false; $(targetEquation).remove();}, [targetEquation]);
 				}
 				else
 				{
-					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation);
+                    console.log($(targetEquation).attr('id'));
+					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(){ equation.createEquationStarted = false });
 				}
 			}
         }
@@ -109,6 +113,7 @@ var equation =
             {
                 // Enter
                 case 13:
+                    e.preventDefault();
                     createEquation(targetEquation);
                     break;
                 // Escape

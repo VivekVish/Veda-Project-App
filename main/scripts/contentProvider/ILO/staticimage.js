@@ -9,6 +9,10 @@
 
 var staticimage =
 {
+    // DESC: createImageStarted is set to true if a image has started to be created
+    createImageStarted: false,
+    
+    // DESC: the html for the image upload form
     imageUploadForm: '<form action="resources/imageUpload.php" method="post" name="unobtrusive" id="unobtrusive" enctype="multipart/form-data">'+
 							'<ul><li><label for="imageFilename">File</label><input type="file" name="filename" id="imageFilename" value="filename" /></li>'+
                             '<li><label for="imageName">Name</label><input type="text" name="imageName" id="imageName" /></li>'+
@@ -319,7 +323,7 @@ var staticimage =
 			checkValidWidth();
 		});
 		
-		var createImageStarted = false;
+		staticimage.createImageStarted = false;
         
         $('#imageCaption').focus();
         
@@ -327,7 +331,7 @@ var staticimage =
         
         function createImage()
         {
-            if(!createImageStarted&&$('#imageHolder').find('img').size()>0)
+            if(!staticimage.createImageStarted&&$('#imageHolder').find('img').size()>0)
 			{
                 function afterILOCreation()
                 {
@@ -339,19 +343,19 @@ var staticimage =
                     $('#overlay').fadeOut('fast',function() {$(this).remove();});
                 }
                 
-				createImageStarted = true;
+				staticimage.createImageStarted = true;
 
                 var ILOArray = {'type':'staticimage','version':'1.0','attributes':{'width':$('#imageWidth').val()/100,'frame':$("#imageHolder").attr("data-frame"),'position':$('input[name="imagePosition"]:checked').val()},'content':{'file':$('#imageHolder').attr('data-imagefile'),'caption':$('#imageCaption').val()}};
 
-				if(typeof(targetImage) == 'undefined')
+				if(typeof(targetImage) == 'undefined' || $('#content').find(targetImage).size()==0)
 				{
 					targetImage = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetImage,'after');
-					ilo.createILO(targetImage,ILOArray,afterILOCreation);	
+					ilo.createILO(targetImage,ILOArray,afterILOCreation, function(targetImage){staticimage.createImageStarted = false;$(targetImage).remove();}, [targetImage]);	
 				}
 				else
 				{
-					ilo.editILO($(targetImage).attr('id'),ILOArray,afterILOCreation);
+					ilo.editILO($(targetImage).attr('id'),ILOArray,afterILOCreation, function(){staticimage.createImageStarted = false;});
 				}
                 
 				checkValidWidth();

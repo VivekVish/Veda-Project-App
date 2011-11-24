@@ -10,6 +10,9 @@
 
 var graph = 
 {    
+    // DESC: createGraphStarted is set to true if a graph has started to be created
+    createGraphStarted: false,
+    
 	// DESC: creates a lightbox in which the content provider can edit or add a graph
 	// PARAMETER: targetGraph is the ILO to be edited.  If it is undefined, a new ILO will be added at the caret position
 	// RETURNS: void
@@ -178,7 +181,7 @@ var graph =
 		
 		updateParameters();
 		
-		var createGraphStarted = false;
+		graph.createGraphStarted = false;
 		var newInfoEntered = false;
 		
 		$('#graphEditorHolder').keydown(function(e)
@@ -210,7 +213,7 @@ var graph =
         
         function createGraph()
         {
-            if(!createGraphStarted)
+            if(!graph.createGraphStarted)
 			{
                 function afterILOCreation()
                 {
@@ -222,21 +225,21 @@ var graph =
                 }
                 
 				graph.updateGraph();
-				createGraphStarted = true;
+				graph.createGraphStarted = true;
                 
                 var newArray = ILOContents.ILOArray[$(lightBoxGraph).attr('id')]
                 newArray['attributes']['scrollable'] = $('#graph-scrollable').val()=='on' ? true : false;
 
-				if(typeof(targetGraph) == 'undefined')
+				if(typeof(targetGraph) == 'undefined' || $('#content').find(targetGraph).size()==0)
 				{
 					targetGraph = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetGraph,'after');
-					
-					ilo.createILO(targetGraph,newArray,afterILOCreation);
+
+					ilo.createILO(targetGraph,newArray,afterILOCreation, function(targetGraph){graph.createGraphStarted = false; $(targetGraph).remove();}, [targetGraph]);
 				}
 				else
 				{
-					ilo.editILO($(targetGraph).attr('id'),newArray,afterILOCreation);
+					ilo.editILO($(targetGraph).attr('id'),newArray,afterILOCreation, function(){graph.createGraphStarted = false});
 				}
 			}
         }
