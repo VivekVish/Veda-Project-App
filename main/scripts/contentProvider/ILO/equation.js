@@ -72,7 +72,7 @@ var equation =
                 }
                 
 				equation.createEquationStarted = true;
-				if(typeof(targetEquation) == 'undefined')
+				if(typeof(targetEquation) == 'undefined' || $('#content').find(targetEquation).size()==0)
 				{
                     targetEquation = document.createElement('span');
                     ilo.insertILO(insertionPoint, targetEquation, "insertNode");
