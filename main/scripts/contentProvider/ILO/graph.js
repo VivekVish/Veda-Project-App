@@ -212,6 +212,15 @@ var graph =
         {
             if(!createGraphStarted)
 			{
+                function afterILOCreation()
+                {
+                    graphILO.display(targetGraph);
+	
+                    delete ILOContents.ILOArray['ilo-1'];
+                    $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                    $('#overlay').fadeOut('fast',function() {$(this).remove();});
+                }
+                
 				graph.updateGraph();
 				createGraphStarted = true;
                 
@@ -223,18 +232,12 @@ var graph =
 					targetGraph = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetGraph,'after');
 					
-					ilo.createILO(targetGraph,newArray);
+					ilo.createILO(targetGraph,newArray,afterILOCreation);
 				}
 				else
 				{
-					ilo.editILO($(targetGraph).attr('id'),newArray);
+					ilo.editILO($(targetGraph).attr('id'),newArray,afterILOCreation);
 				}
-				
-				graphILO.display(targetGraph);
-	
-                delete ILOContents.ILOArray['ilo-1'];
-				$('#lightbox').fadeOut('fast',function() {$(this).remove();});
-				$('#overlay').fadeOut('fast',function() {$(this).remove();});
 			}
         }
         

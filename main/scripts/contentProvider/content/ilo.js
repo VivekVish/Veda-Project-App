@@ -90,9 +90,12 @@ var ilo =
 			{
 				if($(allILOs[i]).attr('id')==$(allILOs[j]).attr('id'))
 				{
-					newILOID = ilo.getNewILOID();
-					ILOContents.ILOArray[newILOID] = ILOContents.ILOArray[$(allILOs[i]).attr('id')];
-					$('#'+$(allILOs[i]).attr('id')).attr('id',newILOID);
+					ilo.getNewILOID(function(newILOID)
+                    {
+                        ILOContents.ILOArray[newILOID] = ILOContents.ILOArray[$(allILOs[i]).attr('id')];
+                        $('#'+$(allILOs[i]).attr('id')).attr('id',newILOID);
+                    });
+					
 				}
 			}
 		}
@@ -109,17 +112,39 @@ var ilo =
 	},
 	
 	// DESC: gets new, unique ILO ID
-	// RETURNS: ILO id number (string in the form "ilo#")
-	getNewILOID: function()
+    // PARAMETER: callback is the function to call once the new ILO ID received
+    // PARAMETER: callbackArgs is an array of arguments to pass to the callback function
+	// RETURNS: void
+	getNewILOID: function(callback,callbackArgs)
 	{
-		return "ilo"+$.ajax({url:'resources/nextILOId.php',type:'GET',async:false}).responseText;
+        $.ajax({url:'resources/nextILOId.php',type:'GET',callbackFunction:callback,callbackArgs:callbackArgs,success: function(data)
+        {
+             if(data=="Access denied.")
+             {
+                 new Message("You must log back in.");
+             }
+             else
+             {
+                if(typeof(this.callbackArgs)=="undefined")
+                {
+                    this.callbackArgs = ["ilo"+data];
+                }
+                else
+                {
+                    this.callbackArgs.unshift("ilo"+data);
+                }
+
+                this.callbackFunction.apply(null,this.callbackArgs);
+             }
+        }});
+		//return "ilo"+$.ajax({url:'resources/nextILOId.php',type:'GET',async:false}).responseText;
 	},
 	
 	// DESC: edits an ILO by changing its ID and creating a new entry in the ILO XML array but retaining the old ILO XML
 	// PARAMETER: currentILOID is the ILO ID of the ILO to be edited
 	// PARAMETER: newILOArray is what the ILO XML will be changed to
 	// RETURNS: void
-	editILO: function(currentILOID, newILOArray)
+	editILO: function(currentILOID, newILOArray,callback)
 	{
 		var ILOExists = false;
 		$.ajax({url:'resources/doesILOExist.php', type:'GET', data:{iloID:currentILOID}, async: false, success:function(data)
@@ -135,14 +160,19 @@ var ilo =
                 
                 if(ILOExists)
                 {	
-                    var newILOID = ilo.getNewILOID();
-                    ILOContents.setILOArray(newILOID,newILOArray);
-                    $('#'+currentILOID).attr('id',newILOID);
-                    delete ILOContents.ILOArray[currentILOID];			
+                    ilo.getNewILOID(function(newILOID,currentILOID,newILOArray,callback)
+                    {
+                        ILOContents.setILOArray(newILOID,newILOArray);
+                        $('#'+currentILOID).attr('id',newILOID);
+                        delete ILOContents.ILOArray[currentILOID];
+                        callback.call();
+                    },[currentILOID,newILOArray,callback]);
+                    	
                 }
                 else
                 {
                     ILOContents.setILOArray(currentILOID,newILOArray);
+                    callback.call();
                 }
 			}});
 	},
@@ -151,11 +181,14 @@ var ilo =
 	// PARAMETER: newILOElement is the element in which the new ILO will be added
 	// PARAMETER: newILOArray is the ILO Array of the new ILO
 	// RETURNS: void
-	createILO: function(newILOElement,newILOArray)
+	createILO: function(newILOElement,newILOArray,callback)
 	{
-		var newILOID = ilo.getNewILOID();
-		ILOContents.setILOArray(newILOID,newILOArray);
-		$(newILOElement).attr('id',newILOID).addClass('ilo').attr('data-ilotype',newILOArray['type']).attr('contenteditable','false');
+		ilo.getNewILOID(function(newILOID,newILOElement,newILOArray,callback)
+        {
+            ILOContents.setILOArray(newILOID,newILOArray);
+            $(newILOElement).attr('id',newILOID).addClass('ilo').attr('data-ilotype',newILOArray['type']).attr('contenteditable','false');
+            callback.call();
+        },[newILOElement,newILOArray,callback]);
 	},
     
     // DESC: inserts the ILO into the content

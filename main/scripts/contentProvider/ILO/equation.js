@@ -50,33 +50,36 @@ var equation =
         {
             if(!createEquationStarted)
 			{
+                function afterILOCreation()
+                {
+                    equationILO.display(targetEquation);
+                    $('#equationText').die('keydown');
+
+                    delete ILOContents.ILOArray['ilo-1'];
+
+                    $('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove()});
+                    $('#overlay').fadeOut('fast',function() 
+                                                 {
+                                                     $(this).remove();
+                                                     MathJax.Hub.Queue(function()
+                                                     {
+                                                         rangeTraverse.setCurrentRange(ilo.savedRange);
+                                                     });
+                                                 });
+                }
+                
 				createEquationStarted = true;
 				if(typeof(targetEquation) == 'undefined')
 				{
                     targetEquation = document.createElement('span');
                     ilo.insertILO(insertionPoint, targetEquation, "insertNode");
 					
-					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()});
+					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation);
 				}
 				else
 				{
-					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()});
+					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation);
 				}
-				
-				equationILO.display(targetEquation);
-                $('#equationText').die('keydown');
-				
-                delete ILOContents.ILOArray['ilo-1'];
-                
-				$('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove()});
-				$('#overlay').fadeOut('fast',function() 
-                                             {
-                                                 $(this).remove();
-                                                 MathJax.Hub.Queue(function()
-                                                 {
-                                                     rangeTraverse.setCurrentRange(ilo.savedRange);
-                                                 });
-                                             });
 			}
         }
         

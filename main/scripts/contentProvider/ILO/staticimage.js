@@ -142,7 +142,7 @@ var staticimage =
                         $.each(userImages, function(index,imageRow)
                         {
                             var newOption = $('<option></option>');
-                            newOption.attr('value',imageRow.imageId);
+                            newOption.attr('value',imageRow.imageId+"."+imageRow.imageType);
                             newOption.html(imageRow.name);
                             $('#userImages select').append(newOption);
                         });
@@ -329,6 +329,16 @@ var staticimage =
         {
             if(!createImageStarted&&$('#imageHolder').find('img').size()>0)
 			{
+                function afterILOCreation()
+                {
+                    staticimageILO.display(targetImage);
+				
+                    delete ILOContents.ILOArray['ilo-1'];
+
+                    $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                    $('#overlay').fadeOut('fast',function() {$(this).remove();});
+                }
+                
 				createImageStarted = true;
 
                 var ILOArray = {'type':'staticimage','version':'1.0','attributes':{'width':$('#imageWidth').val()/100,'frame':$("#imageHolder").attr("data-frame"),'position':$('input[name="imagePosition"]:checked').val()},'content':{'file':$('#imageHolder').attr('data-imagefile'),'caption':$('#imageCaption').val()}};
@@ -337,20 +347,15 @@ var staticimage =
 				{
 					targetImage = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetImage,'after');
-					ilo.createILO(targetImage,ILOArray);	
+					ilo.createILO(targetImage,ILOArray,afterILOCreation);	
 				}
 				else
 				{
-					ilo.editILO($(targetImage).attr('id'),ILOArray);
+					ilo.editILO($(targetImage).attr('id'),ILOArray,afterILOCreation);
 				}
                 
 				checkValidWidth();
-				staticimageILO.display(targetImage);
 				
-                delete ILOContents.ILOArray['ilo-1'];
-                
-				$('#lightbox').fadeOut('fast',function() {$(this).remove();});
-				$('#overlay').fadeOut('fast',function() {$(this).remove();});
 			}
         }
         
