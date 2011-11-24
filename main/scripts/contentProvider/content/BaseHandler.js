@@ -481,7 +481,12 @@ BaseHandler.prototype.handleGeneralEvent=function(e)
                     break;
                 // I
                 case 73:
-                    if(thisObject.keyPressed['ctrl'])
+                    if(thisObject.keyPressed['ctrl']&&thisObject.keyPressed['shift'])
+                    {
+                        e.preventDefault();
+                        staticimage.editMode();
+                    }
+                    else if(thisObject.keyPressed['ctrl'])
                     {
                         e.preventDefault();
                         materialProvider.formatTextStyle("italic");
@@ -547,7 +552,7 @@ BaseHandler.prototype.handleGeneralEvent=function(e)
                     break;
                 // Z
                 case 90:
-                    if(thisObject.keyPressed['ctrl'])
+                    if(thisObject.keyPressed['ctrl']&&!thisObject.keyPressed['shift'])
                     {
                         e.preventDefault();
                         contentState.undo();

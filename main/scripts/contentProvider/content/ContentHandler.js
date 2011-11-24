@@ -146,6 +146,14 @@ ContentHandler.prototype.handleGeneralEvent=function(e)
                         materialProvider.exitInfoBox();
                     }
                     break;
+                // Z
+                case 90:
+                    if(thisObject.keyPressed['ctrl']&&thisObject.keyPressed['shift'])
+                    {
+                        e.preventDefault();
+                        materialProvider.exitInfoBox();
+                    }
+                    break;
             }
             break;
     }
