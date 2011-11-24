@@ -14,7 +14,11 @@ BaseHandler.prototype.keyPressed = new Array();
 // RETURNS: void
 BaseHandler.prototype.handleContentEvent=function(e)
 {
-    if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
+    if((e.target==window&&e.type=="blur"))
+    {
+        this.handleWindowEvent(e);
+    }
+    else if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
     {
         this.handleGeneralEvent(e);
 
@@ -48,7 +52,7 @@ BaseHandler.prototype.handleContentEvent=function(e)
         }
         else
         {
-            this.handleSectionEvent(e);
+            this.handleWindowEvent(e);
         }
     }
 }
@@ -303,7 +307,7 @@ BaseHandler.prototype.handleILOEvent=function(e)
 // DESC: Handles events that fall outside the standard elements.
 // PARAMETER: e is an object of type Event
 // RETURNS: void
-BaseHandler.prototype.handleSectionEvent=function(e)
+BaseHandler.prototype.handleWindowEvent=function(e)
 {
     switch(e.type)
     {
@@ -318,7 +322,12 @@ BaseHandler.prototype.handleSectionEvent=function(e)
                     e.preventDefault();
                     break;
             }
-            break;	
+            break;
+        case 'blur':
+            this.keyPressed['shift'] = false;
+            this.keyPressed['ctrl'] = false;
+            this.keyPressed['alt'] = false;
+            break;
     }
 }
 

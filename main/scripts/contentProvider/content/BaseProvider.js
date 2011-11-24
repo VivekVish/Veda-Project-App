@@ -767,6 +767,12 @@ BaseProvider.prototype.construct = function()
     {
         tooltip: ",mouseenter mouseleave"
     }});
+
+    // Set window blur event
+    $(window).blur(function(e)
+    {
+        currentHandler.handleContentEvent(e);
+    });
     
 	// Style except when within equations or when equations are highlighted 
 	$('#bold,#italic,#underline').click(function(){thisObject.formatTextStyle($(this).attr('id'))});
