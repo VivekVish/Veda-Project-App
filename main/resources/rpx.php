@@ -44,9 +44,9 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
   curl_setopt($curl, CURLOPT_FAILONERROR, true);
   $result = curl_exec($curl);
   if ($result == false){
-    #echo "\n".'Curl error: ' . curl_error($curl);
-    #echo "\n".'HTTP code: ' . curl_errno($curl);
-    #echo "\n"; var_dump($post_data);
+    echo "\n".'Curl error: ' . curl_error($curl);
+    echo "\n".'HTTP code: ' . curl_errno($curl);
+    echo "\n"; var_dump($post_data);
   }
   curl_close($curl);
 

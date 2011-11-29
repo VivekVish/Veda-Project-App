@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////
 // The equation namespace receives and processes events from  //
-// rangeTraverse.	When the caret is within equation or  //
+// rangeTraverse.	When the caret is within equation or      //
 // when an equation is clicked, the equation is highlighted,  //
 // and users have the option of editing or deleting the 	  //
 // equation. 												  //
@@ -81,7 +81,6 @@ var equation =
 				}
 				else
 				{
-                    console.log($(targetEquation).attr('id'));
 					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(){ equation.createEquationStarted = false });
 				}
 			}
