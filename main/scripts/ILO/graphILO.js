@@ -129,9 +129,14 @@ var graphILO =
                             newFunction.lines = {show: true, lineWidth:8};
                             newFunction.color = graphILO.backgroundColor;
                             newFunction.data = dataPoints;
+                            delete newFunction.label;
                             
                             graphFuncs.push($.extend({},newFunction));
                             
+                            if(funcIndex==0)
+                            {
+                                newFunction.label = mappingLabel;
+                            }
                             newFunction.dashes = {show: true};
                             newFunction.lines = {show: false};
                             newFunction.color = graphILO.colors[index];
