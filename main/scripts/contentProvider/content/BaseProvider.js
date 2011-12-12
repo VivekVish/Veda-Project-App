@@ -601,6 +601,7 @@ BaseProvider.prototype.cleanAfterPaste = function()
         replaceHangingElements(val);
     });
 
+    ilo.checkForRepeatILOs();
     baseContent.refreshCitations();
 }
 
