@@ -377,7 +377,7 @@ var graphILO =
 	// RETURNS: data is returned assuming data is defined. otherwise, defaultVal is returned
 	checkMissingData: function(data, defaultVal)
 	{
-		return typeof(data)=='undefined' || data=='' || isNaN(data) ? defaultVal : data;
+		return typeof(data)=='undefined' || data==='' || isNaN(data) ? defaultVal : data;
 	},
 	
 	// DESC: parses an equation into a format that Javascript can run
