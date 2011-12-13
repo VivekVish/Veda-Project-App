@@ -453,6 +453,7 @@ var graph =
             graphMappingEntity.updateMappingLink();
             graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
             graphMappingEntity.updateMappingSlidesWidth();
+            graphMappingEntity.updateSlideIconControlDisplay();
             graph.updateGraph();
             
             $('#graphMappingIcons ul').sortable();
