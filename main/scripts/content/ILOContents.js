@@ -18,7 +18,7 @@ var ILOContents =
         if(ILOIds.length>0)
         {
             var ILOPayload = {'ILOIds':ILOIds};
-            $.ajax({url : 'resources/getILOs.php', type: 'GET', data: ILOPayload, async: false, success: function(data)
+            $.ajax({url : 'resources/getILOs.php', type: 'POST', data: ILOPayload, async: false, success: function(data)
             {
                 ILOContents.ILOArray = $.parseJSON(data);
                 callback.call();
