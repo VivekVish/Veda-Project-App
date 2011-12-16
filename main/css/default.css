@@ -39,11 +39,16 @@ footer li
 }
 
 /* Course Navigation */
-nav#coursenav, nav#coursenav a
+nav#coursenav
 {
     color: #FFF;
     background-color: #000;
     background-color: rgba(0,0,0,0.9);	
+}
+
+nav#coursenav a
+{
+    color: #FFF;
 }
 
 nav#coursenav ul li
