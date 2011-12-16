@@ -106,7 +106,7 @@ navbar.prototype.display = function()
 
         navlinks.find('img').load(function()
         {
-            if($(this).parent().siblings().children('img[data-loaded=false]').size()==0)
+            if($(this).parents('li').first().siblings().children('img[data-loaded=false]').size()==0)
             {
                 $('nav#coursenav>div').fadeIn('fast',function()
                 {
