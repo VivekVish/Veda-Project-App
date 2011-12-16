@@ -49,8 +49,24 @@ navbar.prototype.fill = function(navBarTitle, backLocation, navbarLinks)
                     $('#coursenav>div>ul>li:last-of-type').append('<ul></ul>');
                     for(j=0;j<navbarLinks[i].lessons.length;j++)
                     {
-                        $('#coursenav>div>ul>li:last-of-type>ul').append('<li data-link="'+navbarLinks[i].lessons[j]['link']+'">'+eval(j+1)+'. '+navbarLinks[i].lessons[j]["name"]+'</li>');
+                        var linkArray = navbarLinks[i].lessons[j]['link'].replace(/^\/data\/material\/|\/$/g,'').split('/');
+                        var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+
+                        var linkLocation = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course+"&section="+escape(navPosition.section)+"&lesson="+escape(navPosition.lesson);
+                        $('#coursenav>div>ul>li:last-of-type>ul').append('<li><a href="'+linkLocation+'">'+eval(j+1)+'. '+navbarLinks[i].lessons[j]["name"]+'</a></li>');
                     }
+                }
+            }
+            else if(navbarObject.courses)
+            {
+                $('#coursenav').removeClass('lessonNav');
+                for(i=0;i<navbarLinks.length;i++)
+                {
+                    var linkArray = navbarLinks[i]['link'].replace(/^\/data\/material\/|\/$/g,'').split('/');
+                    
+                    var navPosition = {course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+                    var linkLocation = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course;
+                    $('#coursenav>div>ul').append('<li data-img="'+navbarLinks[i]['img']+'"><a href="'+linkLocation+'">'+navbarLinks[i]["name"]+'</a></li>');
                 }
             }
             else
@@ -78,7 +94,14 @@ navbar.prototype.display = function()
     {
         for(i=0;i<navlinks.length;i++)
         {
-            $(navlinks[i]).prepend('<img data-loaded="false" src=img/navIcons/'+$(navlinks[i]).attr('data-img')+".png />");
+            if(navbarObject.courses)
+            {
+                $(navlinks[i]).children('a').prepend('<img data-loaded="false" src=img/navIcons/'+$(navlinks[i]).attr('data-img')+".png />");
+            }
+            else
+            {
+                $(navlinks[i]).prepend('<img data-loaded="false" src=img/navIcons/'+$(navlinks[i]).attr('data-img')+".png />");
+            }
         }
 
         navlinks.find('img').load(function()
@@ -205,14 +228,7 @@ navbar.prototype.navigateToNextLevel = function(navBarLocation)
 {
     if(this.readyToProcess)
     {
-        if(this.courses)
-        {
-            var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
-            var navPosition = {course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
-
-            window.location = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course;
-        }
-        else if(!this.lessons)
+        if(!this.lessons && !this.courses)
         {
             this.processPosition(navBarLocation);
         }
@@ -243,12 +259,7 @@ function navbar()
 	{
         navbarObject.navigateToNextLevel($(this).attr('data-link'));
 	});
-	
-	$('#coursenav>div>ul>li>ul>li').live('click',function(e)
-	{
-        navbarObject.navigateToLesson($(this).attr('data-link'));
-	});
-	
+
 	$('nav#coursenav>div>div#upToPreviousNavLevel').live('click', function(e)
 	{
 		navbarObject.processPosition($(this).attr('data-link'));

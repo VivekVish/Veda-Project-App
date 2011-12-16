@@ -39,7 +39,7 @@ footer li
 }
 
 /* Course Navigation */
-nav#coursenav
+nav#coursenav, nav#coursenav a
 {
     color: #FFF;
     background-color: #000;
