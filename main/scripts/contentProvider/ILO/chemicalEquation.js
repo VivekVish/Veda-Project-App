@@ -27,6 +27,7 @@ var chemicalEquation =
 				return;
 			}
 			insertionPoint = rangeTraverse.getCurrentRange();
+            var currentRange = rangeTraverse.getCurrentRange();
 		}
 
 		createLightBox('#content','Chemical Equation Editor','<div id="chemicalEqEditorHolder"></div>',$('#content').width()/2);
@@ -81,6 +82,7 @@ var chemicalEquation =
             delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$('#chemicalEqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempChemicalEquationEditor ul');$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+            rangeTraverse.setCurrentRange(currentRange);
         }
         
         $('#chemicalEqEditorHolder button.create')[0].targetChemicalEquation = targetChemicalEquation;

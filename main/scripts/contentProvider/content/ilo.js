@@ -81,7 +81,7 @@ var ilo =
 	
 	// DESC: changes the ILO id of any repeat ILOs to deal with copy pasting creating non-unique ILO ids
 	// RETURNS: void
-	checkForRepeatILOs: function()
+	checkForRepeatILOs: function(callback)
 	{
 		allILOs = $('.ilo');
 		for(i=0;i<allILOs.length-1;i++)

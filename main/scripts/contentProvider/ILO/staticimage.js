@@ -173,6 +173,7 @@ var staticimage =
 				return;
 			}
 			insertionPoint = rangeTraverse.parents('p,.ilo,:header,table,ul,li')[0];
+            var currentRange = rangeTraverse.getCurrentRange();
 		}
 		
 		createLightBox('#content','Image Editor','<div id="imageEditorHolder"><div><div id="imageHolder"></div><div id="imageTabs"></div><div id="imageInfoHolder"></div></div></div>');
@@ -368,6 +369,8 @@ var staticimage =
             delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+            rangeTraverse.setCurrentRange(currentRange);
+            
         }
 		
 		$('#imageEditorHolder button.create').click(function()

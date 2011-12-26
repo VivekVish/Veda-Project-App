@@ -33,6 +33,7 @@ var equation =
 				return;
 			}
 			insertionPoint = rangeTraverse.getCurrentRange();
+            var currentRange = rangeTraverse.getCurrentRange();
 		}
 
 		createLightBox('#content','Equation Editor','<div id="EqEditorHolder"></div>',$('#content').width()/2);
@@ -92,6 +93,7 @@ var equation =
             $('#equationText').die('keydown');
             $('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+            rangeTraverse.setCurrentRange(currentRange);
         }
         
         $('#EqEditorHolder button.create')[0].targetEquation = targetEquation;

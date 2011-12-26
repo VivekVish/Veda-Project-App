@@ -75,6 +75,7 @@ var graph =
 				return;
 			}
 			insertionPoint = rangeTraverse.parents('p,.ilo,:header,table,ul,li')[0];
+            var currentRange = rangeTraverse.getCurrentRange();
 		}
 		
 		createLightBox('#content','Graph Editor','<div id="graphEditorHolder"></div>');
@@ -249,6 +250,7 @@ var graph =
             delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+            rangeTraverse.setCurrentRange(currentRange);
         }
         
         $('#graphEditorHolder input[type="text"]').keydown(function(e)
