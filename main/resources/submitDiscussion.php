@@ -3,6 +3,7 @@
 # Includes
 require_once("config/main.inc.php");
 require_once("lib/PathArray.php");
+require_once("lib/HelperFunctions.php");
 
 if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()))
 {
@@ -19,7 +20,7 @@ PathArray::getPathFromRequest($field,$subject,$course,$section,$lesson);
 
 if (isset($_REQUEST['content']) && !empty($_REQUEST['content']))
 {
-	$discussionContent = htmlentities(trim($_REQUEST['content']));
+	$discussionContent = htmlentities(trim(HelperFunctions::removeCurlyQuotes($_REQUEST['content'])));
 }
 if (isset($_REQUEST['ilos']) && !empty($_REQUEST['ilos']))
 {

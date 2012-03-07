@@ -3,6 +3,7 @@
 # Includes
 require_once("config/main.inc.php");
 require_once("lib/PathArray.php");
+require_once("lib/HelperFunctions.php");
 
 if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()))
 {
@@ -24,7 +25,7 @@ if(!PathArray::isNameValid($section)||!PathArray::isNameValid($lesson))
 
 if (isset($_REQUEST['content']) && !empty($_REQUEST['content']))
 {
-	$lessonContent = htmlentities(trim($_REQUEST['content']));
+	$lessonContent = htmlentities(trim(HelperFunctions::removeCurlyQuotes($_REQUEST['content'])));
 }
 if (isset($_REQUEST['new_lesson']) && !empty($_REQUEST['new_lesson']))
 {
