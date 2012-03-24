@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////
-// The QuestionContent object parses the XML of the question  //
+// The QuestionContent object parses the JSON of the question  //
 // content													  //
 ////////////////////////////////////////////////////////////////
 
-function QuestionContent(questionContentXMLObject)
+function QuestionContent(questionContentJSONObject)
 {
-	this.XML = questionContentXMLObject;
+	this.JSON = questionContentJSONObject;
 	
-	this.parseXML = function()
+	this.parseJSON = function()
 	{
-		var returnXML = $('<div class="questionContent"></div>');
-		returnXML.append(this.XML.html());
-		return returnXML;
+		var returnJSON = $('<div class="questionContent"></div>');
+		returnJSON.append(this.JSON.html());
+		return returnJSON;
 	}
 }

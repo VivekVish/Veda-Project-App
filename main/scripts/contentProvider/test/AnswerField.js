@@ -1,20 +1,20 @@
 ////////////////////////////////////////////////////////////////
-// The answerField object parses the XML of a question's      //
+// The answerField object parses the JSON of a question's      //
 // answer field blueprint									  //
 ////////////////////////////////////////////////////////////////
 
-function AnswerField(answerFieldXMLObject)
+function AnswerField(answerFieldJSONObject)
 {
-	this.XML = answerFieldXMLObject;
+	this.JSON = answerFieldJSONObject;
 	
-	this.parseXML = function()
+	this.parseJSON = function()
 	{
-		var returnXML = $('<div class="answerField"><ul></ul></div>');
-		this.XML.children('answerblueprint').each(function(index, element)
+		var returnJSON = $('<div class="answerField"><ul></ul></div>');
+		this.JSON.children('answerblueprint').each(function(index, element)
 		{
-			$(returnXML).children('ul').append('<li class="answer">'+$(this).html()+'</li>');
+			$(returnJSON).children('ul').append('<li class="answer">'+$(this).html()+'</li>');
 		});
 		
-		return returnXML;
+		return returnJSON;
 	}
 }

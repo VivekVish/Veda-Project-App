@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////
-// The CorrectAnwswer object parses the XML of a question's   //
+// The CorrectAnwswer object parses the JSON of a question's   //
 // correct answer blueprint									  //
 ////////////////////////////////////////////////////////////////
 
-function CorrectAnswer(correctAnswerXMLObject)
+function CorrectAnswer(correctAnswerJSONObject)
 {
-	this.XML = correctAnswerXMLObject;
+	this.JSON = correctAnswerJSONObject;
 	
-	this.parseXML = function()
+	this.parseJSON = function()
 	{
-		var returnXML = $('<div class="correctAnswer"></div>');
-		returnXML.append(this.XML.html());
-		return returnXML;
+		var returnJSON = $('<div class="correctAnswer"></div>');
+		returnJSON.append(this.JSON.html());
+		return returnJSON;
 	}
 }

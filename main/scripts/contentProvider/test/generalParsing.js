@@ -5,7 +5,7 @@
 
 var generalQuestionParsing =
 {
-	parseXML:function(XML)
+	parseJSON:function(JSON)
 	{
 	}
 }

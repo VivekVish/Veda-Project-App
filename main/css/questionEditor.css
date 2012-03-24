@@ -8,3 +8,115 @@
 	z-index: 2;
 	border-top: solid black 0.2em;
 }
+
+div#layout
+{
+    padding-right: 45em;
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+}
+
+form.awesome-form
+{
+    border: 1px dashed #888;
+    padding: 1em;
+    position: relative;
+}
+
+div#layout ol, div#layout ul
+{
+    margin: 0 0 0 2em;
+    padding: 0;
+}
+
+.af-add
+{
+    margin-left: 2em;
+}
+
+fieldset > div.field[data-af-type="list"] > .af-add
+{
+    margin-left: 0;
+}
+
+div.field
+{
+    display: inline-block;
+    margin: 0 1em 0 0;
+    padding: 0.25em 0;
+}
+div.field.full
+{
+    width: 100%;
+}
+
+div.af-type-selectable { display: none; }
+div.af-type-selectable.af-selected { display: block; }
+
+form > div.field { display: block; }
+
+div.field label
+{
+    display: block;
+    font-weight: bold;
+}
+
+div.field input, div.field textarea
+{
+    width: 100%;
+}
+
+div.field>input, div.field>textarea, div.field>select
+{
+    margin-left: 0.25em;
+}
+
+div.field>input, div.field>textarea
+{
+    width: 80%;
+}
+
+#submit-button
+{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+div#test
+{
+    position: fixed;
+    right: 1em;
+    top: 3em;
+    bottom: 6em;
+    width: 40em;
+    float: right;
+    padding-top: 1.5em;
+}
+
+div#test-output
+{
+    position: fixed;
+    right: 1em;
+    top: 6.25em;
+    bottom: 6em;
+    width: 40em;
+    background-color: #ffe;
+    border: 1px dashed #888;
+    font-family: Courier;
+    padding: 1em;
+    overflow-y: scroll;
+    white-space: pre;
+}
+
+.af-remove, .af-add, #test>a
+{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#questionEditor form fieldset
+{
+    border: 2px groove threedface;
+}

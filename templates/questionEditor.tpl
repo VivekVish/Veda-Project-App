@@ -1,4 +1,4 @@
-        <div id="content" data-location="{$location}" data-name="{$name}" contenteditable="true">
+        <!--<div id="content" data-location="{$location}" data-name="{$name}" contenteditable="true">
         	<section>            	
                 <h1>Question Editor</h1>
 				<select>
@@ -27,6 +27,22 @@
                 </div>
 				<div class="submitdiv">
                     <button type="button" class="editQuestion" id="editQuestion">EDIT</button>
+                </div>
+            </section>
+        </div>-->
+
+        <div id="content" data-location="{$location}" data-name="{$name}" contenteditable="true">
+            <section>
+                <div id="layout">
+                    <div id="questionEditor">
+                        <form id="awesome-form-test"></form>
+                    </div>
+
+                    <div id="test">
+                        <a href="#test">Test</a>
+                        <div id="test-output">
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
