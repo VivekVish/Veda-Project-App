@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////
-// The QuestionParameter object parses the JSON of a 	      //
+// The QuestionParameter object parses the XML of a 	      //
 // question's generic parameters							  //
 ////////////////////////////////////////////////////////////////
 
-function QuestionParameters(questionParametersJSONObject)
+function QuestionParameters(questionParametersXMLObject)
 {
-	this.JSON = questionParametersJSONObject;
+	this.XML = questionParametersXMLObject;
 	
-	this.parseJSON = function()
+	this.parseXML = function()
 	{
-		var returnJSON = $('<div class="questionParameters"></div>');
-		returnJSON.append(this.JSON.html());
-		return returnJSON;
+		var returnXML = $('<div class="questionParameters"></div>');
+		returnXML.append(this.XML.html());
+		return returnXML;
 	}
 }

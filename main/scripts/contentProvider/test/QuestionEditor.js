@@ -4,25 +4,27 @@
 // blueprint.												  //
 ////////////////////////////////////////////////////////////////
 
-function QuestionEditor(questionElement,questionJSON)
+function QuestionEditor(questionElement,questionXML)
 {
 	this.questionContainer = questionElement;
-	this.questionBlueprintId = $(questionJSON).attr('id');
-	this.contentBlueprint = new QuestionContent($(questionJSON).children('contentblueprint'));
-	this.genericParams = new QuestionParameters($(questionJSON).children('genericparams'));
-	this.correctAnswerBlueprint = new CorrectAnswer($(questionJSON).children('correctanswerblueprint'));
-	this.answerFieldBlueprint = new AnswerField($(questionJSON).children('answerfieldblueprint'));
+	this.questionBlueprintId = $(questionXML).attr('id');
+	this.contentBlueprint = new QuestionContent($(questionXML).children('contentblueprint'));
+	this.genericParams = new QuestionParameters($(questionXML).children('genericparams'));
+	this.correctAnswerBlueprint = new CorrectAnswer($(questionXML).children('correctanswerblueprint'));
+	this.answerFieldBlueprint = new AnswerField($(questionXML).children('answerfieldblueprint'));
 	
 	this.display = function()
 	{
-		$(this.questionContainer).append(this.contentBlueprint.parseJSON());
-		$(this.questionContainer).append(this.answerFieldBlueprint.parseJSON());
+		$(this.questionContainer).append(this.contentBlueprint.parseXML());
+		$(this.questionContainer).append(this.answerFieldBlueprint.parseXML());
 		console.log(this.questionContainer);
 		console.log(this.questionBlueprintId);
-		console.log(this.genericParams.parseJSON());
-		console.log(this.contentBlueprint.parseJSON());
-		console.log(this.correctAnswerBlueprint.parseJSON());
-		console.log(this.answerFieldBlueprint.parseJSON());
+		console.log(this.genericParams.parseXML());
+		console.log(this.contentBlueprint.parseXML());
+		console.log(this.correctAnswerBlueprint.parseXML());
+		console.log(this.answerFieldBlueprint.parseXML());
+		
+		
 	}
 	
 	this.display();

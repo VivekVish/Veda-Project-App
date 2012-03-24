@@ -17,7 +17,7 @@
 	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
 							 "general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo","contentProvider/ILO/formValidator","content/Content","contentProvider/content/ContentProvider","contentProvider/test/questionBlueprints","contentProvider/test/QuestionProvider","general/lightbox",
 							 "contentProvider/test/QuestionHandler","test/test","contentProvider/test/QuestionContent","contentProvider/test/CorrectAnswer","contentProvider/test/QuestionEditor",
-							 "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations", "contentProvider/test/awesomeForm", "general/JSON-js-prettyPrint","jquery/jsonform.min");
+							 "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations");
     $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
 							 
 	foreach($ILOs as $ilo)
@@ -27,7 +27,7 @@
 		array_push($cssfiles,"ILO/".$ilo);
 	}
 
-	$bodytemplates = array("usernav","contentprovider","navbar","notebar","questionEditor","footer");
+	$bodytemplates = array("usernav","contentprovider","navbar","notebar","questionEditor","questionEditorViewer","footer");
 	
 	$quizId="5";
 	$questionID = 1;
@@ -38,7 +38,7 @@
 	#Question Information
     $smarty->assign("content","");
     $smarty->assign("location","/data/material/questionBlueprints/5/");
-    $smarty->assign("name","Question Editor");
+    $smarty->assign("name","Simplifying a rational function");
     $smarty->assign("answerfieldtype","multchoice");
 	$smarty->assign("quizId", $quizId);
     $smarty->assign("answers", $answers);

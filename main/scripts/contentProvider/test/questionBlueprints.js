@@ -1,55 +1,40 @@
 ////////////////////////////////////////////////////////////////
-// The questionBlueprints namespace stores the JSON of        //
-// questions and gets the question JSON from the server.	  //
+// The questionBlueprints namespace stores the XML of questions //
+// and gets the question XML from the server.				  //
 ////////////////////////////////////////////////////////////////
 
 var questionBlueprints =
 {
-	// stores question JSON
-	questionJSON: new Object(),
+	// stores ILO XML
+	questionXML: new Object(),
 	
 	// DESC: gets question blueprints using an AJAX request to the API
 	// PARAMETER: questionIds is an array of question IDs to be requested
 	// RETURNS: void
-	getQuestionJSON: function(questionIds)
+	getQuestionXML: function(questionIds)
 	{
-		questionBlueprints.questionJSON['question101'] = 
-		{
-            5: [200, {
-              'type': 'Equation Multiple Choice',
-              'paramblueprint': [
-                {'name':'trigfunc','type':'function','include':['sin','cos','tan']},
-                {'name':'a_true_or_false','type':'enum','values':['TRUE','FALSE']},
-                {'name':'a','type':'integer','lowerbound':1,'upperbound':10},
-                {'name':'b','type':'integer','lowerbound':2,'upperbound':4}
-              ],
-              'answerfieldparamblueprint': [
-                {'name':'c','type':'enum','values':[-2,2]}
-              ],
-              'ILOContents': [
-                {'index':237,'value':'\frac{\mathrm{d} }{\mathrm{d} x} \`trigfunc`(`a`x^`b`)'},
-                {'index':238,'value':'``d/dx(```trigfunc`(`a`x^`b`)`` / `b`)``'},
-                {'index':239,'value':'``d/dx(```trigfunc`(`a`x^`b`)`` / (`b`*`a`*x^(`b`-1)))``'},
-                {'index':242,'value':'``d/dx(```trigfunc`(`a`x^`b`)`` / `b`)``*`c`'},
-                {'index':252,'value':'``d/dx(`trigfunc`(`a`x^`b`))``'}
-              ],
-              'content': '<p>Evaluate the following expression:</p><span class="ilo" id="ilo237" data-ilotype="equation"></span>',
-              'correctanswer': '<span class="ilo" id="ilo252" data-ilotype="equation"></span>',
-              'answerfieldblueprint': {
-                'attributes':{'type':'multiplechoice','numanswers':4},
-                'contents': [
-                  {'content':'<span class="ilo" id="ilo238" data-ilotype="equation"></span>'},
-                  {'content':'<span class="ilo" id="ilo239" data-ilotype="equation"></span>'},
-                  {'content':'<span class="ilo" id="ilo242" data-ilotype="equation"></span>'},
-                  {'attributes': {
-                    'positionfromlast': 0,
-                    'forceinclude': true,
-                    'type':'noneoftheabove'
-                  },'content':'None of the above'}
-                ]
-              }
-            }]
-        };
+		questionBlueprints.questionXML['question101'] = 
+		"<questionblueprint id = \"qb1\">"+
+			"<genericparams>"+
+				"<parameter name='trigfunc' type='enum'><function>sin</function><function>cos</function><function>tan</function></parameter>"+
+				"<parameter name='a' type='range'><begin>1</begin><end>10</end></parameter>"+
+				"<parameter name='b' type='range'><begin>2</begin><end>4</end></parameter>"+
+				"<afparameter name='c' type='enum'><int>-2</int><int>2</int></afparameter>"+
+				"<afparameter name='d' type='enum'><int>-2</int><int>2</int></afparameter>"+
+			"</genericparams>"+
+			"<contentblueprint>"+
+				"<p>Evaluate the following expression:</p>"+
+				"<span id='ilo3' data-ilotype='equation' class='ilo'></span>"+
+			"</contentblueprint>"+
+			"<correctanswerblueprint>"+
+				"\\(``simplify((x+`a`)*(x+`b`)/(x+`a`))``,x \\ne -`a`\\)"+
+			"</correctanswerblueprint>"+
+			"<answerfieldblueprint id=\"afb20\" type=\"multchoice\" choices=\"5\">"+
+				"<answerblueprint><span id='ilo1' data-ilotype='equation' class='ilo'></span></answerblueprint>"+
+				"<answerblueprint><span id='ilo2' data-ilotype='equation' class='ilo'></span></answerblueprint>"+
+                "<answerblueprint>None of the above</answerblueprint>"+
+			"</answerfieldblueprint>"+
+		"</questionblueprint>";
     
         $('.samplequestion .questioncontent').append('<span id="ilo4" data-ilotype="equation" class="ilo"></span>');
         $('.samplequestion .answerfield ol').append('<li><span id="ilo5" data-ilotype="equation" class="ilo"></span></li>');
@@ -68,12 +53,12 @@ var questionBlueprints =
         ILOContents.ILOArray['ilo8'] = {content:'x+3, x \\ne -1',type:'equation',version:'1.0'};
 	},
 	
-	// DESC: sets the ILO JSON of the ILO in question
+	// DESC: sets the ILO XML of the ILO in question
 	// PARAMETER: QuestionId is the question ID to be changed
-	// PARAMETER: JSON is the question JSON
+	// PARAMETER: XML is the question XML
 	// RETURNS: void
-	setQuestionJSON: function(QuestionId, JSON)
+	setQuestionXML: function(QuestionId, XML)
 	{
-		questionJSON.questionJSON[QuestionId] = JSON;
+		questionBlueprints.questionXML[QuestionId] = XML;
 	}
 }
