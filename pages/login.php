@@ -1,6 +1,6 @@
 <?php
 	# Setup splash screen
-	$title = "Welcome to The Veda Project";
+	$title = "The Veda Project: The Free Online Educational Platform";
 
 	# Setup html includes
 	$cssfiles = array("reset","login","default");
