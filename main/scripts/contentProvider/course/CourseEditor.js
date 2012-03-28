@@ -564,9 +564,11 @@ CourseEditor.prototype.openAddLessonLightbox = function(lessonIcon)
                         }
 
                         var newLessonRow = $('<span data-lessonpath='+position+' data-lessonorder='+newLessonOrder+'></span>');
+                        var lessonLink = "index.php?field="+payload['field']+"&subject="+payload['subject']+"&course="+payload['course']+"&section="+payload['section']+"&lesson="+payload['lesson'];
                         newLessonRow.append('<span></span>')
                                      .append('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>')
-                                     .append('<span><img class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" /></span>');
+                                     .append('<span><img class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" />'+
+                                             '<a href="'+lessonLink+'"><img class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a></span>');
 
                         $(lessonList).append($('<li></li>').append(newLessonRow));
                         thisObject.callNavReprocess();
@@ -750,10 +752,12 @@ CourseEditor.prototype.recoverDeletedLessons = function(navPosition)
                         var newLessonOrder = lessonItem['order'];
 
                         var newLessonRow = $('<span data-lessonpath='+position+' data-lessonorder='+newLessonOrder+'></span>');
+                        var lessonLink = "index.php?field="+payload['field']+"&subject="+payload['subject']+"&course="+payload['course']+"&section="+lessonItem['section_name']+"&lesson="+lessonItem['name'];
 
                         newLessonRow.append('<span></span>')
                                  .append('<span class="lessonName">'+lessonItem['name'].replace(/_/g,' ')+'</span>')
-                                 .append('<span><img class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" /></span>');
+                                 .append('<span><img class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" />'+
+                                         '<a href="'+lessonLink+'"><img class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a></span>');
 
                         $('span[data-sectionpath="'+thisObject.navPosition+lessonItem['section_name']+"/"+'"]').parent('li').children('ul.lessonList').append($('<li></li>').append(newLessonRow));
 
