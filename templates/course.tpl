@@ -9,7 +9,7 @@
 {foreach from=$sectionArray item="section"}
 					<li>
 						<span data-sectionpath={$section.path} data-sectionorder={$section.order}>
-							<span class="expandedList"><img src="img/editorIcons/minus_icon.png"></span>
+							<span class="expandedList"></span>
 							<span class="sectionName">{$section.name}</span>
 							<span>
                             </span>
