@@ -34,14 +34,14 @@
 	}
 	else
 	{
-		$bodytemplates = array("usernav","navbar","notebar","lesson","footer");
+		$bodytemplates = array("usernav","navbar","lesson","footer");
 	}
     
     $location = "/data/material/{$_REQUEST['field']}/{$_REQUEST['subject']}/{$_REQUEST['course']}/{$_REQUEST['section']}/{$_REQUEST['lesson']}/";
     $historyLink = pathArray::pathToLink($location)."&type=lessonHistory";
     $discussionLink = pathArray::pathToLink($location)."&type=lessonDiscussion";
     
-    if($autosaveTime[0]!==false)
+    if(isset($autosaveTime)&&$autosaveTime[0]!==false)
     {
         $smarty->assign("lastSavedAt",$autosaveTime[0]);
         $autosaveLink = pathArray::pathToLink($location)."&type=lessonAutosave";

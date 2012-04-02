@@ -12,3 +12,13 @@
 {
     color: purple;
 }
+
+button#loginbutton
+{
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    width: 15em;
+    font-size: 1.25em;
+    height: 2em;
+}

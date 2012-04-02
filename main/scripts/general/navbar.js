@@ -15,6 +15,7 @@ navbar.prototype.fields = false;
 navbar.prototype.lessons = false;
 navbar.prototype.courses = false;
 navbar.prototype.readyToProcess=true;
+navbar.prototype.currentPosition=null;
 
 // DESC: fills the navbar with content and calls the display function
 // PARAMETER: navBarTitle is the title of the new nav bar
@@ -32,9 +33,14 @@ navbar.prototype.fill = function(navBarTitle, backLocation, navbarLinks)
 
             $('#upToPreviousNavLevel').remove();
 
-            if(!navbarObject.fields)
+            if(!navbarObject.fields&!navbarObject.lessons)
             {
                 $('#coursenav>div>h2').after('<div id="upToPreviousNavLevel" data-link="'+backLocation+'"><img src="img/back_button.png" /></div>');
+            }
+            else if(navbarObject.lessons)
+            {
+                var backArray = navbarObject.currentPosition.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                $('#coursenav>div>h2').after('<a id="backToCourseButton" href="index.php?field='+backArray[0]+'&subject='+backArray[1]+'&course='+backArray[2]+'"><img src="img/back_button.png" /></a>');
             }
 
             $('#coursenav>div>ul').remove();
@@ -134,12 +140,14 @@ navbar.prototype.display = function()
 navbar.prototype.processPosition = function(navBarLocation)
 {
     var navbarObject = this;
+    navbarObject.currentPosition=navBarLocation;
     
     if(this.readyToProcess)
     {
         this.readyToProcess=false;
         var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
         var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+        
 
         $.ajax({url : 'resources/getCourseNav.php', type: 'GET', data: navPosition,success: function(data)
         {

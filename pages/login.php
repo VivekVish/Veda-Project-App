@@ -1,4 +1,8 @@
 <?php
+    # Destroy current session
+    $_SESSION = array();
+    session_destroy();
+    
 	# Setup splash screen
 	$title = "The Veda Project: The Free Online Educational Platform";
 
@@ -18,7 +22,7 @@
 		return $pageURL;
 	}
 	
-	$destination = urlencode(preg_replace('/&/','AMPERSANDCODE',curPageURL()));
+	$destination = urlencode(preg_replace('/\?$/','',preg_replace('/&/','AMPERSANDCODE',preg_replace('/(\&login=true)|(login=true\&)|(login=true)/',"",curPageURL()))));
 
 	### Body Templates ###
 	$bodytemplates = array("login");

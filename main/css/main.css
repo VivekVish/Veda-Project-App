@@ -13,7 +13,7 @@ html, body
 {
 	position: fixed;
 	height: 1.5em;
-	width: 70%;
+	width: 85%;
 	left: 15%;
 	z-index: 5;
 }
@@ -48,7 +48,7 @@ html, body
 {
 	position: fixed;
 	height: 2.5em;
-	width: 70%;
+	width: 85%;
 	left: 15%;
 	z-index: 3;
 	bottom:1.5em;
@@ -97,7 +97,7 @@ footer
 {
 	position: fixed;
 	height: 1.5em;
-	width: 70%;
+	width: 85%;
 	bottom: 0;
 	left: 15%;
 	z-index: 3;
@@ -166,7 +166,7 @@ nav#coursenav>div:hover
     overflow-y: auto;
 }
 
-nav#coursenav>div>div#upToPreviousNavLevel
+nav#coursenav>div>div#upToPreviousNavLevel, nav#coursenav>div>#backToCourseButton
 {
 	position: relative;
 	left: 80%;
@@ -175,12 +175,12 @@ nav#coursenav>div>div#upToPreviousNavLevel
 	width: 2em;
 }
 
-nav#coursenav>div>div#upToPreviousNavLevel:hover
+nav#coursenav>div>div#upToPreviousNavLevel:hover, nav#coursenav>div>#backToCourseButton:hover
 {
 	cursor: pointer;	
 }
 
-nav#coursenav>div>div#upToPreviousNavLevel>img
+nav#coursenav>div>div#upToPreviousNavLevel>img, nav#coursenav>div>#backToCourseButton>img
 {
 	height: 2em;
 	width: 2em;
@@ -346,7 +346,7 @@ nav#coursenav h2
 {
 	min-height: 95%;
 	left: 15%;
-	width: 70%;
+	width: 85%;
 	padding-top: 1.5em;
 	position: absolute;
 	padding-bottom: 4em;

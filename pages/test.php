@@ -12,7 +12,7 @@
 		array_push($cssfiles,"ILO/".$ilo);
 	}
 	
-	$bodytemplates = array("usernav","navbar","notebar","quiz","footer");
+	$bodytemplates = array("usernav","navbar","quiz","footer");
 	
 	$questions = array();
 

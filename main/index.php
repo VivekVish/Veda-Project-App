@@ -4,7 +4,9 @@
 require_once('config/main.inc.php');
 require_once('lib/ConstructPage.php');
 
+$loginURL = ($_SERVER["REQUEST_URI"]=="/" || $_SERVER["REQUEST_URI"]=="/index.php") ? "index.php?login=true" : $_SERVER["REQUEST_URI"]."&login=true";
 $contentprovider = false;
+$loggedIn = false;
 $navPosition = "";
 $title = "";
 $content = "";
@@ -19,17 +21,31 @@ if ($userSession->getNeedUserName())
 {
 	require_once('pages/newUser.php');
 }
-# Is user logged in with this session?
-else if ($userSession->isLoggedIn())
+# User not logged in
+else if(isset($_REQUEST['login'])&&$_REQUEST['login']=="true")
 {
-	if ($userSession->isContentProvider()||$userSession->isAdmin())
-	{
-		$contentprovider = true;	
-	}
-	else
-	{
-		$contentprovider = false;	
-	}
+	require_once('pages/login.php');
+}
+else
+{
+    if ($userSession->isLoggedIn())
+    {
+        $loggedIn=true;
+        
+        if ($userSession->isContentProvider()||$userSession->isAdmin())
+        {
+            $contentprovider = true;	
+        }
+        else
+        {
+            $contentprovider = false;	
+        }
+    }
+    else
+    {
+        $loggedIn=false;
+    }
+	
 
 	$constructPage = new ConstructPage();
 	$api = new Api();
@@ -40,10 +56,9 @@ else if ($userSession->isLoggedIn())
 		$subject = urlencode(trim($_REQUEST['subject']));
 		$course = urlencode(trim($_REQUEST['course']));
 		
-		$navPosition = "/data/material/$field/$subject/$course/";
-		
 		if(isset($_REQUEST['section'])&&isset($_REQUEST['lesson']))
 		{
+            $navPosition = "/data/material/$field/$subject/$course/";
 			$section = urlencode(trim($_REQUEST['section']));
 			$lesson = urlencode(trim($_REQUEST['lesson']));
 			
@@ -68,7 +83,10 @@ else if ($userSession->isLoggedIn())
                         $responseArray = json_decode($response);
                         $content = html_entity_decode($responseArray->content);
                         $name = preg_replace('/_/',' ',$responseArray->name);
-                        $autosaveTime=json_decode($api->get("/data/material/$field/$subject/$course/$section/$lesson/content/autosave/{$userSession->getUsername()}/exists/"));
+                        if($contentprovider)
+                        {
+                            $autosaveTime=json_decode($api->get("/data/material/$field/$subject/$course/$section/$lesson/content/autosave/{$userSession->getUsername()}/exists/"));
+                        }
 					}
 					else
 					{
@@ -151,7 +169,10 @@ else if ($userSession->isLoggedIn())
 					$responseArray = json_decode($response);
                     $content = html_entity_decode($responseArray->content);
                     $name = preg_replace('/_/',' ',$responseArray->name);
-                    $autosaveTime=json_decode($api->get("/data/material/$field/$subject/$course/$section/$lesson/content/autosave/{$userSession->getUsername()}/exists/"));
+                    if($contentprovider)
+                    {
+                        $autosaveTime=json_decode($api->get("/data/material/$field/$subject/$course/$section/$lesson/content/autosave/{$userSession->getUsername()}/exists/"));
+                    }
 				}
 				else
 				{
@@ -171,8 +192,14 @@ else if ($userSession->isLoggedIn())
 			}
 			else if($contentprovider)
 			{
+                $navPosition = "/data/material/$field/$subject/";
 				require_once('pages/courseEditor.php');
 			}
+            else
+            {
+                $navPosition = "/data/material/$field/$subject/";
+                require_once('pages/course.php');
+            }
 		}
 	}
     else if(isset($_REQUEST['questionblueprintid']))
@@ -188,16 +215,13 @@ else if ($userSession->isLoggedIn())
 		$navPosition="/data/";
 	}	
 }
-# User not logged in
-else
-{
-	require_once('pages/login.php');
-}
 
 ### Assign Smarty Variables ###
 $smarty->assign("contentprovider", $contentprovider);
+$smarty->assign("loggedIn", $loggedIn);
 	
 #Head
+$smarty->assign("loginURL",$loginURL);
 $smarty->assign("title", $title);
 $smarty->assign("cssfiles", $cssfiles);
 $smarty->assign("iejavascriptfiles", $iejavascriptfiles);

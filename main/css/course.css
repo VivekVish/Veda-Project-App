@@ -1,0 +1,35 @@
+#content ul.lessonList span:last-of-type img.deleteLessonIcon
+{
+    margin-right: 1.5em;
+}
+
+button#recoverDeletedLessons
+{
+    display: block;
+    margin: auto;
+    width: 15em;
+    font-size: 1.25em;
+    height: 2em;
+}
+
+.lessonList>li>span:first-of-type>a
+{
+    display:block;
+    width:100%;
+    padding-left: 1.5em;
+}
+
+button#recoverDeletedLessons:hover
+{
+    cursor: pointer;
+}
+
+#recoverLessonsHolder
+{
+    width: 100%;
+}
+
+#lightbox #recoverLessonsBox select
+{
+    width: 100%;
+}
