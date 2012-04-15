@@ -7,9 +7,9 @@
 	
 	$bodytemplates = array("usernav","navbar","quizOverview","footer");
 	#Questions
-	$quizPath="/data/Mathematics/Mathematics/Geometry/Circumference_of_a_Circle";
-	$questions=array(array("id"=>187,"type"=>"Multiple Choice","topic"=>"Circumference of a Circle","topicPath"=>"/data/Mathematics/Mathematics/Geometry/Circumference_of_a_Circle","preview"=>"What is the circumference of","recurrence"=>2),
-					 array("id"=>186,"type"=>"Equation","topic"=>"Perimeter of Polygons","topicPath"=>"/data/Mathematics/Mathematics/Geometry/Perimeter_of_Polygons","preview"=>"I'LL CUT YOU","recurrence"=>1));
+	$quizPath="/data/material/$field/$subject/$course/$section/$lesson/quizOutline/";
+	/*$questions=array(array("id"=>187,"type"=>"Multiple Choice","topic"=>"Circumference of a Circle","topicPath"=>"/data/Mathematics/Mathematics/Geometry/Circumference_of_a_Circle","preview"=>"What is the circumference of","recurrence"=>2),
+					 array("id"=>186,"type"=>"Equation","topic"=>"Perimeter of Polygons","topicPath"=>"/data/Mathematics/Mathematics/Geometry/Perimeter_of_Polygons","preview"=>"I'LL CUT YOU","recurrence"=>1));*/
 	$quizId=5;
 	
 	### Assign Smarty Variables ###

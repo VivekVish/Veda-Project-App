@@ -6,6 +6,7 @@ require_once('lib/ConstructPage.php');
 
 $loginURL = ($_SERVER["REQUEST_URI"]=="/" || $_SERVER["REQUEST_URI"]=="/index.php") ? "index.php?login=true" : $_SERVER["REQUEST_URI"]."&login=true";
 $contentprovider = false;
+$admin = false;
 $loggedIn = false;
 $navPosition = "";
 $title = "";
@@ -32,12 +33,19 @@ else
     {
         $loggedIn=true;
         
-        if ($userSession->isContentProvider()||$userSession->isAdmin())
+        if($userSession->isAdmin())
         {
+            $admin=true;
+            $contentprovider=true;
+        }
+        else if ($userSession->isContentProvider())
+        {
+            $admin=false;
             $contentprovider = true;	
         }
         else
         {
+            $admin=false;
             $contentprovider = false;	
         }
     }
@@ -66,8 +74,11 @@ else
 			{
 				if($_REQUEST['type']=='quiz'||$_REQUEST['type']=='prequiz')
 				{
-					if($contentprovider)
+					if($admin)
 					{
+                        $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quizOutline/");
+                        $content=json_decode($response);
+                        $questions=$content->childData;
                         require_once('pages/testOverview.php');
 					}
 					else

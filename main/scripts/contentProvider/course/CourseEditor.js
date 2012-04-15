@@ -725,11 +725,14 @@ CourseEditor.prototype.recoverDeletedLessons = function(navPosition)
 
         $.ajax({url:'resources/getDeletedLessons.php',type:'GET',data:payload,success:function(data)
         {
-            var deletedLessons = $.parseJSON(data);
-            $.each(deletedLessons, function(index, value)
+            if(data!='"none"')
             {
-                recoverLessonsBox.find('ul>li>select').append('<option value="'+value.id+'">'+value.name.replace(/_/g,' ')+'</option>');
-            });
+                var deletedLessons = $.parseJSON(data);
+                $.each(deletedLessons, function(index, value)
+                {
+                    recoverLessonsBox.find('ul>li>select').append('<option value="'+value.id+'">'+value.name.replace(/_/g,' ')+'</option>');
+                });
+            }
         }});
 
         recoverLessonsBox.children('ul').append('<li><button class="ok">OK</button><button class="recover">Recover</button><li>');
@@ -786,7 +789,7 @@ CourseEditor.prototype.recoverDeletedLessons = function(navPosition)
 
 function CourseEditor()
 {
-    this.navPosition = $('#coursenav').attr('data-navPosition');
+    this.navPosition = $('#listEditorHeader').attr('data-coursepath');
 	var thisObject = this;
     
 	$('.sectionList').sortable().disableSelection();
