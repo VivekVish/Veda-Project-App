@@ -1,6 +1,7 @@
         <div id="content">
         	<section>            	
                 <h1>{$course}</h1>
+                <p>Click on a lesson below to begin.</p>
 				<div id="listEditorHeader" data-coursepath="{$classPath}">
 					<span></span>
 					<span></span>
