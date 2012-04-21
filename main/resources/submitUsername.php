@@ -29,7 +29,7 @@ else
 	die("Failed at application.");
 }
 
-$payload = json_encode(array("provider"=>$provider,"identity"=>$identity,"status"=>"content_provider"));
+$payload = json_encode(array("provider"=>$provider,"identity"=>$identity,"status"=>"user"));
 
 # Instantiate api class
 $api = new Api();
