@@ -19,7 +19,7 @@ CourseEditor.prototype.actionStarted = false;
 // RETURNS: boolean, true if name is valid and false if not
 CourseEditor.prototype.isNameValid = function(nameToCheck)
 {
-    return nameToCheck.length>0&&nameToCheck.search(/\//)==-1;
+    return nameToCheck.length>0&&nameToCheck.search(/\//)==-1&&nameToCheck.search(/\&/)==-1;
 }
 
 // DESC: Refreshes the navigation bar
@@ -110,6 +110,7 @@ CourseEditor.prototype.renameLesson = function(lessonNameElement, newName)
             var position = $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath');
             var positionArray = position.replace(/^\/data\/material\/|\/$/g,'').split('/');
             $(lessonNameElement).replaceWith('<span class="lessonName">'+positionArray[4].replace(/_/g,' ')+'</span>');
+            new Message("Name cannot contain special characters.",{type:'error'});
             return;
         }
 
