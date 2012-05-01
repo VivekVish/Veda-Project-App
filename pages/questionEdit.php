@@ -17,7 +17,7 @@
 	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
 							 "general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo","contentProvider/ILO/formValidator","content/Content","contentProvider/content/ContentProvider","contentProvider/test/questionBlueprints","contentProvider/test/QuestionProvider","general/lightbox",
 							 "contentProvider/test/QuestionHandler","test/test","contentProvider/test/QuestionContent","contentProvider/test/CorrectAnswer","contentProvider/test/QuestionEditor",
-							 "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations", "contentProvider/test/awesomeForm", "general/JSON-js-prettyPrint","jquery/jsonform.min");
+							 "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations");
     $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
 							 
 	foreach($ILOs as $ilo)
@@ -30,7 +30,6 @@
 	$bodytemplates = array("usernav","contentprovider","navbar","questionEditor","footer");
 	
 	$quizId="5";
-	$questionID = 1;
     
     $answers = array();
     $content = "";
@@ -42,6 +41,6 @@
     $smarty->assign("answerfieldtype","multchoice");
 	$smarty->assign("quizId", $quizId);
     $smarty->assign("answers", $answers);
-	$smarty->assign("questionID", $questionID);
+	$smarty->assign("questionId", $questionId);
 	$smarty->assign("questionTypes", $questionTypes);
 ?>

@@ -4,6 +4,38 @@
 
 $(document).ready(function()
 {
+    function checkUsername(newUsername)
+    {
+        if(newUsername.length<3)
+		{
+			$('#newUserMessageBox').html('<p class="error">The username is not 3 characters long.</p>');
+            return false;
+		}
+		else if(newUsername.search(/[^a-zA-Z0-9]/)>-1)
+		{
+			$('#newUserMessageBox').html('<p class="error">The username contains invalid characters.</p>');
+            return false;
+		}
+		else
+		{
+			$('#newUserMessageBox').html('');
+			
+			var usernamePayload = {username:$('#newUsername').val()};
+			
+			$.ajax({url: 'resources/usernameCheck.php', data: usernamePayload, success: function(data)
+			{
+				if(data=="<user>User Not Found.</user>")
+				{
+					$('#newUserMessageBox').html('<p class="valid">This username is available! Feel free to register.</p>');
+				}
+				else
+				{
+					$('#newUserMessageBox').html('<p class="error">Sorry.  This username has been taken.</p>');
+				}
+			}});
+		}
+    }
+    
 	// Logs out if user is idle for 10 minutes
 	setTimeout(function()
 	{
@@ -44,32 +76,7 @@ $(document).ready(function()
 	{
 		var newUsername = $('#newUsername').val();
 		
-		if(newUsername.length<3)
-		{
-			$('#newUserMessageBox').html('<p class="error">The username is not 3 characters long.</p>');
-		}
-		else if(newUsername.search(/[^a-zA-Z0-9]/)>-1)
-		{
-			$('#newUserMessageBox').html('<p class="error">The username contains invalid characters.</p>');
-		}
-		else
-		{
-			$('#newUserMessageBox').html('');
-			
-			var usernamePayload = {username:$('#newUsername').val()};
-			
-			$.ajax({url: 'resources/usernameCheck.php', data: usernamePayload, success: function(data)
-			{
-				if(data=="<user>User Not Found.</user>")
-				{
-					$('#newUserMessageBox').html('<p class="valid">This username is available! Feel free to register.</p>');
-				}
-				else
-				{
-					$('#newUserMessageBox').html('<p class="error">Sorry.  This username has been taken.</p>');
-				}
-			}});
-		}
+		checkUsername(newUsername);
 	});
 	
 	// submits the username
@@ -88,12 +95,22 @@ $(document).ready(function()
 		else
 		{
 			var usernamePayload = {username:$('#newUsername').val()};
-			
-			$.ajax({url: 'resources/submitUsername.php', data: usernamePayload, success: function(data)
+            
+            $.ajax({url: 'resources/usernameCheck.php', data: usernamePayload, success: function(data)
 			{
-				if(data=="Success.")
+				if(data=="<user>User Not Found.</user>")
 				{
-					window.location.reload();
+                    $.ajax({url: 'resources/submitUsername.php', data: usernamePayload, success: function(data)
+                    {
+                        if(data=="Success.")
+                        {
+                            window.location.reload();
+                        }
+                    }});
+				}
+				else
+				{
+					$('#newUserMessageBox').html('<p class="error">Sorry.  This username has been taken.</p>');
 				}
 			}});
 		}

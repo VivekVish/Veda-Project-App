@@ -13,6 +13,14 @@ var questionBlueprints =
 	// RETURNS: void
 	getQuestionXML: function(questionIds)
 	{
+        if(questionIds!="new")
+        {
+            $.ajax({url : 'resources/getQuizQuestion.php', type: 'POST', data: questionIds, success: function(data)
+            {
+                
+            }});
+        }
+        /*
 		questionBlueprints.questionXML['question101'] = 
 		"<questionblueprint id = \"qb1\">"+
 			"<genericparams>"+
@@ -35,7 +43,7 @@ var questionBlueprints =
                 "<answerblueprint>None of the above</answerblueprint>"+
 			"</answerfieldblueprint>"+
 		"</questionblueprint>";
-    
+        
         $('.samplequestion .questioncontent').append('<span id="ilo4" data-ilotype="equation" class="ilo"></span>');
         $('.samplequestion .answerfield ol').append('<li><span id="ilo5" data-ilotype="equation" class="ilo"></span></li>');
         $('.samplequestion .answerfield ol').append('<li><span id="ilo6" data-ilotype="equation" class="ilo"></span></li>');
@@ -51,6 +59,7 @@ var questionBlueprints =
         ILOContents.ILOArray['ilo6'] = {content:'x+2, x \\ne -1',type:'equation',version:'1.0'};
         ILOContents.ILOArray['ilo7'] = {content:'x-1',type:'equation',version:'1.0'};
         ILOContents.ILOArray['ilo8'] = {content:'x+3, x \\ne -1',type:'equation',version:'1.0'};
+        */
 	},
 	
 	// DESC: sets the ILO XML of the ILO in question

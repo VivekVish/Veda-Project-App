@@ -41,6 +41,6 @@
 {/foreach}
         </tbody>
     </table>
-    <button id="addQuestion">Add Question</button>
+    <button id="addQuestion" type="submit">Add Question</button>
     <button id="attachQuestion">Attach Question</button>
 </div>

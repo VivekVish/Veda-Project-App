@@ -18,6 +18,7 @@ var ILOContents =
         if(ILOIds.length>0)
         {
             var ILOPayload = {'ILOIds':ILOIds};
+            // We use POST instead of GET to avoid a URL that is too long to process.
             $.ajax({url : 'resources/getILOs.php', type: 'POST', data: ILOPayload, async: false, success: function(data)
             {
                 ILOContents.ILOArray = $.parseJSON(data);

@@ -74,17 +74,35 @@ else
 			{
 				if($_REQUEST['type']=='quiz'||$_REQUEST['type']=='prequiz')
 				{
-					if($admin)
-					{
-                        $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quizOutline/");
-                        $content=json_decode($response);
-                        $questions=$content->childData;
-                        require_once('pages/testOverview.php');
-					}
-					else
-					{
-						require_once('pages/test.php');
-					}
+                    if(isset($_REQUEST['questionId']))
+                    {
+                        if($admin)
+                        {
+                            $questionId=$_REQUEST['questionId'];
+                            if($_REQUEST['questionId']=="new")
+                            {
+                                require_once('pages/questionEdit.php');
+                            }
+                        }
+                        else
+                        {
+                            header("Location: ".$loginURL);
+                        }
+                    }
+                    else
+                    {
+                        if($admin)
+                        {
+                            $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quizOutline/");
+                            $content=json_decode($response);
+                            $questions=$content->childData;
+                            require_once('pages/testOverview.php');
+                        }
+                        else
+                        {
+                            require_once('pages/test.php');
+                        }
+                    }
 				}
 				else if($_REQUEST['type']=='lesson')
 				{
@@ -218,6 +236,10 @@ else
         if($contentprovider)
         {
             require_once('pages/questionEdit.php');
+        }
+        else
+        {
+            header("Location: ".$loginURL);
         }
     }
 	else
