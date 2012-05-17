@@ -27,4 +27,4 @@
     }
 	$smarty->assign("questions", $questions);
     $smarty->assign("lastAnswer", $lastAnswer);
-	$smarty->assign("contentprovider", $contentprovider);
+	$smarty->assign("contentprovider", false);
