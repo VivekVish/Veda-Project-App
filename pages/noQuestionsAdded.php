@@ -5,3 +5,5 @@
     $fullnamejavascriptfiles = array();
     
     $bodytemplates = array("usernav","navbar","noQuestionsAdded","footer");
+    
+    $smarty->assign("contentprovider", false);
