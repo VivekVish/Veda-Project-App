@@ -35,7 +35,8 @@
 		foreach($lessonXMLArray as $lessonKey => $lessonXMLElement)
 		{
 			array_push($lessonArray,array("name"=>(string)$lessonXMLElement->name,
-									      "link"=>PathArray::pathToLink((string)$lessonXMLElement->path),
+									      "link"=>PathArray::pathToLink((string)$lessonXMLElement->path)."&type=lesson",
+                                          "quizLink"=>PathArray::pathToLink((string)$lessonXMLElement->path)."&type=quiz",
 										  "path"=>(string)$lessonXMLElement->path,
 										  "order"=>(string)$lessonXMLElement->order));
 			

@@ -150,7 +150,7 @@ nav#coursenav.lessonNav div ul li ul li:hover
 
 .question .answerfield.multchoice ol li:hover, .question .answerfield.multchoice ol li.deselected:hover 
 {
-	background-color: #DDF;
+	background-color: #EEF;
 	-moz-box-shadow: inset 0em 0em 0.25em #555;
 	-webkit-box-shadow: inset 0em 0em 0.25em #555;
 	box-shadow: inset 0em 0em 0.25em #555;
@@ -165,10 +165,10 @@ nav#coursenav.lessonNav div ul li ul li:hover
 .question .answerfield.multchoice ol li.deselected
 {
 	border: 0.15em black solid;
-	background-color: #EEF;
+	background-color: #FFF;
 }
 
-button.submitanswer, button.editQuestion, #insertTableBox button
+button.submitanswer, button.editQuestion, #insertTableBox button, button#retakequiz
 {
 	-webkit-border-radius: .5em; 
 	-moz-border-radius: .5em;

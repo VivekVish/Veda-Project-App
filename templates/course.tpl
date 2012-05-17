@@ -6,7 +6,7 @@
 					<span></span>
 					<span></span>
 				</div>
-				<ul class="sectionList listEditor">
+				<ul class="sectionList listEditor userCourse">
 {foreach from=$sectionArray item="section"}
 					<li>
 						<span data-sectionpath={$section.path} data-sectionorder={$section.order}>
@@ -22,8 +22,11 @@
                                     <a href="{$lesson.link}">
                                         <span></span>
                                         <span class="lessonName">{$lesson.name}</span>
-                                        <span></span>
                                     </a>
+                                    <span class="userCourseButtons">
+                                        <a href="{$lesson.quizLink}"><img title="Take Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>
+                                        <a href="{$lesson.link}"><img title="Read Lesson" class="readLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>
+                                    </span>
 								</span>
 							</li>
 {/foreach}

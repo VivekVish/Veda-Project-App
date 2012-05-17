@@ -31,11 +31,11 @@
             </tr>
 {foreach from=$questions item="question"}
             <tr>
-                <td>{$question.id}</td>
-                <td>{$question.name}</td>
+                <td>{$question->id}</td>
+                <td>{$question->name}</td>
                 <td>
-                    <a href="index.php?quizBlueprintId={$quizId}&questionBlueprintId={$question.id}">{html_image file="img/editorIcons/edit_icon.png"}</a>
-                    <img src="img/editorIcons/delete_icon.png" class="deleteQuizQuestion" data-quizblueprintid="{$quizId}" data-questionblueprintid="{$question.id}"/></td>
+                    <a href="{$quizLink}&questionId={$question->id}">{html_image file="img/editorIcons/edit_icon.png"}</a>
+                    <img src="img/editorIcons/delete_icon.png" class="deleteQuizQuestion" data-questionblueprintid="{$question->id}" />
                 </td>
             </tr>
 {/foreach}

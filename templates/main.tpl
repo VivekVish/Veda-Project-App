@@ -26,6 +26,7 @@
 {foreach from=$fullnamejavascriptfiles item=javascriptfile}
         	<script type="text/javascript" src="scripts/{$javascriptfile}"></script>
 {/foreach}
+
 {literal}
 <script type="text/javascript">
 

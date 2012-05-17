@@ -6,8 +6,9 @@
                     <div class="answerfield {$answerfieldtype}">
 {if $answerfieldtype=='multchoice'}
                         <ol>
-{foreach from=$answers key=id item=answer}
-                            <li class="answerChoice" id="{$question_id}-{$id}">{$answer}</li>
+{foreach from=$answers key=id item=answer name=answerLoop}
+{assign var='counter' value=$id+1}
+                            <li class="answerChoice" id="{$question_id}-{$counter}">{$answer}</li>
 {/foreach}
                         </ol>
 {elseif $answerfieldtype=='fillintheblank'}

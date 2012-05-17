@@ -79,10 +79,23 @@ else
                         if($admin)
                         {
                             $questionId=$_REQUEST['questionId'];
-                            if($_REQUEST['questionId']=="new")
+                            if($questionId=="new")
                             {
-                                require_once('pages/questionEdit.php');
+                                $questionContent = "<p></p>";
+                                $questionName = "";
+                                $correctAnswer = 1;
+                                $answers = array();
                             }
+                            else
+                            {
+                                $response=$api->get("/data/material/questionBlueprint/$questionId/");
+                                $content=json_decode($response);
+                                $questionContent = html_entity_decode($content->content);
+                                $questionName = $content->name;
+                                $correctAnswer = $content->correctAnswer;
+                                $answers = $content->answerChoices;
+                            }
+                            require_once('pages/questionEdit.php');
                         }
                         else
                         {
@@ -98,9 +111,61 @@ else
                             $questions=$content->childData;
                             require_once('pages/testOverview.php');
                         }
+                        else if($loggedIn)
+                        {
+                            $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quizOutline/");
+                            $content=json_decode($response);
+                            $questions=$content->childData;
+                            if(count($questions)>0)
+                            {
+                                $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quiz/{$userSession->getUsername()}/");
+                                $quizIncomplete = false;
+                                $questionId = null;
+                                $responseArray = json_decode($response);
+                                $answerCorrect = array();
+                                $lastAnswer = array();
+                                foreach($responseArray as $key=>$submittedAnswer)
+                                {
+                                    if($submittedAnswer->answered===false)
+                                    {
+                                        $quizIncomplete = true;
+                                        $questionId = $submittedAnswer->id;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        array_push($answerCorrect,$submittedAnswer->submittedAnswer==$submittedAnswer->correctAnswer);
+                                        $lastAnswer = $submittedAnswer;
+                                    }
+                                }
+                                
+                                if($quizIncomplete)
+                                {
+                                    if(count($lastAnswer)>0)
+                                    {
+                                        $response=$api->get("/data/material/questionBlueprint/{$lastAnswer->id}/");
+                                        $responseArray = json_decode($response);
+                                        $lastCorrectAnswer = html_entity_decode($responseArray->answerChoices[$lastAnswer->correctAnswer-1]);
+                                        $lastQuestion = html_entity_decode($responseArray->content);
+                                    }
+                                    $response=$api->get("/data/material/questionBlueprint/$questionId/");
+                                    $responseArray = json_decode($response);
+                                    require('pages/test.php');
+                                }
+                                else
+                                {
+                                    $location="/data/material/$field/$subject/$course/$section/$lesson/";
+                                    require('pages/testComplete.php');
+                                }
+                            }
+                            else
+                            {
+                                require_once('pages/noQuestionsAdded.php');
+                            }
+                        }
                         else
                         {
-                            require_once('pages/test.php');
+                            header("Location: ".$loginURL);
                         }
                     }
 				}

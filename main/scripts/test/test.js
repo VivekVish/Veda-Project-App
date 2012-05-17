@@ -8,7 +8,7 @@ $(document).ready(function()
 		multChoice = $(multChoiceQuestions[i]).find("ol > li");
 		for(j=0; j<multChoice.size(); j++)
 		{
-			letter = String.fromCharCode(97+i);
+			letter = String.fromCharCode(97+j);
 			$(multChoice[j]).prepend("<span class='letter'>"+letter+".&nbsp;</span>");
 		}
 	}
@@ -27,6 +27,19 @@ $(document).ready(function()
 			$(this).addClass('selected');	
 			$(this).removeClass('deselected');
 		}
+        
+        var answerPayload = {};
+        
+        answerPayload.questionId=$(this).attr('id').substr(0,$(this).attr('id').indexOf('-'));
+        answerPayload.answerId=$(this).attr('id').substr($(this).attr('id').indexOf('-')+1,$(this).attr('id').length-1);
+        
+        $.ajax({url : "resources/submitAnswer.php", type: 'POST', data: answerPayload, success:function(data)
+        {
+            if(data=="Success.")
+            {
+                window.location.reload();
+            }
+        }});
 	});
 
 	$('.fillintheblank>input')
@@ -56,6 +69,8 @@ $(document).ready(function()
 		{
 			$("#selectedAnswer").val($(this).attr("id"));
 		});
+        
+        
 	});
 
 	// Submit form

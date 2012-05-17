@@ -104,3 +104,8 @@
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce));
 	background: -webkit-linear-gradient(top, #fcfff4 0%,#e9e9ce 100%);
 }
+
+#content ul.listEditor.userCourse>li>ul>li>span
+{
+    height: 1.25em;
+}

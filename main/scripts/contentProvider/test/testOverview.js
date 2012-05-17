@@ -126,12 +126,14 @@ $(document).ready(function()
 	// EVENT: Content Provider clicks the Delete Quiz Question Button to permanently delete a question, detaching it frm not only the current quiz but all quizzes
 	$('.deleteQuizQuestion').click(function()
 	{
-		var lightBoxContents = $('<div id="deleteQuestionLightBox">Are you sure you want to permanently delete this question from not only this quiz but all quizzes?  If you just want to remove it from this quiz, simply detach it.<div><button class="nobutton">No</button><button class="yesbutton">Yes</button></div></div>');
+        var questionId = $(this).parents('tr').children('td').first().html();
+		var lightBoxContents = $('<div id="deleteQuestionLightBox">Are you sure you want to permanently delete this question from not only this quiz but all quizzes?  If you just want to remove it from this quiz, simply detach it.<div><button class="nobutton">No</button><button class="yesbutton" data-questionblueprintid="'+questionId+'">Yes</button></div></div>');
 		createLightBox("#content","Delete Question",lightBoxContents);
 		var buttonPressed = this;
 		
 		$('#deleteQuestionLightBox .yesbutton').click(function()
 		{
+            console.log(this);
 			$.ajax({url : 'resources/deleteQuizQuestion.php', type: 'POST',data:{'quizBlueprintId':$(this).attr('data-quizblueprintid'),'questionBlueprintId':$(this).attr('data-questionblueprintid')},success:function(data)
 			{
 				if(data!="failure")

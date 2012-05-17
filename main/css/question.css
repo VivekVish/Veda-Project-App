@@ -86,3 +86,29 @@ button.submitanswer, button.editQuestion
 	border: solid black 0.1em;
 	height: 1.8em;
 }
+
+.answerCorrect, .answerIncorrect
+{
+    width: 30%;
+    margin: auto;
+}
+
+.answerCorrect h1, .answerIncorrect h1
+{
+    text-align: center;
+}
+
+.answerCorrect div, .answerIncorrect div
+{
+    padding: 1em;
+}
+
+.answerCorrect
+{
+    background-color: #00FF00;
+}
+
+.answerIncorrect
+{
+    background-color: #FF4444;
+}

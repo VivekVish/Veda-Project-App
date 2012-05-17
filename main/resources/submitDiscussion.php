@@ -59,5 +59,3 @@ $uri = "/data/material/$field/$subject/$course/$section/$lesson/content/discussi
 $result = $api->post($uri, $payload);
 
 print_r($result);
-
-?>

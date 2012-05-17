@@ -33,3 +33,11 @@ button#recoverDeletedLessons:hover
 {
     width: 100%;
 }
+
+#content ul.listEditor .lessonList>li>span:first-of-type>span.userCourseButtons
+{
+    display: inline;
+    float: right;
+    position: relative;
+    top: -1.35em;
+}

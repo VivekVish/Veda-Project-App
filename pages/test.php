@@ -1,10 +1,9 @@
 <?php
-	$quiz_id="5";
 	$title = "The Veda Project";
-	$cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message","question");
+    $cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message","question");
 	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");
 	$ILOs = array("graph","equation","chemicalEquation","staticimage");
-	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","test/test","content/citations");
+	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar", "content/ILOContents","content/Content","flot/jquery.flot.min","flot/jquery.flot.dashes","test/test","content/citations");
     $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
 	foreach($ILOs as $ilo)
 	{
@@ -15,26 +14,17 @@
 	$bodytemplates = array("usernav","navbar","quiz","footer");
 	
 	$questions = array();
-
-	$questions[0]['id'] = "g123";
-	$questions[0]['content'] = "What is <div class='ilo' data-ilotype='equation' id='ilo100'></div>?";
-	$questions[0]['answers'][0] = "Answer 1";
-	$questions[0]['answers'][1] = "Answer 2";
-	$questions[0]['answers'][2] = "Answer 3";
-	$questions[0]['answers'][3] = "Answer 4";
-	$questions[0]['answerfieldtype'] = "fillintheblank";
-	
-	$questions[1]['id'] = "g456";
-	$questions[1]['content'] = "What is hi?";
-	$questions[1]['answers'][0] = "Answer 1";
-	$questions[1]['answers'][1] = "Answer 2";
-	$questions[1]['answers'][2] = "Answer 3";
-	$questions[1]['answers'][3] = "Answer 4";
-	$questions[1]['answerfieldtype'] = "fillintheblank";
+    $questions[0]['content'] = html_entity_decode($responseArray->content);
+    $questions[0]['answerfieldtype'] = "multchoice";
+    $questions[0]['answers'] = $responseArray->answerChoices;
+    $questions[0]['id'] = $questionId;
 
 	#Question Information
-	$smarty->assign("quiz_id", $quiz_id);
+    if(isset($lastQuestion)&&isset($lastCorrectAnswer))
+    {
+        $smarty->assign("lastQuestion",$lastQuestion);
+        $smarty->assign("lastCorrectAnswer",$lastCorrectAnswer);
+    }
 	$smarty->assign("questions", $questions);
+    $smarty->assign("lastAnswer", $lastAnswer);
 	$smarty->assign("contentprovider", $contentprovider);
-
-?>

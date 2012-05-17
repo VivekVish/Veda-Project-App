@@ -27,6 +27,7 @@
 									<span title="Click to Edit Name" class="lessonName">{$lesson.name}</span>
 									<span>
                                         <img title="Delete Lesson" class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" />
+                                        <a href="{$lesson.quizLink}"><img title="Edit Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>
                                         <a href="{$lesson.link}"><img title="Edit Lesson" class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>
                                     </span>
 								</span>

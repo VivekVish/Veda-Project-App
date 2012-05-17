@@ -30,16 +30,14 @@
 	$bodytemplates = array("usernav","contentprovider","navbar","questionEditor","footer");
 	
 	$quizId="5";
-    
-    $answers = array();
-    $content = "";
-    
+
 	#Question Information
-    $smarty->assign("content","");
-    $smarty->assign("location","/data/material/questionBlueprints/5/");
+    $smarty->assign("questionContent",$questionContent);
+    $smarty->assign("location",$navPosition.$section."/".$lesson."/quiz/".$_REQUEST['questionId']);
     $smarty->assign("name","Question Editor");
+    $smarty->assign("questionName",$questionName);
+    $smarty->assign("correctAnswer",$correctAnswer);
     $smarty->assign("answerfieldtype","multchoice");
-	$smarty->assign("quizId", $quizId);
     $smarty->assign("answers", $answers);
 	$smarty->assign("questionId", $questionId);
 	$smarty->assign("questionTypes", $questionTypes);

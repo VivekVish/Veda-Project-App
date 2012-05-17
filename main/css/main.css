@@ -415,7 +415,7 @@ nav#coursenav h2
 	height: 1em;	
 }
 
-#content table td
+#content table td, #content table th
 {
 	border: 0.14em solid black;
 	min-width: 1em;	
@@ -576,4 +576,18 @@ nav#coursenav h2
 {
     font-size: 0.7em;
     vertical-align: text-top;
+}
+
+/* Quiz Complete */
+button#retakequiz
+{
+	margin-top: 2em;
+	float: right;
+	
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1em;
+	font-weight: bold;
+	padding: .5em 2em .55em;
 }

@@ -14,45 +14,48 @@ BaseHandler.prototype.keyPressed = new Array();
 // RETURNS: void
 BaseHandler.prototype.handleContentEvent=function(e)
 {
-    if((e.target==window&&e.type=="blur"))
+    if(e.target.tagName!="INPUT")
     {
-        this.handleWindowEvent(e);
-    }
-    else if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
-    {
-        this.handleGeneralEvent(e);
-
-        if(rangeTraverse.within('.ilo')||((e.type=="click"||e.type=="mousedown"||e.type=="mouseup")&&($(e.target).parents('.ilo').size()>0||$(e.target).is('.ilo'))))
-        {
-            this.handleILOEvent(e);
-        }
-        else if(rangeTraverse.within('table'))
-        {
-            this.handleTableEvent(e);
-        }
-        else if(rangeTraverse.within('ul,ol'))
-        {
-            this.handleListEvent(e);	
-        }
-        else if(rangeTraverse.within('blockquote'))
-        {
-            this.handleBlockquoteEvent(e);
-        }
-        else if(rangeTraverse.within('p'))
-        {
-            this.handleParagraphEvent(e);
-        }
-        else if(rangeTraverse.within(':header'))
-        {
-            this.handleHeaderEvent(e);	
-        }
-        else if(rangeTraverse.within('input'))
-        {
-            this.handleInputEvent(e);
-        }
-        else
+        if((e.target==window&&e.type=="blur"))
         {
             this.handleWindowEvent(e);
+        }
+        else if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
+        {
+            this.handleGeneralEvent(e);
+
+            if(rangeTraverse.within('.ilo')||((e.type=="click"||e.type=="mousedown"||e.type=="mouseup")&&($(e.target).parents('.ilo').size()>0||$(e.target).is('.ilo'))))
+            {
+                this.handleILOEvent(e);
+            }
+            else if(rangeTraverse.within('table'))
+            {
+                this.handleTableEvent(e);
+            }
+            else if(rangeTraverse.within('ul,ol'))
+            {
+                this.handleListEvent(e);	
+            }
+            else if(rangeTraverse.within('blockquote'))
+            {
+                this.handleBlockquoteEvent(e);
+            }
+            else if(rangeTraverse.within('p'))
+            {
+                this.handleParagraphEvent(e);
+            }
+            else if(rangeTraverse.within(':header'))
+            {
+                this.handleHeaderEvent(e);	
+            }
+            else if(rangeTraverse.within('input'))
+            {
+                this.handleInputEvent(e);
+            }
+            else
+            {
+                this.handleWindowEvent(e);
+            }
         }
     }
 }

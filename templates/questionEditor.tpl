@@ -1,4 +1,4 @@
-        <div id="content" data-location="{$location}" data-questionid="{$questionId}" data-name="{$name}" contenteditable="true">
+        <div id="content" data-location="{$location}" data-questionid="{$questionId}" data-name="{$name}">
         	<section>            	
                 <h1>Question Editor</h1>
                 <label>Question Type</label>
@@ -12,14 +12,28 @@
 {/foreach}
 				</select>
                 <label>Answer</label>
-                <select>
-{section name=foo loop=9} 
+                <select class="correctAnswer">
+{section name=foo loop=9}
+{if $smarty.section.foo.iteration==$correctAnswer}
+                    <option value={$smarty.section.foo.iteration} selected="selected">{$smarty.section.foo.iteration}</option>
+{else}
                     <option value={$smarty.section.foo.iteration}>{$smarty.section.foo.iteration}</option>
+{/if}
 {/section}
                 </select>
+                <label for="questionName">Question Name</label>
+                <input id="questionName" value="{$questionName}"/>
                 <div class="question" id="{$question_id}">
                     <div class="questionContent">
-                        <p>{$content}</p>
+{$questionContent}
+
+{if count($answers)>0}
+                        <ul>
+{foreach from=$answers item=answer}
+                            <li>{$answer}</li>
+{/foreach}
+                        </ul>
+{/if}
                     </div>
                 </div>
                 {*
