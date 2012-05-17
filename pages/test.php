@@ -27,4 +27,6 @@
     }
 	$smarty->assign("questions", $questions);
     $smarty->assign("lastAnswer", $lastAnswer);
-	$smarty->assign("contentprovider", $contentprovider);
+    
+    // HACK - FIGURE OUT A WAY TO REMOVE LATER
+	$contentprovider = false;

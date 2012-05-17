@@ -6,4 +6,5 @@
     
     $bodytemplates = array("usernav","navbar","noQuestionsAdded","footer");
     
-    $smarty->assign("contentprovider", false);
+    // HACK - FIGURE OUT A WAY TO REMOVE LATER
+    $contentprovider=false;
