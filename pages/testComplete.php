@@ -8,3 +8,6 @@
     
     $smarty->assign("location",$location);
     $smarty->assign("answerCorrect",$answerCorrect);
+    
+    // HACK - FIGURE OUT A WAY TO REMOVE LATER
+	$contentprovider = false;
