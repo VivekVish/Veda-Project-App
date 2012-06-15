@@ -1,5 +1,4 @@
 <?php
-	$quiz_id="5";
 	$title = "The Veda Project";
 	$ILOs = array("graph","equation","chemicalEquation","staticimage");
 	
@@ -24,4 +23,3 @@
 	#Question Information
 	$smarty->assign("quiz_id", $quiz_id);
 	$smarty->assign("questions", $questions);
-?>

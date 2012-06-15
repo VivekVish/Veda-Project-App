@@ -307,6 +307,15 @@ else
             header("Location: ".$loginURL);
         }
     }
+    else if(isset($_REQUEST['type'])&&$_REQUEST['type']=="lessonPlans")
+    {
+        #$response=$api->get("/user/lessonplans/{$userSession->getUsername()}/");
+        require_once('pages/lessonPlans.php');
+    }
+    else if(isset($_REQUEST['lessonPlanId']))
+    {
+        require_once('pages/lessonPlan.php');
+    }
 	else
 	{
 		require_once('pages/landing.php');

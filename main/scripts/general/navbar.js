@@ -223,7 +223,6 @@ navbar.prototype.processPosition = function(navBarLocation)
                 navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
             }
 
-
             $('#coursenav').attr('data-navPosition',navBarLocation);
         }});
     }

@@ -1,7 +1,6 @@
 <?php
 	require_once("lib/PathArray.php");
-	
-	$quiz_id="5";
+
 	$title = "The Veda Project";
 	
 	$cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message","contentprovider","listEditor","course");
@@ -51,6 +50,5 @@
 	$smarty->assign("classPath","/data/material/$field/$subject/$course/");
 	$smarty->assign("sectionArray",$sectionArray);
 	$smarty->assign("course", preg_replace('/_/'," ",$course));
-	$smarty->assign("quiz_id", $quiz_id);
 	$smarty->assign("questions", $questions);
 ?>

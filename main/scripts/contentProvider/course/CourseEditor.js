@@ -473,7 +473,7 @@ CourseEditor.prototype.openAddSectionLightbox = function()
                         }
 
                         var newSectionRow = $('<span data-sectionpath='+position+' data-sectionorder='+newSectionOrder+'></span>');
-                        newSectionRow.append('<span class="expandedList"><img src="img/editorIcons/minus_icon.png"></span>')
+                        newSectionRow.append('<span class="expandedList"></span>')
                                      .append('<span class="sectionName">'+newSectionName+'</span>')
                                      .append('<span><img class="addLessonIcon" src="img/editorIcons/addLesson_icon.png"><img class="deleteSectionIcon" src="img/editorIcons/delete_icon.png" /></span>');
 

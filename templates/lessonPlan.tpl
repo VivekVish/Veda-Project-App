@@ -1,7 +1,7 @@
-        <div id="content">
+<div id="content">
         	<section>            	
-                <h1>{$course}</h1>
-				<div id="listEditorHeader" data-coursepath="{$classPath}">
+                <h1>{$lessonPlanName}</h1>
+				<div id="listEditorHeader" data-lessonplanpath="holder">
 					<span></span>
 					<span></span>
 					<span>
@@ -38,8 +38,9 @@
 					
 {/foreach}
 				</ul>
-                <div id="recoverLessonsHolder">
-                    <button id="recoverDeletedLessons">Recover Deleted Lessons</button>
+                <div id="lessonRepository" data-navposition="/data/material/">
+                    <p id="repositoryBackLinks"></p>
+                    <div></div>
                 </div>
             </section>
             
