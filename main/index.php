@@ -307,10 +307,17 @@ else
             header("Location: ".$loginURL);
         }
     }
-    else if(isset($_REQUEST['type'])&&$_REQUEST['type']=="lessonPlans")
+    else if(isset($_REQUEST['type'])&&$_REQUEST['type']=="lessonPlanManager")
     {
-        #$response=$api->get("/user/lessonplans/{$userSession->getUsername()}/");
-        require_once('pages/lessonPlans.php');
+        if($loggedIn)
+        {
+            $response=$api->get("/user/lessonplanmanager/{$userSession->getUsername()}/");
+            require_once('pages/lessonPlanManager.php');
+        }
+        else
+        {
+            header("Location: ".$loginURL);
+        }
     }
     else if(isset($_REQUEST['lessonPlanId']))
     {
@@ -346,5 +353,3 @@ $smarty->assign("bodytemplates",$bodytemplates);
 
 #Display
 $smarty->display("main.tpl");
-
-?>

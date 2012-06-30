@@ -1,0 +1,206 @@
+/* Lesson Repository */
+#lessonRepository
+{
+    position: relative;
+    background-color: #000;
+    width: 100%;
+    min-height: 20em;
+    margin-left: 2em;
+}
+
+div#lessonRepository>div
+{
+	overflow-y: auto;
+    overflow-x: hidden;
+}
+
+div#lessonRepository>div>div#upToPreviousNavLevel, div#lessonRepository>div>#backToCourseButton
+{
+	position: relative;
+	left: 80%;
+	top: -2.4em;
+    height: 2em;
+	width: 2em;
+}
+
+div#lessonRepository>div>div#upToPreviousNavLevel:hover, div#lessonRepository>div>#backToCourseButton:hover
+{
+	cursor: pointer;	
+}
+
+div#lessonRepository>div>div#upToPreviousNavLevel>img, div#lessonRepository>div>#backToCourseButton>img
+{
+	height: 2em;
+	width: 2em;
+}
+
+div#lessonRepository.lessonNav>div>ul.listEditor
+{
+	margin: 0em;
+    width: 100%;
+}
+
+div#lessonRepository.lessonNav>div>ul>li>ul
+{
+	margin: 0em;
+}
+
+div#lessonRepository ul li
+{
+	width: 16%;
+    margin-top: 0.75em;
+    margin: 1em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	border: 2px solid black;
+	-webkit-background-clip: padding-box;
+	text-align: center;
+	padding: 0 0.25em;
+	cursor: pointer;
+    display: inline-block;
+    list-style: none;
+}
+
+div#lessonRepository>div>ul>li>a
+{
+    -moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+div#lessonRepository.lessonNav ul li
+{
+	text-align: left;
+	border: none;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	margin: 0;
+    padding: 0;
+	width: 90%;
+	font-size: 1em;
+	cursor: default;
+}
+
+div#lessonRepository.lessonNav ul li
+{
+    display: inline-block;
+	width: 100%;
+}
+
+div#lessonRepository.lessonNav ul li>span
+{
+    color: black;
+    padding-bottom: 0.35em;
+    font-size: 1em;
+    font-weight: normal;
+    width: 100%;
+    display: inline-block;
+    background: #dddddd;
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(40%,#dfe5d7), color-stop(100%,#b3bead));
+	background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%);
+}
+
+div#lessonRepository.lessonNav ul li ul li>span
+{
+    padding-bottom: 0.35em;
+    color: black;
+    width: 100%;
+    display: inline-block;
+    background: #eeeeee;
+	background: -moz-linear-gradient(top, #fcfff4 0%, #e9e9ce 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce));
+	background: -webkit-linear-gradient(top, #fcfff4 0%,#e9e9ce 100%);
+}
+
+div#lessonRepository.lessonNav ul li ul li
+{
+	font-size: 1em;
+}
+
+div#lessonRepository.lessonNav div ul li ul li:hover
+{
+	cursor: pointer;
+}
+
+div#lessonRepository ul li:last-of-type
+{
+	margin-right: 1%;	
+}
+
+div#lessonRepository ul li img
+{
+	margin-top: 0.25em;
+	margin-right: 10%;
+	margin-left: 10%;
+	width: 80%;
+}
+
+div#lessonRepository h2
+{
+	padding: 0.2em 0em 0.2em 0.2em;
+	font-size: 1.8em;	
+}
+
+div#lessonRepository
+{
+    color: #FFF;
+    background-color: #000;
+    background-color: rgba(0,0,0,0.9);	
+}
+
+div#lessonRepository a
+{
+    color: #FFF;
+}
+
+div#lessonRepository ul li
+{
+	font-weight: bold;
+	background-color: #000;
+}
+
+div#lessonRepository ul li:hover
+{
+    color: white;
+	-moz-box-shadow: 0px 0px 3em #fff;
+	-webkit-box-shadow: 0px 0px 3em #fff;
+	box-shadow: 0px 0px 3em #fff;
+	border-color: white;
+}
+
+div#lessonRepository.lessonNav ul li
+{
+	background-color: #000;
+    background-color: rgba(0,0,0,0);	
+}
+
+div#lessonRepository.lessonNav ul li:hover
+{
+	color: white;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+div#lessonRepository.lessonNav div ul li:hover
+{
+	color: #FFF;
+}
+
+div#lessonRepository>#repositoryBackLinks
+{
+    padding-top: 0.25em;
+    margin-left: 0.5em;
+}
+
+div#lessonRepository>#repositoryBackLinks>span:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}

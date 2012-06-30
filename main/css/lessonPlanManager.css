@@ -1,0 +1,79 @@
+button#addLessonPlan
+{
+    display: block;
+    margin: auto;
+    width: 15em;
+    font-size: 1.25em;
+    height: 2em;
+}
+
+#lightbox label[for='newLessonPlanName']
+{
+    width: 40%;
+    display: inline;
+}
+
+#lightbox input#newLessonPlanName
+{
+    margin-left: 0.5em;
+    width: 40%;
+    display: inline;
+}
+
+#lessonplans a
+{
+    color: blue;
+}
+
+#lessonplans a:visited
+{
+    color: #800080;
+}
+
+#lessonplans a:hover
+{
+    text-decoration: underline;
+}
+
+#lightbox
+{
+    width: 25%;
+}
+
+#lightbox #createLessonPlan label
+{
+    width: 50%;
+}
+
+#lightbox #createLessonPlan li
+{
+    position: relative;
+    margin-bottom: 0.75em;
+}
+
+#lightbox #createLessonPlan li:nth-last-child(2)
+{
+    margin-bottom: 2em;
+}
+
+#lightbox #createLessonPlan li
+{
+    position: relative;
+    margin-bottom: 0.75em;
+}
+
+#lightbox #createLessonPlan input, #lightbox #createLessonPlan textarea
+{
+    position: absolute;
+    right: 0;
+    margin-right: 0;
+    margin-left: 0.2em;
+    width: 45%;
+    border: 0.3em;
+    padding: 0.15em;
+}
+
+.editLessonPlanIcon:hover, .deleteLessonPlanIcon:hover
+{
+    cursor: pointer;
+}

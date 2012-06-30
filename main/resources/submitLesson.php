@@ -33,7 +33,6 @@ if (isset($_REQUEST['new_lesson']) && !empty($_REQUEST['new_lesson']))
 }
 if (isset($_REQUEST['ilos']) && !empty($_REQUEST['ilos']))
 {
-    
 	$ilos = json_encode($_REQUEST['ilos']);
 }
 else
