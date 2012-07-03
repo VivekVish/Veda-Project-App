@@ -418,11 +418,14 @@ LessonRepository.prototype.processPosition = function(navLocation)
 
         $.ajax({url : 'resources/getCourseNav.php', type: 'GET', data: navPosition,success: function(data)
         {
-            var backLocation = '/data/';
-            currentPath = $(data).children('path').html();
+            var backLocation = '/data/material/';
+            dataArray = $.parseJSON(data);
+            
+            var currentPath = dataArray['path'];
+            
             if(currentPath!==null)
             {
-                var backLocationArray = $(data).children('path').html().split('/');
+                var backLocationArray = currentPath.split('/');
                 backLocationArray.splice(backLocationArray.length-2,1);
                 var backLocation = backLocationArray.join('/');
             }
@@ -431,33 +434,59 @@ LessonRepository.prototype.processPosition = function(navLocation)
 
             LessonRepositoryObject.fields = false;
             LessonRepositoryObject.lessons = false;
+            
+            function getJSONArrayLength(myObject)
+            {
+                var keepGoing = true;
+                var objectLength = 0;
+                while(keepGoing)
+                {
+                    if(myObject[objectLength]==null)
+                    {
+                        keepGoing=false;
+                    }
+                    else
+                    {
+                        objectLength++;
+                    }
+                }
+                
+                return objectLength;
+            }
 
-            if($(data)[0].nodeName=='COURSE')
+            if(currentPath.split('/').length==7)
             {
                 LessonRepositoryObject.fields = false;
                 LessonRepositoryObject.lessons = true;
 
-                if($(data).find('section').size()>0)
+                if(getJSONArrayLength(dataArray['children'])>0)
                 {
-                    $(data).find('section').each(function(index)
+                    for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
                     {
-                        newLessonRepositoryLinks.push({link:$(this).children('path').html(),name:$(this).children('name').html(),lessons:new Array()});
-                        var sectionLinkArray = newLessonRepositoryLinks[index].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                        newLessonRepositoryLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],lessons:new Array()});
+                        var sectionLinkArray = newLessonRepositoryLinks[i].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
                         var sectionNavPosition = {section:sectionLinkArray[3], course:sectionLinkArray[2], subject:sectionLinkArray[1],field:sectionLinkArray[0]};
 
-                        $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:function(innerData)
+                        function processAjax(index)
                         {
-                            $(innerData).find('lesson').each(function(innerIndex)
+                            return function(innerData)
                             {
-                                newLessonRepositoryLinks[index].lessons.push({link:$(this).children('path').html(),name:$(this).children('name').html()});
-                            });
+                                innerDataArray = $.parseJSON(innerData);
 
-                            if(index==$(data).find('section').size()-1)
-                            {
-                                LessonRepositoryObject.fill(newLessonRepositoryLinks);
+                                for(j=0;j<getJSONArrayLength(innerDataArray['children']);j++)
+                                {
+                                    newLessonRepositoryLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name']});
+                                }
+
+                                if(index==getJSONArrayLength(dataArray['children'])-1)
+                                {
+                                    LessonRepositoryObject.fill(newLessonRepositoryLinks);
+                                }
                             }
-                        }});
-                    });
+                        }
+                        
+                        $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:processAjax.call(this,i)});
+                    }
                 }
                 else
                 {
@@ -466,7 +495,7 @@ LessonRepository.prototype.processPosition = function(navLocation)
             }
             else
             {
-                if($(data)[0].nodeName=='DATA')
+                if(currentPath=='/data/material/')
                 {
                     LessonRepositoryObject.fields = true;
                 }
@@ -475,10 +504,11 @@ LessonRepository.prototype.processPosition = function(navLocation)
                     LessonRepositoryObject.fields = false;
                 }
                 LessonRepositoryObject.lessons = false;
-                $(data).find('field,subject,course').each(function(index)
+                
+                for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
                 {
-                    newLessonRepositoryLinks.push({link:$(this).children('path').html(),name:$(this).children('name').html(),img:$.trim($(this).children('name').html()).replace(/ /g,'_')});
-                });	
+                    newLessonRepositoryLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],img:$.trim(dataArray['children'][i]['name']).replace(/ /g,'_')});
+                }	
 
                 LessonRepositoryObject.fill(newLessonRepositoryLinks);
             }
@@ -521,7 +551,7 @@ function LessonRepository()
 	
 	$('#lessonRepository>div>ul>li').live('click',function()
 	{
-        if(!this.lessons)
+        if(!LessonRepositoryObject.lessons)
         {
             LessonRepositoryObject.navigateToNextLevel($(this).attr('data-link'));
         }

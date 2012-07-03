@@ -147,57 +147,87 @@ navbar.prototype.processPosition = function(navBarLocation)
         this.readyToProcess=false;
         var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
         var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
-        
 
         $.ajax({url : 'resources/getCourseNav.php', type: 'GET', data: navPosition,success: function(data)
         {
-            var backLocation = '/data/';
-            currentPath = $(data).children('path').html();
+            var backLocation = '/data/material/';
+            dataArray = $.parseJSON(data);
+
+            var currentPath = dataArray['path'];
+            
             if(currentPath!==null)
             {
-                var backLocationArray = $(data).children('path').html().split('/');
+                var backLocationArray = currentPath.split('/');
                 backLocationArray.splice(backLocationArray.length-2,1);
                 var backLocation = backLocationArray.join('/');
             }
-
+                    
             var newNavBarLinks = new Array();
-            var newNavBarTitle = $(data).children('name').html()==null ? 'Fields' : $(data).children('name').html();
+            var newNavBarTitle = dataArray['name']==null ? 'Fields' : dataArray['name'];
 
             navbarObject.fields = false;
             navbarObject.courses = false;
             navbarObject.lessons = false;
+            
+            function getJSONArrayLength(myObject)
+            {
+                var keepGoing = true;
+                var objectLength = 0;
+                while(keepGoing)
+                {
+                    if(myObject[objectLength]==null)
+                    {
+                        keepGoing=false;
+                    }
+                    else
+                    {
+                        objectLength++;
+                    }
+                }
+                
+                return objectLength;
+            }
 
-            if($(data)[0].nodeName=='SUBJECT')
+            // Current Path is subject level
+            if(currentPath.split('/').length==6)
             {
                 navbarObject.courses = true;
             }
 
-            if($(data)[0].nodeName=='COURSE')
+            // Current Path is course level
+            if(currentPath.split('/').length==7)
             {
                 navbarObject.fields = false;
                 navbarObject.lessons = true;
 
-                if($(data).find('section').size()>0)
+                if(getJSONArrayLength(dataArray['children'])>0)
                 {
-                    $(data).find('section').each(function(index)
+                    for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
                     {
-                        newNavBarLinks.push({link:$(this).children('path').html(),name:$(this).children('name').html(),lessons:new Array()});
-                        var sectionLinkArray = newNavBarLinks[index].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                        newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],lessons:new Array()});
+                        var sectionLinkArray = newNavBarLinks[i].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
                         var sectionNavPosition = {section:sectionLinkArray[3], course:sectionLinkArray[2], subject:sectionLinkArray[1],field:sectionLinkArray[0]};
-
-                        $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:function(innerData)
+                        
+                        function processAjax(index)
                         {
-                            $(innerData).find('lesson').each(function(innerIndex)
+                            return function(innerData)
                             {
-                                newNavBarLinks[index].lessons.push({link:$(this).children('path').html(),name:$(this).children('name').html()});
-                            });
+                                innerDataArray = $.parseJSON(innerData);
 
-                            if(index==$(data).find('section').size()-1)
-                            {
-                                navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
+                                for(j=0;j<getJSONArrayLength(innerDataArray['children']);j++)
+                                {
+                                    newNavBarLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name']});
+                                }
+
+                                if(index==getJSONArrayLength(dataArray['children'])-1)
+                                {
+                                    navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
+                                }
                             }
-                        }});
-                    });
+                        }
+                        
+                        $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:processAjax.call(this,i)});
+                    }
                 }
                 else
                 {
@@ -206,7 +236,7 @@ navbar.prototype.processPosition = function(navBarLocation)
             }
             else
             {
-                if($(data)[0].nodeName=='DATA')
+                if(currentPath=='/data/material/')
                 {
                     navbarObject.fields = true;
                 }
@@ -215,11 +245,12 @@ navbar.prototype.processPosition = function(navBarLocation)
                     navbarObject.fields = false;
                 }
                 navbarObject.lessons = false;
-                $(data).find('field,subject,course').each(function(index)
+                
+                for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
                 {
-                    newNavBarLinks.push({link:$(this).children('path').html(),name:$(this).children('name').html(),img:$.trim($(this).children('name').html()).replace(/ /g,'_')});
-                });	
-
+                    newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],img:$.trim(dataArray['children'][i]['name']).replace(/ /g,'_')});
+                }
+                
                 navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
             }
 

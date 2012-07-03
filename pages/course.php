@@ -11,45 +11,42 @@
 	$bodytemplates = array("usernav","navbar","course");
 	
 	# Get Lessons
-	$sectionArray = array();
+	$sectionOutput = array();
 	$response=$api->get("/data/material/$field/$subject/$course/");
+    $courseArray = json_decode($response);
 
-	$courseXML = new SimpleXMLElement("<parent>".$response."</parent>");
-	$sectionXMLArray = $courseXML->xpath('/parent/course/sections/section');
-	foreach($sectionXMLArray as $sectionKey => $sectionXMLElement)
+	$sectionArray = $courseArray->children;
+	foreach($sectionArray as $sectionKey => $sectionElement)
 	{
 		$sectionInfo = array();
-		$sectionInfo["name"] = (string)$sectionXMLElement->name;
-		$sectionInfo["path"] = (string)$sectionXMLElement->path;
-		$sectionInfo["order"] = (string)$sectionXMLElement->order;
+		$sectionInfo["name"] = (string)$sectionElement->name;
+		$sectionInfo["path"] = (string)$sectionElement->path;
+		$sectionInfo["order"] = (string)$sectionElement->order;
 		
-		$sectionPath = (string)$sectionXMLElement->path;		
-		$response = $api->get($sectionPath);
-	
-		$sectionXML = new SimpleXMLElement("<parent>".$response."</parent>");
+		$responseArray = json_decode($api->get($sectionInfo['path']));
 		
-		$lessonXMLArray = $sectionXML->xpath('/parent/section/lessons/lesson');
-		
+		$lessonJSONArray = $responseArray->children;
+
 		$lessonArray = array();
 		
-		foreach($lessonXMLArray as $lessonKey => $lessonXMLElement)
+		foreach($lessonJSONArray as $lessonKey => $lessonElement)
 		{
-			array_push($lessonArray,array("name"=>(string)$lessonXMLElement->name,
-									      "link"=>PathArray::pathToLink((string)$lessonXMLElement->path)."&type=lesson",
-                                          "quizLink"=>PathArray::pathToLink((string)$lessonXMLElement->path)."&type=quiz",
-										  "path"=>(string)$lessonXMLElement->path,
-										  "order"=>(string)$lessonXMLElement->order));
+			array_push($lessonArray,array("name"=>(string)$lessonElement->name,
+									      "link"=>PathArray::pathToLink((string)$lessonElement->path)."&type=lesson",
+                                          "quizLink"=>PathArray::pathToLink((string)$lessonElement->path)."&type=quiz",
+										  "path"=>(string)$lessonElement->path,
+										  "order"=>(string)$lessonElement->order));
 			
 		}
 		
 		$sectionInfo["lessons"]=$lessonArray;
-		array_push($sectionArray,$sectionInfo);		
+
+		array_push($sectionOutput,$sectionInfo);		
 	}
 
-	
 	# Course Information
 	$smarty->assign("classPath","/data/material/$field/$subject/$course/");
-	$smarty->assign("sectionArray",$sectionArray);
+	$smarty->assign("sectionArray",$sectionOutput);
 	$smarty->assign("course", preg_replace('/_/'," ",$course));
 	$smarty->assign("quiz_id", $quiz_id);
 	$smarty->assign("questions", $questions);

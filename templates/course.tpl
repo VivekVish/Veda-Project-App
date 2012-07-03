@@ -9,7 +9,7 @@
 				<ul class="sectionList listEditor userCourse">
 {foreach from=$sectionArray item="section"}
 					<li>
-						<span data-sectionpath={$section.path} data-sectionorder={$section.order}>
+						<span data-sectionpath="{$section.path}" data-sectionorder="{$section.order}">
 							<span class="expandedList"></span>
 							<span class="sectionName">{$section.name}</span>
 							<span>
