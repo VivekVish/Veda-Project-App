@@ -53,4 +53,3 @@
     $smarty->assign("historyLink",$historyLink);
     $smarty->assign("discussionLink",$discussionLink);
     $smarty->assign("name",$name);
-?>

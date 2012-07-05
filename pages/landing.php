@@ -12,4 +12,3 @@
 	
 	### Body Templates ###
     $bodytemplates = array("usernav","navbar","landing");
-?>

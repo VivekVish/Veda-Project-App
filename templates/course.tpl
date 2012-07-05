@@ -26,6 +26,15 @@
                                     <span class="userCourseButtons">
                                         <a href="{$lesson.quizLink}"><img title="Take Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>
                                         <a href="{$lesson.link}"><img title="Read Lesson" class="readLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>
+{foreach from=$lesson.additions item="addition"}
+{if $addition eq 'trainingmanual'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Training Manual" class="editLessonIcon" src="img/editorIcons/trainingmanual.png" /></a>
+{elseif $addition eq 'roleplay'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Roleplaying Manual" class="editLessonIcon" src="img/editorIcons/roleplay.png" /></a>
+{elseif $addition eq 'video'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Video" class="editLessonIcon" src="img/editorIcons/video.png" /></a>
+{/if}
+{/foreach}
                                     </span>
 								</span>
 							</li>

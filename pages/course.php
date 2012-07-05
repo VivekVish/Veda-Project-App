@@ -28,14 +28,16 @@
 		$lessonJSONArray = $responseArray->children;
 
 		$lessonArray = array();
-		
+
 		foreach($lessonJSONArray as $lessonKey => $lessonElement)
 		{
 			array_push($lessonArray,array("name"=>(string)$lessonElement->name,
 									      "link"=>PathArray::pathToLink((string)$lessonElement->path)."&type=lesson",
                                           "quizLink"=>PathArray::pathToLink((string)$lessonElement->path)."&type=quiz",
+                                          "genericLink"=>PathArray::pathToLink((string)$lessonElement->path),
 										  "path"=>(string)$lessonElement->path,
-										  "order"=>(string)$lessonElement->order));
+										  "order"=>(string)$lessonElement->order,
+                                          "additions"=>$lessonElement->lessonAdditions));
 			
 		}
 		

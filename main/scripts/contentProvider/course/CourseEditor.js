@@ -530,6 +530,84 @@ CourseEditor.prototype.openAddSectionLightbox = function()
     this.actionStarted = false;
 }
 
+CourseEditor.prototype.openAddLessonAddition = function(lessonAdditionIcon)
+{
+    var thisObject = this;
+    
+    if(this.actionStarted === false)
+    {
+        this.actionStarted = true;
+        var insertLessonAddition = $('<div id="insertLessonAdditionBox"><ul></ul></div>');
+        insertLessonAddition.children('ul').append('<li><select id="lessonAdditionType"></select></li>');
+        insertLessonAddition.find('#lessonAdditionType').append('<option value="trainingmanual">Training Manual</option>');
+        insertLessonAddition.find('#lessonAdditionType').append('<option value="roleplay">Roleplay</option>');
+        insertLessonAddition.find('#lessonAdditionType').append('<option value="video">Video</option>');
+        insertLessonAddition.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
+        createLightBox('#content','Attach Lesson Resource',insertLessonAddition);
+        $('#lessonAdditionType').focus();
+        
+        var lessonPath = lessonAdditionIcon.parents('li').first().children('span').attr('data-lessonpath');
+        
+        function attachLessonAddition(lessonPath)
+        {
+            var positionArray = lessonPath.replace(/^\/data\/material\/|\/$/g,'').split('/');
+
+            if($('#lessonAdditionType').children('option:selected').val()=="video")
+            {
+                var newContent = "none";
+            }
+            else
+            {
+                newContent = "<section></section>";
+            }
+
+            var payload = {"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3],"lesson":positionArray[4],"name":$('#lessonAdditionType').children('option:selected').val(),"content":newContent};
+
+            $.ajax({url: 'resources/submitLessonAddition.php', data: payload, type: 'POST', success: function(data)
+            {
+                if(data=="Success.")
+                {
+                    $('#lessonAdditionType').children('option:selected').val();
+                    $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                    $('#overlay').fadeOut('fast',function() {$(this).remove();});
+                }
+            }});
+        }
+        
+        function cancel()
+        {
+            $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+            $('#overlay').fadeOut('fast',function() {$(this).remove();});
+        }
+
+        $('#lessonAdditionType').bind('keyup', function(e)
+        {
+            // Enter
+            if(e.keyCode==13)
+            {
+               attachLessonAddition(lessonPath); 
+            }
+            // Escape
+            else if(e.keyCode==27)
+            {
+                cancel();
+            }
+        });
+        
+        $('#insertLessonAdditionBox button.create').click(function()
+        {
+            attachLessonAddition(lessonPath);
+        });
+
+        $('#insertLessonAdditionBox button.cancel').click(function()
+        {
+            cancel();
+        });
+    }
+    
+    thisObject.actionStarted = false;
+}
+
 // DESC: opens the add lesson lightbox and handles adding lesson
 // RETURNS: void
 CourseEditor.prototype.openAddLessonLightbox = function(lessonIcon)
@@ -896,6 +974,12 @@ function CourseEditor()
     $('.deleteLessonIcon').live('click',function()
     {
         thisObject.deleteLesson($(this));
+    });
+    
+    // Add Lesson Addition
+    $('.addLessonAddition').live('click',function()
+    {
+        thisObject.openAddLessonAddition($(this));
     });
     
     // Recover Deleted Lessons

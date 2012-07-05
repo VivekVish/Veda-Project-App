@@ -26,9 +26,19 @@
 									<span></span>
 									<span title="Click to Edit Name" class="lessonName">{$lesson.name}</span>
 									<span>
+                                        <img title="Attach Lesson Resource" class="addLessonAddition" src="img/editorIcons/plus_icon.png" />
                                         <img title="Delete Lesson" class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" />
                                         <a href="{$lesson.quizLink}"><img title="Edit Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>
                                         <a href="{$lesson.link}"><img title="Edit Lesson" class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>
+{foreach from=$lesson.additions item="addition"}
+{if $addition eq 'trainingmanual'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Edit Training Manual" class="editLessonIcon" src="img/editorIcons/trainingmanual.png" /></a>
+{elseif $addition eq 'roleplay'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Edit Roleplaying Manual" class="editLessonIcon" src="img/editorIcons/roleplay.png" /></a>
+{elseif $addition eq 'video'}
+                                                <a href="{$lesson.genericLink}&type={$addition}"><img title="Edit Video" class="editLessonIcon" src="img/editorIcons/video.png" /></a>
+{/if}
+{/foreach}
                                     </span>
 								</span>
 							</li>

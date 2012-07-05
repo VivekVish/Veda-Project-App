@@ -188,6 +188,28 @@ else
 					}
 					require_once('pages/lesson.php');
 				}
+                else if($_REQUEST['type']=='video')
+                {
+                    $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/lessonAdditions/video/");
+                    $responseArray = json_decode($response);
+                    
+                    require_once('pages/video.php');
+                }
+                else if($_REQUEST['type']=='trainingmanual'||$_REQUEST['type']=='roleplay')
+                {
+                    $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/lessonAdditions/{$_REQUEST['type']}/");
+                    if($response!="Not Found")
+					{
+                        $responseArray = json_decode($response);
+                        $content = html_entity_decode($responseArray->content);
+                        $nameCategory = preg_replace('/_/',' ',$responseArray->name);
+					}
+					else
+					{
+						die("Not Found");
+					}
+					require_once('pages/lessonBoundContent.php');                    
+                }
                 else if($_REQUEST['type']=='lessonHistory'&&$contentprovider)
                 {
                     if(isset($_REQUEST['revisionId']))
