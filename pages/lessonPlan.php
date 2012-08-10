@@ -10,6 +10,6 @@
 	$bodytemplates = array("usernav","navbar","lessonPlan");
     
     $smarty->assign("sectionArray",array());
-    $smarty->assign("lessonPlanName","Prenatal and Neonatal Care");
+    $smarty->assign("lessonPlanName",$responseArray->name);
     $smarty->assign("lessonPlanId",$lessonPlanId);
     $smarty->assign("sectionArray",$responseArray->children);
