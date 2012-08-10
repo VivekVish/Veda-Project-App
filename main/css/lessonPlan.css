@@ -133,7 +133,7 @@ div#lessonRepository ul li:last-of-type
 	margin-right: 1%;	
 }
 
-div#lessonRepository ul li img
+div#lessonRepository>div>ul>li>img
 {
 	margin-top: 0.25em;
 	margin-right: 10%;

@@ -10,22 +10,10 @@ if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSessi
 }
 
 # Retrieve and sanitize data
-if (isset($_REQUEST['oldPath']) && !empty($_REQUEST['oldPath']))
-{
-	$oldPath = trim($_REQUEST['oldPath']);
-}
-if (isset($_REQUEST['oldOrder']) && !empty($_REQUEST['oldOrder']))
-{
-	$oldOrder = trim($_REQUEST['oldOrder']);
-}
-if (isset($_REQUEST['newPath']) && !empty($_REQUEST['newPath']))
-{
-	$newPath = trim($_REQUEST['newPath']);
-}
-if (isset($_REQUEST['newOrder']) && !empty($_REQUEST['newOrder']))
-{
-	$newOrder = trim($_REQUEST['newOrder']);
-}
+$oldPath = trim($_REQUEST['oldPath']);
+$oldOrder = trim($_REQUEST['oldOrder']);
+$newPath = trim($_REQUEST['newPath']);
+$newOrder = trim($_REQUEST['newOrder']);
 
 PathArray::urlEncodePath($newPath);
 PathArray::urlEncodePath($oldPath);

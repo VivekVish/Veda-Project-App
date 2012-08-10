@@ -11,3 +11,5 @@
     
     $smarty->assign("sectionArray",array());
     $smarty->assign("lessonPlanName","Prenatal and Neonatal Care");
+    $smarty->assign("lessonPlanId",$lessonPlanId);
+    $smarty->assign("sectionArray",$responseArray->children);

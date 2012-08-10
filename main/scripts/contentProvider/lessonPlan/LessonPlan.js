@@ -44,7 +44,77 @@ LessonPlan.prototype.renameSection = function(sectionNameElement, newName)
 // RETURNS: void
 LessonPlan.prototype.sortSection = function(sectionItem)
 {
+    var thisObject = this;
     
+    if(this.actionStarted === false)
+    {
+        this.actionStarted = true;
+        var sectionSpan = sectionItem.children('span[data-sectionpath]');
+
+        var oldOrder = eval(sectionSpan.attr('data-sectionorder'));
+        var path = sectionSpan.attr('data-sectionpath');
+
+        var prevElementOrder = eval(sectionItem.prev().children('span').attr('data-sectionorder'));
+
+        if(isNaN(prevElementOrder))
+        {
+            newOrder = 1;
+        }
+        else
+        {
+            if(oldOrder>prevElementOrder)
+            {
+                var newOrder = eval(sectionItem.prev().children('span').attr('data-sectionorder'))+1;
+            }
+            else
+            {
+                var newOrder = eval(sectionItem.prev().children('span').attr('data-sectionorder'));
+            }
+        }
+
+        var payload = {"oldPath":path, "oldOrder":oldOrder, "newPath": path, "newOrder":newOrder};
+
+        $.ajax({url: 'resources/changePosition.php', data: payload, success: function(data)
+        {
+            if(data=="Success.")
+            {
+                var list = sectionItem.parents('ul');
+
+                if(newOrder>oldOrder)
+                {
+                    list.children('li').slice(oldOrder-1,newOrder).children('span').each(function(index)
+                    {
+                        $(this).attr('data-sectionorder',eval($(this).attr('data-sectionorder'))-1);
+                    });
+                }
+                else
+                {
+                    list.children('li').slice(newOrder-1,oldOrder).children('span').each(function(index)
+                    {
+                        $(this).attr('data-sectionorder',eval($(this).attr('data-sectionorder'))+1);
+                    });
+                }
+
+                sectionSpan.attr('data-sectionorder',newOrder);
+                thisObject.callNavReprocess();
+            }
+            else
+            {
+                new Message(data);
+                if(payload.oldOrder==1)
+                {
+                    sectionItem.prependTo('.sectionList')
+                }
+                else
+                {
+                    sectionItem.insertAfter($('.sectionList').children('li').eq(oldOrder-2));
+                }
+            }
+        }, complete: function()
+        {
+            thisObject.actionStarted = false;
+        }});
+    }
 }
 
 // DESC: Makes adjustments and calls an AJAX function after re-ordering a lesson
@@ -129,19 +199,41 @@ LessonPlan.prototype.openAddSectionLightbox = function()
 
         function addSection()
         {            
-            var newSectionName = $('#newSectionName').val().replace(/_/g,' ');
-            var newSectionRow = $('<span></span>');
-            newSectionRow.append('<span class="expandedList"></span>')
-                         .append('<span class="sectionName">'+newSectionName+'</span>')
-                         .append('<span><img class="deleteSectionIcon" src="img/editorIcons/delete_icon.png" /></span>');
+            var newSectionName = $('#newSectionName').val().replace(/ /g,'_');
             
-            $('.sectionList').append($('<li><ul class="lessonList"></ul></li>').prepend(newSectionRow));
-            
-            $('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
-            //$('.listEditor>li>ul>li').draggable({connectToSortable: ".lessonList",helper: "clone",revert: "invalid"});
-            
-            $('#lightbox').fadeOut('fast',function() {$(this).remove();});
-            $('#overlay').fadeOut('fast',function() {$(this).remove();});
+            if(thisObject.isNameValid(newSectionName))
+            {
+                var payload = {"section":newSectionName,"lessonPlanId":$('#listEditorHeader').attr('data-lessonplanid')};
+
+                $.ajax({url: 'resources/submitLessonPlanSection.php', data: payload, success: function(data)
+                {
+                    console.log(data);
+                    if(data=="Success.")
+                    {
+                        var newSectionOrder = eval($('.sectionList span[data-sectionorder]').last().attr('data-sectionorder'))+1;
+                        if(isNaN(newSectionOrder))
+                        {
+                            newSectionOrder = 1;
+                        }
+                        
+                        var newSectionRow = $('<span data-sectionpath="/data/lessonplan/'+$('#listEditorHeader').attr('data-lessonplanid')+'/'+newSectionName+'/" data-sectionorder="'+newSectionOrder+'"></span>');
+                        newSectionRow.append('<span class="expandedList"></span>')
+                                     .append('<span class="sectionName">'+newSectionName.replace(/_/g,' ')+'</span>')
+                                     .append('<span><img class="deleteSectionIcon" src="img/editorIcons/delete_icon.png" /></span>');
+
+                        $('.sectionList').append($('<li><ul class="lessonList"></ul></li>').prepend(newSectionRow));
+
+                        $('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
+                    }
+                }});
+
+                $('#lightbox').fadeOut('fast',function() {$(this).remove();});
+                $('#overlay').fadeOut('fast',function() {$(this).remove();});
+            }
+            else
+            {
+                new Message("Name contains illegal characters.");
+            }
         }
 
         function cancel()
@@ -184,7 +276,41 @@ LessonPlan.prototype.openAddSectionLightbox = function()
 // RETURNS: void
 LessonPlan.prototype.deleteSection = function(sectionDeleteButton)
 {
-    sectionDeleteButton.parents('li').first().remove();
+    var thisObject = this;
+    
+    if(this.actionStarted === false)
+    {
+        this.actionStarted = true;
+        var thisIcon = this;
+
+        var position =  sectionDeleteButton.parent('span').parent('span').attr('data-sectionpath');
+        var positionArray = position.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
+        var payload = {"lessonPlanId":positionArray[0],"section":positionArray[1]};
+        console.log(positionArray);
+        $.ajax({url:'resources/deleteLessonPlanSection.php', data: payload, type: 'POST', success: function(data)
+        {
+            if(data=="Success.")
+            {
+                var oldOrder = sectionDeleteButton.parents('span[data-sectionorder]').attr('data-sectionorder');                 
+
+                sectionDeleteButton.parents('ul').first().children('li').slice(oldOrder-1).children('span').each(function(index)
+                {
+                    $(this).attr('data-sectionorder',eval($(this).attr('data-sectionorder'))-1);
+                });
+
+                sectionDeleteButton.parents('li').first().remove();
+
+                thisObject.callNavReprocess();
+            }
+            else
+            {
+                new Message(data);
+            }
+        }, complete:function()
+        {
+            thisObject.actionStarted = false;
+        }});
+    }
 }
 
 // DESC: deletes a lesson
@@ -206,7 +332,7 @@ function LessonPlan()
 	// Section re-ordering makes ajax request
 	$('.sectionList').live("sortstop",function(e,ui)
 	{
-
+        thisObject.sortSection($(ui.item));
 	});
     
     $('.sectionList').live("sort",function(e,ui)
@@ -284,6 +410,19 @@ function LessonPlan()
     {
         thisObject.deleteLesson($(this));
     });
+    
+    $('ul.lessonList>li>span>span:last-of-type>a').live('mousedown', function(e)
+    {
+        if(e.which==3)
+        {
+            $(this).remove();
+        }
+    });
+    
+    $('ul.lessonList>li>span>span:last-of-type>a').live('contextmenu',function(e)
+    {
+        e.preventDefault();
+    });
 }
 
 LessonRepository.prototype.fields = false;
@@ -345,6 +484,22 @@ LessonRepository.prototype.fill = function(LessonRepositoryLinks)
 
                         var linkLocation = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course+"&section="+escape(navPosition.section)+"&lesson="+escape(navPosition.lesson);
                         $('#lessonRepository>div>ul>li:last-of-type>ul').append('<li><span><span></span><span>'+LessonRepositoryLinks[i].lessons[j]["name"]+'</span><span></span></span></li>');
+                        $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<img title="Delete Lesson" class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" /><a><img title="Edit Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a><a><img title="Edit Lesson" class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>');
+                        for(k=0;k<LessonRepositoryLinks[i].lessons[j].lessonAdditions.length;k++)
+                        {
+                            switch(LessonRepositoryLinks[i].lessons[j].lessonAdditions[k])
+                            {
+                                case 'trainingmanual':
+                                    $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<a><img title="Edit Training Manual" class="editLessonIcon" src="img/editorIcons/trainingmanual.png" /></a>');
+                                    break;
+                                case 'roleplay':
+                                    $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<a><img title="Edit Roleplaying Manual" class="editLessonIcon" src="img/editorIcons/roleplay.png" /></a>');
+                                    break;
+                                case 'video':
+                                    $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<a><img title="Edit Video" class="editLessonIcon" src="img/editorIcons/video.png" /></a>');
+                                    break;
+                            }
+                        }
                     }
                 }
                 
@@ -437,6 +592,11 @@ LessonRepository.prototype.processPosition = function(navLocation)
             
             function getJSONArrayLength(myObject)
             {
+                if(myObject===null)
+                {
+                    return 0;
+                }
+                
                 var keepGoing = true;
                 var objectLength = 0;
                 while(keepGoing)
@@ -471,11 +631,15 @@ LessonRepository.prototype.processPosition = function(navLocation)
                         {
                             return function(innerData)
                             {
-                                innerDataArray = $.parseJSON(innerData);
-
+                                var innerDataArray = $.parseJSON(innerData);
                                 for(j=0;j<getJSONArrayLength(innerDataArray['children']);j++)
                                 {
-                                    newLessonRepositoryLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name']});
+                                    var lessonAdditions = [];
+                                    for(k=0;k<innerDataArray['children'][j]['lessonAdditions'].length;k++)
+                                    {
+                                        lessonAdditions.push(innerDataArray['children'][j]['lessonAdditions'][k]);
+                                    }
+                                    newLessonRepositoryLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name'],lessonAdditions: lessonAdditions});
                                 }
 
                                 if(index==getJSONArrayLength(dataArray['children'])-1)
@@ -560,5 +724,5 @@ function LessonRepository()
     $('#lessonRepository>p#repositoryBackLinks>span').live('click', function()
     {
         LessonRepositoryObject.navigateToNextLevel($(this).attr('data-link'));
-    })
+    });
 }

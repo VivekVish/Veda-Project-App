@@ -208,6 +208,7 @@ else
 					{
 						die("Not Found");
 					}
+
 					require_once('pages/lessonBoundContent.php');                    
                 }
                 else if($_REQUEST['type']=='lessonHistory'&&$contentprovider)
@@ -343,7 +344,17 @@ else
     }
     else if(isset($_REQUEST['lessonPlanId']))
     {
-        require_once('pages/lessonPlan.php');
+        if($loggedIn)
+        {
+            $lessonPlanId = $_REQUEST['lessonPlanId'];
+            $response=$api->get("/data/lessonplan/$lessonPlanId/");
+            $responseArray = json_decode($response);
+            require_once('pages/lessonPlan.php');
+        }
+        else
+        {
+            header("Location: ".$loginURL);
+        }
     }
 	else
 	{

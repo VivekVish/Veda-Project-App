@@ -1,7 +1,7 @@
 <div id="content">
         	<section>            	
                 <h1>{$lessonPlanName}</h1>
-				<div id="listEditorHeader" data-lessonplanpath="holder">
+				<div id="listEditorHeader" data-lessonplanid="{$lessonPlanId}">
 					<span></span>
 					<span></span>
 					<span>
@@ -11,16 +11,15 @@
 				<ul class="sectionList listEditor">
 {foreach from=$sectionArray item="section"}
 					<li>
-						<span data-sectionpath={$section.path} data-sectionorder={$section.order}>
+						<span data-sectionpath={$section->path} data-sectionorder={$section->order}>
 							<span class="expandedList"></span>
-							<span title="Click to Edit Name" class="sectionName">{$section.name}</span>
+							<span title="Click to Edit Name" class="sectionName">{$section->name}</span>
 							<span>
-                                <img title="Add Lesson" class="addLessonIcon" src="img/editorIcons/addLesson_icon.png" />
                                 <img title="Delete Section" class="deleteSectionIcon" src="img/editorIcons/delete_icon.png" />
                             </span>
 						</span>
 						<ul class="lessonList">
-{foreach from=$section.lessons item="lesson"}
+{foreach from=$section->lessons item="lesson"}
 							<li>
 								<span data-lessonpath={$lesson.path} data-lessonorder={$lesson.order}>
 									<span></span>
