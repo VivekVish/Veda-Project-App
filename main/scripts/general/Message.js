@@ -9,12 +9,14 @@ Message.prototype.display = function()
     var messageDiv = $('<div class="message">');
     messageDiv.append('<img src="img/messageIcons/'+opts.type+'.png" />');
     messageDiv.append('<p>'+this.messageContent+'</p>');
-
-    var leftPosition = ($(window).width() - parseInt(css(messageDiv).width)) * opts.positionX;
-    var topPosition = ($(window).height() - parseInt(css(messageDiv).height)) * opts.positionY;
+    
+    $(opts.container).append(messageDiv);
+    
+    var leftPosition = ($(window).width() - messageDiv.width()) * opts.positionX;
+    var topPosition = ($(window).height() - messageDiv.height()) * opts.positionY;
     messageDiv.css('left',leftPosition+'px');
     messageDiv.css('top',topPosition+'px');
-    $(opts.container).append(messageDiv);
+    
     function fadeDivOut()
     {
         messageDiv.fadeOut(opts.fadeOutTime,function(){$(this).remove()});
@@ -60,10 +62,9 @@ function Message(messageContent,opts)
             this.messageContent = messageContent;
         }
     }
-    
+
     if(opts.displayNow)
     {
         this.display();
     }
 }
-

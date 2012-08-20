@@ -23,6 +23,7 @@ $api = new Api();
 
 # Make request
 $payload = json_encode(array("oldPath"=>$oldPath,"oldOrder"=>$oldOrder,"newPath"=>$newPath,"newOrder"=>$newOrder, "username"=>$userSession->getUsername()));
+
 $result = $api->post("$oldPath"."position/",$payload);
 
 print_r($result);

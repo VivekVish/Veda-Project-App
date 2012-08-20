@@ -8,6 +8,17 @@
 	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/main","flexcroll/flexcroll","general/navbar","general/lightbox","contentProvider/lessonPlan/LessonPlan");
 	
 	$bodytemplates = array("usernav","navbar","lessonPlan");
+    $sectionArray = $responseArray->children;
+    
+    foreach($sectionArray as $sectionKey=>$section)
+    {
+        foreach($section->lessons as $lessonKey=>$lesson)
+        {
+            $sectionArray->$sectionKey->$lessonKey->quizLink = PathArray::pathToLink((string)$lesson->path)."&type=quiz";
+            $sectionArray->$sectionKey->$lessonKey->link = PathArray::pathToLink((string)$lesson->path)."&type=lesson";
+            $sectionArray->$sectionKey->$lessonKey->genericLink = PathArray::pathToLink((string)$lesson->path);
+        }
+    }
     
     $smarty->assign("sectionArray",array());
     $smarty->assign("lessonPlanName",$responseArray->name);
