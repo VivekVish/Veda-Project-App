@@ -7,7 +7,7 @@
 {else}
         <p>You got {$percentCorrect}% correct, but you should score at least 70%
            to continue. You can review the material for this quiz 
-           <a href="$lessonReviewLink">here</a>.</p>
+           <a href="{$lessonReviewLink}">here</a>.</p>
 {/if}
         <table id="quizComplete">
             <tr>
