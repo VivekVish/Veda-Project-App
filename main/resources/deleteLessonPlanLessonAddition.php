@@ -2,7 +2,7 @@
 
 require_once("config/main.inc.php");
 
-if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()))
+if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()&&!$userSession->isTeacher()))
 {
     die("Access Denied.");
 }

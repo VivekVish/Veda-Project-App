@@ -20,7 +20,7 @@ table#quizOverview td:last-of-type>img
 	width: 25em;	
 }
 
-button#addQuestion, button#attachQuestion
+button#addQuestion, button#attachQuestion, button#viewFullQuiz, button#viewQuizAnswers
 {
 	margin-top: 2em;
 	float: right;

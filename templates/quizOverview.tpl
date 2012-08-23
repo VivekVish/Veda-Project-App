@@ -42,5 +42,6 @@
         </tbody>
     </table>
     <button id="addQuestion" type="submit">Add Question</button>
-    <button id="attachQuestion">Attach Question</button>
+    <button id="viewFullQuiz">View Full Quiz</button>
+    <button id="viewQuizAnswers">View Quiz Answers</button>
 </div>

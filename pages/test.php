@@ -25,8 +25,15 @@
         $smarty->assign("lastQuestion",$lastQuestion);
         $smarty->assign("lastCorrectAnswer",$lastCorrectAnswer);
     }
+    
+    $smarty->assign("teacher",$teacher);
 	$smarty->assign("questions", $questions);
     $smarty->assign("lastAnswer", $lastAnswer);
+    $smarty->assign("field", $field);
+    $smarty->assign("subject", $subject);
+    $smarty->assign("course", $course);
+    $smarty->assign("section", $section);
+    $smarty->assign("lesson", $lesson);
     
     // HACK - FIGURE OUT A WAY TO REMOVE LATER
 	$contentprovider = false;

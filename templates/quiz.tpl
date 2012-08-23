@@ -29,7 +29,10 @@
                         <input type="hidden" id="question_id" name="question_id" value="{$question_id}" />
                         <input type="hidden" id="selectedAnswer" name="selectedAnswer" value="none" />
                     </form>
-                    <!--<button type="button" class="submitanswer" id="submitAnswer">SUBMIT</button>-->
+{if $teacher}
+                    <button id="viewFullQuiz" onClick="parent.location='index.php?field={$field}&subject={$subject}&course={$course}&section={$section}&lesson={$lesson}&type=printableQuiz'">View Full Quiz</button>
+                    <button id="viewQuizAnswers" onClick="parent.location='index.php?field={$field}&subject={$subject}&course={$course}&section={$section}&lesson={$lesson}&type=printableQuizAnswers'">View Quiz Answers</button>
+{/if}
                 </div>
             </section>
         </div>

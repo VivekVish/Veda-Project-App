@@ -271,7 +271,19 @@ $(document).ready(function()
     {
         var quizPath = $('#content #quizOverview').attr('data-quizpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
         window.location = "index.php?field="+quizPath[0]+"&subject="+quizPath[1]+"&course="+quizPath[2]+"&section="+quizPath[3]+"&lesson="+quizPath[4]+"&type=quiz&questionId=new";
-    })
+    });
+    
+    $('#viewFullQuiz').click(function()
+    {
+        var quizPath = $('#content #quizOverview').attr('data-quizpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
+        window.location = "index.php?field="+quizPath[0]+"&subject="+quizPath[1]+"&course="+quizPath[2]+"&section="+quizPath[3]+"&lesson="+quizPath[4]+"&type=printableQuiz";
+    });
+    
+    $('#viewQuizAnswers').click(function()
+    {
+        var quizPath = $('#content #quizOverview').attr('data-quizpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
+        window.location = "index.php?field="+quizPath[0]+"&subject="+quizPath[1]+"&course="+quizPath[2]+"&section="+quizPath[3]+"&lesson="+quizPath[4]+"&type=printableQuizAnswers";
+    });
 });
 
 

@@ -78,6 +78,11 @@ $(document).ready(function()
 	{
 		$("#answerForm").submit();
 	});
-	
- 	
+    
+    if($('.answerCorrect').size()>0)
+    {
+        var messages = ["Good job", "Keep going", "Impressive", "Awesome"];
+        var thisMessage = messages[Math.floor(Math.random() * messages.length)];
+        new Message(thisMessage,{type:'success', fadeOutDelay: 200, fadeOutTime: 1000});
+    }
 });

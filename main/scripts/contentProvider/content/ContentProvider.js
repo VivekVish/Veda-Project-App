@@ -16,7 +16,8 @@ ContentProvider.prototype.openInfoBoxLightbox = function()
     insertInfoBoxBox.find('ul>li>select').append('<option value="definition">Definition</option>').
                                           append('<option value="theorem">Theorem</option>').
                                           append('<option value="warning">Warning</option>').   
-                                          append('<option value="information">Information</option>');
+                                          append('<option value="information">Information</option>').
+                                          append('<option value="teacher">Teacher\'s Manual</option>');
     insertInfoBoxBox.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
 
     if($(caretPositionRange.startContainer).parents('.infoBox').size()==0)

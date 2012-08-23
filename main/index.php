@@ -6,8 +6,10 @@ require_once('lib/ConstructPage.php');
 
 $loginURL = ($_SERVER["REQUEST_URI"]=="/" || $_SERVER["REQUEST_URI"]=="/index.php") ? "index.php?login=true" : $_SERVER["REQUEST_URI"]."&login=true";
 $contentprovider = false;
+$teacher = false;
 $admin = false;
 $loggedIn = false;
+$userStatus = "";
 $navPosition = "";
 $title = "";
 $content = "";
@@ -37,21 +39,35 @@ else
         {
             $admin=true;
             $contentprovider=true;
+            $teacher = false;
+            $userStatus="admin";
         }
         else if ($userSession->isContentProvider())
         {
             $admin=false;
-            $contentprovider = true;	
+            $contentprovider = true;
+            $teacher = false;
+            $userStatus="contentProvider";
+        }
+        else if ($userSession->isTeacher())
+        {
+            $admin=false;
+            $contentprovider = false;
+            $teacher = true;
+            $userStatus="teacher";
         }
         else
         {
             $admin=false;
-            $contentprovider = false;	
+            $contentprovider = false;
+            $teacher = false;
+            $userStatus="student";
         }
     }
     else
     {
         $loggedIn=false;
+        $userStatus="notLoggedIn";
     }
 	
 
@@ -169,6 +185,26 @@ else
                         }
                     }
 				}
+                else if($_REQUEST['type']=='printableQuiz'||$_REQUEST['type']=='printableQuizAnswers')
+                {
+                    if($admin||$contentprovider||$teacher)
+                    {
+                        $showAnswers=false;
+                        
+                        if($_REQUEST['type']=='printableQuizAnswers')
+                        {
+                            $showAnswers=true;
+                        }
+                        
+                        $response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/quiz/");
+                        $responseArray = json_decode($response);
+                        require_once('pages/printQuiz.php');
+                    }
+                    else
+                    {
+                        header("Location: ".$loginURL);
+                    }
+                }
 				else if($_REQUEST['type']=='lesson')
 				{
 					$response=$api->get("/data/material/$field/$subject/$course/$section/$lesson/content/");
@@ -366,6 +402,7 @@ else
 ### Assign Smarty Variables ###
 $smarty->assign("contentprovider", $contentprovider);
 $smarty->assign("loggedIn", $loggedIn);
+$smarty->assign("userStatus", $userStatus);
 	
 #Head
 $smarty->assign("loginURL",$loginURL);

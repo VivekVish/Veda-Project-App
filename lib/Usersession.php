@@ -89,6 +89,12 @@ class Usersession
 	{
 		return $this->status=="admin";
 	}
+    
+    # Is the user a teacher?
+	public function isTeacher()
+	{
+		return $this->status=="teacher";
+	}
 	
 	# Has this user just logged in but without a username
 	public function getNeedUsername()

@@ -47,7 +47,6 @@
 
 		array_push($sectionOutput,$sectionInfo);		
 	}
-
 	
 	# Course Information
 	$smarty->assign("classPath","/data/material/$field/$subject/$course/");

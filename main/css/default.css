@@ -204,3 +204,30 @@ button.submitanswer, button.editQuestion, #insertTableBox button, button#retakeq
 	background: -webkit-gradient(linear, left top, left bottom, from(#9dd74f), to(#7ead3e));
 	background: -moz-linear-gradient(top,  #9dd74f,  #7ead3e);
 }
+
+/* Info Box */
+
+.infoBox[data-infoboxtype="definition"]
+{
+    background-color: #DDF;
+}
+
+.infoBox[data-infoboxtype="theorem"]
+{
+    background-color: #DFD;
+}
+
+.infoBox[data-infoboxtype="warning"]
+{
+    background-color: #FDD;
+}
+
+.infoBox[data-infoboxtype="information"]
+{
+    background-color: #FFD;
+}
+
+.infoBox[data-infoboxtype="teacher"]
+{
+    background-color: #EEE;
+}

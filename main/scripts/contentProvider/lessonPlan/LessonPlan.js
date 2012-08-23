@@ -75,7 +75,7 @@ LessonPlan.prototype.sortSection = function(sectionItem)
 
         var payload = {"oldPath":path, "oldOrder":oldOrder, "newPath": path, "newOrder":newOrder};
 
-        $.ajax({url: 'resources/changePosition.php', data: payload, success: function(data)
+        $.ajax({url: 'resources/changeLessonPlanPosition.php', data: payload, success: function(data)
         {
             if(data=="Success.")
             {
@@ -154,9 +154,8 @@ LessonPlan.prototype.sortLesson = function(lessonItem,oldList)
         }
 
         var payload = {"oldPath":oldPath, "oldOrder":oldOrder, "newPath":newPath, "newOrder":newOrder};
-        console.log(payload);
 
-        $.ajax({url: 'resources/changePosition.php', data: payload, success: function(data)
+        $.ajax({url: 'resources/changeLessonPlanPosition.php', data: payload, success: function(data)
         {
             if(data=="Success.")
             {
@@ -414,8 +413,7 @@ LessonPlan.prototype.addLesson = function(lessonItem)
     if(this.actionStarted===false)
     {
         this.actionStarted=true;
-        
-        var positionArray = lessonItem.attr('data-lessonpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
+        var positionArray = lessonItem.children('span').attr('data-lessonpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
         var lessonPlanPositionArray = $(lessonItem).parents('.lessonList').prev('[data-sectionpath]').attr('data-sectionpath').replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
         var payload = {"field":positionArray[0],"subject":positionArray[1],"course":positionArray[2],"section":positionArray[3],"lesson":positionArray[4],"lessonPlanId":lessonPlanPositionArray[0],"lessonPlanSection":lessonPlanPositionArray[1],"order":$(lessonItem).prevAll().size()+1};
 
@@ -568,6 +566,7 @@ function LessonPlan()
     
     $('.lessonList').live("sort",function(e,ui)
     {
+        $(ui.placeholder[0]).css('height',$('#listEditorHeader').height());
         if(thisObject.actionStarted)
         {
             e.preventDefault();
@@ -630,7 +629,7 @@ function LessonPlan()
     
     $('ul.lessonList>li>span>span:last-of-type>a').live('mousedown', function(e)
     {
-        if(e.which==3&&!$(this).hasClass('deleteLessonIcon'))
+        if(e.which==3&&$(this).children('.editLessonIcon').size()==0)
         {
             thisObject.deleteLessonAddition($(this));
         }
@@ -638,7 +637,10 @@ function LessonPlan()
     
     $('ul.lessonList>li>span>span:last-of-type>a').live('contextmenu',function(e)
     {
-        e.preventDefault();
+        if($(this).children('.editLessonIcon').size()==0)
+        {
+            e.preventDefault();
+        }
     });
 }
 
@@ -698,9 +700,10 @@ LessonRepository.prototype.fill = function(LessonRepositoryLinks)
                     {
                         var linkArray = LessonRepositoryLinks[i].lessons[j]['link'].replace(/^\/data\/material\/|\/$/g,'').split('/');
                         var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
-
-                        $('#lessonRepository>div>ul>li:last-of-type>ul').append('<li data-lessonpath="'+LessonRepositoryLinks[i].lessons[j]['link']+'"><span><span></span><span>'+LessonRepositoryLinks[i].lessons[j]["name"]+'</span><span></span></span></li>');
-                        $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<img title="Delete Lesson" class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" /><a><img title="Edit Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a><a><img title="Edit Lesson" class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a>');
+                        var lessonOrder = j+1;
+                        
+                        $('#lessonRepository>div>ul>li:last-of-type>ul').append('<li><span data-lessonpath="'+LessonRepositoryLinks[i].lessons[j]['link']+'" data-lessonorder="'+lessonOrder+'"><span></span><span>'+LessonRepositoryLinks[i].lessons[j]["name"]+'</span><span></span></span></li>');
+                        $('#lessonRepository>div>ul>li:last-of-type>ul>li:last-of-type>span>span:last-of-type').append('<img title="Delete Lesson" class="deleteLessonIcon" src="img/editorIcons/delete_icon.png" /><a><img title="Edit Lesson" class="editLessonIcon" src="img/editorIcons/editLesson_icon.png" /></a><a><img title="Edit Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>');
                         for(k=0;k<LessonRepositoryLinks[i].lessons[j].lessonAdditions.length;k++)
                         {
                             switch(LessonRepositoryLinks[i].lessons[j].lessonAdditions[k])

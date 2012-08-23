@@ -76,4 +76,9 @@ function Content()
             citationsArray.push($(this).attr('id'));
         });
     }
+    
+    if($('#content').attr('data-userstatus')!="teacher"&&$('#content').attr('data-userstatus')!="admin"&&$('#content').attr('data-userstatus')!="contentprovider")
+    {
+        $('.infoBox[data-infoboxtype="teacher"]').hide();
+    }
 }

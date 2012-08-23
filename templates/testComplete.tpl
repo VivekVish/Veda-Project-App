@@ -1,6 +1,14 @@
 <div id="content" data-location="{$location}">
     <section>
-        <h1>Quiz Results</h1>
+        <h1>Quiz Results</h1>   
+{if $thresholdCorrectMet}
+        <p>Great job! You got {$percentCorrect}% correct. Feel free to continue
+           to the next lesson.</p>
+{else}
+        <p>You got {$percentCorrect}% correct, but you should score at least 70%
+           to continue. You can review the material for this quiz 
+           <a href="$lessonReviewLink">here</a>.</p>
+{/if}
         <table id="quizComplete">
             <tr>
                 <th>Question</th>

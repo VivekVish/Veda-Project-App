@@ -1,0 +1,14 @@
+#content a
+{
+    color: blue;
+}
+
+#content a:visited
+{
+    color: #9d11b3;
+}
+
+#content a:hover
+{
+    text-decoration: underline;
+}

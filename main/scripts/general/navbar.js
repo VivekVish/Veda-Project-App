@@ -173,6 +173,11 @@ navbar.prototype.processPosition = function(navBarLocation)
             {
                 var keepGoing = true;
                 var objectLength = 0;
+                if(myObject==null)
+                {
+                    return objectLength;
+                }
+                
                 while(keepGoing)
                 {
                     if(myObject[objectLength]==null)

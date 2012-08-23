@@ -112,3 +112,16 @@ button.submitanswer, button.editQuestion
 {
     background-color: #FF4444;
 }
+
+button#viewFullQuiz, button#viewQuizAnswers
+{
+	margin-top: 2em;
+	float: right;
+	
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1em;
+	font-weight: bold;
+	padding: .5em 2em .55em;
+}
