@@ -17,6 +17,14 @@ Message.prototype.display = function()
     messageDiv.css('left',leftPosition+'px');
     messageDiv.css('top',topPosition+'px');
     
+    $(messageDiv).hide();
+    
+    $(messageDiv).children('img').load(function()
+    {
+        console.log('yes');
+        $(messageDiv).show();
+    })
+    
     function fadeDivOut()
     {
         messageDiv.fadeOut(opts.fadeOutTime,function(){$(this).remove()});
