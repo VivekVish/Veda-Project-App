@@ -21,7 +21,6 @@ Message.prototype.display = function()
     
     $(messageDiv).children('img').load(function()
     {
-        console.log('yes');
         $(messageDiv).show();
     })
     
