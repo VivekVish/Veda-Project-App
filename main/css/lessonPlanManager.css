@@ -62,7 +62,7 @@ button#addLessonPlan
     margin-bottom: 0.75em;
 }
 
-#lightbox #createLessonPlan input, #lightbox #createLessonPlan textarea
+#lightbox #createLessonPlan input, #lightbox #createLessonPlan textarea, #lightbox #createLessonPlan select
 {
     position: absolute;
     right: 0;
@@ -71,6 +71,10 @@ button#addLessonPlan
     width: 45%;
     border: 0.3em;
     padding: 0.15em;
+    box-sizing:content-box;
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box; 
 }
 
 .editLessonPlanIcon:hover, .deleteLessonPlanIcon:hover

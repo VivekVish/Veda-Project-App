@@ -31,6 +31,27 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         
         var createLessonPlan = $('<div id="createLessonPlan"><ul></ul></div>');
         createLessonPlan.children('ul').append('<li><label for="newLessonPlanName">Lesson Plan Name</label><input id="newLessonPlanName" value="'+currentName+'"></input></li>');
+	createLessonPlan.children('ul').append('<li><label for="newLessonPlanLocation">Location</label><select id="newLessonPlanLocation"></select></li>');
+        createLessonPlan.children('ul').append('<li><label for="newLessonPlanAge">Target Patient Age</label><select id="newLessonPlanAge"></select></li>');
+	createLessonPlan.children('ul').find('#newLessonPlanAge').append('<option value="adult">Adult</option><option value="oneToFive">One to Five Years Old</option><option value="zeroToOne">Zero to One Years Old</option><option value="newborn">Newborn</option>');
+        createLessonPlan.children('ul').append('<li><label for="newLessonPlanGender">Target Patient Gender</label><select id="newLessonPlanGender"></select></li>');
+	createLessonPlan.children('ul').find('#newLessonPlanGender').append('<option value="both">Both</option><option value="female">Female</option><option value="male">Male</option>');
+        createLessonPlan.children('ul').find('#newLessonPlanLocation').append('<option value="potou">Potou, Senegal</option>').
+                                                                  append('<option value="tiby">Tiby, Mali</option>').
+                                                                  append('<option value="toya">Toya, Mali</option>').
+                                                                  append('<option value="sada">SADA, Northern Ghana</option>').
+                                                                  append('<option value="pampaida">Pampaida, Nigeria</option>').
+                                                                  append('<option value="bonsaaso">Bonsaaso, Ghana</option>').
+                                                                  append('<option value="ikaram">Ikaram, Nigeria</option>').
+                                                                  append('<option value="koraro">Koraro, Ethiopia</option>').
+                                                                  append('<option value="sauri">Sauri, Kenya</option>').
+                                                                  append('<option value="dertu">Dertu, Kenya</option>').
+                                                                  append('<option value="ruhira">Ruhira, Kenya</option>').
+                                                                  append('<option value="mayange">Mayange, Rwanda</option>').
+                                                                  append('<option value="mbola">Mbola, Tanzania</option>').
+                                                                  append('<option value="gumulira">Gumulira, Malawi</option>').
+                                                                  append('<option value="mwandama">Mwandama, Mali</option>');
+	createLessonPlan.children('ul').append('<li><label for="newLessonPlanLiteracy">Literacy Required</label><select id="newLessonPlanLiteracy"><option value="yes">Yes</option><option value="no">No</option></select></li>');
         createLessonPlan.children('ul').append('<li><label for="newTags">Tags (comma-separated)</label><input id="newTags" value="'+currentTags+'"></input></li>');
         createLessonPlan.children('ul').append('<li><label for="newNotes">Notes</label><textarea id="newNotes">'+currentNotes+'</textarea></li>');
         createLessonPlan.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');

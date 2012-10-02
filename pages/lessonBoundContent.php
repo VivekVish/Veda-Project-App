@@ -6,7 +6,7 @@
 	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");
 	$ILOs = array("graph","equation","chemicalEquation","staticimage");
 	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","flexcroll/flexcroll","general/main","general/navbar","general/addAllTrigFunctions","content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","content/Content","content/citations");
-    $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
+        $fullnamejavascriptfiles = array("MathJax/MathJax.js?config=default");
 	foreach($ILOs as $ilo)
 	{
 		array_push($javascriptfiles,"ILO/".$ilo."ILO");
@@ -29,11 +29,22 @@
 	if($contentprovider)
 	{
 		$bodytemplates = array("usernav","contentprovider","navbar","lesson","footer");
+                if($nameCategory=="trainingmanual")
+                {
+                    array_push($javascriptfiles,"contentProvider/lessonPlan/TrainingManual");
+                }
 	}
 	else
 	{
 		$bodytemplates = array("usernav","navbar","lesson","footer");
 	}
+        
+        if($teacher&&$nameCategory=="trainingmanual")
+        {
+            array_push($cssfiles,"trainingmanualteacher");
+            array_push($javascriptfiles,"teacher/teacher");
+            $bodytemplates = array("usernav","navbar","lesson","trainingmanualteacher","footer");
+        }
     
     $location = "/data/material/{$_REQUEST['field']}/{$_REQUEST['subject']}/{$_REQUEST['course']}/{$_REQUEST['section']}/{$_REQUEST['lesson']}/lessonAdditions/{$nameCategory}/";
     $historyLink = pathArray::pathToLink($location)."&type=lessonHistory";

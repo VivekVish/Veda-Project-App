@@ -1,0 +1,37 @@
+#usernav
+{
+    width:70%;
+}
+
+#pagenav
+{
+    width:70%;
+}
+
+footer
+{
+    width:70%;
+}
+
+#content
+{
+    width:70%;
+    overflow-x: scroll;
+}
+
+div#teachertrainingmanual
+{
+    width:15%;
+    height:100%;
+    background-color: black;
+    position: fixed;
+    right:0%;
+    top:0%;
+    color:white;
+}
+
+div#teachertrainingmanual ul
+{
+    margin-top: 2em;
+    margin-left: 0.45em;
+}
