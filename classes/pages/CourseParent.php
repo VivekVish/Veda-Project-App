@@ -1,20 +1,34 @@
 <?php
-	require_once("lib/PathArray.php");
 
-	$title = "The Veda Project";
-	
-	$cssfiles = array("reset","main","default","flexcrollstyles-default","jquery-ui","message","contentprovider","listEditor","course");
-	$iejavascriptfiles = array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js");
-	$javascriptfiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/main","flexcroll/flexcroll","general/navbar","general/lightbox","contentProvider/course/CourseEditor");
-	
-	$bodytemplates = array("usernav","navbar","courseEditor");
-	
-	# Get Lessons
-	$sectionOutput = array();
-	$response=$GLOBALS['api']->get("/data/material/$field/$subject/$course/");
-        $courseArray = json_decode($response);
+require_once('Frame.php');
 
-	$sectionArray = $courseArray->children;
+class CourseParent extends Frame
+{
+    protected $classPath = null;
+    protected $courseName = null;
+    protected $sections = array();
+    
+    public function __construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles)
+    {
+        parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
+        
+        $this->appendCssFiles(array("listEditor","course"));
+    }
+    
+    public function display()
+    {
+        $GLOBALS['smarty']->assign("classPath",$this->classPath);
+	$GLOBALS['smarty']->assign("sectionArray",$this->sections);
+	$GLOBALS['smarty']->assign("course", preg_replace('/_/'," ",$courseName));
+        parent::display();
+    }
+    
+    public function getData($uri)
+    {
+        parent::getData($uri);
+
+        $sectionArray = $this->pageContent->children;
+        
 	foreach($sectionArray as $sectionKey => $sectionElement)
 	{
             $sectionInfo = array();
@@ -42,15 +56,17 @@
 
                 }
             }
-		
+            
             $sectionInfo["lessons"]=$lessonArray;
-
-            array_push($sectionOutput,$sectionInfo);		
+            
+            array_push($this->sections,$sectionInfo);		
 	}
-	
-	# Course Information
-	$smarty->assign("classPath","/data/material/$field/$subject/$course/");
-	$smarty->assign("sectionArray",$sectionOutput);
-	$smarty->assign("course", preg_replace('/_/'," ",$course));
-	$smarty->assign("questions", $questions);
+        
+        $this->classPath = $uri;
+        
+        $pathArray = PathArray::pathToArray($uri);
+        $this->courseName = $pathArray[4];
+    }
+}
+
 ?>

@@ -299,12 +299,12 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
 		}
 		else
 		{
-			$responseXML = new SimpleXMLElement("<parent>".$result."</parent>");
-			$status = $responseXML->xpath('/parent/user/status');
-			$id = $responseXML->xpath('/parent/user/id');
-			$_SESSION['status'] = (string)$status[0];
-			$_SESSION['id'] = (string)$id[0];            
-			$_SESSION['requestusername']=false;
+                    $responseXML = new SimpleXMLElement("<parent>".$result."</parent>");
+                    $status = $responseXML->xpath('/parent/user/status');
+                    $id = $responseXML->xpath('/parent/user/id');
+                    $_SESSION['status'] = (string)$status[0];
+                    $_SESSION['id'] = (string)$id[0];            
+                    $_SESSION['requestusername']=false;
 		}
 		
 		//redirect the visitor

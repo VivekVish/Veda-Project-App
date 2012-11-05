@@ -2,32 +2,32 @@
 
 class PathArray
 {
-	private static $indexArray = array("data","materials","field","subject","course","section","lesson","type");
+    private static $indexArray = array("data","materials","field","subject","course","section","lesson","type");
+
+    public static function pathToArray($path)
+    {
+        $uriArr= explode("/",trim($path,"/"));
+        $returnArray = array();
+
+        foreach($uriArr as $indexVal => $value)
+        {
+            if($indexVal>1)
+            {
+                $returnArray[self::$indexArray[$indexVal]] = $value;
+            }
+        }
+
+        return $returnArray;
+    }
 	
-	public static function pathToArray($path)
-	{
-		$uriArr= explode("/",trim($path,"/"));
-		$returnArray = array();
-		
-		foreach($uriArr as $indexVal => $value)
-		{
-			if($indexVal>1)
-			{
-				$returnArray[self::$indexArray[$indexVal]] = $value;
-			}
-		}
-		
-		return $returnArray;
-	}
-	
-	public static function pathToLink($path)
-	{
-		$pathArray = self::pathToArray($path);
-		
-		$returnString = "index.php?";
-		
-		foreach($pathArray as $key => $value)
-		{
+    public static function pathToLink($path)
+    {
+        $pathArray = self::pathToArray($path);
+
+        $returnString = "index.php?";
+
+        foreach($pathArray as $key => $value)
+        {
             if($key=="type")
             {
                 if($value=="lesson")
@@ -43,12 +43,12 @@ class PathArray
             {
                 $returnString.="$key=$value&";
             }
-		}
-		
-		$returnString = rtrim($returnString,"&");
-		
-		return $returnString;
-	}
+        }
+
+        $returnString = rtrim($returnString,"&");
+
+        return $returnString;
+    }
     
     public static function getPathFromRequest(&$field,&$subject,&$course,&$section,&$lesson)
     {

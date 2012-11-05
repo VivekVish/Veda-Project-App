@@ -7,7 +7,7 @@
         <iframe width="640" height="360" src="http://www.youtube.com/embed/{$video}?rel=0" frameborder="0" allowfullscreen></iframe>
 {/if}
         <br />
-{if $contentprovider}
+{if $contentprovider || $admin}
         <label for="videoInput">Video Input</label><input id="videoInput"></input>
         <button id="setVideoButton">Set Video</button>
 {/if}

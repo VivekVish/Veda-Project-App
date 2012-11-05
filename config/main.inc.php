@@ -14,30 +14,9 @@ foreach (glob("lib/Auth/*.php") as $filename)
 }
 
 # Setup session handler
-$userSession = new Usersession();
-	
-if(!isset($userSession->navstyle))
-{
-	$userSession->navstyle = 'icons';
-	$userSession->navcontents = '';
-	$userSession->fulllinks = '';
-	$userSession->navfixed = false;
-	$userSession->notesfixed = false;
-}
+$GLOBALS['userSession'] = new Usersession();
+$GLOBALS['api'] = new Api();
+$GLOBALS['url'] = ($_SERVER["REQUEST_URI"]=="/" || $_SERVER["REQUEST_URI"]=="/index.php") ? "index.php" : $_SERVER["REQUEST_URI"];
 
-# Pass messages to smarty
-/*$GLOBALS['messages'] = $userSession->Messages;
-if (!empty($GLOBALS['messages']))
-{
-	$smarty->assign("messages", $GLOBALS['messages']);
-}
-$userSession->Messages = "";
-*/
 # Smarty Vars
-$smarty->assign('site_root', SITE_ROOT);
-//$smarty->assign('navstyle', $userSession->navstyle);
-//$smarty->assign('navfixed', $userSession->navfixed);
-//$smarty->assign('notesfixed', $userSession->notesfixed);
-$smarty->assign('title', 'The Veda Project');	
-
-?>
+$smarty->assign('SITE_ROOT', SITE_ROOT);

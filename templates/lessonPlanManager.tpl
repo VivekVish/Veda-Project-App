@@ -10,7 +10,7 @@
                     </tr>
 {foreach from=$lessonplans item="lessonplan"}
                     <tr data-lessonplanid="{$lessonplan->id}">
-                        <td><a href="index.php?lessonPlanId={$lessonplan->id}">{$lessonplan->name}</a></td>
+                        <td><a href="index.php?type=lessonPlan&id={$lessonplan->id}">{$lessonplan->name}</a></td>
                         <td>{$lessonplan->tags}</td>
                         <td>{$lessonplan->notes}</td>
                         <td>

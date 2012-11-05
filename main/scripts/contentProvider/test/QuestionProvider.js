@@ -8,7 +8,7 @@ QuestionProvider.prototype.submitContent = function()
 {
     $('p>br').remove();
     var questionPayload = this.getPayload();
-    
+    console.log(questionPayload);
     $.ajax({url : "resources/submitQuestion.php", type: 'POST', data: questionPayload, success:function(data)
     {
         new Message(data);

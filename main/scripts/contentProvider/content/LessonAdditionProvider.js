@@ -30,10 +30,10 @@ LessonAdditionProvider.prototype.construct = function()
     this.justSubmitted = this.parent.getPayload();
     
     // Submit Content
-	$('#submitContent').click(function()
-	{
-		thisObject.submitContent();
-	});
+    $('#submitContent').click(function()
+    {
+            thisObject.submitContent();
+    });
 }
 
 // DESC: Sets the submit and autosave files

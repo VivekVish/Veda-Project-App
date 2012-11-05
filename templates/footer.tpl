@@ -1,10 +1,10 @@
-	<div id="pagenav">
+{if $contentprovider || $admin}
+    <div id="pagenav">
     	<ul>
-            {if $contentprovider==true}
-            	<li id="submitContent"><a>Submit</a></li>
-            {/if}
+            <li id="submitContent"><a>Submit</a></li>         
         </ul>
     </div>
+{/if}
     <footer>
     	<!--<ul>
         	<li title="footercomments"><p>Comment</p></li>
