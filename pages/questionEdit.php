@@ -32,13 +32,13 @@
 	$quizId="5";
 
 	#Question Information
-    $smarty->assign("questionContent",$questionContent);
-    $smarty->assign("location",$navPosition.$section."/".$lesson."/quiz/".$_REQUEST['questionId']);
-    $smarty->assign("name","Question Editor");
-    $smarty->assign("questionName",$questionName);
-    $smarty->assign("correctAnswer",$correctAnswer);
-    $smarty->assign("answerfieldtype","multchoice");
-    $smarty->assign("answers", $answers);
+        $smarty->assign("questionContent",$questionContent);
+        $smarty->assign("location",$navPosition.$section."/".$lesson."/quiz/".$_REQUEST['questionId']);
+        $smarty->assign("name","Question Editor");
+        $smarty->assign("questionName",$questionName);
+        $smarty->assign("correctAnswer",$correctAnswer);
+        $smarty->assign("answerfieldtype","multchoice");
+        $smarty->assign("answers", $answers);
 	$smarty->assign("questionId", $questionId);
 	$smarty->assign("questionTypes", $questionTypes);
 ?>
