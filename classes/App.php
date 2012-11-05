@@ -2,8 +2,15 @@
 
 # Includes
 require_once('config/main.inc.php');
-require_once('lib/ConstructPage.php');
-require_once('classes/ResourcePath.php');
+
+if(MODE=="REG")
+{
+    require_once('classes/ResourcePath.php');
+}
+elseif(MODE=="CHW")
+{
+    require_once('classes/CHWResourcePath.php');
+}
 
 class App 
 {
