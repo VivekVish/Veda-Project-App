@@ -1,13 +1,13 @@
 $(document).ready(function()
 {
-    lessonPlanManager = new LessonPlanManager();
+    mvpModuleManager = new MVPModuleManager();
 })
 
 // DESC: If an action is started, is set to true.  when completed, it is set to false.
 //       If actionStarted is true, a new action like a sort cannot start
-LessonPlanManager.prototype.actionStarted = false;
+MVPModuleManager.prototype.actionStarted = false;
 
-LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
+MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
 {
     var thisObject = this;
         
@@ -20,16 +20,26 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
             var currentName = "";
             var currentTags = "";
             var currentNotes = "";
+            var currentLocation = "potou";
+            var currentAge = "adult";
+            var currentGender = "both";
+            var currentLiteracy = "yes";
+            var currentImage = "CHW_Overview";
         }
         else
         {
-            var currentName = $('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanId+'"]').children().first().text();
-            var currentTags = $($('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanId+'"]').children().get(1)).text();
-            var currentNotes = $($('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanId+'"]').children().get(2)).text();
+            var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('h3').text();
+            var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('.tags').text().substring(6);
+            var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('.notes').text();
+            var currentLocation = "potou";
+            var currentAge = "oneToFive";
+            var currentGender = "male";
+            var currentLiteracy = "no";
+            var currentImage = "Cough";
         }
         
         var createLessonPlan = $('<div id="createLessonPlan"><ul></ul></div>');
-        createLessonPlan.children('ul').append('<li><label for="newLessonPlanName">Lesson Plan Name</label><input id="newLessonPlanName" value="'+currentName+'"></input></li>');
+        createLessonPlan.children('ul').append('<li><label for="newLessonPlanName">Module Name</label><input id="newLessonPlanName" value="'+currentName+'"></input></li>');
 	createLessonPlan.children('ul').append('<li><label for="newLessonPlanLocation">Location</label><select id="newLessonPlanLocation"></select></li>');
         createLessonPlan.children('ul').append('<li><label for="newLessonPlanAge">Target Patient Age</label><select id="newLessonPlanAge"></select></li>');
 	createLessonPlan.children('ul').find('#newLessonPlanAge').append('<option value="adult">Adult</option><option value="oneToFive">One to Five Years Old</option><option value="zeroToOne">Zero to One Years Old</option><option value="newborn">Newborn</option>');
@@ -53,35 +63,56 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
 	createLessonPlan.children('ul').append('<li><label for="newLessonPlanLiteracy">Literacy Required</label><select id="newLessonPlanLiteracy"><option value="yes">Yes</option><option value="no">No</option></select></li>');
         createLessonPlan.children('ul').append('<li><label for="newTags">Tags (comma-separated)</label><input id="newTags" value="'+currentTags+'"></input></li>');
         createLessonPlan.children('ul').append('<li><label for="newNotes">Notes</label><textarea id="newNotes">'+currentNotes+'</textarea></li>');
+        createLessonPlan.children('ul').append('<li><label for="newLessonPlanImage">Image</label><select id="newLessonPlanImage"></select></li>');
+        createLessonPlan.children('ul').find('#newLessonPlanImage').append('<option value="CHW_Overview">CHW Overview</option>').
+                                                                  append('<option value="Cough">Cough</option>').
+                                                                  append('<option value="Diarrhea">Diarrhea</option>').
+                                                                  append('<option value="Fever">Fever</option>').
+                                                                  append('<option value="Bednets">Bednets</option>').
+                                                                  append('<option value="Vaccinations">Vaccinations</option>').
+                                                                  append('<option value="Hygiene_and_Sanitation">Hygiene and Sanitation</option>').
+                                                                  append('<option value="Nutrition">Nutrition</option>').
+                                                                  append('<option value="Water_Treatment">Water Treatment</option>').
+                                                                  append('<option value="Safe_Food_Handling">Safe Food Handling</option>').
+                                                                  append('<option value="Antenatal_Care">Antenatal Care</option>').
+                                                                  append('<option value="Newborn_Care">Newborn Care</option>');
         createLessonPlan.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Create Lesson Plan',createLessonPlan);
+        
+        createLessonPlan.children('ul').find('#newLessonPlanLocation').children('option[value="'+currentLocation+'"]').attr('selected','selected');
+        createLessonPlan.children('ul').find('#newLessonPlanAge').children('option[value="'+currentAge+'"]').attr('selected','selected');
+        createLessonPlan.children('ul').find('#newLessonPlanGender').children('option[value="'+currentGender+'"]').attr('selected','selected');
+        createLessonPlan.children('ul').find('#newLessonPlanLiteracy').children('option[value="'+currentLiteracy+'"]').attr('selected','selected');
+        createLessonPlan.children('ul').find('#newLessonPlanImage').children('option[value="'+currentImage+'"]').attr('selected','selected');
+        
+        createLightBox('#content','Create Module',createLessonPlan);
         $('#newLessonPlanName').focus();
         
-        function addLessonPlan(id,lessonPlanName,tags,notes)
+        function addLessonPlan(id,lessonPlanName,tags,notes,location,age,gender,literacy,moduleImage)
         {
             var tagArray = tags.split(",");
-            var payload = {id:id,lessonPlanName: lessonPlanName, tags: tagArray, notes: notes};
+            var payload = {id:id,lessonPlanName: lessonPlanName, tags: tagArray, notes: notes, location: location, age: age, gender: gender, literacy: literacy};
 
             $.ajax({url:'resources/submitLessonPlan.php', type: 'POST', data: payload, success: function(data)
             {
                 try
                 {
                     var lessonPlanIdArray = $.parseJSON(data);
+                    
+                    var lessonPlanRow = $('<li data-lessonplanid="'+lessonPlanIdArray['id']+'" item="material"></li>');
+                    $(lessonPlanRow).append('<a href="index.php?type=lessonPlan&id='+lessonPlanIdArray['id']+'"></a>');
+                    $(lessonPlanRow).children('a').append('<img src="img/navIcons/'+moduleImage+'.png" />')
+                    $(lessonPlanRow).children('a').append('<h3>'+lessonPlanName+'</h3>');
+                    $(lessonPlanRow).children('a').append('<p class="notes">'+notes+'</p>');
+                    $(lessonPlanRow).children('a').append('<p class="tags">Tags: '+tags+'</td>');
+                    $(lessonPlanRow).append('<button class="editModule">Edit</button><button class="deleteModule">Delete</button>');
 
-                    var lessonPlanRow = $('<tr data-lessonplanid="'+lessonPlanIdArray['id']+'"></tr>');
-                    $(lessonPlanRow).append('<td><a href="index.php?lessonPlanId='+lessonPlanIdArray['id']+'">'+lessonPlanName+'</a></td>');
-                    $(lessonPlanRow).append('<td>'+tags+'</td>');
-                    $(lessonPlanRow).append('<td>'+notes+'</td>');
-                    $(lessonPlanRow).append('<td><img title="Edit Lesson" class="editLessonPlanIcon" src="img/editorIcons/editLesson_icon.png" />'+
-                                            '<img title="Delete Lesson" class="deleteLessonPlanIcon" src="img/editorIcons/delete_icon.png" /></td>');
-
-                    if($('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').size()==0)
+                    if($('#myModules ul').children('li[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').size()==0)
                     {
-                        $('#lessonplans').append(lessonPlanRow);
+                        $('#myModules ul').append(lessonPlanRow);
                     }
                     else
                     {
-                        $('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').replaceWith(lessonPlanRow);
+                        $('#myModules ul').children('li[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').replaceWith(lessonPlanRow);
                     }
                     
                     $('#lightbox').fadeOut('fast',function() {$(this).remove();});
@@ -122,7 +153,7 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
 
         $('#createLessonPlan button.create').click(function()
         {
-            addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val());
+            addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val(),$('#newLessonPlanLocation').val(),$('#newLessonPlanAge').val(),$('#newLessonPlanGender').val(),$('#newLessonPlanLiteracy').val(),$("#newLessonPlanImage").val());
         });
 
         $('#createLessonPlan button.cancel').click(function()
@@ -132,13 +163,13 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
     }
 }
 
-LessonPlanManager.prototype.deleteLessonPlan = function(lessonPlanId)
+MVPModuleManager.prototype.deleteLessonPlan = function(lessonPlanId)
 {
     $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: {"lessonPlanId":lessonPlanId}, success: function(data)
     {
         if(data=="Success.")
         {
-            $('#lessonplans tbody').children('tr[data-lessonplanid="'+lessonPlanId+'"]').remove();
+            $('li[data-lessonplanid="'+lessonPlanId+'"]').remove();
         }
         else
         {
@@ -147,22 +178,22 @@ LessonPlanManager.prototype.deleteLessonPlan = function(lessonPlanId)
     }});
 }
 
-function LessonPlanManager()
+function MVPModuleManager()
 {
     var thisObject = this;
     
-    $('#addLessonPlan').click(function()
+    $('#addModule').click(function()
     {
         thisObject.openAddLessonPlanLightbox();
     });
     
-    $('.deleteLessonPlanIcon').live('click',function()
+    $('.deleteModule').live('click',function(e)
     {
-        thisObject.deleteLessonPlan($(this).parents('tr').first().attr('data-lessonplanid'));
+        thisObject.deleteLessonPlan($(this).parent('li').attr('data-lessonplanid'));
     });
     
-    $('.editLessonPlanIcon').live('click',function()
+    $('.editModule').live('click',function()
     {
-        thisObject.openAddLessonPlanLightbox($(this).parents('tr').first().attr('data-lessonplanid'));
+        thisObject.openAddLessonPlanLightbox($(this).parent('li').attr('data-lessonplanid'));
     });
 }

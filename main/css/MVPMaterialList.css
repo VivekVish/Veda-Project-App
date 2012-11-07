@@ -46,17 +46,44 @@
     left: 130px;
 }
 
-.materialList li p.tags
+.materialList li button, #myModules button
 {
-    position: absolute;
-    top: auto;
-    bottom: 5px;
-    left: 130px;
+    width:75px;
+    height: 30px;
 }
 
-.materialList li button#editModule
+#myModules #addModule
+{
+    float: right;
+    margin-right: 10px;
+}
+
+.materialList li button:hover, #myModules #addModule:hover
+{
+    cursor: pointer;
+}
+
+.materialList li button.editModule
 {
     position: absolute;
     top: 5px;
     right: 10px;
+}
+
+.materialList li button.deleteModule
+{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+#lightbox
+{
+    width: 25em;
+    border: black 1px solid;
+}
+
+#lightbox label
+{
+    width: 170px;
 }

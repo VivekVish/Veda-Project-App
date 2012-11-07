@@ -13,8 +13,8 @@ class MVPMaterialList extends AbstractFrame
         parent::__construct("The Veda Project: The Free Online Educational Platform", $bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
         $this->appendTemplates(array("MVPHeader","MVPMaterialList","MVPModules"));
-        $this->appendCssFiles(array("reset","message","MVPMain","MVPMaterialList"));
-        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/lightbox"));
+        $this->appendCssFiles(array("reset","message","main","default","MVPMain","MVPMaterialList"));
+        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/lightbox","MVP/MVPModuleManager"));
     }
     
     public function display()
