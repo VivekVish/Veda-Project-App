@@ -14,7 +14,7 @@ class MVPSubject extends MVPMaterialList
         
         parent::__construct($bodyTemplates,$cssFiles,$scriptFiles,$ieScriptFiles,$fullnameScriptFiles);
         
-        $this->materialHeader = "Courses";
+        $this->materialHeader = "Modules";
     }
 }
 
