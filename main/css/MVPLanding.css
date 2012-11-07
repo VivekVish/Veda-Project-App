@@ -1,0 +1,59 @@
+#header, #main
+{
+    width: 853px;
+    margin: auto;
+}
+
+#main
+{
+    margin-top: 20px;
+}
+
+#login
+{
+    width: 426px;
+    display: inline-block;
+    float: left;
+}
+
+#login iframe
+{
+    margin-left: 13px;
+}
+
+#guest
+{
+    position: relative;
+    height: 240px;
+    width: 426px;
+    display: inline-block;
+    float:right;
+}
+
+#guest form
+{
+    height: 100%;
+}
+
+#guestLogin
+{
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 36px 12px 36px;
+    margin: auto;
+    margin-top: 92px;
+}
+
+div#guest:after
+{
+    content:'';
+    width:1px;
+    height:190px;
+    background:black;
+    position:absolute;
+    bottom:25px;
+}

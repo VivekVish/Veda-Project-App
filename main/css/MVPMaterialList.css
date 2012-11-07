@@ -1,0 +1,62 @@
+.materialList
+{
+    width: 50%;
+    margin: auto;
+}
+
+.materialList h2
+{
+    font-size: 2em;
+}
+
+.materialList img
+{
+    height: 120px;
+    width: 120px;
+    display: inline-block;
+}
+
+.materialList li
+{
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.materialList li h3
+{
+    font-size: 1.4em;
+    color: #00137F;
+    position: absolute;
+    top: 0;
+    left: 130px;
+}
+
+.materialList li p
+{
+    position: absolute;
+    top: 26px;
+    left: 130px;
+}
+
+.materialList li p.tags
+{
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    left: 130px;
+}
+
+.materialList li p.tags
+{
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    left: 130px;
+}
+
+.materialList li button#editModule
+{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

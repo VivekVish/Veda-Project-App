@@ -300,11 +300,18 @@ function navbar()
 	
 	$('#coursenav>div>ul>li').live('click',function(e)
 	{
-        navbarObject.navigateToNextLevel($(this).attr('data-link'));
+            if($(this).attr('data-link')=="/data/material/CHW_Training/Manager_Training/"||$(this).attr('data-link')=="/data/material/CHW_Training/Supervisor_Training/")
+            {
+                new Message("Still incomplete...");
+            }
+            else
+            {
+                navbarObject.navigateToNextLevel($(this).attr('data-link'));
+            }
 	});
 
 	$('nav#coursenav>div>div#upToPreviousNavLevel').live('click', function(e)
 	{
-		navbarObject.processPosition($(this).attr('data-link'));
+            navbarObject.processPosition($(this).attr('data-link'));
 	});
 }

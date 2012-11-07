@@ -1,0 +1,30 @@
+@font-face
+{
+    font-family: calibri;
+    src: url('fonts/calibri.eot');
+    src: local(calibri), url('fonts/calibri.ttf') format('opentype');
+}
+
+*
+{
+    font-family: calibri, Arial, Helvetica, sans-serif;	
+}
+
+#header
+{
+    width: 50%;
+    margin: auto;
+    position: relative;
+}
+
+#header a
+{
+    position: absolute;
+    right: 0;
+    top: 0.5em;
+}
+
+#header a:hover
+{
+    text-decoration: underline;
+}

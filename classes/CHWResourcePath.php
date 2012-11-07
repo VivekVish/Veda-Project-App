@@ -1,6 +1,5 @@
 <?php
 
-
 class ResourcePath
 {
     private $currentPath = null;
@@ -21,12 +20,29 @@ class ResourcePath
             
             if(is_null($type))
             {
-                $this->pageClass = "Landing";
+                if(!is_null($subject))
+                {
+                    $this->pageClass="MVPSubject";
+                    $this->currentPath ="/data/material/$field/$subject/";
+                }
+                elseif($userType=="guest")
+                {
+                    $this->pageClass = "MVPLanding";
+                }
+                else
+                {
+                    $this->pageClass = "MVPHome";
+                    $this->currentPath = "/data/material/CHW_Training/";
+                }
             }
             else
             {
                 switch($type)
                 {
+                    case "home":
+                        $this->pageClass = "MVPHome";
+                        $this->currentPath = "/data/material/CHW_Training/";
+                        break;
                     case "lessonPlan":
                         $this->currentPath = "/data/lessonplan/$id/";
                         $this->pageClass = "LessonPlan";
