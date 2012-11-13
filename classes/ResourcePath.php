@@ -239,7 +239,7 @@ class ResourcePath
             case "teacher":
                 return $this->teacherAccessible;
                 break;
-            case "contentprovider":
+            case "contentProvider":
                 return $this->CPAccessible;
                 break;
             case "admin":
