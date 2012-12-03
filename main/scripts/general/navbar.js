@@ -273,7 +273,10 @@ navbar.prototype.navigateToNextLevel = function(navBarLocation)
     {
         if(!this.lessons && !this.courses)
         {
-            this.processPosition(navBarLocation);
+            //this.processPosition(navBarLocation);
+            var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
+            var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+            window.location = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course;
         }
     }
 }

@@ -1,20 +1,21 @@
 <?php
 
-require_once('AbstractFrame.php');
-require_once('lib/PathArray.php');
+require_once('MVPFrame.php');
 
-class MVPMaterialList extends AbstractFrame
+class MVPMaterialList extends MVPFrame
 {
     protected $materialHeader = null;
     protected $myModules = array();
     
-    public function __construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles)
+    public function __construct()
     {
-        parent::__construct("The Veda Project: The Free Online Educational Platform", $bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
+        $bodyTemplates = array("MVPMaterialList");
+        $cssFiles = array("MVPMaterialList","lessonPlanManager");
+        $scriptFiles = array("MVP/MVPModuleManager");
+        $ieScriptFiles = array();
+        $fullnameScriptFiles = array();
         
-        $this->appendTemplates(array("MVPHeader","MVPMaterialList","MVPModules"));
-        $this->appendCssFiles(array("reset","message","main","default","MVPMain","MVPMaterialList"));
-        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/lightbox","MVP/MVPModuleManager"));
+        parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
     }
     
     public function display()
@@ -63,7 +64,21 @@ class MVPMaterialList extends AbstractFrame
         if($GLOBALS['userSession']->getUsername())
         {
             $this->myModules = json_decode($GLOBALS['api']->get("/user/lessonplanmanager/{$GLOBALS['userSession']->getUsername()}/"));
-        }
+            
+            foreach($this->myModules as $key=>$module)
+            {
+                $genderText = $module->gender=="both" ? "both genders" : $module->gender;
+                $literacyText = $module->literacy=="yes" ? "literacy required" : "literacy not required";
+                if($module->tags=="")
+                {
+                    $this->myModules[$key]->tagText = sprintf("%s,%s,%s,%s",$module->location,$module->age,$genderText,$literacyText);
+                }
+                else
+                {
+                    $this->myModules[$key]->tagText = sprintf("%s,%s,%s,%s,%s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
+                }
+            } 
+       }
     }
     
     public function setNavPosition($navPosition)

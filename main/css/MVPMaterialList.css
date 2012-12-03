@@ -1,12 +1,29 @@
+#materialContainer
+{
+    width: 800px;
+    margin: auto;
+}
+
+#materialContainer.hasModules
+{
+    width: 900px;
+}
+
 .materialList
 {
-    width: 50%;
+    width: 800px;
     margin: auto;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
 
 .materialList h2
 {
-    font-size: 2em;
+    font-size: 30px;
+    color: #9E1C20;
+    border-bottom: #C8C8C8 dashed 1px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .materialList img
@@ -24,8 +41,9 @@
 
 .materialList li h3
 {
-    font-size: 1.4em;
-    color: #00137F;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4F4F51;
     position: absolute;
     top: 0;
     left: 130px;
@@ -34,17 +52,14 @@
 .materialList li p
 {
     position: absolute;
-    top: 26px;
+    top: 32px;
     left: 130px;
-    margin-right: 90px;
+    line-height: 22px;
 }
 
 .materialList li p.tags
 {
-    position: absolute;
-    top: auto;
-    bottom: 5px;
-    left: 130px;
+    position: static;
 }
 
 .materialList li button, #myModules button
@@ -53,10 +68,95 @@
     height: 30px;
 }
 
-#myModules #addModule
+.materialList.modulesAfter
+{
+    width: 575px;
+    float: left;
+}
+
+#myModules
 {
     float: right;
-    margin-right: 10px;
+    width: 300px;
+    background-color: #E3E8EC;
+    border-radius: 5px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+#myModules li
+{
+    margin: 0px 20px 0 20px;
+    padding: 18px 0 18px 0;
+    min-height: 60px;
+}
+
+#myModules li:not(:last-of-type)
+{
+    border-bottom: #555 dashed 1px;
+}
+
+#myModules img
+{
+    float: left;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+}
+
+#myModules h3
+{
+    font-size: 18px;
+    font-weight: bold;
+    width: 200px;
+    margin-bottom: 6px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#myModulesHeader
+{
+    background-color: #EDF1F4;
+    border-radius: 5px 5px 0 0;
+}
+
+#myModulesHeader h2
+{
+    color: #4E4F53;
+    padding: 7px 0 7px 0;
+}
+
+#myModules #addModule
+{
+    margin-left: 210px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#myModules .moduleContent
+{
+    display: inline-block;
+    width: 200px;
+}
+
+#myModules p
+{
+    display: inline-block;
+    width: 200px;
+    font-size: 14px;
+    margin-bottom: 6px;
+    margin-left: 15px;
+}
+
+#myModules p.tags
+{
+    font-size: 12px;
+}
+
+#myModules h2
+{
+    font-size: 30px;
+    margin-left: 10px;
 }
 
 .materialList li button:hover, #myModules #addModule:hover

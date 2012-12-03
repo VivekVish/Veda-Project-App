@@ -19,27 +19,21 @@ else
     $id = "";
 }
 
-if (isset($_REQUEST['lessonPlanName']) && !empty($_REQUEST['lessonPlanName']))
-{
-	$lessonPlanName = trim($_REQUEST['lessonPlanName']);
-}
-
-if (isset($_REQUEST['tags']) && !empty($_REQUEST['tags']))
-{
-    $tags = $_REQUEST['tags'];
-}
-
-if (isset($_REQUEST['notes']) && !empty($_REQUEST['notes']))
-{
-    $notes = trim($_REQUEST['notes']);
-}
+$lessonPlanName = trim($_REQUEST['lessonPlanName']);
+$tags = $_REQUEST['tags'];
+$notes = trim($_REQUEST['notes']);
+$age = trim($_REQUEST['age']);
+$gender = trim($_REQUEST['gender']);
+$literacy = trim($_REQUEST['literacy']);
+$location = trim($_REQUEST['location']);
+$image = trim($_REQUEST['image']);
 
 $api = new Api();
 $api->setDataType();
 
 $uri = "/user/lessonplanmanager/{$userSession->getUserName()}/";
 
-$payload = json_encode(array("id"=>$id,"name"=>$lessonPlanName,"tags"=>$tags,"notes"=>$notes));
+$payload = json_encode(array("id"=>$id,"name"=>$lessonPlanName,"tags"=>$tags,"notes"=>$notes,"age"=>$age,"gender"=>$gender,"literacy"=>$literacy,"location"=>$location,"image"=>$image));
 
 $result = $api->post($uri, $payload);
 

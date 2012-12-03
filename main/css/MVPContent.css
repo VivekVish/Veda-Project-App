@@ -1,0 +1,138 @@
+/* Content */
+#content>section, #content>div#bibliography
+{
+	padding: 1em;
+}
+
+#content h1
+{
+	font-size: 2em;
+	padding-bottom: 0.2em;
+}
+
+#content h2
+{
+	font-size: 1.7em;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content h3
+{
+	font-size: 1.4em;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content h4
+{
+	font-size: 1.3em;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content h5
+{
+	font-size: 1.2em;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content h6
+{
+	font-size: 1.1em;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content h7
+{
+	font-style: italic;
+	padding-bottom: 0.2em;
+	color: black;
+}
+
+#content
+{
+	min-height: 95%;
+	left: 16%;
+	width: 85%;
+	padding-top: 0px;
+	position: absolute;
+	padding-bottom: 4em;
+}
+
+#content p
+{
+	padding-bottom: 1em;
+}
+
+/* Content Blockquote */
+#content blockquote
+{
+	margin-left: 3em;
+	margin-right: 3em;
+	font-size: 0.8em;
+}
+
+/* Content List */
+
+#content section>ul, #content section>ol, #content div>ul, #content div>ol
+{
+	padding-bottom: 1em;
+}
+
+#content ul, #content ol
+{
+    margin-left: 1.5em;	
+}
+
+#content ul
+{
+    list-style: disc;
+}
+
+#content ul ul
+{
+    list-style: circle;
+}
+
+#content ul ul ul
+{
+    list-style: square;
+}
+
+#content ol
+{
+    list-style: decimal;
+}
+
+#content ol ol
+{
+    list-style: upper-alpha;
+}
+
+#content ol ol ol
+{
+    list-style: lower-alpha;
+}
+
+/* Content table */
+
+#content table
+{
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+#content table tr
+{
+    height: 1em;	
+}
+
+#content table td, #content table th
+{
+    border: 0.14em solid black;
+    min-width: 1em;	
+    padding: 0.2em;
+}

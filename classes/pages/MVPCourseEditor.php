@@ -2,12 +2,12 @@
 
 require_once("MVPCourseParent.php");
 
-class CourseEditor extends CourseParent
+class MVPCourseEditor extends MVPCourseParent
 {
     public function __construct()
     {
         $bodyTemplates = array("courseEditor");
-        $cssFiles = array("contentprovider","listEditor");
+        $cssFiles = array();
         $scriptFiles = array("contentProvider/course/CourseEditor");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array();

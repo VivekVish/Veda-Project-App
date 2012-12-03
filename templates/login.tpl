@@ -1,5 +1,5 @@
 <div id="splash">
-	<a href="index.php"><img src="img/veda3-medium.jpg" /></a>
+	<a href="index.php"><img src="img/vedaorange.png" width="380" height="311" /></a>
 </div>
 
 <div id="loginBox">

@@ -1,0 +1,116 @@
+#content
+{
+    width: 900px;
+    margin: auto;
+    margin-top: 20px;   
+}
+
+#content ul.listEditor
+{
+    width: 100%;
+}
+
+#content h1
+{
+    font-size: 32px;
+    width: 900px;
+    border-bottom: 1px dashed #C8C8C8;
+    padding-bottom: 8px;
+    color: #9E1C1C;
+}
+
+/* Topmost header line */
+#content #listEditorHeader
+{
+    position: relative;
+    top: 0.25em;
+    width: 100%;
+    display: inline-block;
+    height: 60px;
+    border-radius: 4px;
+    background: #4C4D4F;
+    margin-top: 12px;
+}
+
+/* Image Icons */
+#content #listEditorHeader img, #content ul.listEditor img
+{
+    height: 1em;
+    width: 1em;
+    float: right;
+    margin-top: 0.25em;
+    cursor: pointer;
+}
+
+#content #listEditorHeader img
+{
+    margin-top: 23px;
+}
+
+#content #listEditorHeader span:last-of-type img, #content ul.listEditor span:last-of-type img
+{
+    margin-right: 10px;
+}
+
+/* Highest span within section list */
+#content ul.listEditor>li>span
+{
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0 10px 0;
+    border-radius: 4px;
+    background: #D5E7F3;
+}
+
+/* Provide spacing for empty list */
+#content ul.lessonList
+{
+    min-height: 1em;
+    background-color: #FFF;
+}
+
+/* First of sub-spans */
+#content ul.listEditor>li>span>span:first-of-type, #content ul.listEditor>li>ul>li>span>span:first-of-type, #content #listEditorHeader>span:first-of-type
+{
+    display: inline-block;
+    width: 2%;
+    height: 100%;
+}
+
+/* Last of sub-spans */
+#content ul.listEditor>li>span>span:last-of-type, #content ul.listEditor>li>ul>li>span>span:last-of-type, #content #listEditorHeader>span:last-of-type
+{
+    display: inline-block;
+    width: 200px;
+    float: right;
+}
+
+#content ul.listEditor li
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#content ul.listEditor li ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+/* Editing name inputs */
+#content ul.listEditor>li>span>input.sectionName, #content ul.listEditor>li>ul>li>span>input.lessonName
+{
+    width: 70%;
+}
+
+/* Highest span within lesson list */
+#content ul.listEditor>li>ul>li>span
+{
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0 10px 0;
+    border-radius: 4px;
+    background: #EBF0F4;
+}

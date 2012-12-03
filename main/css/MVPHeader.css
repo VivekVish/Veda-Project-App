@@ -1,0 +1,56 @@
+@font-face
+{
+    font-family: museo;
+    src: url('fonts/Museo500-Regular.eot');
+    src: url('fonts/Museo500-Regular.otf') format('opentype'),
+         url('fonts/Museo500-Regular.ttf') format('truetype');
+}
+
+#header #headerContent
+{
+    width: 1040px;
+    margin: auto;
+}
+
+#header
+{
+    background-image: url('../img/headerBackground.png');
+    border-bottom: solid 6px #ABB9BF;
+}
+
+#headerContent
+{
+    position: relative;
+}
+
+#header h1
+{
+    position: absolute;
+    bottom: 38px;
+    left: 360px;
+    font-family: museo, Arial;
+    color: #9E1C20;
+    font-size: 24px;
+}
+
+#header img
+{
+    margin: 20px;
+}
+
+#header a[title="login"],#header a[title="logout"]
+{
+    position: absolute;
+    right: 50px;
+    top: 0px;
+    background: #F58020;
+    padding: 5px 12px 5px 12px;
+    border-radius: 0 0 6px 6px;
+    color: white;
+    text-align: center;
+}
+
+#header a[title="login"]:hover,#header a[title="logout"]:hover
+{
+    text-decoration: underline;
+}

@@ -7,7 +7,7 @@
 
 $(document).ready(function()
 {
-	var lessonPlan = new LessonPlan();
+    var lessonPlan = new LessonPlan();
     var lessonRepository = new LessonRepository();
 });
 
@@ -445,7 +445,7 @@ LessonPlan.prototype.deleteLesson = function(lessonDeleteButton)
     if(this.actionStarted===false)
     {
         var positionArray = $(lessonDeleteButton).parents('li').children('span').attr('data-lessonpath').replace(/^\/data\/material\/|\/$/g,'').split('/');
-        var lessonName = positionArray[positionArray.length-1];
+        var lessonName = positionArray[4];
         var sectionPosition =  $(lessonDeleteButton).parents('ul').prev().attr('data-sectionpath');
         var sectionPositionArray = sectionPosition.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
         var payload = {"lessonPlanId":sectionPositionArray[0],"section":sectionPositionArray[1],"lessonName":lessonName};

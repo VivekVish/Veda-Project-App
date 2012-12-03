@@ -10,21 +10,9 @@
     font-family: calibri, Arial, Helvetica, sans-serif;	
 }
 
-#header
+#main
 {
-    width: 50%;
+    width: 1040px;
     margin: auto;
-    position: relative;
-}
-
-#header a
-{
-    position: absolute;
-    right: 0;
-    top: 0.5em;
-}
-
-#header a:hover
-{
-    text-decoration: underline;
+    margin-top: 30px;
 }

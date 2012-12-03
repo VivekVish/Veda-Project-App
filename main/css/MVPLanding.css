@@ -1,19 +1,22 @@
-#header, #main
-{
-    width: 853px;
-    margin: auto;
-}
-
-#main
-{
-    margin-top: 20px;
-}
-
 #login
 {
-    width: 426px;
+    width: 400px;
     display: inline-block;
-    float: left;
+    margin-bottom: 22px;
+    margin-top: -10px;
+}
+
+#introvideoanddescription
+{
+    float:left;
+    display: inline-block;
+    width: 640px;
+}
+
+#loginBoxes
+{
+    float: right;
+    width: 400px;
 }
 
 #login iframe
@@ -24,8 +27,8 @@
 #guest
 {
     position: relative;
-    height: 240px;
-    width: 426px;
+    height: 160px;
+    width: 400px;
     display: inline-block;
     float:right;
 }
@@ -41,19 +44,82 @@
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
     font-weight: bold;
-    padding: 12px 36px 12px 36px;
-    margin: auto;
-    margin-top: 92px;
+    width: 320px;
+    padding: 10px 0px 10px 0px;
+    margin-left: 52px;
+    margin-top: 22px;
+    
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #fff 0%, #fff 45%, #eee 55%, #eee 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(45%,#fff), color-stop(55%,#eee), color-stop(100%,#eee));
+    background: -webkit-linear-gradient(top, #fff 0%,#fff 45%,#eee 55%, #eee 100%);
+    background: -o-linear-gradient(top, #fff 0%,#fff 45%,#eee 55%,#eee 100%);
+    background: -ms-linear-gradient(top, #fff 0%,#fff 45%,#eee 55%,#eee 100%);
+    background: linear-gradient(to bottom, #fff 0%,#fff 45%,#eee 55%,#eee 100%);
+   
+    border-radius: 10px;
+    border: 2px #D8D8D8 solid;
+    -webkit-background-clip: padding-box; 
+    -moz-background-clip:    padding; 
+    background-clip:         padding-box;
 }
 
-div#guest:after
+#guestLogin:hover
 {
-    content:'';
-    width:1px;
-    height:190px;
-    background:black;
-    position:absolute;
-    bottom:25px;
+    background: #eee;
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #f2f2f2 45%, #e2e2e2 55%, #e2e2e2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(45%,#f2f2f2), color-stop(55%,#e2e2e2), color-stop(100%,#e2e2e2));
+    background: -webkit-linear-gradient(top, #f2f2f2 0%,#f2f2f2 45%,#e2e2e2 55%, #e2e2e2 100%);
+    background: -o-linear-gradient(top, #f2f2f2 0%,#f2f2f2 45%,#e2e2e2 55%,#e2e2e2 100%);
+    background: -ms-linear-gradient(top, #f2f2f2 0%,#f2f2f2 45%,#e2e2e2 55%,#e2e2e2 100%);
+    background: linear-gradient(to bottom, #f2f2f2 0%,#f2f2f2 45%,#e2e2e2 55%,#e2e2e2 100%);
+}
+
+#guestLogin h2
+{
+    font-size: 24px;
+}
+
+#guestLogin p
+{
+    font-size: 14px;
+}
+
+#loginOr
+{
+    border-top: black solid 1px;
+    margin: auto;
+    width: 160px;
+    margin: auto;
+}
+
+#loginOr p
+{
+    text-align: center;
+    background: white;
+    z-index: 2;
+    margin: auto;
+    margin-top: -10px;
+    width: 40px;
+}
+
+#vpdescription
+{
+    margin-top: 25px;
+    padding-bottom: 60px;
+}
+
+#vpdescription h2
+{
+    color: #9E1C20;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#vpdescription p
+{
+    color: #3F3F3F;
+    line-height: 175%;
 }

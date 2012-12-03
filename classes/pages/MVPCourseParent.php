@@ -1,8 +1,8 @@
 <?php
 
-require_once('Frame.php');
+require_once('MVPFrame.php');
 
-class CourseParent extends Frame
+class MVPCourseParent extends MVPFrame
 {
     protected $classPath = null;
     protected $courseName = null;
@@ -12,7 +12,7 @@ class CourseParent extends Frame
     {
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
-        $this->appendCssFiles(array("listEditor","course"));
+        $this->appendCssFiles(array("MVPListEditor","MVPCourse"));
     }
     
     public function display()

@@ -1,0 +1,45 @@
+button#recoverDeletedLessons
+{
+    display: block;
+    margin: auto;
+    width: 15em;
+    font-size: 1.25em;
+    height: 2em;
+    margin-top: 25px;
+}
+
+.lessonList>li>span:first-of-type
+{
+    max-height: 20px;
+}
+
+.lessonList>li>span:first-of-type>a
+{
+    display:block;
+    height: 20px;
+    width:100%;
+    padding-left: 1.5em;
+}
+
+button#recoverDeletedLessons:hover
+{
+    cursor: pointer;
+}
+
+#recoverLessonsHolder
+{
+    width: 100%;
+}
+
+#lightbox #recoverLessonsBox select
+{
+    width: 100%;
+}
+
+#content ul.listEditor .lessonList>li>span:first-of-type>span.userCourseButtons
+{
+    display: inline;
+    float: right;
+    position: relative;
+    top: -1.35em;
+}

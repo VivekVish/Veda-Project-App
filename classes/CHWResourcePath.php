@@ -45,7 +45,7 @@ class ResourcePath
                         break;
                     case "lessonPlan":
                         $this->currentPath = "/data/lessonplan/$id/";
-                        $this->pageClass = "LessonPlan";
+                        $this->pageClass = "MVPLessonPlan";
                         $this->studentAccessible = false;
                         break;
                     case "lessonPlanManager":
@@ -68,11 +68,11 @@ class ResourcePath
                     
                     if($userType=="contentProvider"||$userType=="admin")
                     {
-                        $this->pageClass = "CourseEditor";
+                        $this->pageClass = "MVPCourseEditor";
                     }
                     else
                     {
-                        $this->pageClass = "Course";
+                        $this->pageClass = "MVPCourse";
                     }
                 }
                 else if($type=="exam")
@@ -93,7 +93,7 @@ class ResourcePath
                     }
                     else
                     {
-                        $this->pageClass = "Lesson";
+                        $this->pageClass = "MVPLesson";
                     }
                 }
                 else
@@ -108,7 +108,7 @@ class ResourcePath
                             }
                             else
                             {
-                                $this->pageClass = "Lesson";
+                                $this->pageClass = "MVPLesson";
                             }
                             break;
                         case "questionBlueprint":
@@ -255,7 +255,7 @@ class ResourcePath
             case "teacher":
                 return $this->teacherAccessible;
                 break;
-            case "contentprovider":
+            case "contentProvider":
                 return $this->CPAccessible;
                 break;
             case "admin":

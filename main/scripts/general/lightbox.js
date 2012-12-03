@@ -1,10 +1,10 @@
 /* Create Lightbox */
 function createLightBox(lightBoxTarget, lightBoxTitle, lightBoxContent, lightBoxWidth, lightBoxHeight)
 {
-	$('<div id="overlay"></div>')
-		.appendTo($(lightBoxTarget))
-		.css({'opacity':'0'})
-		.animate({'opacity': '0.6'});
+    $('<div id="overlay"></div>')
+            .appendTo($(lightBoxTarget))
+            .css({'opacity':'0'})
+            .animate({'opacity': '0.6'});
 		
     $('<div id="lightbox"><div><h4>'+lightBoxTitle+'</h4></div></div>')
     .appendTo('body');

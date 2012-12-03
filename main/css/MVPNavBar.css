@@ -1,0 +1,43 @@
+nav#coursenav
+{
+    width: 12%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 20px;
+    background-color: #E3E8EC;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+nav#coursenav h2
+{
+    padding: 2px 0em 2px 0;
+    font-size: 20px;
+}
+
+nav#coursenav #backToCourseButton
+{
+    float: right;
+    margin-top:-27px;
+}
+
+nav#coursenav>div>ul
+{
+    margin-top: 3px;
+}
+
+nav#coursenav>div>ul>li
+{
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+nav#coursenav>div>ul>li>ul
+{
+    font-size: 14px;
+}
+
+nav#coursenav>div>ul>li>ul>li:hover
+{
+    text-decoration: underline;
+}

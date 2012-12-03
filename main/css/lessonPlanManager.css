@@ -77,6 +77,11 @@ button#addLessonPlan
     -webkit-box-sizing:content-box; 
 }
 
+#lightbox #createLessonPlan label[for="newNotes"]
+{
+    margin-bottom: 1em;
+}
+
 .editLessonPlanIcon:hover, .deleteLessonPlanIcon:hover
 {
     cursor: pointer;
