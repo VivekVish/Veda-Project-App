@@ -1,85 +1,87 @@
 /* Content */
 #content>section, #content>div#bibliography
 {
-	padding: 1em;
+    padding: 20px 10px 10px 10px;
 }
 
 #content h1
 {
-	font-size: 2em;
-	padding-bottom: 0.2em;
+    font-size: 2em;
+    padding-bottom: 0.1em;
+    margin-bottom: 0.1em;
+    border-bottom: #555 dashed 1px;
 }
 
 #content h2
 {
-	font-size: 1.7em;
-	padding-bottom: 0.2em;
-	color: black;
+    font-size: 1.7em;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content h3
 {
-	font-size: 1.4em;
-	padding-bottom: 0.2em;
-	color: black;
+    font-size: 1.4em;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content h4
 {
-	font-size: 1.3em;
-	padding-bottom: 0.2em;
-	color: black;
+    font-size: 1.3em;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content h5
 {
-	font-size: 1.2em;
-	padding-bottom: 0.2em;
-	color: black;
+    font-size: 1.2em;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content h6
 {
-	font-size: 1.1em;
-	padding-bottom: 0.2em;
-	color: black;
+    font-size: 1.1em;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content h7
 {
-	font-style: italic;
-	padding-bottom: 0.2em;
-	color: black;
+    font-style: italic;
+    padding-bottom: 0.2em;
+    color: black;
 }
 
 #content
 {
-	min-height: 95%;
-	left: 16%;
-	width: 85%;
-	padding-top: 0px;
-	position: absolute;
-	padding-bottom: 4em;
+    min-height: 95%;
+    left: 16%;
+    width: 68%;
+    padding-top: 0px;
+    position: absolute;
+    padding-bottom: 4em;
 }
 
 #content p
 {
-	padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 /* Content Blockquote */
 #content blockquote
 {
-	margin-left: 3em;
-	margin-right: 3em;
-	font-size: 0.8em;
+    margin-left: 3em;
+    margin-right: 3em;
+    font-size: 0.8em;
 }
 
 /* Content List */
 
 #content section>ul, #content section>ol, #content div>ul, #content div>ol
 {
-	padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 #content ul, #content ol

@@ -13,7 +13,7 @@ class MVPContent extends MVPFrame
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
         $this->appendCssFiles(array("MVPContent","MVPNavBar"));
-        $this->appendTemplates(array("navbar","lesson","MVPContentFooter"));
+        $this->appendTemplates(array("navbar","lesson"));
         $this->appendScriptFiles(array("general/navbar","general/addAllTrigFunctions", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes",
                              "content/Content","content/citations"));
         $this->appendFullnameScriptFiles(array("MathJax/MathJax.js?config=default"));

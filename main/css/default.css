@@ -1,5 +1,4 @@
 /* General */
-
 @font-face
 {
 	font-family: calibri;
@@ -91,7 +90,6 @@ nav#coursenav.lessonNav div ul li ul li:hover
 }
 
 /* Content */
-
 #content
 {
 	background-color: #FFF;
@@ -117,14 +115,14 @@ nav#coursenav.lessonNav div ul li ul li:hover
 
 #pagenav #submitLesson
 {
-	border: solid #EFE;
-	background-color: #CFF;
+    border: solid #EFE;
+    background-color: #CFF;
 }
 
 #pagenav #submitLesson:hover
 {
-	border: solid #6F6;
-	background-color: #EFF;
+    border: solid #6F6;
+    background-color: #EFF;
 }
 
 /* Questions */

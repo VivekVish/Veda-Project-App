@@ -122,7 +122,7 @@ ContentProvider.prototype.insertSection= function(level)
     if(rangeTraverse.within('#content'))
     {
         var newHeader = $('<h'+(eval(level)+1)+'>');
-        var rangeParent = rangeTraverse.parents(':header,blockquote,table,list,p').last();
+        var rangeParent = rangeTraverse.parents(':header,blockquote,table,ol,ul,p').last();
 
         if(rangeParent.children().size()==0&&rangeParent.text()=="")
         {

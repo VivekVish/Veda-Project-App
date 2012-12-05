@@ -1,0 +1,33 @@
+#content
+{
+    min-height: 95%;
+    left: 16%;
+    width: 68%;
+    padding-top: 0px;
+    position: absolute;
+    padding-bottom: 4em;
+    margin-top: 20px;
+}
+
+#content h1
+{
+    font-size: 2em;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+    border-bottom: #555 dashed 1px;
+}
+
+label[for="videoInput"], #videoInput, #setVideoButton
+{
+    margin-top: 10px;
+}
+
+label[for="videoInput"]
+{
+    margin-right: 10px;
+}
+
+#videoInput
+{
+    margin-right: 8px;
+}

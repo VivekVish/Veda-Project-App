@@ -8,3 +8,41 @@ footer
     bottom: 0;
     z-index: 3;
 }
+
+/* Page Navigation */
+#pagenav #submitContent
+{
+    border: solid #EFEFEF;
+    background-color: #EEE;
+    position: absolute;	
+    left: 45%;
+    cursor: pointer;
+}
+
+#pagenav #submitContent:hover
+{
+    background-color: #EFF;
+}
+
+#pagenav li
+{
+    margin-top: 0.25em;
+
+    text-align: center;
+    -moz-border-radius: 0.4em;
+    -webkit-border-radius: 0.4em;
+    border-radius: 0.4em;
+    width: 8%;
+    border-width: 0.2em;
+}
+
+#pagenav li a
+{
+    display: block;
+    padding: 0.45em 0 0.45em 0;
+}
+
+#pagenav li a:hover
+{
+    cursor: pointer;	
+}

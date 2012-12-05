@@ -77,7 +77,7 @@ class ResourcePath
                 }
                 else if($type=="exam")
                 {
-                    $this->pageClass = "Test";
+                    $this->pageClass = "MVPTest";
                 }
             }
             else
@@ -89,7 +89,7 @@ class ResourcePath
                     $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/";
                     if($userType=="contentProvider"||$userType=="admin")
                     {
-                        $this->pageClass = "EditLesson";
+                        $this->pageClass = "MVPEditLesson";
                     }
                     else
                     {
@@ -104,7 +104,7 @@ class ResourcePath
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/";
                             if($userType=="contentProvider"||$userType=="admin")
                             {
-                                $this->pageClass = "EditLesson";
+                                $this->pageClass = "MVPEditLesson";
                             }
                             else
                             {
@@ -113,7 +113,7 @@ class ResourcePath
                             break;
                         case "questionBlueprint":
                             $this->currentPath = "/data/material/questionBlueprint/$id/";
-                            $this->pageClass = "QuestionEditor";
+                            $this->pageClass = "MVPQuestionEditor";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
@@ -124,12 +124,12 @@ class ResourcePath
                                 $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/quiz/";
                                 $this->studentAccessible = false;
                                 $this->trainerAccessible = false;
-                                $this->pageClass="QuizOverview";
+                                $this->pageClass="MVPQuizOverview";
                             }
                             else
                             {
                                 $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/quiz/$username/";
-                                $this->pageClass="Question";
+                                $this->pageClass="MVPQuestion";
                             }
                             break;
                         case "printableQuiz":
@@ -146,26 +146,26 @@ class ResourcePath
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/lessonAdditions/video/";
                             if($userType=="contentProvider"||$userType=="admin")
                             {
-                                $this->pageClass = "EditVideo";
+                                $this->pageClass = "MVPEditVideo";
                             }
                             else
                             {
-                                $this->pageClass = "Video";
+                                $this->pageClass = "MVPVideo";
                             }
                             break;
                         case "trainingmanual":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/lessonAdditions/trainingmanual/";
                             if($userType=="contentProvider"||$userType=="admin")
                             {
-                                $this->pageClass = "EditTrainingManual";
+                                $this->pageClass = "MVPEditTrainingManual";
                             }
                             elseif($userType=="teacher")
                             {
-                                $this->pageClass = "TeacherTrainingManual";
+                                $this->pageClass = "MVPTeacherTrainingManual";
                             }
                             else
                             {
-                                $this->pageClass = "TrainingManual";
+                                $this->pageClass = "MVPTrainingManual";
                             }
                             break;
                         case "roleplay":
@@ -173,54 +173,54 @@ class ResourcePath
                             $this->pageClass = "Roleplay";
                             if($userType=="contentProvider"||$userType=="admin")
                             {
-                                $this->pageClass = "EditRoleplay";
+                                $this->pageClass = "MVPEditRoleplay";
                             }
                             else
                             {
-                                $this->pageClass = "Roleplay";
+                                $this->pageClass = "MVPRoleplay";
                             }
                             break;
                         case "lessonHistory":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/history/";
-                            $this->pageClass = "LessonHistory";
+                            $this->pageClass = "MVPLessonHistory";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonDiscussionHistory":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/discussion/history/";
-                            $this->pageClass = "LessonDiscussionHistory";
+                            $this->pageClass = "MVPLessonDiscussionHistory";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonRevision":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/history/$id/";
-                            $this->pageClass = "EditLessonRevision";
+                            $this->pageClass = "MVPEditLessonRevision";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonDiscussionRevision":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/discussion/history/$id/";
-                            $this->pageClass = "EditLessonDiscussionRevision";
+                            $this->pageClass = "MVPEditLessonDiscussionRevision";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonDiscussion":
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/discussion/";
-                            $this->pageClass = "EditLessonDiscussion";
+                            $this->pageClass = "MVPEditLessonDiscussion";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonAutosave":
                             $this->requiresLogin = true;
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/autosave/$username/";
-                            $this->pageClass = "EditLessonAutosave";
+                            $this->pageClass = "MVPEditLessonAutosave";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;
                         case "lessonDiscussionAutosave":
                             $this->requiresLogin = true;
                             $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/content/discussion/autosave/$username/";
-                            $this->pageClass = "EditDiscussionAutosave";
+                            $this->pageClass = "MVPEditDiscussionAutosave";
                             $this->studentAccessible = false;
                             $this->trainerAccessible = false;
                             break;

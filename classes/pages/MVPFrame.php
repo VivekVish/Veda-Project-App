@@ -7,6 +7,7 @@ class MVPFrame extends AbstractFrame
 {
     protected $pageContent = null;
     protected $navPosition = null;
+    protected $displaySubmit = false;
 
     public function __construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles)
     {
@@ -23,6 +24,7 @@ class MVPFrame extends AbstractFrame
     {
         $GLOBALS['smarty']->assign("title",$this->title);
         $GLOBALS['smarty']->assign("navPosition",$this->navPosition);
+        $GLOBALS['smarty']->assign("displaySubmit",$this->displaySubmit);
         $GLOBALS['smarty']->assign("loggedIn",$GLOBALS['userSession']->isLoggedIn());
         $GLOBALS['smarty']->assign("loginURL",$GLOBALS['url']=="index.php" ? "index.php?login=true" : $GLOBALS['url']."&login=true");
         

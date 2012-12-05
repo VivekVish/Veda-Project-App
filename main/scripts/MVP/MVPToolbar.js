@@ -1,0 +1,20 @@
+$(document).ready(function()
+{
+    $(window).scroll(function(e)
+    {
+        if($(window).scrollTop()>125)
+        {
+            if(!$('#CPtoolbar').hasClass('attached'))
+            {
+                $('#CPtoolbar').addClass('attached')
+            }
+        }
+        else
+        {
+            if($('#CPtoolbar').hasClass('attached'))
+            {
+                $('#CPtoolbar').removeClass('attached')
+            }
+        }
+    })
+})

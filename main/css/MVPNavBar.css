@@ -1,12 +1,24 @@
+body
+{
+    width: 100%;
+    overflow: auto;
+}
+
 nav#coursenav
 {
     width: 12%;
     float: left;
     margin-left: 2%;
-    margin-top: 20px;
+    margin-top: 30px;
     background-color: #E3E8EC;
     border-radius: 5px;
-    padding: 10px;
+}
+
+nav#coursenav div#coursenavheader
+{
+    background-color:#EDF1F4;
+    padding: 10px 10px 0 10px;
+    border-radius: 5px 5px 0 0;
 }
 
 nav#coursenav h2
@@ -21,9 +33,16 @@ nav#coursenav #backToCourseButton
     margin-top:-27px;
 }
 
+nav#coursenav #backToCourseButton img
+{
+    width: 20px;
+    height: 20px;
+}
+
 nav#coursenav>div>ul
 {
     margin-top: 3px;
+    padding: 0 10px 10px 10px;
 }
 
 nav#coursenav>div>ul>li
@@ -37,7 +56,7 @@ nav#coursenav>div>ul>li>ul
     font-size: 14px;
 }
 
-nav#coursenav>div>ul>li>ul>li:hover
+nav#coursenav>div>ul>li>ul>li>a:hover
 {
     text-decoration: underline;
 }

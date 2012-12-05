@@ -28,19 +28,19 @@ navbar.prototype.fill = function(navBarTitle, backLocation, navbarLinks)
     $('nav#coursenav>div').fadeOut('fast',
         function()
         {
-            $('#coursenav>div>h2').remove();
-            $('#coursenav>div').prepend("<h2>"+navBarTitle+"</h2>");
+            $('#coursenav>div>div>h2').remove();
+            $('#coursenav>div>div').prepend("<h2>"+navBarTitle+"</h2>");
 
             $('#upToPreviousNavLevel').remove();
 
             if(!navbarObject.fields&!navbarObject.lessons)
             {
-                $('#coursenav>div>h2').after('<div id="upToPreviousNavLevel" data-link="'+backLocation+'"><img src="img/back_button.png" /></div>');
+                $('#coursenav>div>div>h2').after('<div id="upToPreviousNavLevel" data-link="'+backLocation+'"><img src="img/back_button.png" /></div>');
             }
             else if(navbarObject.lessons)
             {
                 var backArray = navbarObject.currentPosition.replace(/^\/data\/material\/|\/$/g,'').split('/');
-                $('#coursenav>div>h2').after('<a id="backToCourseButton" href="index.php?field='+backArray[0]+'&subject='+backArray[1]+'&course='+backArray[2]+'"><img src="img/back_button.png" /></a>');
+                $('#coursenav>div>div>h2').after('<a id="backToCourseButton" href="index.php?field='+backArray[0]+'&subject='+backArray[1]+'&course='+backArray[2]+'"><img src="img/back_button.png" /></a>');
             }
 
             $('#coursenav>div>ul').remove();
@@ -141,7 +141,7 @@ navbar.prototype.processPosition = function(navBarLocation)
 {
     var navbarObject = this;
     navbarObject.currentPosition=navBarLocation;
-    
+
     if(this.readyToProcess)
     {
         this.readyToProcess=false;
