@@ -3,7 +3,7 @@
     {
         public static function removeCurlyQuotes($content)
         {
-            return str_replace("—","--",str_replace("’","'",str_replace("‘","'",str_replace("”",'"',str_replace("“",'"',$_REQUEST['content'])))));
+            return str_replace("—","--",str_replace("’","'",str_replace("‘","'",str_replace("”",'"',str_replace("“",'"',$content)))));
         }
     }
 ?>

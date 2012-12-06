@@ -1,0 +1,158 @@
+/* Questions */
+.question, .samplequestion, #questionButtons
+{
+    position: relative;
+    width: 80%;
+    left: 10%;
+    margin-top: 1em;
+    padding: 1em 0 1em 0;
+}
+
+.question .questioncontent
+{
+    padding: 5px;
+    width: 100%;
+    background-color: #4B4C4B;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 0;
+}
+
+.question .answerfield
+{
+    width: 100%;
+}
+
+#content .question .answerfield.multchoice ol
+{
+    margin-top: 0;
+    padding-top: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.question .answerfield.multchoice ol li:first-of-type
+{
+    margin-top: 10px;
+}
+
+.question .answerfield.multchoice ol li
+{
+    padding: 8px 5px 8px 5px;
+    background-color: #E7EDF1;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.question .answerfield.multchoice:not(.selected) ol li:hover
+{
+    border: 2px solid black;
+    padding: 6px 3px 6px 3px;
+}
+
+.question .answerfield.multchoice ol li p
+{
+    display: inline;
+    padding: 0;
+}
+
+div.submitdiv
+{
+    position: relative;
+    width: 80%;
+    left: 10%;
+}
+
+button.submitanswer, button.editQuestion
+{
+    margin-top: 2em;
+    float: right;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: .5em 2em .55em;
+}
+
+.answerfield.multchoice ol li
+{
+    list-style-type: none;
+    position: relative;
+}
+
+.fillintheblank>input:not([type="radio"])
+{
+    border-radius: 0.25em;
+    background-clip: padding-box;
+    border: solid black 0.1em;
+    height: 1.8em;
+}
+
+.answerCorrect, .answerIncorrect
+{
+    width: 30%;
+    margin: auto;
+}
+
+.answerCorrect h1, .answerIncorrect h1
+{
+    text-align: center;
+}
+
+.answerCorrect div, .answerIncorrect div
+{
+    padding: 1em;
+}
+
+.answerCorrect
+{
+    background-color: #00FF00;
+}
+
+.answerIncorrect
+{
+    background-color: #FF4444;
+}
+
+#questionButtons button
+{
+    margin-top: 2em;
+    float: right;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: .5em 2em .55em;
+}
+
+#questionButtons button:last-of-type
+{
+    margin-right: 0;
+}
+
+.correctAnswerImage, .incorrectAnswerImage
+{
+    position: absolute;
+    right: -60px;
+    top: 0;
+}
+
+.question .answerfield.multchoice ol li.correctAnswer
+{
+    color: white;
+    background-color: #92CE44;
+}
+
+.question .answerfield.multchoice ol li.incorrectAnswer
+{
+    background-color: #E2CFD0;
+}

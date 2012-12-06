@@ -1,0 +1,13 @@
+#content
+{
+    position: absolute;
+    left: 16%;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+#content a
+{
+    text-decoration: underline;
+    color: blue;
+}

@@ -36,6 +36,10 @@
 {/if}
                     </div>
                 </div>
+                <h3>Question Response</h3>
+                <div class="questionResponse">
+{$questionResponse}
+                </div>
                 {*
                 <div class="samplequestion">
                     <h4>Sample Question</h4>

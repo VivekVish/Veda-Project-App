@@ -26,9 +26,9 @@ class MVPQuestionEditor extends MVPFrame
     
     public function __construct()
     {
-        $bodyTemplates = array("contentprovider","questionEditor","footer");
-        $cssFiles = array("contentprovider","question","contentprovider","equationEditor","questionEditor");
-        $scriptFiles = array("content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
+        $bodyTemplates = array("navbar","contentprovider","questionEditor");
+        $cssFiles = array("MVPNavBar","question","MVPContent","MVPContentprovider","equationEditor","questionEditor");
+        $scriptFiles = array("general/navbar","content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
                                     "general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo","contentProvider/ILO/formValidator","content/Content","contentProvider/content/ContentProvider","contentProvider/test/questionBlueprints","contentProvider/test/QuestionProvider","general/lightbox",
                                     "contentProvider/test/QuestionHandler","test/test","contentProvider/test/QuestionContent","contentProvider/test/CorrectAnswer","contentProvider/test/QuestionEditor",
                                     "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations");
@@ -44,11 +44,12 @@ class MVPQuestionEditor extends MVPFrame
         
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
-        
+        $this->displaySubmit = true;
     }
     
     public function display()
     {
+        $GLOBALS['smarty']->assign("questionResponse",$this->questionResponse);
         $GLOBALS['smarty']->assign("questionContent",$this->questionContent);
         $GLOBALS['smarty']->assign("location",$this->navPosition.$this->section."/".$this->lesson."/quiz/".$this->questionId);
         $GLOBALS['smarty']->assign("name","Question Editor");
@@ -75,6 +76,7 @@ class MVPQuestionEditor extends MVPFrame
         if($this->questionId=="new")
         {
             $this->questionContent = "<p></p>";
+            $this->questionResponse = "<p></p>";
             $this->questionName = "";
             $this->correctAnswer = 1;
             $this->answers = array();
@@ -83,6 +85,7 @@ class MVPQuestionEditor extends MVPFrame
         {
             parent::getData($uri);
             $this->questionContent = html_entity_decode($this->pageContent->content);
+            $this->questionResponse = html_entity_decode($this->pageContent->response);;
             $this->questionName = $this->pageContent->name;
             $this->correctAnswer = $this->pageContent->correctAnswer;
             $this->answers = $this->pageContent->answerChoices;

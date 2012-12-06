@@ -53,7 +53,7 @@ var equation =
         function createEquation(targetEquation)
         {
             if(!equation.createEquationStarted)
-			{
+            {
                 function afterILOCreation()
                 {
                     equationILO.display(targetEquation);
@@ -63,28 +63,28 @@ var equation =
 
                     $('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove()});
                     $('#overlay').fadeOut('fast',function() 
-                                                 {
-                                                     $(this).remove();
-                                                     MathJax.Hub.Queue(function()
-                                                     {
-                                                         rangeTraverse.setCurrentRange(ilo.savedRange);
-                                                     });
-                                                 });
+                    {
+                        $(this).remove();
+                        MathJax.Hub.Queue(function()
+                        {
+                            rangeTraverse.setCurrentRange(ilo.savedRange);
+                        });
+                    });
                 }
                 
-				equation.createEquationStarted = true;
-				if(typeof(targetEquation) == 'undefined' || $('#content').find(targetEquation).size()==0)
-				{
+                equation.createEquationStarted = true;
+                if(typeof(targetEquation) == 'undefined' || $('#content').find(targetEquation).size()==0)
+                {
                     targetEquation = document.createElement('span');
                     ilo.insertILO(insertionPoint, targetEquation, "insertNode");
 					
-					ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(targetEquation){equation.createEquationStarted = false; $(targetEquation).remove();}, [targetEquation]);
-				}
-				else
-				{
-					ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(){ equation.createEquationStarted = false });
-				}
-			}
+                    ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(targetEquation){equation.createEquationStarted = false; $(targetEquation).remove();}, [targetEquation]);
+                }
+                else
+                {
+                    ilo.editILO($(targetEquation).attr('id'),{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(){ equation.createEquationStarted = false });
+                }
+            }
         }
         
         function cancel()

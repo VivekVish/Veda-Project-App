@@ -119,7 +119,7 @@ class ResourcePath
                             break;
                         case "quiz":
                             $this->requiresLogin = true;
-                            if($userStatus=="admin"||$userStatus=="contentProvider")
+                            if($userType=="admin"||$userType=="contentProvider")
                             {
                                 $this->currentPath = "/data/material/$field/$subject/$course/$section/$lesson/quiz/";
                                 $this->studentAccessible = false;

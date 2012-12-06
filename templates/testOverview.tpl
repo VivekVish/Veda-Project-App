@@ -1,4 +1,5 @@
 <div id="content">
+    <h1>{$testTitle}</h1>
     <table id="quizOverview" data-quizpath="{$quizPath}">
         <tbody>
 {*
@@ -25,16 +26,16 @@
 {/foreach}
 *}
             <tr>
-                <td>Question ID</td>
-                <td>Name</td>
-                <td>Actions</td>
+                <th>Question ID</th>
+                <th>Name</th>
+                <th>Actions</th>
             </tr>
 {foreach from=$questions item="question"}
             <tr>
                 <td>{$question->id}</td>
                 <td>{$question->name}</td>
                 <td>
-                    <a href="{$questionLink}&id={$question->id}">{html_image file="img/editorIcons/edit_icon.png"}</a>
+                    <a href="{$questionLink}&id={$question->id}">{html_image file="img/editorIcons/editLesson_icon.png"}</a>
                     <img src="img/editorIcons/delete_icon.png" class="deleteQuizQuestion" data-questionblueprintid="{$question->id}" />
                 </td>
             </tr>

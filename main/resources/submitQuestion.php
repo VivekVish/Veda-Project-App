@@ -27,7 +27,7 @@ if(!PathArray::isNameValid($section)||!PathArray::isNameValid($lesson))
 
 if (isset($_REQUEST['content']) && !empty($_REQUEST['content']))
 {
-	$questionContent = htmlentities(trim(HelperFunctions::removeCurlyQuotes($_REQUEST['content'])));
+    $questionContent = htmlentities(trim(HelperFunctions::removeCurlyQuotes($_REQUEST['content'])));
 }
 
 if(isset($_REQUEST['answerChoices']) && !empty($_REQUEST['answerChoices']))
@@ -37,16 +37,6 @@ if(isset($_REQUEST['answerChoices']) && !empty($_REQUEST['answerChoices']))
 else
 {
     die("No answer choices included");
-}
-
-if(isset($_REQUEST['correctAnswer']) && !empty($_REQUEST['correctAnswer']))
-{
-    $correctAnswer = $_REQUEST['correctAnswer'];
-}
-
-if(isset($_REQUEST['questionId']) && !empty($_REQUEST['questionId']))
-{
-    $questionId = $_REQUEST['questionId'];
 }
 
 if(isset($_REQUEST['questionOrder']) && !empty($_REQUEST['questionOrder']))
@@ -76,14 +66,14 @@ else
 	$citations = json_encode(array());
 }
 
-if (isset($_REQUEST['name']) && !empty($_REQUEST['name']))
-{
-	$name = trim($_REQUEST['name']);
-}
+$correctAnswer = $_REQUEST['correctAnswer'];
+$name = trim($_REQUEST['name']);
+$questionId = $_REQUEST['questionId'];
+$responseContent = htmlentities(trim(HelperFunctions::removeCurlyQuotes($_REQUEST['response'])));
 
 # Build payload XML
 
-$payload = json_encode(array("name"=>$name,"description"=>urldecode($lesson),"content"=>$questionContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"citations"=>$citations, "answerChoices"=>$answerChoices, "correctAnswer"=>$correctAnswer, "questionOrder"=>$questionOrder,"lessonPath"=>$lessonPath));
+$payload = json_encode(array("name"=>$name,"description"=>urldecode($lesson),"content"=>$questionContent,"response"=>$responseContent,"ilos"=>$ilos,"active"=>"true","username"=>$userSession->getUsername(),"citations"=>$citations, "answerChoices"=>$answerChoices, "correctAnswer"=>$correctAnswer, "questionOrder"=>$questionOrder,"lessonPath"=>$lessonPath));
 
 # Instantiate api class
 $api = new Api();

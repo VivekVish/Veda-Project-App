@@ -37,6 +37,7 @@ class MVPQuizOverview extends MVPTestOverview
         
         $this->quizPath = "/".implode("/",$uriArr)."/";
         $this->questionLink = preg_replace('/type=quiz/',"type=questionBlueprint",$GLOBALS['url']);
+        $this->testTitle = $uriArr[6]." Quiz";
     }
 }
 

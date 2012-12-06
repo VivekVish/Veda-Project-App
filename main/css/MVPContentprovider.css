@@ -112,13 +112,6 @@
     visibility: hidden;
 }
 
-/* Submit Button */
-#pagenav #submitContent
-{
-    position: absolute;	
-    left: 45%;
-}
-
 /* ILO */
 
 .editILO,.deleteILO
@@ -197,7 +190,7 @@
 /* Content and Navigation */
 #content
 {
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
 nav#coursenav

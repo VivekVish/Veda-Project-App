@@ -19,11 +19,11 @@ class MVPQuestion extends MVPFrame
     
     public function __construct()
     {
-        $bodyTemplates = array();
-        $cssFiles = array();
-        $scriptFiles = array();
+        $bodyTemplates = array("navbar");
+        $cssFiles = array("MVPContent","MVPNavBar");
+        $scriptFiles = array("general/navbar");
         $ieScriptFiles = array();
-        $fullnameScriptFiles = array();
+        $fullnameScriptFiles = array("MathJax/MathJax.js?config=default");
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
     }
     
@@ -127,9 +127,9 @@ class MVPQuestion extends MVPFrame
         $this->mode=$mode;
         if($mode=="question")
         {
-            $bodyTemplates = array("quiz","footer");
-            $cssFiles = array("question");
-            $scriptFiles = array("content/ILOContents","content/Content","flot/jquery.flot.min","flot/jquery.flot.dashes","test/test","content/citations");
+            $bodyTemplates = array("MVPQuiz");
+            $cssFiles = array("MVPQuestion");
+            $scriptFiles = array("content/ILOContents","content/Content","flot/jquery.flot.min","flot/jquery.flot.dashes","test/MVPTest","content/citations");
             $fullnameScriptFiles = array("MathJax/MathJax.js?config=default");
 
             foreach($this->ILOs as $ilo)
@@ -140,14 +140,14 @@ class MVPQuestion extends MVPFrame
         }
         else if($mode=="complete")
         {
-            $bodyTemplates = array("testComplete","footer");
-            $cssFiles = array("testComplete");
+            $bodyTemplates = array("testComplete");
+            $cssFiles = array("MVPTestComplete");
             $scriptFiles = array("test/testComplete");
             $fullnameScriptFiles = array();
         }
         else if($mode=="noQuestions")
         {
-            $bodyTemplates = array("noQuestionsAdded","footer");
+            $bodyTemplates = array("noQuestionsAdded");
             $cssFiles = array();
             $scriptFiles = array();
             $fullnameScriptFiles = array();

@@ -8,3 +8,24 @@
 	z-index: 2;
 	border-top: solid black 0.2em;
 }
+
+.question, .questionResponse
+{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+h3
+{
+    position: relative;
+    width: 80%;
+    left: 10%;
+    padding: 1em 0 1em 0;
+}
+
+.questionResponse
+{
+    margin-top: 0;
+}

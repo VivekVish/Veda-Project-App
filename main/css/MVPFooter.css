@@ -12,8 +12,8 @@ footer
 /* Page Navigation */
 #pagenav #submitContent
 {
-    border: solid #EFEFEF;
-    background-color: #EEE;
+    border: solid #FFF;
+    background-color: #DDD;
     position: absolute;	
     left: 45%;
     cursor: pointer;
@@ -21,7 +21,7 @@ footer
 
 #pagenav #submitContent:hover
 {
-    background-color: #EFF;
+    background-color: #EEE;
 }
 
 #pagenav li

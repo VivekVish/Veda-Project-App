@@ -1,13 +1,23 @@
 /* Content */
-#content>section, #content>div#bibliography
+#content>div#bibliography
 {
     padding: 20px 10px 10px 10px;
+}
+
+#content>section
+{
+    padding: 0 10px 10px 10px;
+}
+
+#content
+{
+    margin-top: 30px;
 }
 
 #content h1
 {
     font-size: 2em;
-    padding-bottom: 0.1em;
+    padding-bottom: 1px;
     margin-bottom: 0.1em;
     border-bottom: #555 dashed 1px;
 }
