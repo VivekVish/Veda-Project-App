@@ -450,7 +450,7 @@ CourseEditor.prototype.openAddSectionLightbox = function()
         var insertSection = $('<div id="insertSectionBox"><ul></ul></div>');
         insertSection.children('ul').append('<li><label for="newSectionName">Section Name</label><input id="newSectionName"></input></li>');
         insertSection.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Create Section',insertSection);
+        createLightBox('html','Create Section',insertSection);
         $('#newSectionName').focus();
 
         function addSection()
@@ -543,7 +543,7 @@ CourseEditor.prototype.openAddLessonAddition = function(lessonAdditionIcon)
         insertLessonAddition.find('#lessonAdditionType').append('<option value="roleplay">Roleplay</option>');
         insertLessonAddition.find('#lessonAdditionType').append('<option value="video">Video</option>');
         insertLessonAddition.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Attach Lesson Resource',insertLessonAddition);
+        createLightBox('html','Attach Lesson Resource',insertLessonAddition);
         $('#lessonAdditionType').focus();
         
         var lessonPath = lessonAdditionIcon.parents('li').first().children('span').attr('data-lessonpath');
@@ -621,7 +621,7 @@ CourseEditor.prototype.openAddLessonLightbox = function(lessonIcon)
         var insertLesson = $('<div id="insertLessonBox"><ul></ul></div>');
         insertLesson.children('ul').append('<li><label for="newLessonName">Lesson Name</label><input id="newLessonName"></input></li>');
         insertLesson.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Create Lesson',insertLesson);
+        createLightBox('html','Create Lesson',insertLesson);
         $('#newLessonName').focus();
 
         function addLesson()
@@ -816,7 +816,7 @@ CourseEditor.prototype.recoverDeletedLessons = function(navPosition)
 
         recoverLessonsBox.children('ul').append('<li><button class="ok">OK</button><button class="recover">Recover</button><li>');
 
-        createLightBox('#content','Recover Deleted Lessons',recoverLessonsBox);
+        createLightBox('html','Recover Deleted Lessons',recoverLessonsBox);
 
         $('#recoverLessonsBox button.recover').click(function()
         {

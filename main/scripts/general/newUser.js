@@ -49,7 +49,7 @@ $(document).ready(function()
 			window.location = 'resources/logout.php';
 		});
 		
-		createLightBox('body','Your session has timed out.',lightBoxContent);
+		createLightBox('html','Your session has timed out.',lightBoxContent);
 	}, 600000);
 	
 	// Checks for the validity of the username being typed

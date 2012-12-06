@@ -78,7 +78,7 @@ var graph =
             var currentRange = rangeTraverse.getCurrentRange();
 		}
 		
-		createLightBox('#content','Graph Editor','<div id="graphEditorHolder"></div>');
+		createLightBox('html','Graph Editor','<div id="graphEditorHolder"></div>');
 		$('#lightbox').addClass('graphLightbox');
 		$('#graphEditorHolder').append('<div><div class="ilo" data-ilotype="graph" id="ilo-1"></div></div>');
 		

@@ -287,7 +287,7 @@ LessonPlan.prototype.openAddSectionLightbox = function()
         var insertSection = $('<div id="insertSectionBox"><ul></ul></div>');
         insertSection.children('ul').append('<li><label for="newSectionName">Section Name</label><input id="newSectionName"></input></li>');
         insertSection.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Create Section',insertSection);
+        createLightBox('html','Create Section',insertSection);
         $('#newSectionName').focus();
 
         function addSection()

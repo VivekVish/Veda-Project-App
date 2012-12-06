@@ -10,6 +10,11 @@
     font-family: calibri, Arial, Helvetica, sans-serif;	
 }
 
+body
+{
+    height: 100%;
+}
+
 #main
 {
     width: 1040px;

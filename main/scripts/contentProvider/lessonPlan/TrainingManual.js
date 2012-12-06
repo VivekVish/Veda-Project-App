@@ -18,7 +18,7 @@ ContentProvider.prototype.openInfoBoxLightbox = function()
 
     if($(caretPositionRange.startContainer).parents('.infoBox').size()==0)
     {
-        createLightBox('#content','Create Info Box',insertInfoBoxBox);
+        createLightBox('html','Create Info Box',insertInfoBoxBox);
 
         $('#insertInfoBoxBox button.create').click(function()
         {
@@ -29,7 +29,7 @@ ContentProvider.prototype.openInfoBoxLightbox = function()
     }
     else
     {
-        createLightBox('#content','Change Info Box',insertInfoBoxBox);
+        createLightBox('html','Change Info Box',insertInfoBoxBox);
 
         $('#insertInfoBoxBox button.create').click(function()
         {

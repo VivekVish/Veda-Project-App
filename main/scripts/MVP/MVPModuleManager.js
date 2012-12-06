@@ -136,7 +136,7 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         createLessonPlan.children('ul').find('#newLessonPlanLiteracy').children('option[value="'+currentLiteracy+'"]').attr('selected','selected');
         createLessonPlan.children('ul').find('#newLessonPlanImage').children('option[value="'+currentImage+'"]').attr('selected','selected');
         
-        createLightBox('body','Create Module',createLessonPlan);
+        createLightBox('html','Create Module',createLessonPlan);
         $('#newLessonPlanName').focus();
         
         function addLessonPlan(id,lessonPlanName,tags,notes,location,age,gender,literacy,moduleImage)

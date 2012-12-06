@@ -17,7 +17,7 @@ BaseProvider.prototype.createCitationLightbox = function()
         insertCitationLightbox.children('ul').append($('<li><textarea id="citationText" rows="3" cols="20"></textarea></li>'));
         insertCitationLightbox.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
 
-        createLightBox('#content','Insert Citation',insertCitationLightbox);
+        createLightBox('html','Insert Citation',insertCitationLightbox);
 
         $('#insertCitationLightbox button.create').click(function()
         {
@@ -160,7 +160,7 @@ BaseProvider.prototype.createInsertTableLightBox = function()
         insertTableBox.find('#tableColumns').append('<option value="'+i+'">'+i+'</option>');
     }
 
-    createLightBox('#content','Create Table',insertTableBox);
+    createLightBox('html','Create Table',insertTableBox);
 
     $('#insertTableBox button.create').click(function()
     {

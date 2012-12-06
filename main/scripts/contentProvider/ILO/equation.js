@@ -36,7 +36,7 @@ var equation =
             var currentRange = rangeTraverse.getCurrentRange();
 		}
 
-		createLightBox('#content','Equation Editor','<div id="EqEditorHolder"></div>',$('#content').width()/2);
+		createLightBox('html','Equation Editor','<div id="EqEditorHolder"></div>',$('#content').width()/2);
 		$('#EqEditorHolder').append('<ul></ul>');
 		$('#EqEditorHolder ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
 		$('#equationText').val(equationData);

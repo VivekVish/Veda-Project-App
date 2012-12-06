@@ -58,15 +58,18 @@ $(document).ready(function()
                                 $('.incorrectAnswerImage').css('top',($('.incorrectAnswerImage').parent('li').outerHeight()-$('.incorrectAnswerImage').height())/2+"px");
                             }
                             
-                            console.log($('.submitDiv'));
+                            if(answerArray.response!=null)
+                            {
+                                $('.question').append('<div id="answerResponse"></div>');
+                                $("#answerResponse").html($('<div />').html(answerArray.response).text());
+                            }
+                            
                             $('#questionButtons').append('<button id="nextquestion">Next Question</button>');
                             
                             $('#nextquestion').click(function()
                             {
                                 window.location.reload();
                             });
-                            
-                            console.log($('#nextquestion'));
                         }
                         catch(e)
                         {

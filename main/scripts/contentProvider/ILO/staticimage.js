@@ -176,7 +176,7 @@ var staticimage =
             var currentRange = rangeTraverse.getCurrentRange();
 		}
 		
-		createLightBox('#content','Image Editor','<div id="imageEditorHolder"><div><div id="imageHolder"></div><div id="imageTabs"></div><div id="imageInfoHolder"></div></div></div>');
+		createLightBox('html','Image Editor','<div id="imageEditorHolder"><div><div id="imageHolder"></div><div id="imageTabs"></div><div id="imageInfoHolder"></div></div></div>');
         $('#imageTabs').append('<ul></ul>');
         $('#imageTabs ul').append('<li><a href="#imageUploadForm">Upload Image</a></li>'+
                                   '<li><a href="#courseImages">Course Images</a></li>'+

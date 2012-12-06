@@ -30,7 +30,7 @@ var chemicalEquation =
             var currentRange = rangeTraverse.getCurrentRange();
 		}
 
-		createLightBox('#content','Chemical Equation Editor','<div id="chemicalEqEditorHolder"></div>',$('#content').width()/2);
+		createLightBox('html','Chemical Equation Editor','<div id="chemicalEqEditorHolder"></div>',$('#content').width()/2);
 		$('#chemicalEqEditorHolder').append('<ul></ul>');
 		$('#chemicalEqEditorHolder ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
 		$('#chemicalEquationText').val(equationData);

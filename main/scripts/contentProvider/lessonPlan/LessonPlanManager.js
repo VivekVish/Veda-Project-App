@@ -54,7 +54,7 @@ LessonPlanManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         createLessonPlan.children('ul').append('<li><label for="newTags">Tags (comma-separated)</label><input id="newTags" value="'+currentTags+'"></input></li>');
         createLessonPlan.children('ul').append('<li><label for="newNotes">Notes</label><textarea id="newNotes">'+currentNotes+'</textarea></li>');
         createLessonPlan.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('#content','Create Lesson Plan',createLessonPlan);
+        createLightBox('html','Create Lesson Plan',createLessonPlan);
         $('#newLessonPlanName').focus();
         
         function addLessonPlan(id,lessonPlanName,tags,notes)

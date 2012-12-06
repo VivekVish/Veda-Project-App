@@ -305,7 +305,7 @@ LessonPlan.prototype.openAddSectionLightbox = function()
         var insertSection = $('<div id="insertSectionBox"><ul></ul></div>');
         insertSection.children('ul').append('<li><label for="newSectionName">Section Name</label><input id="newSectionName"></input></li>');
         insertSection.children('ul').append('<li><button class="cancel">Cancel</button><button class="create">Create</button></li>');
-        createLightBox('body','Create Section',insertSection);
+        createLightBox('html','Create Section',insertSection);
         $('#newSectionName').focus();
 
         function addSection()
@@ -697,7 +697,7 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
     createLessonPlan.children('ul').find('#newLessonPlanLiteracy').children('option[value="'+currentLiteracy+'"]').attr('selected','selected');
     createLessonPlan.children('ul').find('#newLessonPlanImage').children('option[value="'+currentImage+'"]').attr('selected','selected');
 
-    createLightBox('body','Create Module',createLessonPlan);
+    createLightBox('html','Create Module',createLessonPlan);
     $('#newLessonPlanName').focus();
     
     function editLessonPlan(id,lessonPlanName,tags,notes,location,age,gender,literacy,moduleImage)
