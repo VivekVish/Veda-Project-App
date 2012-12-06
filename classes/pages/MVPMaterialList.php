@@ -71,11 +71,11 @@ class MVPMaterialList extends MVPFrame
                 $literacyText = $module->literacy=="yes" ? "literacy required" : "literacy not required";
                 if($module->tags=="")
                 {
-                    $this->myModules[$key]->tagText = sprintf("%s,%s,%s,%s",$module->location,$module->age,$genderText,$literacyText);
+                    $this->myModules[$key]->tagText = sprintf("%s, %s, %s, %s",$module->location,$module->age,$genderText,$literacyText);
                 }
                 else
                 {
-                    $this->myModules[$key]->tagText = sprintf("%s,%s,%s,%s,%s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
+                    $this->myModules[$key]->tagText = sprintf("%s, %s, %s, %s, %s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
                 }
             } 
        }
