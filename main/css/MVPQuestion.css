@@ -156,3 +156,14 @@ button.submitanswer, button.editQuestion
 {
     background-color: #E2CFD0;
 }
+
+#answerResponse
+{
+    padding: 8px 5px 8px 5px;
+    border: 2px black solid;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
