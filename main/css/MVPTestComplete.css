@@ -12,3 +12,16 @@
 {
     text-decoration: underline;
 }
+
+button#retakequiz
+{
+    margin-top: 2em;
+    float: right;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: .5em 2em .55em;
+}
