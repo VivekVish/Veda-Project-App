@@ -297,24 +297,24 @@ navbar.prototype.navigateToLesson = function(navBarLocation)
 
 function navbar()
 {
-	var navbarObject = this;
+    var navbarObject = this;
 
-	this.processPosition($('#coursenav').attr('data-navPosition'));
-	
-	$('#coursenav>div>ul>li').live('click',function(e)
-	{
-            if($(this).attr('data-link')=="/data/material/CHW_Training/Manager_Training/"||$(this).attr('data-link')=="/data/material/CHW_Training/Supervisor_Training/")
-            {
-                new Message("Still incomplete...");
-            }
-            else
-            {
-                navbarObject.navigateToNextLevel($(this).attr('data-link'));
-            }
-	});
+    this.processPosition($('#coursenav').attr('data-navPosition'));
 
-	$('nav#coursenav>div>div#upToPreviousNavLevel').live('click', function(e)
-	{
-            navbarObject.processPosition($(this).attr('data-link'));
-	});
+    $('#coursenav>div>ul>li').live('click',function(e)
+    {
+        if($(this).attr('data-link')=="/data/material/CHW_Training/Manager_Training/"||$(this).attr('data-link')=="/data/material/CHW_Training/Supervisor_Training/")
+        {
+            new Message("Still incomplete...");
+        }
+        else
+        {
+            navbarObject.navigateToNextLevel($(this).attr('data-link'));
+        }
+    });
+
+    $('nav#coursenav>div>div#upToPreviousNavLevel').live('click', function(e)
+    {
+        navbarObject.processPosition($(this).attr('data-link'));
+    });
 }

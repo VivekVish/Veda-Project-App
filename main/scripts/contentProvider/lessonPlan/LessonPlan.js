@@ -529,19 +529,19 @@ LessonPlan.prototype.deleteLessonAddition = function(additionButton)
 
 function LessonPlan()
 {
-	var thisObject = this;
-    
-	$('.sectionList').sortable().disableSelection();
-	$('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
+    var thisObject = this;
 
-	// Section re-ordering makes ajax request
-	$('.sectionList').live("sortstop",function(e,ui)
-	{
+    $('.sectionList').sortable().disableSelection();
+    $('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
+
+    // Section re-ordering makes ajax request
+    $('.sectionList').live("sortstop",function(e,ui)
+    {
         if(typeof($(ui.item[0]).attr('data-lessonpath'))==='undefined'&&!$(ui.item).hasClass('lessonPlanLesson'))
         {
             thisObject.sortSection($(ui.item));
         }
-	});
+    });
     
     $('.sectionList').live("sort",function(e,ui)
     {
@@ -551,9 +551,9 @@ function LessonPlan()
         }
     });
 	
-	// Lesson re-ordering makes ajax request
-	$('.lessonList').live("sortstop",function(e,ui)
-	{
+    // Lesson re-ordering makes ajax request
+    $('.lessonList').live("sortstop",function(e,ui)
+    {
         if($(ui.item).hasClass('lessonPlanLesson'))
         {
             thisObject.sortLesson($(ui.item),$(e.target));
@@ -562,7 +562,7 @@ function LessonPlan()
         {
             thisObject.addLesson($(ui.item));
         }
-	});
+    });
     
     $('.lessonList').live("sort",function(e,ui)
     {
@@ -573,47 +573,47 @@ function LessonPlan()
         }
     });
 	
-	// Edit section name
-	$('span.sectionName').live('click',function()
-	{
-        thisObject.editSectionName($(this));
-	});
-	
-	$('input.sectionName').live('blur',function()
-	{
-        if($(this).attr('data-revert')!="true")
+    // Edit section name
+    $('span.sectionName').live('click',function()
+    {
+    thisObject.editSectionName($(this));
+    });
+
+    $('input.sectionName').live('blur',function()
+    {
+    if($(this).attr('data-revert')!="true")
+    {
+        thisObject.renameSection(this,$(this).val());
+    }
+    });
+
+    // Contract List
+    $('.listEditor .expandedList img').live('click',function()
+    {
+        var minusImage = this;
+        $(minusImage).parents('li').children('ul').slideUp(400,function()
         {
-            thisObject.renameSection(this,$(this).val());
-        }
-	});
-	
-	// Contract List
-	$('.listEditor .expandedList img').live('click',function()
-	{
-		var minusImage = this;
-		$(minusImage).parents('li').children('ul').slideUp(400,function()
-		{
-			$(minusImage).attr('src','img/editorIcons/plus_icon.png');
-			$(minusImage).parents('.expandedList').removeClass('expandedList').addClass('contractedList');
-		});
-	});
-	
-	// Expand List
-	$('.listEditor .contractedList img').live('click',function()
-	{
-		var plusImage = this;
-		$(plusImage).parents('li').children('ul').slideDown(400,function()
-		{
-			$(plusImage).attr('src','img/editorIcons/minus_icon.png');
-			$(plusImage).parents('.contractedList').removeClass('contractedList').addClass('expandedList');
-		});
-	});
-	
-	// Add Section Button
-	$('#listEditorHeader #addSectionIcon').live('click',function()
-	{
+            $(minusImage).attr('src','img/editorIcons/plus_icon.png');
+            $(minusImage).parents('.expandedList').removeClass('expandedList').addClass('contractedList');
+        });
+    });
+
+    // Expand List
+    $('.listEditor .contractedList img').live('click',function()
+    {
+        var plusImage = this;
+        $(plusImage).parents('li').children('ul').slideDown(400,function()
+        {
+            $(plusImage).attr('src','img/editorIcons/minus_icon.png');
+            $(plusImage).parents('.contractedList').removeClass('contractedList').addClass('expandedList');
+        });
+    });
+
+    // Add Section Button
+    $('#listEditorHeader #addSectionIcon').live('click',function()
+    {
         thisObject.openAddSectionLightbox();
-	});
+    });
     
     // Delete Section
     $('.deleteSectionIcon').live('click',function()

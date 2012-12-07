@@ -685,7 +685,7 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
     var currentGender = $("#listEditorHeader").attr("data-gender");
     var currentLiteracy = $("#listEditorHeader").attr("data-literacy");
     var currentImage = $("#listEditorHeader").attr("data-image");
-
+    console.log(currentImage);
     var createLessonPlan = this.createAddLessonPlanLightbox();
         
     createLessonPlan.children('ul').find('#newLessonPlanName').val(currentName);

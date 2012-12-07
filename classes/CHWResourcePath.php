@@ -44,9 +44,16 @@ class ResourcePath
                         $this->currentPath = "/data/material/CHW_Training/";
                         break;
                     case "lessonPlan":
-                        $this->currentPath = "/data/lessonplan/$id/";
-                        $this->pageClass = "MVPLessonPlan";
-                        $this->studentAccessible = false;
+                        if(is_null($section)||is_null($lesson))
+                        {
+                            $this->currentPath = "/data/lessonplan/$id/";
+                            $this->pageClass = "MVPLessonPlan";
+                        }
+                        else
+                        {
+                            $this->currentPath = "/data/lessonplan/$id/$section/$lesson/";
+                            $this->pageClass = "MVPLessonPlanLesson";
+                        }
                         break;
                     case "lessonPlanManager":
                         $this->currentPath = "/user/lessonplanmanager/$username/";

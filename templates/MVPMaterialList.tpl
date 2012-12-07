@@ -27,7 +27,7 @@
 {foreach from=$myModules item="material"}
             <li data-lessonplanid="{$material->id}">
                 <a href="index.php?type=lessonPlan&id={$material->id}">
-                    <img src="img/navIcons/Cough.png" />
+                    <img src="img/navIcons/{$material->image}.png" />
                     <div class="moduleContent">
                         <h3>{$material->name}</h3>
                         <p class="notes">{$material->notes}</p>
