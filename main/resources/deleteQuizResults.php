@@ -12,12 +12,22 @@ if(!$userSession->isLoggedIn())
 
 if (isset($_REQUEST['quizPath']) && !empty($_REQUEST['quizPath']))
 {
-	$quizPath = $_REQUEST['quizPath'];
+    $quizPath = $_REQUEST['quizPath'];
 }
 
 $api = new Api();
 
-$uri = $quizPath."quiz/{$userSession->getUsername()}/";
+$uriArr = explode("/",trim($quizPath,"/"));
+
+if(count($uriArr)==6)
+{
+    $uri = $quizPath."{$userSession->getUsername()}/";
+}
+else
+{
+    $uri = $quizPath."quiz/{$userSession->getUsername()}/";
+}
+
 $result = $api->delete($uri);
 
 print_r($result);

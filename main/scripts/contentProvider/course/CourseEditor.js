@@ -72,6 +72,10 @@ CourseEditor.prototype.renameSection = function(sectionNameElement, newName)
                     $(sectionNameElement).parents('span[data-sectionpath]').attr('data-sectionpath','/data/material/'+positionArray.join('/')+'/');
                     $(sectionNameElement).parents('span[data-sectionpath]').next('ul.lessonList').find('li>span[data-lessonpath]').each(function(index)
                     {
+                        $(this).children().last().children('a').each(function()
+                        {
+                            $(this).attr("href",$(this).attr("href").substring(0,$(this).attr("href").indexOf("&section=")+9)+encodeURIComponent(newPositionName)+$(this).attr("href").substring($(this).attr("href").indexOf("&lesson=")));
+                        });
                         var lessonPathArray = $(this).attr('data-lessonpath').split('/');
                         lessonPathArray[6] = newPositionName;
                         $(this).attr('data-lessonpath',lessonPathArray.join('/'));
@@ -130,9 +134,13 @@ CourseEditor.prototype.renameLesson = function(lessonNameElement, newName)
                 {
                     var newPositionName = newName.replace(/ /g,'_');
                     positionArray[4] = newPositionName;
+                    $(lessonNameElement).parents('span[data-lessonpath]').children().last().children('a').each(function()
+                    {
+                        $(this).attr("href",$(this).attr("href").substring(0,$(this).attr("href").indexOf("&lesson=")+8)+encodeURIComponent(newPositionName)+$(this).attr("href").substring($(this).attr("href").indexOf("&type=")))
+                    });
                     $(lessonNameElement).parents('span[data-lessonpath]').attr('data-lessonpath','/data/material/'+positionArray.join('/')+'/');
                     $(lessonNameElement).replaceWith('<span class="lessonName">'+newName+'</span>');
-
+                    
                     thisObject.callNavReprocess();
                     thisObject.actionStarted = false;
                 }

@@ -39,8 +39,16 @@ navbar.prototype.fill = function(navBarTitle, backLocation, navbarLinks)
             }
             else if(navbarObject.lessons)
             {
-                var backArray = navbarObject.currentPosition.replace(/^\/data\/material\/|\/$/g,'').split('/');
-                $('#coursenav>div>div>h2').after('<a id="backToCourseButton" href="index.php?field='+backArray[0]+'&subject='+backArray[1]+'&course='+backArray[2]+'"><img src="img/back_button.png" /></a>');
+                if(navbarObject.currentPosition.search(/^\/data\/material\//g)>-1)
+                {
+                    var backArray = navbarObject.currentPosition.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                    $('#coursenav>div>div>h2').after('<a id="backToCourseButton" href="index.php?field='+backArray[0]+'&subject='+backArray[1]+'&course='+backArray[2]+'"><img src="img/back_button.png" /></a>');
+                }
+                else
+                {
+                    backArray = navbarObject.currentPosition.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
+                    $('#coursenav>div>div>h2').after('<a id="backToCourseButton" href="index.php?type=lessonPlan&id='+backArray[0]+'"><img src="img/back_button.png" /></a>');
+                }
             }
 
             $('#coursenav>div>ul').remove();
@@ -53,13 +61,27 @@ navbar.prototype.fill = function(navBarTitle, backLocation, navbarLinks)
                 {
                     $('#coursenav>div>ul').append('<li>'+navbarLinks[i]["name"]+'</li>');
                     $('#coursenav>div>ul>li:last-of-type').append('<ul></ul>');
-                    for(j=0;j<navbarLinks[i].lessons.length;j++)
+                    if(navbarObject.currentPosition.search(/^\/data\/material\//g)>-1)
                     {
-                        var linkArray = navbarLinks[i].lessons[j]['link'].replace(/^\/data\/material\/|\/$/g,'').split('/');
-                        var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+                        for(j=0;j<navbarLinks[i].lessons.length;j++)
+                        {
+                            var linkArray = navbarLinks[i].lessons[j]['link'].replace(/^\/data\/material\/|\/$/g,'').split('/');
+                            var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
 
-                        var linkLocation = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course+"&section="+escape(navPosition.section)+"&lesson="+escape(navPosition.lesson);
-                        $('#coursenav>div>ul>li:last-of-type>ul').append('<li><a href="'+linkLocation+'">'+eval(j+1)+'. '+navbarLinks[i].lessons[j]["name"]+'</a></li>');
+                            var linkLocation = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course+"&section="+escape(navPosition.section)+"&lesson="+escape(navPosition.lesson);
+                            $('#coursenav>div>ul>li:last-of-type>ul').append('<li><a href="'+linkLocation+'">'+eval(j+1)+'. '+navbarLinks[i].lessons[j]["name"]+'</a></li>');
+                        }
+                    }
+                    else
+                    {
+                        for(j=0;j<navbarLinks[i].lessons.length;j++)
+                        {
+                            var linkArray = navbarLinks[i].lessons[j]['link'].replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
+                            var navPosition = {lesson:linkArray[2], section:linkArray[1],lessonplanId:linkArray[0]};
+
+                            var linkLocation = "index.php?type=lessonPlan&id="+navPosition.lessonplanId+"&section="+navPosition.section+"&lesson="+navPosition.lesson;
+                            $('#coursenav>div>ul>li:last-of-type>ul').append('<li><a href="'+linkLocation+'">'+eval(j+1)+'. '+navbarLinks[i].lessons[j]["name"]+'</a></li>');
+                        }
                     }
                 }
             }
@@ -145,122 +167,132 @@ navbar.prototype.processPosition = function(navBarLocation)
     if(this.readyToProcess)
     {
         this.readyToProcess=false;
-        var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
-        var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
-
-        $.ajax({url : 'resources/getCourseNav.php', type: 'GET', data: navPosition,success: function(data)
+        if(navBarLocation.search(/^\/data\/material\//g)>-1)
         {
-            var backLocation = '/data/material/';
-            dataArray = $.parseJSON(data);
-
-            var currentPath = dataArray['path'];
+            var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
+            var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
             
-            if(currentPath!==null)
+            $.ajax({url : 'resources/getCourseNav.php', type: 'GET', data: navPosition,success: function(data)
             {
-                var backLocationArray = currentPath.split('/');
-                backLocationArray.splice(backLocationArray.length-2,1);
-                var backLocation = backLocationArray.join('/');
-            }
-                    
-            var newNavBarLinks = new Array();
-            var newNavBarTitle = dataArray['name']==null ? 'Fields' : dataArray['name'];
+                var backLocation = '/data/material/';
+                var dataArray = $.parseJSON(data);
 
-            navbarObject.fields = false;
-            navbarObject.courses = false;
-            navbarObject.lessons = false;
-            
-            function getJSONArrayLength(myObject)
-            {
-                var keepGoing = true;
-                var objectLength = 0;
-                if(myObject==null)
+                var currentPath = dataArray['path'];
+
+                if(currentPath!==null)
                 {
-                    return objectLength;
+                    var backLocationArray = currentPath.split('/');
+                    backLocationArray.splice(backLocationArray.length-2,1);
+                    var backLocation = backLocationArray.join('/');
                 }
-                
-                while(keepGoing)
+
+                var newNavBarLinks = new Array();
+                var newNavBarTitle = dataArray['name']==null ? 'Fields' : dataArray['name'];
+
+                navbarObject.fields = false;
+                navbarObject.courses = false;
+                navbarObject.lessons = false;
+
+                // Current Path is subject level
+                if(currentPath.split('/').length==6)
                 {
-                    if(myObject[objectLength]==null)
+                    navbarObject.courses = true;
+                }
+
+                // Current Path is course level
+                if(currentPath.split('/').length==7)
+                {
+                    navbarObject.fields = false;
+                    navbarObject.lessons = true;
+
+                    if(getJSONArrayLength(dataArray['children'])>0)
                     {
-                        keepGoing=false;
+                        for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
+                        {
+                            newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],lessons:new Array()});
+                            var sectionLinkArray = newNavBarLinks[i].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                            var sectionNavPosition = {section:sectionLinkArray[3], course:sectionLinkArray[2], subject:sectionLinkArray[1],field:sectionLinkArray[0]};
+
+                            function processAjax(index)
+                            {
+                                return function(innerData)
+                                {
+                                    innerDataArray = $.parseJSON(innerData);
+
+                                    for(j=0;j<getJSONArrayLength(innerDataArray['children']);j++)
+                                    {
+                                        newNavBarLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name']});
+                                    }
+
+                                    if(index==getJSONArrayLength(dataArray['children'])-1)
+                                    {
+                                        navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
+                                    }
+                                }
+                            }
+
+                            $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:processAjax.call(this,i)});
+                        }
                     }
                     else
                     {
-                        objectLength++;
+                        navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
                     }
                 }
-                
-                return objectLength;
-            }
-
-            // Current Path is subject level
-            if(currentPath.split('/').length==6)
-            {
-                navbarObject.courses = true;
-            }
-
-            // Current Path is course level
-            if(currentPath.split('/').length==7)
-            {
-                navbarObject.fields = false;
-                navbarObject.lessons = true;
-
-                if(getJSONArrayLength(dataArray['children'])>0)
+                else
                 {
+                    if(currentPath=='/data/material/')
+                    {
+                        navbarObject.fields = true;
+                    }
+                    else
+                    {
+                        navbarObject.fields = false;
+                    }
+                    navbarObject.lessons = false;
+
                     for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
                     {
-                        newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],lessons:new Array()});
-                        var sectionLinkArray = newNavBarLinks[i].link.replace(/^\/data\/material\/|\/$/g,'').split('/');
-                        var sectionNavPosition = {section:sectionLinkArray[3], course:sectionLinkArray[2], subject:sectionLinkArray[1],field:sectionLinkArray[0]};
-                        
-                        function processAjax(index)
-                        {
-                            return function(innerData)
-                            {
-                                innerDataArray = $.parseJSON(innerData);
-
-                                for(j=0;j<getJSONArrayLength(innerDataArray['children']);j++)
-                                {
-                                    newNavBarLinks[index].lessons.push({link:innerDataArray['children'][j]['path'],name:innerDataArray['children'][j]['name']});
-                                }
-
-                                if(index==getJSONArrayLength(dataArray['children'])-1)
-                                {
-                                    navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
-                                }
-                            }
-                        }
-                        
-                        $.ajax({url: 'resources/getCourseNav.php',type:'GET',data:sectionNavPosition,success:processAjax.call(this,i)});
+                        newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],img:$.trim(dataArray['children'][i]['name']).replace(/ /g,'_')});
                     }
-                }
-                else
-                {
+
                     navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
                 }
-            }
-            else
+
+                $('#coursenav').attr('data-navPosition',navBarLocation);
+            }});
+        }
+        else
+        {
+            navbarObject.fields = false;
+            navbarObject.lessons = true;
+            
+            linkArray = navBarLocation.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
+            navPosition = {moduleId:linkArray[0]};
+            $.ajax({url : 'resources/getModuleNav.php', type: 'GET', data: navPosition,success: function(data)
             {
-                if(currentPath=='/data/material/')
-                {
-                    navbarObject.fields = true;
-                }
-                else
-                {
-                    navbarObject.fields = false;
-                }
-                navbarObject.lessons = false;
+                var jsonArray = $.parseJSON(data);
                 
-                for(i=0;i<getJSONArrayLength(dataArray['children']);i++)
+                var newNavBarTitle = jsonArray['name'];
+                var backLocation = navBarLocation;
+                var newNavBarLinks = new Array();
+                
+                for(i=0;i<jsonArray.children.length;i++)
                 {
-                    newNavBarLinks.push({link:dataArray['children'][i]['path'],name:dataArray['children'][i]['name'],img:$.trim(dataArray['children'][i]['name']).replace(/ /g,'_')});
+                    var lessonplanId = jsonArray.children[i].path.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/')[0];
+                    var sectionName = jsonArray.children[i].path.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/')[1];
+                    newNavBarLinks.push({link:jsonArray.children[i]['path'],name:jsonArray.children[i]['name'],lessons:new Array()});
+                    for(j=0;j<jsonArray.children[i].lessons.length;j++)
+                    {
+                        var lessonName = jsonArray.children[i].lessons[j].path.replace(/^\/data\/material\/|\/$/g,'').split('/')[4];
+                        var lessonPath = "/data/lessonplan/"+lessonplanId+"/"+sectionName+"/"+lessonName+"/";
+                        newNavBarLinks[i].lessons.push({link:lessonPath,name:jsonArray.children[i].lessons[j].name});
+                    }
                 }
                 
                 navbarObject.fill(newNavBarTitle, backLocation, newNavBarLinks);
-            }
-
-            $('#coursenav').attr('data-navPosition',navBarLocation);
-        }});
+            }});
+        }
     }
 }
 
@@ -273,10 +305,19 @@ navbar.prototype.navigateToNextLevel = function(navBarLocation)
     {
         if(!this.lessons && !this.courses)
         {
-            //this.processPosition(navBarLocation);
-            var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
-            var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
-            window.location = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course;
+            if(navBarLocation.search(/^\/data\/material\//g)>-1)
+            {
+                //this.processPosition(navBarLocation);
+                var linkArray = navBarLocation.replace(/^\/data\/material\/|\/$/g,'').split('/');
+                var navPosition = {lesson:linkArray[4],section:linkArray[3], course:linkArray[2], subject:linkArray[1],field:linkArray[0]};
+                window.location = "index.php?field="+navPosition.field+"&subject="+navPosition.subject+"&course="+navPosition.course;
+            }
+            else
+            {
+                linkArray = navBarLocation.replace(/^\/data\/lessonplan\/|\/$/g,'').split('/');
+                navPosition = {moduleId:linkArray[0]};
+                window.location = "index.php?type=lessonPlan&id="+navPosition.moduleId;
+            }
         }
     }
 }

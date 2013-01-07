@@ -103,7 +103,11 @@ class MVPQuestion extends MVPFrame
             }
             else
             {
-                $this->location="/data/material/{$this->pathArray[2]}/{$this->pathArray[3]}/{$this->pathArray[4]}/{$this->pathArray[5]}/{$this->pathArray[6]}/";
+                $this->location="/{$this->pathArray[0]}/{$this->pathArray[1]}/{$this->pathArray[2]}/{$this->pathArray[3]}/{$this->pathArray[4]}/{$this->pathArray[5]}/";
+                if(count($this->pathArray)>6)
+                {
+                    $this->location.="{$this->pathArray[6]}/";
+                }
                 $numCorrect = 0;
 
                 foreach($this->answerCorrect as $isCorrect)
@@ -115,7 +119,7 @@ class MVPQuestion extends MVPFrame
                 }
 
                 $this->percentCorrect = round(100*$numCorrect/count($this->answerCorrect));
-                $this->thresholdCorrectMet = $percentCorrect>=70;
+                $this->thresholdCorrectMet = $this->percentCorrect>=70;
                 
                 $this->setMode("complete");
             }

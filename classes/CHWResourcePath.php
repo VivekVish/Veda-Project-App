@@ -39,6 +39,9 @@ class ResourcePath
             {
                 switch($type)
                 {
+                    case "newuser":
+                        $this->pageClass = "MVPRequestUsername";
+                        break;
                     case "home":
                         $this->pageClass = "MVPHome";
                         $this->currentPath = "/data/material/CHW_Training/";
@@ -51,6 +54,7 @@ class ResourcePath
                         }
                         else
                         {
+                            $this->navPosition = "/data/lessonplan/$id/";
                             $this->currentPath = "/data/lessonplan/$id/$section/$lesson/";
                             $this->pageClass = "MVPLessonPlanLesson";
                         }
@@ -60,6 +64,34 @@ class ResourcePath
                         $this->pageClass = "LessonPlanManager";
                         $this->studentAccessible = false;
                         $this->requiresLogin = true;
+                        break;
+                    case "lessonPlantrainingmanual":
+                        $this->navPosition = "/data/lessonplan/$id/";
+                        $this->currentPath = "/data/lessonplan/$id/$section/$lesson/trainingmanual/";
+                        if($userType=="teacher")
+                        {
+                            $this->pageClass = "MVPTeacherTrainingManual";
+                        }
+                        else
+                        {
+                            $this->pageClass = "MVPLessonPlanTrainingManual";
+                        }
+                        break;
+                    case "lessonPlanroleplay":
+                        $this->navPosition = "/data/lessonplan/$id/";
+                        $this->currentPath = "/data/lessonplan/$id/$section/$lesson/roleplay/";
+                        $this->pageClass = "MVPLessonPlanRoleplay";
+                        break;
+                    case "lessonPlanvideo":
+                        $this->navPosition = "/data/lessonplan/$id/";
+                        $this->currentPath = "/data/lessonplan/$id/$section/$lesson/video/";
+                        $this->pageClass = "MVPLessonPlanVideo";
+                        break;
+                    case "lessonPlanQuiz":
+                        $this->requiresLogin = true;
+                        $this->navPosition = "/data/lessonplan/$id/";
+                        $this->currentPath = "/data/lessonplan/$id/$section/$lesson/quiz/$username/";
+                        $this->pageClass = "MVPLessonPlanQuestion";
                         break;
                 }
             }
@@ -165,10 +197,6 @@ class ResourcePath
                             if($userType=="contentProvider"||$userType=="admin")
                             {
                                 $this->pageClass = "MVPEditTrainingManual";
-                            }
-                            elseif($userType=="teacher")
-                            {
-                                $this->pageClass = "MVPTeacherTrainingManual";
                             }
                             else
                             {

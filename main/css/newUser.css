@@ -1,112 +1,111 @@
 @font-face
 {
-	font-family: trajan;
-	src: url('fonts/TrajanBold.eot');
+    font-family: trajan;
+    src: url('fonts/TrajanBold.eot');
     src: local(trajan), url('fonts/TrajanBold.ttf') format('opentype');
 }
 
 #lightbox
 {
-	min-width: 600px;
+    min-width: 600px;
 }
 
 #header
 {
-	margin: auto;
-	position: relative;
-	width: 550px;
+    margin: auto;
+    position: relative;
+    width: 550px;
 }
 
 #header img, #header h1
 {
-	display: inline;
-	position: absolute;
+    display: inline;
+    position: absolute;
 }
 
 #header h1
 {
-	font-family: trajan;
-	font-size: 40px;
-	color: #002359;
-	top: 15px;
-	left: 90px;
+    font-family: trajan;
+    font-size: 40px;
+    color: #002359;
+    top: 15px;
+    left: 90px;
 }
 
 #header h1 span
 {
-	font-family: trajan;
-	font-size: 50px;
-	color: #002359;
+    font-family: trajan;
+    font-size: 50px;
+    color: #002359;
 }
 
 #newUser
 {
-	position: relative;
-	
-	width: 480px;
-	margin: auto;
-	margin-top: 100px;
-	border: 2px solid;
-	border-radius: 8px;
-	background-clip: padding-box;
-	background: #EEF;
-	
-	padding: 4px 10px 4px 10px;
+    position: relative;
+
+    width: 480px;
+    margin: auto;
+    margin-top: 100px;
+    border: 2px solid;
+    border-radius: 8px;
+    background-clip: padding-box;
+    background: #EEF;
+
+    padding: 4px 10px 4px 10px;
 }
 
 #newUser h2
 {
-	font-size: 24px;
-	margin-bottom: 2px;
+    font-size: 24px;
+    margin-bottom: 2px;
 }
 
 #newUser p
 {
-	padding-bottom: 4px;
+    padding-bottom: 4px;
 }
 
 #newUser #newUserButtons
 {
-	height: 24px;
-	margin-top: 2px;
+    height: 24px;
+    margin-top: 2px;
 }
 
 #newUser form
 {
-	float: right;
+    float: right;
 }
 
 #newUser #submitNewUsername
 {
-	float: right;
+    float: right;
 }
 
 #newUser #newUserMessageBox
 {
-	min-height: 30px;
-	width: 460px;
-	margin-top: 4px;
+    min-height: 30px;
+    width: 460px;
+    margin-top: 4px;
 }
 
 #newUser #newUserMessageBox p
 {
-	width: 440px;
-	padding: 6px 2px 6px 32px;
-	
+    width: 440px;
+    padding: 6px 2px 6px 32px;
 }
 
 #newUser #newUserMessageBox .error
 {
-	color: red;
-	background: #FFFFCC url("../img/x.gif") left no-repeat;
-	background-position: 0.5% 50%;
-	border: 1px #FF3300 dotted;
+    color: red;
+    background: #FFFFCC url("../img/x.gif") left no-repeat;
+    background-position: 0.5% 50%;
+    border: 1px #FF3300 dotted;
 }
 
 #newUser #newUserMessageBox .valid
 {
-	color: green;
-	background: #CCCCFF url('../img/check.gif') left no-repeat;
-	background-position: 0.5% 50%;
-	border: 1px #000099 dotted;
+    color: green;
+    background: #CCCCFF url('../img/check.gif') left no-repeat;
+    background-position: 0.5% 50%;
+    border: 1px #000099 dotted;
 }

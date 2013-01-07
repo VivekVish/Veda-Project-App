@@ -13,5 +13,3 @@ class MVPTeacherTrainingManual extends MVPTrainingManual
         $this->appendTemplates(array("trainingmanualteacher"));
     }
 }
-
-?>

@@ -45,11 +45,11 @@
 {if $addition eq 'quiz'}
                                     <a href="{$lesson->quizLink}"><img title="Take Quiz" class="quizIcon" src="img/editorIcons/quiz_icon.png" /></a>
 {elseif $addition eq 'roleplay'}
-                                    <a href="{$lesson->genericLink}&type={$addition}"><img title="Edit Roleplaying Manual" class="roleplayIcon" src="img/editorIcons/roleplay.png" /></a>
+                                    <a href="{$lesson->genericLink}{$addition}"><img title="Edit Roleplaying Manual" class="roleplayIcon" src="img/editorIcons/roleplay.png" /></a>
 {elseif $addition eq 'trainingmanual'}
-                                    <a href="{$lesson->genericLink}&type={$addition}"><img title="Edit Training Manual" class="trainingManualIcon" src="img/editorIcons/trainingmanual.png" /></a>
+                                    <a href="{$lesson->genericLink}{$addition}"><img title="Edit Training Manual" class="trainingManualIcon" src="img/editorIcons/trainingmanual.png" /></a>
 {elseif $addition eq 'video'}
-                                    <a href="{$lesson->genericLink}&type={$addition}"><img title="Edit Video" class="videoIcon" src="img/editorIcons/video.png" /></a>
+                                    <a href="{$lesson->genericLink}{$addition}"><img title="Edit Video" class="videoIcon" src="img/editorIcons/video.png" /></a>
 {/if}
 {/foreach}
                                 </span>

@@ -9,6 +9,10 @@ $(document).ready(function()
             {
                 window.location.reload();
             }
+            else
+            {
+                new Message(data);
+            }
         }});
     });
 });

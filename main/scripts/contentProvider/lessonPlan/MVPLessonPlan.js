@@ -34,7 +34,7 @@ LessonPlan.prototype.renameSection = function(sectionNameElement, newName)
     if(this.actionStarted === false)
     {
         this.actionStarted = true;
-        newName = $.trim(newName);
+        var newName = $.trim(newName);
         thisObject.actionStarted = false;
     }
 }

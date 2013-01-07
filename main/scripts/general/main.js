@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-	window.WINDOWHEIGHT = $(window).height();
+    window.WINDOWHEIGHT = $(window).height();
 });
 
 function compareArrays(arr1,arr2)
@@ -16,6 +16,30 @@ function compareArrays(arr1,arr2)
         if (arr1[i] != arr2[i]) return false;
     }
     return true;
+}
+
+function getJSONArrayLength(myObject)
+{
+    var keepGoing = true;
+    var objectLength = 0;
+    if(myObject==null)
+    {
+        return objectLength;
+    }
+
+    while(keepGoing)
+    {
+        if(myObject[objectLength]==null)
+        {
+            keepGoing=false;
+        }
+        else
+        {
+            objectLength++;
+        }
+    }
+
+    return objectLength;
 }
 
 function css(a)
@@ -59,9 +83,4 @@ function css2json(css)
         };
     }
     return s;
-}
-
-function jsondecode()
-{
-    
 }

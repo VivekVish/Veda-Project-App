@@ -43,14 +43,15 @@ class MVPLessonPlan extends MVPFrame
         $uriArr = explode("/",trim($uri,"/"));
         
         $this->id = $uriArr[2];
-        
         foreach($this->pageContent->children as $sectionKey=>$section)
         {
+            $sectionPathArray = split("/",preg_replace('/^\/data\/lessonplan\/|\/$/','',$section->path));
             foreach($section->lessons as $lessonKey=>$lesson)
             {
-                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->quizLink = PathArray::pathToLink((string)$lesson->path)."&type=quiz";
-                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->link = PathArray::pathToLink((string)$lesson->path)."&type=lesson";
-                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->genericLink = PathArray::pathToLink((string)$lesson->path);
+                $lessonPathArray = split("/",preg_replace('/^\/data\/material\/|\/$/','',$lesson->path));
+                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->quizLink = "index.php?type=lessonPlanQuiz&id=".$sectionPathArray[0]."&section=".$sectionPathArray[1]."&lesson=".$lessonPathArray[4];
+                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->link = "index.php?type=lessonPlan&id=".$sectionPathArray[0]."&section=".$sectionPathArray[1]."&lesson=".$lessonPathArray[4];
+                $this->pageContent->children[$sectionKey]->lessons[$lessonKey]->genericLink = "index.php?id=".$sectionPathArray[0]."&section=".$sectionPathArray[1]."&lesson=".$lessonPathArray[4]."&type=lessonPlan";
             }
         }
 

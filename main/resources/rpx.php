@@ -295,7 +295,8 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
 
 		if($result=="<user>User Not Found.</user>")
 		{
-			$_SESSION['requestusername']=true;
+                    $_SESSION['requestusername']=true;
+                    $redirect="http://".$_SERVER['HTTP_HOST']."/index.php?type=newuser";
 		}
 		else
 		{
@@ -305,10 +306,10 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
                     $_SESSION['status'] = (string)$status[0];
                     $_SESSION['id'] = (string)$id[0];            
                     $_SESSION['requestusername']=false;
+                    $redirect=preg_replace('/AMPERSANDCODE/','&',urldecode($_REQUEST['destination']));
 		}
 		
 		//redirect the visitor
-		$redirect=preg_replace('/AMPERSANDCODE/','&',urldecode($_REQUEST['destination'])); 
 		header('HTTP/1.1 303 See Other'); 
 		header('X-Powered-By: PHP/5.2.2'); 
 		header('Content-Type: text/html'); 
