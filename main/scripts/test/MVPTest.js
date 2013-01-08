@@ -49,13 +49,17 @@ $(document).ready(function()
                             var correctAnswer = answerArray["correctAnswer"];
                             // Acts on all questions present--if multiple questions are added, this code must be changed
                             $(".multchoice>ol>li").eq(correctAnswer-1).append("<img class='correctAnswerImage' src='img/correctAnswer.png' />").addClass('correctAnswer');
-                            $('.correctAnswerImage').css('top',($('.correctAnswerImage').parent('li').outerHeight()-$('.correctAnswerImage').height())/2+"px");
+                            $('.correctAnswerImage').load(function() {
+                                $('.correctAnswerImage').css('top',($('.correctAnswerImage').parent('li').outerHeight()-$('.correctAnswerImage').height())/2+"px");
+                            });
                             $('.answerfield').addClass('selected');
-                            
+
                             if(answerPayload.answerId!=correctAnswer)
                             {
                                 $(".multchoice>ol>li").eq(answerPayload.answerId-1).append("<img class='incorrectAnswerImage' src='img/incorrectAnswer.png' />").addClass('incorrectAnswer');
-                                $('.incorrectAnswerImage').css('top',($('.incorrectAnswerImage').parent('li').outerHeight()-$('.incorrectAnswerImage').height())/2+"px");
+                                $('.incorrectAnswerImage').load(function() {
+                                    $('.incorrectAnswerImage').css('top',($('.incorrectAnswerImage').parent('li').outerHeight()-$('.incorrectAnswerImage').height())/2+"px");
+                                });
                             }
                             
                             if(answerArray.response!=null)
