@@ -80,17 +80,18 @@ class MVPQuestion extends MVPFrame
                     // Get question & answers info
                     $response=$GLOBALS['api']->get("/data/material/questionBlueprint/{$submittedAnswer->id}/");
                     $responseArray = json_decode($response);
-                    
+
                     array_push($this->answerCorrect,array(
                         'correct' => $submittedAnswer->submittedAnswer==$submittedAnswer->correctAnswer,
                         'question' => html_entity_decode($responseArray->content),
                         'submittedAnswer' => $responseArray->answerChoices[$submittedAnswer->submittedAnswer - 1],
                         'correctAnswer' => $responseArray->answerChoices[$responseArray->correctAnswer - 1],
+                        'response' => html_entity_decode($responseArray->response),
                     ));
                     $this->lastAnswer = $submittedAnswer;
                 }
             }
-            
+
             if($quizIncomplete)
             {
                 if(count($this->lastAnswer)>0)

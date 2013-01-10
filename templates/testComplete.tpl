@@ -37,6 +37,11 @@
             </li>
         </ol>
     </div>
+    {if !empty($answer.response)}
+    <div class="answerResponse">
+        {$answer.response}
+    </div>
+    {/if}
 </div>
                     
 
