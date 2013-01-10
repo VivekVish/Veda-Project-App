@@ -1,0 +1,29 @@
+div#teachertrainingmanual
+{
+    width: 12%;
+    float: right;
+    margin-right: 2%;
+    margin-top: 30px;
+    border-radius: 5px;
+    background-color: #E3E8EC;
+}
+
+div#teachertrainingmanual #teachertrainingmanualheader
+{
+    background-color: #EDF1F4;
+    padding: 10px 0 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+div#teachertrainingmanual #teachertrainingmanualheader h2
+{
+    padding: 0 10px 10px 10px;
+    font-size: 20px;
+}
+
+
+div#teachertrainingmanual ul
+{
+    margin-top: 0.2em;
+    padding: 0 10px 10px 10px;
+}

@@ -17,7 +17,7 @@ class EditTrainingManual extends EditContent
         
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
-        $this->appendScriptFiles(array("contentProvider/content/LessonAdditionProvider","contentProvider/lessonPlan/TrainingManual","contentProvider/content/TrainingManualHandler"));
+        $this->appendScriptFiles(array("contentProvider/content/LessonAdditionProvider","contentProvider/lessonPlan/TrainingManualProvider","contentProvider/content/TrainingManualHandler"));
     }
     
     public function display()

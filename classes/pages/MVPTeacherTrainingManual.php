@@ -1,14 +1,14 @@
 <?php
 
-require_once("MVPTrainingManual.php");
+require_once("MVPLessonPlanTrainingManual.php");
 
-class MVPTeacherTrainingManual extends MVPTrainingManual
+class MVPTeacherTrainingManual extends MVPLessonPlanTrainingManual
 {
     public function __construct()
     {
         parent::__construct();
         
-        $this->appendCssFiles(array("trainingmanualteacher"));
+        $this->appendCssFiles(array("MVPTeacherTrainingManual"));
         $this->appendScriptFiles(array("teacher/teacher"));
         $this->appendTemplates(array("trainingmanualteacher"));
     }

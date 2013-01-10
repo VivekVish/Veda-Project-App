@@ -7,6 +7,8 @@ class MVPLessonPlanTrainingManual extends MVPTrainingManual
     public function __construct()
     {       
         parent::__construct();
+        
+        $this->appendScriptFiles(array("lessonPlan/LessonPlanTrainingManual"));
     }
 }
 

@@ -9,6 +9,56 @@ ContentHandler.prototype = new BaseHandler();
 ContentHandler.prototype.constructor = ContentHandler;
 ContentHandler.prototype.parent = new BaseHandler();
 
+// DESC: handles all events and passes them to appropriate functions based on the placement of the cursor or the origin of the event
+// PARAMETER: e is an object of type Event
+// RETURNS: void
+ContentHandler.prototype.handleContentEvent=function(e)
+{
+    if(e.target.tagName!="INPUT")
+    {
+        if((e.target==window&&e.type=="blur"))
+        {
+            this.handleWindowEvent(e);
+        }
+        else if((e.type=="click"||e.type=="mousedown"||e.type=="mouseup"||e.type=="keyup")||typeof(rangeTraverse.getCurrentRange())!='undefined')
+        {
+            this.handleGeneralEvent(e);
+
+            if(rangeTraverse.within('.ilo')||((e.type=="click"||e.type=="mousedown"||e.type=="mouseup")&&($(e.target).parents('.ilo').size()>0||$(e.target).is('.ilo'))))
+            {
+                this.handleILOEvent(e);
+            }
+            else if(rangeTraverse.within('table'))
+            {
+                this.handleTableEvent(e);
+            }
+            else if(rangeTraverse.within('ul,ol'))
+            {
+                this.handleListEvent(e);	
+            }
+            else if(rangeTraverse.within('blockquote'))
+            {
+                this.handleBlockquoteEvent(e);
+            }
+            else if(rangeTraverse.within('p'))
+            {
+                this.handleParagraphEvent(e);
+            }
+            else if(rangeTraverse.within(':header'))
+            {
+                this.handleHeaderEvent(e);	
+            }
+            else if(rangeTraverse.within('input'))
+            {
+                this.handleInputEvent(e);
+            }
+            else
+            {
+                this.handleWindowEvent(e);
+            }
+        }
+    }
+}
 
 // DESC: handles events that occur when the cursor is within a table or a an event's target is a table, inherits functionality from baseHandler
 // PARAMETER: e is an object of type Event
@@ -54,6 +104,7 @@ ContentHandler.prototype.handleHeaderEvent=function(e)
 // RETURNS: void
 ContentHandler.prototype.handleGeneralEvent=function(e)
 {
+    console.log('got here');
     var thisObject = this;
     this.parent.handleGeneralEvent(e);
     materialProvider.toggleExitInfoBoxButton();
@@ -165,3 +216,7 @@ function ContentHandler()
 }
 
 var currentHandler = new ContentHandler();
+$(document).ready(function()
+{
+    console.log(currentHandler.handleContentEvent);
+})
