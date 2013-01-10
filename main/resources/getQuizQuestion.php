@@ -6,7 +6,7 @@ require_once("../../config/main.inc.php");
 # Retrieve and sanitize data
 if (isset($_REQUEST['questionIds']) && !empty($_REQUEST['questionIds']))
 {
-	$questionIds = trim(json_encode($_REQUEST['questionIds']),"[]");
+    $questionIds = trim(json_encode($_REQUEST['questionIds']),"[]");
 }
 
 # Instantiate api class and make request

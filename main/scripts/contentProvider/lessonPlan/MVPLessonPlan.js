@@ -211,8 +211,6 @@ LessonPlan.prototype.sortLesson = function(lessonItem,oldList)
                     lessonSpan.attr('data-lessonorder',newOrder);
                     lessonSpan.attr('data-lessonpath',newPath);	
                 }
-
-                thisObject.callNavReprocess();
             }
             else
             {
@@ -440,6 +438,31 @@ LessonPlan.prototype.addLesson = function(lessonItem)
             if(data==="Success.")
             {
                 $(lessonItem).addClass('lessonPlanLesson');
+
+                $(lessonItem).find('a').each(function()
+                {
+                    var baseLink = "index.php?id="+payload.lessonPlanId+"&section="+payload.lessonPlanSection+"&lesson="+payload.lesson;
+                    if($(this).find('img').hasClass('editLessonIcon'))
+                    {
+                        $(this).attr('href',baseLink+"&type=lessonPlan");
+                    }
+                    else if($(this).find('img').hasClass('quizIcon'))
+                    {
+                        $(this).attr('href',baseLink+"&type=lessonPlanQuiz");
+                    }
+                    else if($(this).find('img').hasClass('trainingManualIcon'))
+                    {
+                        $(this).attr('href',baseLink+"&type=lessonPlantrainingmanual");
+                    }
+                    else if($(this).find('img').hasClass('roleplayIcon'))
+                    {
+                        $(this).attr('href',baseLink+"&type=lessonPlanroleplay");
+                    }
+                    else if($(this).find('img').hasClass('videoIcon'))
+                    {
+                        $(this).attr('href',baseLink+"&type=lessonPlanvideo");
+                    }
+                });
             }
             else
             {

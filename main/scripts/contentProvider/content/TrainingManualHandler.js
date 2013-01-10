@@ -1,18 +1,3 @@
-// DESC: forces content events that aren't in info boxes to 0
-// PARAMETER: e is the object of type Event
-// RETURNS: void
-ContentHandler.prototype.handleContentEvent = function(e)
-{
-    if(!rangeTraverse.hasAncestor('.infoBox'))
-    {
-        e.preventDefault();
-    }
-    else
-    {
-        this.parent.handleContentEvent(e);
-    }
-}
-
 // DESC: inserts the ILO into the content
 // PARAMETER: insertionPoint is the range where the ILO should be inserted
 // PARAMETER: ILOPlaceholder is the element in the content which holds the ILO

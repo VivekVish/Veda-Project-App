@@ -25,7 +25,7 @@ class MVPTrainingManual extends MVPContent
         parent::getData($uri);
         $uriArr = explode("/",trim($uri,"/"));
         $this->location = $uri;
-        $this->name = preg_replace('/_/',' ',$uriArr[6])." Training Manual";   
+        $this->name = preg_replace('/_/',' ',$uriArr[6])." Training Manual";
     }
 }
 

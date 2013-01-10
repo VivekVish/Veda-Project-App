@@ -621,7 +621,7 @@ BaseHandler.prototype.handleGeneralEvent=function(e)
 
 function BaseHandler()
 {
-	this.keyPressed['ctrl'] = false;
-	this.keyPressed['alt'] = false;
-	this.keyPressed['shift'] = false;
+    this.keyPressed['ctrl'] = false;
+    this.keyPressed['alt'] = false;
+    this.keyPressed['shift'] = false;
 }
