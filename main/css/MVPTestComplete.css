@@ -25,3 +25,49 @@ button#retakequiz
     font-weight: bold;
     padding: .5em 2em .55em;
 }
+
+#content .question {
+    left: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#content .question p.explanation {
+    padding-bottom: 0;
+}
+
+.question .questioncontent {
+    margin-bottom: 32px;
+}
+
+.question .counterContainer {
+    position: relative;
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #4B4C4B;
+    box-shadow: 2px 2px 5px #000000;
+    top: 16px;
+    left: -16px;
+}
+
+.question .counter {
+    position: relative;
+    top: 7px;
+    display: block;
+    width: 32px;
+    height: 20px;
+    text-align: center;
+    color: white;
+}
+
+.question .answerResponse {
+padding: 8px 5px 8px 5px;
+border: 2px black solid;
+border-radius: 5px;
+cursor: pointer;
+width: 100%;
+margin-bottom: 10px;
+font-size: 20px;
+}

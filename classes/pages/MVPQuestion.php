@@ -77,11 +77,21 @@ class MVPQuestion extends MVPFrame
                 }
                 else
                 {
-                    array_push($this->answerCorrect,$submittedAnswer->submittedAnswer==$submittedAnswer->correctAnswer);
+                    // Get question & answers info
+                    $response=$GLOBALS['api']->get("/data/material/questionBlueprint/{$submittedAnswer->id}/");
+                    $responseArray = json_decode($response);
+
+                    array_push($this->answerCorrect,array(
+                        'correct' => $submittedAnswer->submittedAnswer==$submittedAnswer->correctAnswer,
+                        'question' => html_entity_decode($responseArray->content),
+                        'submittedAnswer' => $responseArray->answerChoices[$submittedAnswer->submittedAnswer - 1],
+                        'correctAnswer' => $responseArray->answerChoices[$responseArray->correctAnswer - 1],
+                        'response' => html_entity_decode($responseArray->response),
+                    ));
                     $this->lastAnswer = $submittedAnswer;
                 }
             }
-            
+
             if($quizIncomplete)
             {
                 if(count($this->lastAnswer)>0)
@@ -110,14 +120,14 @@ class MVPQuestion extends MVPFrame
                 }
                 $numCorrect = 0;
 
-                foreach($this->answerCorrect as $isCorrect)
+                foreach($this->answerCorrect as $answer)
                 {
-                    if($isCorrect)
+                    if($answer['correct'])
                     {
                         $numCorrect++;
                     }
                 }
-
+                
                 $this->percentCorrect = round(100*$numCorrect/count($this->answerCorrect));
                 $this->thresholdCorrectMet = $this->percentCorrect>=70;
                 
@@ -145,9 +155,15 @@ class MVPQuestion extends MVPFrame
         else if($mode=="complete")
         {
             $bodyTemplates = array("testComplete");
-            $cssFiles = array("MVPTestComplete");
-            $scriptFiles = array("test/testComplete");
-            $fullnameScriptFiles = array();
+            $cssFiles = array('MVPListEditor', "MVPTestComplete", 'MVPQuestion');
+            $scriptFiles = array("test/testComplete","content/ILOContents","content/Content","flot/jquery.flot.min","flot/jquery.flot.dashes","test/test","content/citations");
+            $fullnameScriptFiles = array("MathJax/MathJax.js?config=default");
+            
+            foreach($this->ILOs as $ilo)
+            {
+                array_push($scriptFiles,"ILO/".$ilo."ILO");
+                array_push($cssFiles,"ILO/".$ilo);
+            }
         }
         else if($mode=="noQuestions")
         {
