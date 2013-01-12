@@ -1,3 +1,5 @@
+// DESC: Called by LessonPlanTrainingManual to create teacher functionality in Training Manual
+// RETURNS: void
 function addTeacherFunctionality()
 {
     $('#teachertrainingmanual').append('<ul>');

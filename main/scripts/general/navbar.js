@@ -339,7 +339,7 @@ navbar.prototype.navigateToLesson = function(navBarLocation)
 function navbar()
 {
     var navbarObject = this;
-
+    
     this.processPosition($('#coursenav').attr('data-navPosition'));
 
     $('#coursenav>div>ul>li').live('click',function(e)

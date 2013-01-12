@@ -17,7 +17,7 @@ class ResourcePath
     {
         if(is_null($field)||is_null($subject)||is_null($course))
         {
-            $this->navPosition="/data/";
+            $this->navPosition="/data/material/";
             
             if(is_null($type))
             {
