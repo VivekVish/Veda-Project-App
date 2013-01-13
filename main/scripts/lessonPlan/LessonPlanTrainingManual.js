@@ -30,6 +30,7 @@ function LessonPlanTrainingManual()
 }
 
 // DESC: A placeholder function that is overwritten in teacher.js to ensure the ajax request is met
+// RETURNS: void
 function addTeacherFunctionality()
 {
     
