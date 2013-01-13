@@ -148,3 +148,35 @@
     min-width: 1em;	
     padding: 0.2em;
 }
+
+@media print {
+    #header {
+        display: none;
+    }
+    
+    nav#coursenav {
+        display: none;
+    }
+    
+    footer {
+        display: none;
+    }
+    
+    #content {
+        left: 0;
+        width: 95%;
+    }
+    
+    #print_container {
+        display: none;
+    }
+}
+
+@media screen {
+    #print_container {
+        display: block;
+        text-align: right;
+    }
+}
+
+

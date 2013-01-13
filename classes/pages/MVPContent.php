@@ -15,7 +15,7 @@ class MVPContent extends MVPFrame
         $this->appendCssFiles(array("MVPContent","MVPNavBar"));
         $this->appendTemplates(array("navbar","lesson"));
         $this->appendScriptFiles(array("general/navbar","general/addAllTrigFunctions", "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes",
-                             "content/Content","content/citations"));
+                             "content/Content","content/citations","content/print"));
         $this->appendFullnameScriptFiles(array("MathJax/MathJax.js?config=default"));
         
         foreach($this->ILOs as $ilo)

@@ -93,6 +93,9 @@ class ResourcePath
                         $this->currentPath = "/data/lessonplan/$id/$section/$lesson/quiz/$username/";
                         $this->pageClass = "MVPLessonPlanQuestion";
                         break;
+                    case "pdf":
+                        $this->pageClass = "MVPPdfContent";
+                        break;
                 }
             }
         }
