@@ -1,115 +1,127 @@
 /* Content Provider Toolbar */
-#CPtoolbar
+
+@media screen 
 {
-    background-color: #BBC9CF;
-    position: absolute;
-    left: 0;
-    padding-left: 16.75%;
-    z-index: 3;
-    height: 1.52em;
-    width: 83.25%;
-    top: 128px;
+    #CPtoolbar
+    {
+        background-color: #BBC9CF;
+        position: absolute;
+        left: 0;
+        padding-left: 16.75%;
+        z-index: 3;
+        height: 1.52em;
+        width: 83.25%;
+        top: 128px;
+    }
+
+    #CPtoolbar.attached
+    {
+        position: fixed;
+        top:0;
+    }
+
+    #CPtoolbar ul li
+    {
+        float: left;
+        height: 1.02em;
+        width: 1.02em;
+        padding: 0.25em;
+
+        background-color: #BBC9CF;
+    }
+
+    #CPtoolbar ul li:hover, #CPtoolbar ul li.CPselected
+    {
+        background-color: #FDA;
+        cursor:pointer;
+    }
+
+    #CPtoolbar ul li img
+    {
+        height: 100%;
+        width: 100%;
+    }
+
+    #CPtoolbar ul span.CPfunctions
+    {
+        float: right;
+    }
+
+    #CPtoolbar ul span.CPfunctions li
+    {
+        width: inherit;
+        border: 0.1em solid black;
+        -moz-border-radius: 0.05em;
+        -webkit-border-radius: 0.2em;
+        border-radius: 0.2em;
+        padding: 0.1em 0.2em 0.2em 0.2em;
+        margin-top: 0.05em;
+        height: 0.95em;
+    }
+
+    #CPtoolbar ul span.CPfunctions li:nth-of-type(n+2)
+    {
+        margin-left: 1em;
+    }
+
+    #CPtoolbar ul span.CPfunctions li:last-of-type
+    {
+        margin-right: 0.2em;
+    }
+
+    /* Drop down menu */
+
+    #CPtoolbar ul ul
+    {
+        width: 3.2em;
+        visibility: hidden;
+        position: absolute;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        left: 0;
+        border-top: 0.05em solid #444;
+        top: 1.4em;
+    }
+
+    #CPtoolbar ul ul li
+    {
+        background-color: #BEBEBE;
+        background: -webkit-gradient(linear, left top, left bottom, from(#E8E8E8), to(#BEBEBE));
+        background: -moz-linear-gradient(top,  #E8E8E8,  #BEBEBE);
+        position: relative;
+        text-align:left;
+        width: 3.1em;
+        padding: 0;
+        margin: 0;
+        height: 1.02em;
+        border: 0.05em solid #444;
+        border-top: 0;
+    }
+
+    #CPtoolbar ul ul li img
+    {
+        width: 3.0em;
+        height: 1.02em;
+    }
+
+    #CPtoolbar ul li:hover ul
+    {
+        visibility: visible;
+    }
+
+    #CPtoolbar ul li:hover .removeSectionVisible
+    {
+        visibility: hidden;
+    }
 }
 
-#CPtoolbar.attached
+@media print 
 {
-    position: fixed;
-    top:0;
-}
-
-#CPtoolbar ul li
-{
-    float: left;
-    height: 1.02em;
-    width: 1.02em;
-    padding: 0.25em;
-
-    background-color: #BBC9CF;
-}
-
-#CPtoolbar ul li:hover, #CPtoolbar ul li.CPselected
-{
-    background-color: #FDA;
-    cursor:pointer;
-}
-
-#CPtoolbar ul li img
-{
-    height: 100%;
-    width: 100%;
-}
-
-#CPtoolbar ul span.CPfunctions
-{
-    float: right;
-}
-
-#CPtoolbar ul span.CPfunctions li
-{
-    width: inherit;
-    border: 0.1em solid black;
-    -moz-border-radius: 0.05em;
-    -webkit-border-radius: 0.2em;
-    border-radius: 0.2em;
-    padding: 0.1em 0.2em 0.2em 0.2em;
-    margin-top: 0.05em;
-    height: 0.95em;
-}
-
-#CPtoolbar ul span.CPfunctions li:nth-of-type(n+2)
-{
-    margin-left: 1em;
-}
-
-#CPtoolbar ul span.CPfunctions li:last-of-type
-{
-    margin-right: 0.2em;
-}
-
-/* Drop down menu */
-
-#CPtoolbar ul ul
-{
-    width: 3.2em;
-    visibility: hidden;
-    position: absolute;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    left: 0;
-    border-top: 0.05em solid #444;
-    top: 1.4em;
-}
-
-#CPtoolbar ul ul li
-{
-    background-color: #BEBEBE;
-    background: -webkit-gradient(linear, left top, left bottom, from(#E8E8E8), to(#BEBEBE));
-    background: -moz-linear-gradient(top,  #E8E8E8,  #BEBEBE);
-    position: relative;
-    text-align:left;
-    width: 3.1em;
-    padding: 0;
-    margin: 0;
-    height: 1.02em;
-    border: 0.05em solid #444;
-    border-top: 0;
-}
-
-#CPtoolbar ul ul li img
-{
-    width: 3.0em;
-    height: 1.02em;
-}
-
-#CPtoolbar ul li:hover ul
-{
-    visibility: visible;
-}
-
-#CPtoolbar ul li:hover .removeSectionVisible
-{
-    visibility: hidden;
+    #CPtoolbar 
+    {
+        display: none;
+    }
 }
 
 /* ILO */
