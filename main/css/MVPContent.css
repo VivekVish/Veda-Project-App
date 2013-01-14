@@ -174,8 +174,12 @@
 
 @media screen {
     #print_container {
+        position: relative;
+        float: right;
         display: block;
         text-align: right;
+        top: 15px;
+        right: 8px;
     }
 }
 
