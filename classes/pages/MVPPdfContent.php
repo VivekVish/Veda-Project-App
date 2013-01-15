@@ -10,8 +10,8 @@ class MVPPdfContent extends MVPFrame
     private $pdf_url = 'pdf';
     
     private $allowed_hosts = array(
-        '/^veda-app.local$/',
-        '/.vedaproject.org$/',
+        '/^veda-app\.local$/',
+        '/\.vedaproject\.org$/',
     );
     
     public function __construct()
@@ -42,8 +42,20 @@ class MVPPdfContent extends MVPFrame
         $pdf_file = preg_replace('/\W+/', '_', $url_info['query']).'.pdf';
         $full_path = $this->pdf_path . '/' . $pdf_file;
         
-        if(!file_exists($full_path))
+        
+        if(file_exists($full_path))
         {
+            $max_wait = 60; // Let's wait a minute
+            while(!filesize($full_path) && $max_wait--)
+            {
+                sleep(1);
+                clearstatcache(true, $full_path);
+            }
+        }
+        else
+        {
+            // Create the file first to prevent process lock
+            touch($full_path);
             $command = sprintf('%s %s %s %s A4', $this->phantom_js, escapeshellarg($this->render_script), escapeshellarg($url), escapeshellarg($full_path));
             exec($command, $output, $return);
             if ($return != 0) {
@@ -53,8 +65,9 @@ class MVPPdfContent extends MVPFrame
             }
         }
         
-        $pdf_url = $this->pdf_url . '/' . $pdf_file;
-        header('Location: ' . $pdf_url);
+        header('Content-disposition: attachment; filename='.$pdf_file);
+        header('Content-type: application/pdf');
+        readfile($full_path);
     }
     
     public function getData($uri)
