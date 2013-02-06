@@ -45,6 +45,7 @@ class MVPPdfContent extends MVPFrame
         if(!file_exists($full_path))
         {
             $command = sprintf('%s %s %s %s A4', $this->phantom_js, escapeshellarg($this->render_script), escapeshellarg($url), escapeshellarg($full_path));
+            echo '<span style="display:none">'.$command.'</span>';exit;
             exec($command, $output, $return);
             if ($return != 0) {
                 // Error
