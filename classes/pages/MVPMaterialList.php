@@ -6,6 +6,7 @@ class MVPMaterialList extends MVPFrame
 {
     protected $materialHeader = null;
     protected $myModules = array();
+    protected $myAddedModules = array();
     
     public function __construct()
     {
@@ -22,6 +23,7 @@ class MVPMaterialList extends MVPFrame
     {
         $GLOBALS['smarty']->assign("title",$this->title);
         $GLOBALS['smarty']->assign("myModules",$this->myModules);
+        $GLOBALS['smarty']->assign("myAddedModules",$this->myAddedModules);
         
         $GLOBALS['smarty']->assign("loggedIn",$GLOBALS['userSession']->isLoggedIn());
         $GLOBALS['smarty']->assign("loginURL",$GLOBALS['url']=="index.php" ? "index.php?login=true" : $GLOBALS['url']."&login=true");
@@ -77,7 +79,34 @@ class MVPMaterialList extends MVPFrame
                 {
                     $this->myModules[$key]->tagText = sprintf("%s, %s, %s, %s, %s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
                 }
-            } 
+            }
+            
+            $this->myAddedModules = json_decode($GLOBALS['api']->get("/user/lessonplan/{$GLOBALS['userSession']->getUsername()}/"));
+            foreach($this->myAddedModules as $key=>$module)
+            {
+                if($module->type=="custom")
+                {
+                    $genderText = $module->gender=="both" ? "both genders" : $module->gender;
+                    $literacyText = $module->literacy=="yes" ? "literacy required" : "literacy not required";
+                    if($module->tags=="")
+                    {
+                        $this->myAddedModules[$key]->tagText = sprintf("%s, %s, %s, %s",$module->location,$module->age,$genderText,$literacyText);
+                    }
+                    else
+                    {
+                        $this->myAddedModules[$key]->tagText = sprintf("%s, %s, %s, %s, %s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
+                    }
+                }
+                else if($module->type=="standard")
+                {
+                    $this->myAddedModules[$key]->image = $module->name;
+                    $this->myAddedModules[$key]->name = preg_replace('/_/',' ',$module->name);
+                    
+                    $uriArr = explode("/",trim($module->path,"/"));
+                    
+                    $this->myAddedModules[$key]->link = sprintf("index.php?field=%s&subject=%s&course=%s",$uriArr[2],$uriArr[3],$uriArr[4]);
+                }
+            }
        }
     }
     

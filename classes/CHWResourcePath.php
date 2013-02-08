@@ -22,7 +22,15 @@ class ResourcePath
             {
                 if(!is_null($subject))
                 {
-                    $this->pageClass="MVPSubject";
+                    if($userType=="guest")
+                    {
+                        $this->pageClass="MVPSubject";
+                    }
+                    else
+                    {
+                        $this->pageClass="MVPSubjectLoggedIn";
+                    }
+                    
                     $this->currentPath ="/data/material/$field/$subject/";
                 }
                 elseif($userType=="guest")

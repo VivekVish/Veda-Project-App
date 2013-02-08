@@ -8,7 +8,7 @@
         <h2>{$materialHeader}</h2>
         <ul>
 {foreach from=$materialList->children item="material"}
-            <li>
+            <li data-path="{$material->path}">
                 <a href="{$material->link}">
                     <img src="img/navIcons/{$material->img}.png" />
                     <h3>{$material->name}</h3>
@@ -32,11 +32,39 @@
                         <h3>{$material->name}</h3>
                         <p class="notes">{$material->notes}</p>
                         <p class="tags"><strong>Tags:</strong> {$material->tagText}</p>
+                    </div>
+                </a>
+                <!--<button class="editModule">Edit</button>
+                <button class="deleteModule">Delete</button>-->
+            </li>
+{/foreach}
+{foreach from=$myAddedModules item="material"}
+{if $material->type=="custom"}
+            <li data-userlessonplanid="{$material->id}" data-lessonplanid="{$material->lessonplanid}">
+                <a href="index.php?type=lessonPlan&id={$material->lessonplanid}">
+                    <img src="img/navIcons/{$material->image}.png" />
+                    <div class="moduleContent">
+                        <h3>{$material->name}</h3>
+                        <p class="notes">{$material->notes}</p>
+                        <p class="tags"><strong>Tags:</strong> {$material->tagText}</p>
                     <div>
                 </a>
                 <!--<button class="editModule">Edit</button>
                 <button class="deleteModule">Delete</button>-->
             </li>
+{elseif $material->type=="standard"}
+            <li data-userlessonplanid="{$material->id}" data-coursepath="{$material->path}">
+                <a href="{$material->link}">
+                    <img src="img/navIcons/{$material->image}.png" />
+                    <div class="moduleContent">
+                        <h3>{$material->name}</h3>
+                        <p class="notes">{$material->description}</p>
+                    <div>
+                </a>
+                <!--<button class="editModule">Edit</button>
+                <button class="deleteModule">Delete</button>-->
+            </li>
+{/if}
 {/foreach}
         </ul>
         <button id="addModule">Add</button>
