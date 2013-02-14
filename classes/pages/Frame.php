@@ -13,8 +13,8 @@ class Frame extends AbstractFrame
         parent::__construct("The Veda Project: The Free Online Educational Platform", $bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
         
         $this->prependTemplates(array("usernav","navbar"));
-        $this->prependCssFiles(array("reset","main","default","flexcrollstyles-default","jquery-ui","message"));
-        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/main","flexcroll/flexcroll","general/navbar","general/lightbox"));
+        $this->prependCssFiles(array("reset","main","default","flexcrollstyles-default","jquery-ui","message","tooltip"));
+        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","general/Message","general/main","flexcroll/flexcroll","general/navbar","general/lightbox"));
         $this->prependIeScriptFiles(array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"));
     }
     

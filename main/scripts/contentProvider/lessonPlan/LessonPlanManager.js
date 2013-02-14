@@ -156,12 +156,12 @@ function LessonPlanManager()
         thisObject.openAddLessonPlanLightbox();
     });
     
-    $('.deleteLessonPlanIcon').live('click',function()
+    $(document).on('click','.deleteLessonPlanIcon',function()
     {
         thisObject.deleteLessonPlan($(this).parents('tr').first().attr('data-lessonplanid'));
     });
     
-    $('.editLessonPlanIcon').live('click',function()
+    $(document).on('click','.editLessonPlanIcon',function()
     {
         thisObject.openAddLessonPlanLightbox($(this).parents('tr').first().attr('data-lessonplanid'));
     });

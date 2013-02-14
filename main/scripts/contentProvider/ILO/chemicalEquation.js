@@ -96,8 +96,8 @@ var chemicalEquation =
 			cancel();
 		});
         
-        $('#chemicalEquationText').die('keydown');
-        $('#chemicalEquationText').live('keydown', function(e)
+        $(document).off('keydown','#chemicalEquationText');
+        $(document).on('keydown', '#chemicalEquationText', function(e)
         {
             switch(e.keyCode)
             {

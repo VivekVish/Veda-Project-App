@@ -228,20 +228,25 @@ ContentProvider.prototype.construct = function()
         thisObject.exitInfoBox();
     })
     
-    $("#insertSection *[title]").data('tooltip',null);
-    
-    $("#insertSection *[title]").tooltip({position: "center right", opacity: 0.85, layout: '<div></div>', onBeforeShow: function()
-    {
-        var tooltip = this.getTip();
-        var paragraph = $('<table><tbody><tr><td vertical-align="middle"><p></p></td></tr></tbody></table>');
-        paragraph.find('p').append(tooltip.text());
-        tooltip.empty();
-        tooltip.append(paragraph);
-        
-    }, events:
-    {
-        tooltip: ",mouseenter mouseleave"
-    }});
+    $("#insertSection *[title]").tooltip({
+      show: "false",
+      hide: "false",
+      position: {
+        my: "left+5 center",
+        at: "right center"
+      },
+      content: function()
+      {
+          return "<p>"+$(this).attr('title')+"<p>";
+      },
+      open: function(e,ui)
+      {
+          if($(ui.tooltip[0]).find('.ui-tooltip-content>p').height()>40)
+          {
+              $(ui.tooltip[0]).addClass('bigTooltip');
+          }
+      }
+    });
     
     // The following removes overlays that were added when people submitted lessons with a lightbox active
     $('#lightbox').remove();

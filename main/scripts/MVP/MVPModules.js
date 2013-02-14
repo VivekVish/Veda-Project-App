@@ -9,18 +9,27 @@ $(document).ready(function()
 ModuleList.prototype.createAddModuleButton = function(moduleItem)
 {
     $(moduleItem).append('<div class="addToMyModulesDiv"><img title="Add To My Modules" class="addToMyModules" src="img/editorIcons/addModule_icon.png" /></div>');
-    $(".addToMyModules[title]").tooltip({position: 'bottom left', relative: true, layout: '<div></div>', onBeforeShow: function()
-    {
-        var tooltip = this.getTip();
-        var paragraph = $('<table><tbody><tr><td vertical-align="middle"><p></p></td></tr></tbody></table>');
-        paragraph.find('p').append(tooltip.text());
-        tooltip.empty();
-        tooltip.append(paragraph);
-        
-    }, events:
-    {
-        tooltip: ",mouseenter mouseleave"
-    }});
+    
+    $(".addToMyModules[title]").tooltip({
+      show: "false",
+      hide: "false",
+      position: {
+        my: "center top+16",
+        at: "center bottom",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      },
+      content: function()
+      {
+          return "<p>"+$(this).attr('title')+"<p>";
+      }
+    });
 }
 
 // DESC: Removes the module button
@@ -55,7 +64,7 @@ function ModuleList()
         thisObject.removeAddModuleButton(this);
     });
     
-    $('.materialList>ul>li .addToMyModules').live('click',function()
+    $(document).on('click','.materialList>ul>li .addToMyModules',function()
     {
         thisObject.addModuleToMyModules($(this).parents('li'));
     });

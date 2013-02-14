@@ -653,12 +653,12 @@ BaseProvider.prototype.construct = function()
 	
 	$('.ilo').unbind('mousedown mouseup mousemove mouseout');
 	
-	$('.ilo').live('mousedown',function(e)
+	$(document).on('mousedown','.ilo',function(e)
 	{
 		e.preventDefault();
 	});
 	
-	$('.ilo').live('click',function(e)
+	$(document).on('click','.ilo',function(e)
 	{
 		currentHandler.handleContentEvent(e);
 	});
@@ -756,18 +756,37 @@ BaseProvider.prototype.construct = function()
     });
     
     // Set Content Provider Tooltips
-    $("span.CPsublist>li[title]").tooltip({position: "bottom center", opacity: 0.85, layout: '<div></div>', onBeforeShow: function()
-    {
-        var tooltip = this.getTip();
-        var paragraph = $('<table><tbody><tr><td vertical-align="middle"><p></p></td></tr></tbody></table>');
-        paragraph.find('p').append(tooltip.text());
-        tooltip.empty();
-        tooltip.append(paragraph);
-        
-    }, events:
-    {
-        tooltip: ",mouseenter mouseleave"
-    }});
+    $("span.CPsublist>li[title]").tooltip({
+      show: "false",
+      hide: "false",
+      position: {
+        my: "center top+16",
+        at: "center bottom",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      },
+      content: function()
+      {
+          return "<p>"+$(this).attr('title')+"<p>";
+      },
+      open: function(e,ui)
+      {
+          if($(ui.tooltip[0]).find('.ui-tooltip-content>p').height()>40)
+          {
+              $(ui.tooltip[0]).addClass('bigTooltip');
+          }
+          else if($(ui.tooltip[0]).find('.ui-tooltip-content>p').height()<20)
+          {
+              $(ui.tooltip[0]).addClass('smallTooltip');
+          }
+      }
+    });
 
     // Set window blur event
     $(window).blur(function(e)

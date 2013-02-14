@@ -1,0 +1,66 @@
+/* Tooltip */
+.ui-tooltip, .arrow:after {
+    background: black;
+  }
+  .ui-tooltip {
+    width: 100px;
+    height: 40px;
+    padding: 10px 20px;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    color: white;
+    border: none;
+    z-index: 4;
+  }
+  
+   .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
+
+.ui-tooltip-content>p
+{
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    text-align: center;
+    width: 90px;
+}
+
+.ui-tooltip.bigTooltip
+{
+     height: 60px;
+}
+
+.ui-tooltip.smallTooltip
+{
+     height: 25px;
+}

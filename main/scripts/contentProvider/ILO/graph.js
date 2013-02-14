@@ -149,36 +149,36 @@ var graph =
 					 
 		$('#graphEditorHolder').append('<div><ul><li><button class="cancel">Cancel</button><button class="create">Create</button></li></ul></div>');
 		
-        $('.deleteGraphFunction').die('click');
-		$('.deleteGraphFunction').live('click',function(e)
-		{
-			$(this).parent('li').remove();
-			graph.updateGraph();
-		});
+        $(document).off('click','.deleteGraphFunction');
+        $(document).on('click','.deleteGraphFunction',function(e)
+        {
+                $(this).parent('li').remove();
+                graph.updateGraph();
+        });
         
-        $('.graphMapping').die('click');
-        $('.graphMapping').live('click',function(e)
+        $(document).off('click','.graphMapping');
+        $(document).on('click','.graphMapping',function(e)
         {
             graph.enterMappingMode(this);
         });
 
-		$('#insertGraphFunction').bind('click',function(e)
-		{
-			addGraphFunction("function");
-			graph.updateGraph();
-		});
+        $('#insertGraphFunction').bind('click',function(e)
+        {
+                addGraphFunction("function");
+                graph.updateGraph();
+        });
 		
-        $("#graphParameters input.graphFunctionEquations").die('blur');
-        $("#graphParameters input.graphFunctionEquations").live('blur',function(e)
+        $(document).off('blur',"#graphParameters input.graphFunctionEquations");
+        $(document).on('blur',"#graphParameters input.graphFunctionEquations",function(e)
         {
             $(this).val($(this).val().replace(/ /g,''));
         });
         
-        $('#graphParameters input').die('blur');
-		$('#graphParameters input').live('blur',function(e)
-		{
-			graph.updateGraph();
-		});
+        $(document).off('blur','#graphParameters input');
+        $(document).on('blur','#graphParameters input',function(e)
+        {
+            graph.updateGraph();
+        });
 		
 		updateParameters();
 		
@@ -493,20 +493,20 @@ var graph =
         
         $('#generalGraphParameters').fadeTo(300,0);
         
-        $('#backToGeneralGraphEditor').die('click');
-        $('#backToGeneralGraphEditor').live('click',function()
+        $(document).off('click','#backToGeneralGraphEditor');
+        $(document).on('click','#backToGeneralGraphEditor',function()
         {
             graph.exitMappingMode();
         });
         
-        $('#insertNewMappingObject').die('click');
-        $('#insertNewMappingObject').live('click',function()
+        $(document).off('click','#insertNewMappingObject');
+        $(document).on('click','#insertNewMappingObject',function()
         {
             graphMappingEntity.insertNewMappingObject();
         });
         
-        $('.graphTypes').die('change');
-        $('.graphTypes').live('change',function()
+        $(document).off('change','.graphTypes');
+        $(document).on('change','.graphTypes',function()
         {
             var slideType = $(this).val();
             var parentSlide = $(this).parents('.slide');
@@ -520,40 +520,40 @@ var graph =
             graph.updateGraph();
         });
         
-        $('.slideIcon').die('click');
-        $('.slideIcon').live('click',function()
+        $(document).off('click','.slideIcon');
+        $(document).on('click','.slideIcon',function()
         {
            graphMappingEntity.selectSlide($(this).prevAll('.slideIcon').size()); 
            graphMappingEntity.updateMappingLink();
            graph.updateGraph();
         });
         
-        $('.slide input').die('blur change');
-        $('#graphSlideHolder .slide input, #graphSlideHolder .slide select:not(.graphTypes), #graphSlideHolder .slide textarea').live('blur change', function()
+        $(document).off('blur change','.slide input');
+        $(document).on('blur change','#graphSlideHolder .slide input, #graphSlideHolder .slide select:not(.graphTypes), #graphSlideHolder .slide textarea', function()
         {
             graphMappingEntity.updateMappingLink();
             graphMappingEntity.updateSlideIcons(graphMappingEntity.mappingLink,graphILO.checkAllGraphData(ILOContents.ILOArray['ilo-1']));
             graph.updateGraph();
         });
         
-        $('.graphMappingSlideControl#rightControl').die('click');
-        $('.graphMappingSlideControl#rightControl').live('click',function()
+        $(document).off('click','.graphMappingSlideControl#rightControl');
+        $(document).on('click','.graphMappingSlideControl#rightControl',function()
         {
             $('#graphMappingIcons ul').animate({'margin-left':parseInt($('#graphMappingIcons ul').css('margin-left'))-$('.slideIcon').first().outerWidth(true)},300);
             graphMappingEntity.slideIconPosition++;
             graphMappingEntity.updateSlideIconControlDisplay();
         });
         
-        $('.graphMappingSlideControl#leftControl').die('click');
-        $('.graphMappingSlideControl#leftControl').live('click',function()
+        $(document).off('click','.graphMappingSlideControl#leftControl');
+        $(document).on('click','.graphMappingSlideControl#leftControl',function()
         {
             $('#graphMappingIcons ul').animate({'margin-left':parseInt($('#graphMappingIcons ul').css('margin-left'))+$('.slideIcon').first().outerWidth(true)},300);
             graphMappingEntity.slideIconPosition--;
             graphMappingEntity.updateSlideIconControlDisplay();
         });
         
-        $('.slide .deleteMappingObject').die('click');
-        $('.slide .deleteMappingObject').live('click', function()
+        $(document).off('click','.slide .deleteMappingObject');
+        $(document).on('click', '.slide .deleteMappingObject',function()
         {
             $(this).parents('.slide').first().remove();
             graphMappingEntity.updateMappingLink();

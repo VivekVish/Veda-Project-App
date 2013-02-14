@@ -342,7 +342,7 @@ function navbar()
     
     this.processPosition($('#coursenav').attr('data-navPosition'));
 
-    $('#coursenav>div>ul>li').live('click',function(e)
+    $(document).on('click','#coursenav>div>ul>li',function(e)
     {
         if($(this).attr('data-link')=="/data/material/CHW_Training/Manager_Training/"||$(this).attr('data-link')=="/data/material/CHW_Training/Supervisor_Training/")
         {
@@ -354,7 +354,7 @@ function navbar()
         }
     });
 
-    $('nav#coursenav>div>div#upToPreviousNavLevel').live('click', function(e)
+    $(document).on('click', 'nav#coursenav>div>div#upToPreviousNavLevel',function(e)
     {
         navbarObject.processPosition($(this).attr('data-link'));
     });

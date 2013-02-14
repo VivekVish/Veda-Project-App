@@ -267,12 +267,12 @@ function MVPModuleManager()
         thisObject.openAddLessonPlanLightbox();
     });
     
-    $('.deleteModule').live('click',function(e)
+    $(document).on('click','.deleteModule',function(e)
     {
         thisObject.deleteLessonPlan($(this).parent('li').attr('data-lessonplanid'));
     });
     
-    $('.editModule').live('click',function()
+    $(document).on('click','.editModule',function()
     {
         thisObject.openAddLessonPlanLightbox($(this).parent('li').attr('data-lessonplanid'));
     });
