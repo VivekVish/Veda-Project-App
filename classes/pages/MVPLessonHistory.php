@@ -9,8 +9,8 @@ class MVPLessonHistory extends MVPFrame
     
     public function __construct()
     {
-        $bodyTemplates = array("footer","history");
-        $cssFiles = array("contentprovider","revisionHistory");
+        $bodyTemplates = array("history");
+        $cssFiles = array("MVPContent","MVPContentprovider","revisionHistory");
         $scriptFiles = array("contentProvider/content/history");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array();
