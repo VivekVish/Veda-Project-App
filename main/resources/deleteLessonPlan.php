@@ -9,7 +9,7 @@ if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSessi
 
 if (isset($_REQUEST['lessonPlanId']) && !empty($_REQUEST['lessonPlanId']))
 {
-	$lessonPlanId = trim($_REQUEST['lessonPlanId']);
+    $lessonPlanId = trim($_REQUEST['lessonPlanId']);
 }
 
 $api = new Api();

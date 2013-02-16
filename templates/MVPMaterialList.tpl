@@ -34,8 +34,6 @@
                         <p class="tags"><strong>Tags:</strong> {$material->tagText}</p>
                     </div>
                 </a>
-                <!--<button class="editModule">Edit</button>
-                <button class="deleteModule">Delete</button>-->
             </li>
 {/foreach}
 {foreach from=$myAddedModules item="material"}
@@ -47,10 +45,8 @@
                         <h3>{$material->name}</h3>
                         <p class="notes">{$material->notes}</p>
                         <p class="tags"><strong>Tags:</strong> {$material->tagText}</p>
-                    <div>
+                    </div>
                 </a>
-                <!--<button class="editModule">Edit</button>
-                <button class="deleteModule">Delete</button>-->
             </li>
 {elseif $material->type=="standard"}
             <li data-userlessonplanid="{$material->id}" data-coursepath="{$material->path}">
@@ -59,10 +55,8 @@
                     <div class="moduleContent">
                         <h3>{$material->name}</h3>
                         <p class="notes">{$material->description}</p>
-                    <div>
+                    </div>
                 </a>
-                <!--<button class="editModule">Edit</button>
-                <button class="deleteModule">Delete</button>-->
             </li>
 {/if}
 {/foreach}

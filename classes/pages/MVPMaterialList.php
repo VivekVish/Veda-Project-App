@@ -73,11 +73,11 @@ class MVPMaterialList extends MVPFrame
                 $literacyText = $module->literacy=="yes" ? "literacy required" : "literacy not required";
                 if($module->tags=="")
                 {
-                    $this->myModules[$key]->tagText = sprintf("%s, %s, %s, %s",$module->location,$module->age,$genderText,$literacyText);
+                    $this->myModules[$key]->tagText = sprintf("<span class='moduleLocation'>%s</span>, <span class='moduleAge'>%s</span>, <span class='moduleGender'>%s</span>, <span class='moduleLiteracy'>%s</span>",$module->location,$module->age,$genderText,$literacyText);
                 }
                 else
                 {
-                    $this->myModules[$key]->tagText = sprintf("%s, %s, %s, %s, %s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
+                    $this->myModules[$key]->tagText = sprintf("<span class='moduleTags'>%s</span>, <span class='moduleLocation'>%s</span>, <span class='moduleAge'>%s</span>, <span class='moduleGender'>%s</span>, <span class='moduleLiteracy'>%s</span>",$module->tags,$module->location,$module->age,$genderText,$literacyText);
                 }
             }
             
@@ -90,11 +90,11 @@ class MVPMaterialList extends MVPFrame
                     $literacyText = $module->literacy=="yes" ? "literacy required" : "literacy not required";
                     if($module->tags=="")
                     {
-                        $this->myAddedModules[$key]->tagText = sprintf("%s, %s, %s, %s",$module->location,$module->age,$genderText,$literacyText);
+                        $this->myAddedModules[$key]->tagText = sprintf("<span class='moduleLocation'>%s</span>, <span class='moduleAge'>%s</span>, <span class='moduleGender'>%s</span>, <span class='moduleLiteracy'>%s</span>",$module->location,$module->age,$genderText,$literacyText);
                     }
                     else
                     {
-                        $this->myAddedModules[$key]->tagText = sprintf("%s, %s, %s, %s, %s",$module->tags,$module->location,$module->age,$genderText,$literacyText);
+                        $this->myAddedModules[$key]->tagText = sprintf("<span class='moduleTags'>%s</span>, <span class='moduleLocation'>%s</span>, <span class='moduleAge'>%s</span>, <span class='moduleGender'>%s</span>, <span class='moduleLiteracy'>%s</span>",$module->tags,$module->location,$module->age,$genderText,$literacyText);
                     }
                 }
                 else if($module->type=="standard")

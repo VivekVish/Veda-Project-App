@@ -48,7 +48,27 @@ ModuleList.prototype.addModuleToMyModules = function(moduleItem)
     var payload = {path:$(moduleItem).attr('data-path')};
     $.ajax({url:'resources/addToMyLessonPlans.php', type: 'POST', data: payload, success: function(data)
     {
-        new Message(data);
+        try
+        {
+            var jsonArray = $.parseJSON(data);
+            if(jsonArray.status=="success")
+            {
+                $('#myModules ul').append('<li data-userlessonplanid="'+jsonArray.id+'" data-coursepath="'+payload.path+'"></li>').children('li:last-of-type').
+                                   append('<a href="'+$(moduleItem).children('a').attr('href')+'"></a>').children('a').
+                                   append('<img src="'+$(moduleItem).find('a>img').attr('src')+'" />').
+                                   append('<div class="moduleContent"></div>').children('div').
+                                   append('<h3>'+(moduleItem).find('a>h3').text()+'</h3>').
+                                   append('<p class="notes">'+(moduleItem).find('a>p').text()+'</p>');
+            }
+            else
+            {
+                new Message(data);
+            }
+        }
+        catch(e)
+        {
+            new Message(data);
+        }
     }});
 }
 

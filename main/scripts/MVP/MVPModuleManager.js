@@ -34,11 +34,11 @@ MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lesson
         var literacyText = literacy=="yes" ? "literacy required" : "literacy not required"
         if(tags=="")
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> '+location+','+age+','+genderText+','+literacyText+'</td>');
+            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
         else
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> '+tags+','+location+','+age+','+genderText+','+literacyText+'</td>');
+            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleTags">'+tags+'</span>,<span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
 
         if($('#myModules ul').children('li[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').size()==0)
@@ -131,12 +131,12 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         else
         {
             var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('h3').text();
-            var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').text().substring(6);
+            var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleTags').text();
             var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.notes').text();
-            var currentLocation = "potou";
-            var currentAge = "oneToFive";
-            var currentGender = "male";
-            var currentLiteracy = "no";
+            var currentLocation = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleLocation').text();
+            var currentAge = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleAge').text();
+            var currentGender = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleGender').text();
+            var currentLiteracy = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleLiteracy').text() == "literacy required" ? "yes" : "no";
             var imgSource = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('img').first().attr('src');
             var currentImage = imgSource.substring(imgSource.lastIndexOf('/')+1,imgSource.lastIndexOf('.'));
         }
@@ -230,7 +230,7 @@ MVPModuleManager.prototype.deleteLessonPlan = function(listItem)
 {
     if($(listItem).attr('data-userlessonplanid')===undefined)
     {
-        $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: {"lessonPlanId":$(listItem).attr('data-userlessonplanid')}, success: function(data)
+        $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: {"lessonPlanId":$(listItem).attr('data-lessonplanid')}, success: function(data)
         {
             if(data=="Success.")
             {
