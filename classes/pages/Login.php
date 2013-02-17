@@ -9,7 +9,7 @@ class Login extends AbstractFrame
     public function __construct()
     {
         $bodyTemplates = array("login");
-        $cssFiles = array("reset","login","default");
+        $cssFiles = array("reset","login","default","tooltip");
         $scriptFiles = array("jquery/jquery","jquery/jquery-ui");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array();

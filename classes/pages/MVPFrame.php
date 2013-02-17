@@ -15,8 +15,8 @@ class MVPFrame extends AbstractFrame
         
         $this->prependTemplates(array("MVPHeader"));
         $this->appendTemplates(array("MVPFooter"));
-        $this->prependCssFiles(array("reset","MVPMain","jquery-ui","message","lightbox","MVPHeader","MVPFooter"));
-        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/Message","general/main","general/lightbox"));
+        $this->prependCssFiles(array("reset","MVPMain","jquery-ui","message","lightbox","MVPHeader","MVPFooter","tooltip"));
+        $this->prependScriptFiles(array("jquery/jquery","jquery/jquery-ui","general/Message","general/main","general/lightbox"));
         $this->prependIeScriptFiles(array("http://html5shiv.googlecode.com/svn/trunk/html5.js","http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"));
     }
     

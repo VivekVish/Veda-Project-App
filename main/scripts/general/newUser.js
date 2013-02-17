@@ -44,7 +44,7 @@ $(document).ready(function()
         lightBoxContent.children('ul').append('<li>You were idle on this page for 10 minutes.  For security reasons, we have logged you out.  Please log back in.  Sorry for the inconvenience</li>');
         lightBoxContent.children('ul').append('<li><button id="okay">Okay</button></li>');
 
-        $('#okay').live('click',function()
+        $(document).on('click','#okay',function()
         {
                 window.location = 'resources/logout.php';
         });

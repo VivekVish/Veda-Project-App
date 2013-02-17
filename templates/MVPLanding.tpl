@@ -14,10 +14,7 @@
         </div>
         <div id="guest">
             <div id="loginOr"><p>OR</p></div>
-            <form action="index?type=home">
-                <input type="hidden" name="type" value="home" hidden="true" />
-                <button id="guestLogin"><h2>Take a Tour</h2><p>Login as Guest</p></button>
-            </form>
+            <a id="guestLogin" href="index?type=home"><h2>Take a Tour</h2><p>Login as Guest</p></a>
         </div>
     </div>
 </div>

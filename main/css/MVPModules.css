@@ -1,0 +1,19 @@
+.materialList .addToMyModulesDiv
+{
+    height: 120px;
+    width: 34px;
+    position: absolute;
+    left: -34px;
+    top: 0px;
+}
+
+.materialList .addToMyModules
+{
+    width: 34px;
+    height: 34px;
+}
+
+.materialList .addToMyModules:hover
+{
+    cursor: pointer;
+}

@@ -9,6 +9,7 @@ class MVPSubject extends MVPMaterialList
         parent::__construct();
         
         $this->appendScriptFiles(array("MVP/MVPHome"));
+        $this->appendCssFiles(array("MVPModules"));
         
         $this->materialHeader = "Modules";
     }

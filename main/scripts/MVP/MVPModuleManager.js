@@ -7,6 +7,16 @@ $(document).ready(function()
 //       If actionStarted is true, a new action like a sort cannot start
 MVPModuleManager.prototype.actionStarted = false;
 
+// DESC: Adds module to My Modules
+// PARAMETERS: data is the data returned by AJAX from submitLessonPlan
+//             moduleImage is the image for the module
+//             lessonPlanName is the name of the lesson plan
+//             notes are the lesson plan notes
+//             tags are the tags for the lesson plan
+//             age is the target age of the patients
+//             gender is the target gender of the patients
+//             literacy is a boolean that tells whether the lesson plan requires literacy
+// RETURNS: void
 MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lessonPlanName,notes,tags,location,age,gender,literacy)
 {
     try
@@ -24,11 +34,11 @@ MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lesson
         var literacyText = literacy=="yes" ? "literacy required" : "literacy not required"
         if(tags=="")
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> '+location+','+age+','+genderText+','+literacyText+'</td>');
+            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
         else
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> '+tags+','+location+','+age+','+genderText+','+literacyText+'</td>');
+            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleTags">'+tags+'</span>,<span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
 
         if($('#myModules ul').children('li[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').size()==0)
@@ -49,6 +59,8 @@ MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lesson
     }
 }
 
+// DESC: Creates the content for the add lesson plan light box
+// RETURNS: voids
 MVPModuleManager.prototype.createAddLessonPlanLightbox = function()
 {
     var createLessonPlan = $('<div id="createLessonPlan"><ul></ul></div>');
@@ -94,6 +106,9 @@ MVPModuleManager.prototype.createAddLessonPlanLightbox = function()
     return createLessonPlan;
 }
 
+// DESC: Opens the add lesson plan light box
+// PARAMETERS: lessonPlanId is the id of the lesson plan whose lightbox should be opened ("undefined" for new lesson plans)
+// RETURNS: void
 MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
 {
     var thisObject = this;
@@ -115,14 +130,15 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         }
         else
         {
-            var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('h3').text();
-            var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('.tags').text().substring(6);
-            var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('.notes').text();
-            var currentLocation = "potou";
-            var currentAge = "oneToFive";
-            var currentGender = "male";
-            var currentLiteracy = "no";
-            var currentImage = "Cough";
+            var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('h3').text();
+            var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleTags').text();
+            var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.notes').text();
+            var currentLocation = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleLocation').text();
+            var currentAge = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleAge').text();
+            var currentGender = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleGender').text();
+            var currentLiteracy = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleLiteracy').text() == "literacy required" ? "yes" : "no";
+            var imgSource = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a').children('img').first().attr('src');
+            var currentImage = imgSource.substring(imgSource.lastIndexOf('/')+1,imgSource.lastIndexOf('.'));
         }
         
         var createLessonPlan = thisObject.createAddLessonPlanLightbox();
@@ -186,6 +202,62 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
     }
 }
 
+// DESC: Adds edit (if applicable) and delete buttons to module on hover
+// PARAMETERS: listItem is the module to add buttons to
+// RETURNS: void
+MVPModuleManager.prototype.addButtonsToMyModule = function(listItem)
+{
+    if($(listItem).attr('data-lessonplanid')!==undefined)
+    {
+        $(listItem).append("<img class='deleteMyModule' src='img/editorIcons/delete_icon.png' />"+
+                           "<img class='editMyModule' src='img/editorIcons/editLesson_icon.png' />");
+    }
+    else if($(listItem).attr('data-coursepath')!==undefined)
+    {
+        $(listItem).append("<img class='deleteMyModule' src='img/editorIcons/delete_icon.png' />");
+    }
+}
+
+// DESC: Removes edit (if applicable) and delete buttons on module
+// PARAMETERS: listItem is the module to remove buttons from
+// RETURNS: void
+MVPModuleManager.prototype.removeButtonsToMyModule = function(listItem)
+{
+    $(listItem).children('.deleteMyModule,.editMyModule').remove();
+}
+
+MVPModuleManager.prototype.deleteLessonPlan = function(listItem)
+{
+    if($(listItem).attr('data-userlessonplanid')===undefined)
+    {
+        $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: {"lessonPlanId":$(listItem).attr('data-lessonplanid')}, success: function(data)
+        {
+            if(data=="Success.")
+            {
+                $(listItem).remove();
+            }
+            else
+            {
+                new Message(data);
+            }
+        }});
+    }
+    else
+    {
+        $.ajax({url:'resources/deleteMyLessonPlan.php', type: 'POST', data: {"id":$(listItem).attr('data-userlessonplanid')}, success: function(data)
+        {
+            if(data=="Success.")
+            {
+                $(listItem).remove();
+            }
+            else
+            {
+                new Message(data);
+            }
+        }});
+    }
+}
+
 function MVPModuleManager()
 {
     var thisObject = this;
@@ -195,13 +267,38 @@ function MVPModuleManager()
         thisObject.openAddLessonPlanLightbox();
     });
     
-    $('.deleteModule').live('click',function(e)
+    $(document).on('click','.deleteModule',function(e)
     {
         thisObject.deleteLessonPlan($(this).parent('li').attr('data-lessonplanid'));
     });
     
-    $('.editModule').live('click',function()
+    $(document).on('click','.editModule',function()
     {
         thisObject.openAddLessonPlanLightbox($(this).parent('li').attr('data-lessonplanid'));
     });
+    
+    $('#myModules ul').on({
+                            mouseenter:function()
+                            {
+                                thisObject.addButtonsToMyModule(this);
+                            },
+                            mouseleave:function()
+                            {
+                                thisObject.removeButtonsToMyModule(this);
+                            }
+                          }, "li");
+    
+    $('#myModules ul').on({
+                            click:function()
+                            {
+                                thisObject.openAddLessonPlanLightbox($(this).parents('li').first().attr('data-lessonplanid'));
+                            }
+                          }, "li .editMyModule");
+    
+    $('#myModules ul').on({
+                            click:function()
+                            {
+                                thisObject.deleteLessonPlan($(this).parents('li').first());
+                            }
+                          }, "li .deleteMyModule");
 }

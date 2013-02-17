@@ -11,8 +11,8 @@ class PrintQuiz extends AbstractFrame
     public function __construct()
     {   
         $bodyTemplates = array("printQuiz");
-        $cssFiles = array("printQuiz");
-        $scriptFiles = array("jquery/jquery","jquery/jquery-ui","jquery/jquery.tools","general/main","content/Content","general/addAllTrigFunctions",
+        $cssFiles = array("printQuiz","tooltip");
+        $scriptFiles = array("jquery/jquery","jquery/jquery-ui","general/main","content/Content","general/addAllTrigFunctions",
                          "content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","content/citations");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array("MathJax/MathJax.js?config=default");

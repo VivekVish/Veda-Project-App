@@ -159,6 +159,34 @@
     margin-left: 10px;
 }
 
+#myModules li
+{
+    position: relative;
+}
+
+#myModules li .deleteMyModule, #myModules li .editMyModule
+{
+    height: 17px;
+    width: 17px;
+    position: absolute;
+    top: 83px;
+}
+
+#myModules li .deleteMyModule:hover, #myModules li .editMyModule:hover
+{
+    cursor: pointer;
+}
+
+#myModules li .deleteMyModule
+{
+    left: 0px;
+}
+
+#myModules li .editMyModule
+{
+    left: 42px;
+}
+
 .materialList li button:hover, #myModules #addModule:hover
 {
     cursor: pointer;

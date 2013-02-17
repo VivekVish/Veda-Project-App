@@ -57,7 +57,7 @@ var equation =
                 function afterILOCreation()
                 {
                     equationILO.display(targetEquation);
-                    $('#equationText').die('keydown');
+                    $(document).off('keydown','#equationText');
 
                     delete ILOContents.ILOArray['ilo-1'];
 
@@ -90,7 +90,7 @@ var equation =
         function cancel()
         {
             delete ILOContents.ILOArray['ilo-1'];
-            $('#equationText').die('keydown');
+            $(document).off('keydown','#equationText');
             $('#lightbox').fadeOut('fast',function() {$('#EqEditorHolder ul').children('li:not(:last-child)').remove().prependTo('#tempEquationEditor ul');$(this).remove();});
 			$('#overlay').fadeOut('fast',function() {$(this).remove();});
             rangeTraverse.setCurrentRange(currentRange);
@@ -107,8 +107,8 @@ var equation =
 			cancel();
 		});
         
-        $('#equationText').die('keydown');
-        $('#equationText').live('keydown', function(e)
+        $(document).off('keydown','#equationText');
+        $(document).on('keydown','#equationText',function(e)
         {
             switch(e.keyCode)
             {

@@ -249,12 +249,12 @@ LessonPlan.prototype.editSectionName = function(sectionItem)
         sectionItem.replaceWith(sectionInput);
         sectionInput.focus();
 
-        $('html').live('mousedown',function(e)
+        $(document).on('mousedown','html',function(e)
         {
             if($(sectionInput).attr('data-revert')!="true")
             {
                 thisObject.renameSection(sectionInput,sectionInput.val());
-                $('html').die('mousedown');
+                $(document).off('mousedown','html');
             }
         });
 
@@ -268,7 +268,7 @@ LessonPlan.prototype.editSectionName = function(sectionItem)
                     {
                         sectionInput.blur();
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
                // Escape
                case 27:
@@ -277,7 +277,7 @@ LessonPlan.prototype.editSectionName = function(sectionItem)
                         $(this).attr("data-revert","true");
                         $(this).replaceWith('<span class="sectionName">'+sectionName+'</span>');
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
             }
         });
@@ -576,7 +576,7 @@ function LessonPlan()
 	$('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
 
 	// Section re-ordering makes ajax request
-	$('.sectionList').live("sortstop",function(e,ui)
+	$(document).on("sortstop",'.sectionList',function(e,ui)
 	{
         if(typeof($(ui.item[0]).attr('data-lessonpath'))==='undefined'&&!$(ui.item).hasClass('lessonPlanLesson'))
         {
@@ -584,7 +584,7 @@ function LessonPlan()
         }
 	});
     
-    $('.sectionList').live("sort",function(e,ui)
+    $(document).on("sort",'.sectionList',function(e,ui)
     {
         if(thisObject.actionStarted)
         {
@@ -593,7 +593,7 @@ function LessonPlan()
     });
 	
 	// Lesson re-ordering makes ajax request
-	$('.lessonList').live("sortstop",function(e,ui)
+	$(document).on("sortstop",'.lessonList',function(e,ui)
 	{
         if($(ui.item).hasClass('lessonPlanLesson'))
         {
@@ -605,7 +605,7 @@ function LessonPlan()
         }
 	});
     
-    $('.lessonList').live("sort",function(e,ui)
+    $(document).on("sort",'.lessonList',function(e,ui)
     {
         $(ui.placeholder[0]).css('height',$('#listEditorHeader').height());
         if(thisObject.actionStarted)
@@ -615,12 +615,12 @@ function LessonPlan()
     });
 	
 	// Edit section name
-	$('span.sectionName').live('click',function()
+	$(document).on('click','span.sectionName',function()
 	{
         thisObject.editSectionName($(this));
 	});
 	
-	$('input.sectionName').live('blur',function()
+	$(document).on('blur','input.sectionName',function()
 	{
         if($(this).attr('data-revert')!="true")
         {
@@ -629,7 +629,7 @@ function LessonPlan()
 	});
 	
 	// Contract List
-	$('.listEditor .expandedList img').live('click',function()
+	$(document).on('click','.listEditor .expandedList img',function()
 	{
 		var minusImage = this;
 		$(minusImage).parents('li').children('ul').slideUp(400,function()
@@ -640,7 +640,7 @@ function LessonPlan()
 	});
 	
 	// Expand List
-	$('.listEditor .contractedList img').live('click',function()
+	$(document).on('click','.listEditor .contractedList img',function()
 	{
 		var plusImage = this;
 		$(plusImage).parents('li').children('ul').slideDown(400,function()
@@ -651,30 +651,30 @@ function LessonPlan()
 	});
 	
 	// Add Section Button
-	$('#listEditorHeader #addSectionIcon').live('click',function()
+	$(document).on('click','#listEditorHeader #addSectionIcon',function()
 	{
         thisObject.openAddSectionLightbox();
 	});
     
     // Delete Section
-    $('.deleteSectionIcon').live('click',function()
+    $(document).on('click','.deleteSectionIcon',function()
     {
         thisObject.deleteSection($(this));
     });
     
     // Delete Section
-    $('#deleteModuleIcon').live('click',function()
+    $(document).on('click','#deleteModuleIcon',function()
     {
         thisObject.deleteModule($(this).parents('#listEditorHeader').attr('data-lessonplanid'));
     });
     
     // Delete Lesson
-    $('.deleteLessonIcon').live('click',function()
+    $(document).on('click','.deleteLessonIcon',function()
     {
         thisObject.deleteLesson($(this));
     });
     
-    $('ul.lessonList>li>span>span:last-of-type>a').live('mousedown', function(e)
+    $(document).on('mousedown', 'ul.lessonList>li>span>span:last-of-type>a', function(e)
     {
         if(e.which==3&&$(this).children('.editLessonIcon').size()==0)
         {
@@ -682,7 +682,7 @@ function LessonPlan()
         }
     });
     
-    $('ul.lessonList>li>span>span:last-of-type>a').live('contextmenu',function(e)
+    $(document).on('contextmenu','ul.lessonList>li>span>span:last-of-type>a',function(e)
     {
         if($(this).children('.editLessonIcon').size()==0)
         {
@@ -690,7 +690,7 @@ function LessonPlan()
         }
     });
     
-    $('#editModuleIcon').live('click',function()
+    $(document).on('click','#editModuleIcon',function()
     {
         mvpModuleManager.openAddLessonPlanLightbox($(this).parents('#listEditorHeader').attr('data-lessonplanid'));
     });
@@ -1078,7 +1078,7 @@ function LessonRepository()
     var LessonRepositoryObject = this;
     this.processPosition('/data/material/CHW_Training/');
 
-    $('#lessonRepository>div>ul>li').live('click',function()
+    $(document).on('click','#lessonRepository>div>ul>li',function()
     {
         if(!LessonRepositoryObject.lessons)
         {
@@ -1086,7 +1086,7 @@ function LessonRepository()
         }
     });
     
-    $('#lessonRepository>p#repositoryBackLinks>span').live('click', function()
+    $(document).on('click','#lessonRepository>p#repositoryBackLinks>span',function()
     {
         LessonRepositoryObject.navigateToNextLevel($(this).attr('data-link'));
     });

@@ -104,7 +104,6 @@ ContentHandler.prototype.handleHeaderEvent=function(e)
 // RETURNS: void
 ContentHandler.prototype.handleGeneralEvent=function(e)
 {
-    console.log('got here');
     var thisObject = this;
     this.parent.handleGeneralEvent(e);
     materialProvider.toggleExitInfoBoxButton();
@@ -218,5 +217,5 @@ function ContentHandler()
 var currentHandler = new ContentHandler();
 $(document).ready(function()
 {
-    console.log(currentHandler.handleContentEvent);
+
 })

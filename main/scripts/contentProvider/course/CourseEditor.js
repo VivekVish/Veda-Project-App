@@ -347,12 +347,12 @@ CourseEditor.prototype.editSectionName = function(sectionItem)
         sectionItem.replaceWith(sectionInput);
         sectionInput.focus();
 
-        $('html').live('mousedown',function(e)
+        $(document).on('mousedown','html',function(e)
         {
             if($(sectionInput).attr('data-revert')!="true")
             {
                 thisObject.renameSection(sectionInput,sectionInput.val());
-                $('html').die('mousedown');
+                $(document).off('mousedown','html');
             }
         });
 
@@ -366,7 +366,7 @@ CourseEditor.prototype.editSectionName = function(sectionItem)
                     {
                         sectionInput.blur();
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
                // Escape
                case 27:
@@ -375,7 +375,7 @@ CourseEditor.prototype.editSectionName = function(sectionItem)
                         $(this).attr("data-revert","true");
                         $(this).replaceWith('<span class="sectionName">'+sectionName+'</span>');
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
             }
         });
@@ -404,12 +404,12 @@ CourseEditor.prototype.editLessonName = function(lessonItem)
         lessonItem.replaceWith(lessonInput);
         lessonInput.focus();
 
-        $('html').live('mousedown',function(e)
+        $(document).on('mousedown','html',function(e)
         {
             if($(lessonInput).attr('data-revert')!="true")
             {
                 thisObject.renameLesson(lessonInput,lessonInput.val());
-                $('html').die('mousedown');
+                $(document).off('mousedown','html');
             }
         });
 
@@ -423,7 +423,7 @@ CourseEditor.prototype.editLessonName = function(lessonItem)
                     {
                         lessonInput.blur();
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
                 // Escape
                 case 27:
@@ -432,7 +432,7 @@ CourseEditor.prototype.editLessonName = function(lessonItem)
                         $(this).attr("data-revert","true");
                         $(this).replaceWith('<span class="lessonName">'+lessonName+'</span>');
                     }
-                    $('html').die('mousedown');
+                    $(document).off('mousedown','html');
                     break;
             }
         });
@@ -883,12 +883,12 @@ function CourseEditor()
 	$('.lessonList').sortable({connectWith: '.lessonList'}).disableSelection();
 	
 	// Section re-ordering makes ajax request
-	$('.sectionList').live("sortstop",function(e,ui)
+	$(document).on("sortstop",'.sectionList',function(e,ui)
 	{
         thisObject.sortSection($(ui.item));
 	});
     
-    $('.sectionList').live("sort",function(e,ui)
+    $(document).on("sort",'.sectionList',function(e,ui)
     {
         if(thisObject.actionStarted)
         {
@@ -897,12 +897,12 @@ function CourseEditor()
     });
 	
 	// Lesson re-ordering makes ajax request
-	$('.lessonList').live("sortstop",function(e,ui)
+	$(document).on("sortstop",'.lessonList',function(e,ui)
 	{
         thisObject.sortLesson($(ui.item),$(e.target));
 	});
     
-    $('.lessonList').live("sort",function(e,ui)
+    $(document).on("sort",'.lessonList',function(e,ui)
     {
         if(thisObject.actionStarted)
         {
@@ -911,12 +911,12 @@ function CourseEditor()
     });
 	
 	// Edit section name
-	$('span.sectionName').live('click',function()
+	$(document).on('click','span.sectionName',function()
 	{
         thisObject.editSectionName($(this));
 	});
 	
-	$('input.sectionName').live('blur',function()
+	$(document).on('blur','input.sectionName',function()
 	{
         if($(this).attr('data-revert')!="true")
         {
@@ -925,12 +925,12 @@ function CourseEditor()
 	});
 	
 	// Edit lesson name
-	$('span.lessonName').live('click',function()
+	$(document).on('click','span.lessonName',function()
 	{
         thisObject.editLessonName($(this));
 	});
 	
-	$('input.lessonName').live('blur',function()
+	$(document).on('blur','input.lessonName',function()
 	{
         if($(this).attr('data-revert')!="true")
         {
@@ -939,7 +939,7 @@ function CourseEditor()
 	});
 	
 	// Contract List
-	$('.listEditor .expandedList img').live('click',function()
+	$(document).on('click','.listEditor .expandedList img',function()
 	{
 		var minusImage = this;
 		$(minusImage).parents('li').children('ul').slideUp(400,function()
@@ -950,7 +950,7 @@ function CourseEditor()
 	});
 	
 	// Expand List
-	$('.listEditor .contractedList img').live('click',function()
+	$(document).on('click','.listEditor .contractedList img',function()
 	{
 		var plusImage = this;
 		$(plusImage).parents('li').children('ul').slideDown(400,function()
@@ -961,37 +961,37 @@ function CourseEditor()
 	});
 	
 	// Add Section Button
-	$('#listEditorHeader #addSectionIcon').live('click',function()
+	$(document).on('click','#listEditorHeader #addSectionIcon',function()
 	{
         thisObject.openAddSectionLightbox();
 	});
 	
 	// Add Lesson Button
-	$('.addLessonIcon').live('click',function()
+	$(document).on('click','.addLessonIcon',function()
 	{
         thisObject.openAddLessonLightbox($(this));
 	});
     
     // Delete Section
-    $('.deleteSectionIcon').live('click',function()
+    $(document).on('click','.deleteSectionIcon',function()
     {
         thisObject.deleteSection($(this));
     });
     
     // Delete Lesson
-    $('.deleteLessonIcon').live('click',function()
+    $(document).on('click','.deleteLessonIcon',function()
     {
         thisObject.deleteLesson($(this));
     });
     
     // Add Lesson Addition
-    $('.addLessonAddition').live('click',function()
+    $(document).on('click','.addLessonAddition',function()
     {
         thisObject.openAddLessonAddition($(this));
     });
     
     // Recover Deleted Lessons
-    $('#recoverDeletedLessons').live('click',function()
+    $(document).on('click','#recoverDeletedLessons',function()
     {
         thisObject.recoverDeletedLessons(thisObject.navPosition);
     });
