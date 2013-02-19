@@ -26,19 +26,19 @@ MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lesson
         var lessonPlanRow = $('<li data-lessonplanid="'+lessonPlanIdArray['id']+'" item="material"></li>');
         $(lessonPlanRow).append('<a href="index.php?type=lessonPlan&id='+lessonPlanIdArray['id']+'"></a>');
         $(lessonPlanRow).children('a').append('<img src="img/navIcons/'+moduleImage+'.png" />')
-        $(lessonPlanRow).append('<div class="moduleContent"></div>')
-        $(lessonPlanRow).children('.moduleContent').append('<a href="index.php?type=lessonPlan&id='+lessonPlanIdArray['id']+'"></a>');
-        $(lessonPlanRow).find('.moduleContent a').append('<h3>'+lessonPlanName+'</h3>');
-        $(lessonPlanRow).find('.moduleContent a').append('<p class="notes">'+notes+'</p>');
+        $(lessonPlanRow).children('a').append('<div class="moduleContent"></div>')
+        $(lessonPlanRow).find ('a .moduleContent');
+        $(lessonPlanRow).find('a .moduleContent').append('<h3>'+lessonPlanName+'</h3>');
+        $(lessonPlanRow).find('a .moduleContent').append('<p class="notes">'+notes+'</p>');
         var genderText = gender=="both" ? "both genders" : gender;
         var literacyText = literacy=="yes" ? "literacy required" : "literacy not required"
         if(tags=="")
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
+            $(lessonPlanRow).find('a .moduleContent').append('<p class="tags"><strong>Tags:</strong> <span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>, <span class="moduleGender">'+genderText+'</span>, <span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
         else
         {
-            $(lessonPlanRow).find('.moduleContent a').append('<p class="tags"><strong>Tags:</strong> <span class="moduleTags">'+tags+'</span>,<span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>,<span class="moduleGender">'+genderText+'</span>,<span class="moduleLiteracy">'+literacyText+'</span></td>');
+            $(lessonPlanRow).find('a .moduleContent').append('<p class="tags"><strong>Tags:</strong> <span class="moduleTags">'+tags+'</span>, <span class="moduleLocation">'+location+'</span>, <span class="moduleAge">'+age+'</span>, <span class="moduleGender">'+genderText+'</span>, <span class="moduleLiteracy">'+literacyText+'</span></td>');
         }
 
         if($('#myModules ul').children('li[data-lessonplanid="'+lessonPlanIdArray['id']+'"]').size()==0)
@@ -130,6 +130,7 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         }
         else
         {
+            console.log($('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"]'));
             var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('h3').text();
             var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleTags').text();
             var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.notes').text();
@@ -145,7 +146,7 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         
         createLessonPlan.children('ul').find('#newLessonPlanName').val(currentName);
         createLessonPlan.children('ul').find('#newTags').val(currentTags);
-        createLessonPlan.children('ul').find('#newNotes').val();
+        createLessonPlan.children('ul').find('#newNotes').val(currentNotes);
         createLessonPlan.children('ul').find('#newLessonPlanLocation').children('option[value="'+currentLocation+'"]').attr('selected','selected');
         createLessonPlan.children('ul').find('#newLessonPlanAge').children('option[value="'+currentAge+'"]').attr('selected','selected');
         createLessonPlan.children('ul').find('#newLessonPlanGender').children('option[value="'+currentGender+'"]').attr('selected','selected');
