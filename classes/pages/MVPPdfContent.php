@@ -4,7 +4,11 @@ require_once('MVPFrame.php');
 
 class MVPPdfContent extends MVPFrame
 {
-    private $phantom_js = '../vendors/PhantomJS/phantomjs';
+    const PhantomJS_Linux_amd64 = 'phantomjs-lin64';
+    const PhantomJS_Linux_i386 = 'phantomjs-lin32';
+    const PhantomJS_Windows_i386 = 'phantomjs-win32.exe';
+    
+    private $phantom_js = '../vendors/PhantomJS/';
     private $render_script = '../vendors/PhantomJS/rasterize.js';
     private $pdf_path = './pdf';
     private $pdf_url = 'pdf';
@@ -16,6 +20,16 @@ class MVPPdfContent extends MVPFrame
     
     public function __construct()
     {
+        $os = php_uname('s');
+        $machine = php_uname('m');
+        if(stripos($os,'linux')!==false) {
+            if($machine==='x86_64')
+                $this->phantom_js.=self::PhantomJS_Linux_amd64;
+            else
+                $this->phantom_js.=self::PhantomJS_Linux_i386;
+        } elseif(stripos($os,'windows')!==false) {
+            $this->phantom_js.=self::PhantomJS_Windows_i386;
+        }
     }
     
     public function display()
