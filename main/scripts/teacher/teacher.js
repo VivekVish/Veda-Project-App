@@ -42,7 +42,6 @@ function addTeacherFunctionality()
         {
             payload[$(this).attr('id')] = $(this).is(':checked')
         });
-        console.log(payload);
         $.ajax({url:'resources/submitLessonPlanTrainingManual.php', data:payload, type:'POST', success: function(data)
         {
             new Message(data);
