@@ -76,22 +76,13 @@ Class Api
 
 	public function get($uri)
 	{
-		$key = sha1($uri.'?'.http_build_query(array('content_type'=>$this->contentTypeHeader, 'accept_type'=>$this->acceptTypeHeader)));
-		if(apc_exists($key) && (($result = apc_fetch($key)) !== false))
+		if (!empty($this->contentTypeHeader) || !empty($this->acceptTypeHeader))
 		{
+			$this->setHeaders();
 		}
-		else
-		{
-			if (!empty($this->contentTypeHeader) || !empty($this->acceptTypeHeader))
-			{
-				$this->setHeaders();
-			}
-			$this->setUri($uri);	
-			$result = $this->makeRequest();
-			apc_store($key, $result, 86400);
-		}
+		$this->setUri($uri);	
 			
-		return $result;
+		return $this->makeRequest();
 	}
 
 	public function delete($uri,$payload=null)
