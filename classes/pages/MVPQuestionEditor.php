@@ -28,7 +28,7 @@ class MVPQuestionEditor extends MVPFrame
     {
         $bodyTemplates = array("navbar","contentprovider","questionEditor");
         $cssFiles = array("MVPNavBar","question","MVPContent","MVPContentprovider","equationEditor","questionEditor");
-        $scriptFiles = array("general/navbar","content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
+        $scriptFiles = array("MVP/MVPNavbar","content/ILOContents","flot/jquery.flot.min","flot/jquery.flot.dashes","contentProvider/content/BaseProvider","contentProvider/content/rangeTraverse",
                                     "general/equationEditor","contentProvider/content/BaseHandler","contentProvider/content/ilo","contentProvider/ILO/formValidator","content/Content","contentProvider/content/ContentProvider","contentProvider/test/questionBlueprints","contentProvider/test/QuestionProvider","general/lightbox",
                                     "contentProvider/test/QuestionHandler","test/test","contentProvider/test/QuestionContent","contentProvider/test/CorrectAnswer","contentProvider/test/QuestionEditor",
                                     "contentProvider/test/AnswerField","contentProvider/test/QuestionParameters","contentProvider/content/ContentState", "content/citations","MVP/MVPToolbar");

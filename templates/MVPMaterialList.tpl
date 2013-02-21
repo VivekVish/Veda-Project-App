@@ -26,7 +26,7 @@
         <ul>
 {foreach from=$myModules item="material"}
             <li data-lessonplanid="{$material->id}">
-                <a href="index.php?type=lessonPlan&id={$material->id}">
+                <a href="index.php?type=lessonPlan&id={$material->id}&section={$material->image}&lesson={$material->image}">
                     <img src="img/navIcons/{$material->image}.png" />
                     <div class="moduleContent">
                         <h3>{$material->name}</h3>
@@ -39,7 +39,7 @@
 {foreach from=$myAddedModules item="material"}
 {if $material->type=="custom"}
             <li data-userlessonplanid="{$material->id}" data-lessonplanid="{$material->lessonplanid}">
-                <a href="index.php?type=lessonPlan&id={$material->lessonplanid}">
+                <a href="index.php?type=lessonPlan&id={$material->lessonplanid}&section={$material->image}&lesson={$material->image}">
                     <img src="img/navIcons/{$material->image}.png" />
                     <div class="moduleContent">
                         <h3>{$material->name}</h3>

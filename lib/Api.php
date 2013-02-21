@@ -76,13 +76,12 @@ Class Api
 
 	public function get($uri)
 	{
-		if (!empty($this->contentTypeHeader) || !empty($this->acceptTypeHeader))
-		{
-			$this->setHeaders();
-		}
-		$this->setUri($uri);	
-			
-		return $this->makeRequest();
+            if (!empty($this->contentTypeHeader) || !empty($this->acceptTypeHeader))
+            {
+                $this->setHeaders();
+            }
+            $this->setUri($uri);	
+            return $this->makeRequest();
 	}
 
 	public function delete($uri,$payload=null)
@@ -118,6 +117,7 @@ Class Api
 		}
 		$this->setUri($uri);	
 		$this->setPayload($payload);
+                curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, "POST");
 		
 		return $this->makeRequest();
 	}

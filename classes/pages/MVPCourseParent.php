@@ -28,7 +28,7 @@ class MVPCourseParent extends MVPFrame
         parent::getData($uri);
 
         $sectionArray = $this->pageContent->children;
-        
+
 	foreach($sectionArray as $sectionKey => $sectionElement)
 	{
             $sectionInfo = array();

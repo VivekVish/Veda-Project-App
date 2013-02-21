@@ -13,7 +13,7 @@ class MVPTestOverview extends MVPFrame
         
         parent::appendTemplates(array("navbar","testOverview"));
         parent::appendCssFiles(array("MVPTestOverview","MVPContentprovider","MVPNavBar"));
-        parent::appendScriptFiles(array("contentProvider/test/testOverview","general/navbar"));
+        parent::appendScriptFiles(array("contentProvider/test/testOverview","MVP/MVPNavbar"));
     }
     
     public function display()

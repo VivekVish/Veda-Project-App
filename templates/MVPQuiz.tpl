@@ -1,4 +1,4 @@
-        <div id="content" data-name="Quiz">
+        <div id="content" data-name="Quiz" data-location="{$quizPath}">
             <section>
                 <h1>Quiz</h1>
 {foreach from=$questions key=id item=question}
