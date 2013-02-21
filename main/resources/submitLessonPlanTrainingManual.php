@@ -4,7 +4,7 @@ require_once("config/main.inc.php");
 require_once("lib/PathArray.php");
 require_once("lib/HelperFunctions.php");
 
-if(!$userSession->isLoggedIn()||!$userSession->isTeacher())
+if(!$userSession->isLoggedIn()||(!$userSession->isContentProvider()&&!$userSession->isAdmin()&&!$userSession->isTeacher()))
 {
     die("Access Denied.");
 }
