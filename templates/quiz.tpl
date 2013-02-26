@@ -1,4 +1,4 @@
-        <div id="content" data-name="Quiz">
+        <div id="content" data-name="Quiz" data-location="{$quizPath}">
         	<section>
 {if $lastAnswer|@count>0}
 {if $lastAnswer->submittedAnswer==$lastAnswer->correctAnswer}

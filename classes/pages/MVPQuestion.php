@@ -21,7 +21,7 @@ class MVPQuestion extends MVPFrame
     {
         $bodyTemplates = array("navbar");
         $cssFiles = array("MVPContent","MVPNavBar");
-        $scriptFiles = array("general/navbar");
+        $scriptFiles = array("MVP/MVPNavbar");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array("MathJax/MathJax.js?config=default");
         parent::__construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles);
@@ -49,6 +49,9 @@ class MVPQuestion extends MVPFrame
             $GLOBALS['smarty']->assign("answerCorrect",$this->answerCorrect);
             $GLOBALS['smarty']->assign("lessonReviewLink",PathArray::pathToLink($this->location));
         }
+
+        $GLOBALS['smarty']->assign("quizPath",$this->location);
+        
         parent::display();
     }
     
@@ -57,7 +60,9 @@ class MVPQuestion extends MVPFrame
         parent::getData($uri);
         
         $this->pathArray = explode("/",trim($uri,"/"));
-        
+
+        $this->location = $uri;
+            
         if(count($this->pageContent)==0)
         {
             $this->setMode("noQuestions");

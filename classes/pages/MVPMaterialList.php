@@ -60,7 +60,17 @@ class MVPMaterialList extends MVPFrame
         foreach($this->pageContent->children as $key=>$value)
         {
             $this->pageContent->children[$key]->img = preg_replace('/ /',"_",$value->name);
-            $this->pageContent->children[$key]->link = PathArray::pathToLink($value->path);
+            $uriArr = explode("/",trim($value->path,"/"));
+            if(count($uriArr)==5)
+            {
+                $thisPath = $value->path.$uriArr[4]."/".$uriArr[4]."/";
+            }
+            else
+            {
+                $thisPath = $value->path;
+            }
+
+            $this->pageContent->children[$key]->link = PathArray::pathToLink($thisPath);
         }
         
         if($GLOBALS['userSession']->getUsername())
@@ -79,6 +89,7 @@ class MVPMaterialList extends MVPFrame
                 {
                     $this->myModules[$key]->tagText = sprintf("<span class='moduleTags'>%s</span>, <span class='moduleLocation'>%s</span>, <span class='moduleAge'>%s</span>, <span class='moduleGender'>%s</span>, <span class='moduleLiteracy'>%s</span>",$module->tags,$module->location,$module->age,$genderText,$literacyText);
                 }
+
             }
             
             $this->myAddedModules = json_decode($GLOBALS['api']->get("/user/lessonplan/{$GLOBALS['userSession']->getUsername()}/"));
@@ -104,7 +115,7 @@ class MVPMaterialList extends MVPFrame
                     
                     $uriArr = explode("/",trim($module->path,"/"));
                     
-                    $this->myAddedModules[$key]->link = sprintf("index.php?field=%s&subject=%s&course=%s",$uriArr[2],$uriArr[3],$uriArr[4]);
+                    $this->myAddedModules[$key]->link = sprintf("index.php?field=%s&subject=%s&course=%s&section=%s&lesson=%s",$uriArr[2],$uriArr[3],$uriArr[4],$uriArr[4],$uriArr[4]);
                 }
             }
        }

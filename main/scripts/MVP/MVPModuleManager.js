@@ -24,7 +24,7 @@ MVPModuleManager.prototype.addLessonPlanToDOM = function(data,moduleImage,lesson
         var lessonPlanIdArray = $.parseJSON(data);
 
         var lessonPlanRow = $('<li data-lessonplanid="'+lessonPlanIdArray['id']+'" item="material"></li>');
-        $(lessonPlanRow).append('<a href="index.php?type=lessonPlan&id='+lessonPlanIdArray['id']+'"></a>');
+        $(lessonPlanRow).append('<a href="index.php?type=lessonPlan&id='+lessonPlanIdArray['id']+'&section='+moduleImage+'&lesson='+moduleImage+'"></a>');
         $(lessonPlanRow).children('a').append('<img src="img/navIcons/'+moduleImage+'.png" />')
         $(lessonPlanRow).children('a').append('<div class="moduleContent"></div>')
         $(lessonPlanRow).find ('a .moduleContent');
@@ -130,7 +130,6 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         }
         else
         {
-            console.log($('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"]'));
             var currentName = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('h3').text();
             var currentTags = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.tags').children('.moduleTags').text();
             var currentNotes = $('#myModules ul').find('li[data-lessonplanid="'+lessonPlanId+'"] a .moduleContent').children('.notes').text();
@@ -152,14 +151,26 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
         createLessonPlan.children('ul').find('#newLessonPlanGender').children('option[value="'+currentGender+'"]').attr('selected','selected');
         createLessonPlan.children('ul').find('#newLessonPlanLiteracy').children('option[value="'+currentLiteracy+'"]').attr('selected','selected');
         createLessonPlan.children('ul').find('#newLessonPlanImage').children('option[value="'+currentImage+'"]').attr('selected','selected');
+
+        if(typeof(lessonPlanId)!="undefined")
+        {
+            createLessonPlan.children('ul').find('#newLessonPlanImage').parent('li').hide();
+        }
         
         createLightBox('html','Create Module',createLessonPlan);
         $('#newLessonPlanName').focus();
         
-        function addLessonPlan(id,lessonPlanName,tags,notes,location,age,gender,literacy,moduleImage)
+        this.updateLessonAdditions(currentImage.replace(/ /g,' '),lessonPlanId);
+        
+        $('#newLessonPlanImage').change(function()
+        {
+            thisObject.updateLessonAdditions($('#newLessonPlanImage').val(),lessonPlanId);
+        })
+        
+        function addLessonPlan(id,lessonPlanName,tags,notes,location,age,gender,literacy,moduleImage,lessonAdditions)
         {
             var tagArray = tags.split(",");
-            var payload = {id:id,lessonPlanName: lessonPlanName, tags: tagArray, notes: notes, location: location, age: age, gender: gender, literacy: literacy,image: moduleImage};
+            var payload = {id:id,lessonPlanName: lessonPlanName, tags: tagArray, notes: notes, location: location, age: age, gender: gender, literacy: literacy,image: moduleImage,additions: lessonAdditions};
 
             $.ajax({url:'resources/submitLessonPlan.php', type: 'POST', data: payload, success: function(data)
             {
@@ -182,7 +193,13 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
             // Enter
             if(e.keyCode==13)
             {
-               addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val(),$('#newLessonPlanLocation').val(),$('#newLessonPlanAge').val(),$('#newLessonPlanGender').val(),$('#newLessonPlanLiteracy').val(),$("#newLessonPlanImage").val());
+               var lessonAdditions = {};
+               $('.lessonAdditionInclusion').each(function()
+               {
+                   lessonAdditions[$(this).attr('id').replace(/Addition/,'')] = $(this).is(':checked');
+               })
+               
+               addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val(),$('#newLessonPlanLocation').val(),$('#newLessonPlanAge').val(),$('#newLessonPlanGender').val(),$('#newLessonPlanLiteracy').val(),$("#newLessonPlanImage").val(),lessonAdditions);
             }
             // Escape
             else if(e.keyCode==27)
@@ -193,7 +210,13 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
 
         $('#createLessonPlan button.create').click(function()
         {
-            addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val(),$('#newLessonPlanLocation').val(),$('#newLessonPlanAge').val(),$('#newLessonPlanGender').val(),$('#newLessonPlanLiteracy').val(),$("#newLessonPlanImage").val());
+            var lessonAdditions = {};
+            $('.lessonAdditionInclusion').each(function()
+            {
+                lessonAdditions[$(this).attr('id').replace(/Addition/,'')] = $(this).is(':checked');
+            });
+            
+            addLessonPlan(lessonPlanId,$('#newLessonPlanName').val().replace(/_/g,' '),$('#newTags').val(),$('#newNotes').val(),$('#newLessonPlanLocation').val(),$('#newLessonPlanAge').val(),$('#newLessonPlanGender').val(),$('#newLessonPlanLiteracy').val(),$("#newLessonPlanImage").val(),lessonAdditions);
         });
 
         $('#createLessonPlan button.cancel').click(function()
@@ -201,6 +224,62 @@ MVPModuleManager.prototype.openAddLessonPlanLightbox = function(lessonPlanId)
             cancel();
         });
     }
+}
+
+// DESC: Updates lesson additions based on what image is chosen
+// RETURNS: void
+MVPModuleManager.prototype.updateLessonAdditions = function(imageName,lessonPlanId)
+{
+    var payload = {field:"CHW_Training",subject:"CHW_Training",course:imageName,section:imageName};
+    
+    $.ajax({url:'resources/getCourseNav.php', type: 'POST', data: payload, success: function(data)
+    {
+        var jsonArray = $.parseJSON(data);
+        
+        $('.lessonAdditionInclusion').parent('li').remove();
+        
+        $('#createLessonPlan ul').children('li:last-of-type').before('<li></li>');
+        $('#createLessonPlan ul').children('li:last-of-type').prev().append('<label for="quizAddition">Quiz</label><input type="checkbox" class="lessonAdditionInclusion" id="quizAddition"></input>');
+        
+        $.each(jsonArray.children[0].lessonAdditions,function(index,value)
+        {
+            if(value=="trainingmanual")
+            {
+                var additionName = "Training Manual";
+            }
+            else if(value=="roleplay")
+            {
+                additionName = "Roleplay";
+            }
+            else if(value=="video")
+            {
+                additionName = "Video";
+            }
+            
+            $('#createLessonPlan ul').children('li:last-of-type').before('<li></li>').prev().append('<label for="'+value+'Addition">'+additionName+'</label><input type="checkbox" class="lessonAdditionInclusion" id="'+value+'Addition"></input>')
+        });
+
+        centerLightBox();
+
+        if(typeof(lessonPlanId)=="undefined")
+        {
+            $('.lessonAdditionInclusion').attr('checked','checked')
+        }
+        else
+        {
+            var navPosition = {moduleId:lessonPlanId};
+
+            $.ajax({url : 'resources/getModuleNav.php', type: 'GET', data: navPosition,success: function(data)
+            {
+                var jsonArray = $.parseJSON(data);
+
+                $.each(jsonArray.children[0].lessons[0].additions,function(index, value)
+                {
+                    $('#'+value+'Addition').attr('checked','checked')
+                });
+            }});
+        }
+    }});
 }
 
 // DESC: Adds edit (if applicable) and delete buttons to module on hover
@@ -231,7 +310,9 @@ MVPModuleManager.prototype.deleteLessonPlan = function(listItem)
 {
     if($(listItem).attr('data-userlessonplanid')===undefined)
     {
-        $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: {"lessonPlanId":$(listItem).attr('data-lessonplanid')}, success: function(data)
+        var payload = {"lessonPlanId":$(listItem).attr('data-lessonplanid'),"image":$(listItem).find('img').attr('src').substring($(listItem).find('img').attr('src').lastIndexOf('/')+1,$(listItem).find('img').attr('src').lastIndexOf('.png'))};
+
+        $.ajax({url:'resources/deleteLessonPlan.php', type: 'POST', data: payload, success: function(data)
         {
             if(data=="Success.")
             {

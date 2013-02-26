@@ -11,7 +11,7 @@ class MVPVideo extends MVPFrame
     {
         $bodyTemplates = array("navbar","video");
         $cssFiles = array("MVPVideo","MVPNavBar");
-        $scriptFiles = array("general/navbar");
+        $scriptFiles = array("MVP/MVPNavbar");
         $ieScriptFiles = array();
         $fullnameScriptFiles = array();
         
@@ -31,7 +31,7 @@ class MVPVideo extends MVPFrame
         parent::getData($uri);
         
         $uriArr = explode("/",trim($uri,"/"));
-        $this->location="/data/material/{$uriArr[2]}/{$uriArr[3]}/{$uriArr[4]}/{$uriArr[5]}/{$uriArr[6]}/";
+        $this->location="/data/{$uriArr[1]}/{$uriArr[2]}/{$uriArr[3]}/{$uriArr[4]}/{$uriArr[5]}/{$uriArr[6]}/";
         $this->name = preg_replace('/_/',' ',"{$uriArr[6]} Video");
     }
 }

@@ -133,7 +133,6 @@ $(document).ready(function()
 		
 		$('#deleteQuestionLightBox .yesbutton').click(function()
 		{
-            console.log(this);
 			$.ajax({url : 'resources/deleteQuizQuestion.php', type: 'POST',data:{'quizBlueprintId':$(this).attr('data-quizblueprintid'),'questionBlueprintId':$(this).attr('data-questionblueprintid')},success:function(data)
 			{
 				if(data!="failure")

@@ -376,7 +376,7 @@ equationEditor.prototype.addEquationEditorButton = function(buttonLabel,buttonCo
     }
     catch(e)
     {
-        console.log(buttonLabel);	
+        new Message(buttonLabel);
     }
 
     equationEditorButton.appendChild(equationEditorDisplay);

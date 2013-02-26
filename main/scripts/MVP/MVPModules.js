@@ -51,7 +51,7 @@ ModuleList.prototype.addModuleToMyModules = function(moduleItem)
         try
         {
             var jsonArray = $.parseJSON(data);
-            if(jsonArray.status=="success")
+            if(jsonArray.status=="Success.")
             {
                 $('#myModules ul').append('<li data-userlessonplanid="'+jsonArray.id+'" data-coursepath="'+payload.path+'"></li>').children('li:last-of-type').
                                    append('<a href="'+$(moduleItem).children('a').attr('href')+'"></a>').children('a').

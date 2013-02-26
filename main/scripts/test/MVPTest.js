@@ -77,7 +77,6 @@ $(document).ready(function()
                         }
                         catch(e)
                         {
-                            console.log(e);
                             new Message(answerData);
                         }
                     }})
