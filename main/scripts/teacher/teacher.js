@@ -2,16 +2,16 @@
 // RETURNS: void
 function addTeacherFunctionality()
 {
-    $('#teachertrainingmanual').append('<ul>');
+    $("#trainingmanuallink").append('<ul></ul>');
     function addTrainingCheckbox(boxtype,boxtypeName)
     {
         if($('[data-infoboxtype='+boxtype+']').size()>0)
         {
-            $("#teachertrainingmanual ul").append('<li><input type="checkbox" id="show'+boxtype+'" /><label for="show'+boxtype+'">Show '+boxtypeName+'</label></li>');
+            $("#trainingmanuallink ul").append('<li><input type="checkbox" id="show'+boxtype+'" /><label for="show'+boxtype+'">Show '+boxtypeName+'</label></li>');
 
             if($('[data-infoboxtype='+boxtype+']').is(':visible'))
             {
-                $('#teachertrainingmanual ul #show'+boxtype).attr('checked','checked')
+                $('#trainingmanuallink ul #show'+boxtype).attr('checked','checked')
             }
 
             $("#show"+boxtype).bind("click",function()

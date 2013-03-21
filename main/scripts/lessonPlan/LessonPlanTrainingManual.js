@@ -8,7 +8,7 @@ function LessonPlanTrainingManual()
         var jsonArray = $.parseJSON(data);
         if(jsonArray["isMyLessonPlan"])
         {
-            $('body').append('<div id="teachertrainingmanual"><div id="teachertrainingmanualheader"><h2>Customize Training Manual</h2></div></div>')
+            //$('body').append('<div id="teachertrainingmanual"><div id="teachertrainingmanualheader"><h2>Customize Training Manual</h2></div></div>')
             var payload = {uri:$('#content').attr('data-location')};
         
             $.ajax({url:'resources/getTrainingManual.php',type:'GET',data:payload,success:function(data)
