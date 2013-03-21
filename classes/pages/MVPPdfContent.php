@@ -56,29 +56,33 @@ class MVPPdfContent extends MVPFrame
         $pdf_file = preg_replace('/\W+/', '_', $url_info['query']).'.pdf';
         $full_path = $this->pdf_path . '/' . $pdf_file;
         
-        
         if(file_exists($full_path))
         {
-            $max_wait = 60; // Let's wait a minute
-            while(!filesize($full_path) && $max_wait--)
+            $mtime_diff = filemtime($full_path) - time();
+            if(!filesize($full_path) && $mtime_diff > 60)
             {
-                sleep(1);
-                clearstatcache(true, $full_path);
+                unlink($full_path);
+            }
+            else
+            {
+                $max_wait = 60; // Let's wait a minute
+                while(!filesize($full_path) && $max_wait--)
+                {
+                    sleep(1);
+                    clearstatcache(true, $full_path);
+                }
+                if(!filesize($full_path))
+                    unlink($full_path);
             }
         }
-        else
+        
+        if(!file_exists($full_path))
         {
             // Create the file first to prevent process lock
             touch($full_path);
             $command = sprintf('%s %s %s %s A4', $this->phantom_js, escapeshellarg($this->render_script), escapeshellarg($url), escapeshellarg($full_path));
-            echo '<span style="display:none">'.$command.'</span>';exit;
-            exec($command, $output, $return);
-            if ($return != 0) {
-                // Error
-                echo sprintf("Error running command: %s\nErrors: %s\n", $command, join("\n", $output));
-                exit;
-            }
-        }
+            $o = shell_exec($command);
+        } 
         
         header('Content-disposition: attachment; filename='.$pdf_file);
         header('Content-type: application/pdf');
