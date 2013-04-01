@@ -4,7 +4,7 @@ require_once("Frame.php");
 
 class Question extends Frame
 {
-    protected $ILOs = array("graph","equation","chemicalEquation","staticimage");
+    protected $ILOs = array("graph","equation","chemicalEquation","staticimage","youtube");
     protected $mode = null;
     protected $lastCorrectAnswer = null;
     protected $lastQuestion = null;

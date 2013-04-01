@@ -4,7 +4,7 @@ require_once("AbstractFrame.php");
 
 class PrintQuiz extends AbstractFrame
 {
-    protected $ilos = array("graph","equation","chemicalEquation","staticimage");
+    protected $ilos = array("graph","equation","chemicalEquation","staticimage","youtube");
     protected $pageContent = null;
     protected $showAnswers = false;
     

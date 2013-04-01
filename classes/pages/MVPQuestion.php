@@ -4,7 +4,7 @@ require_once("MVPFrame.php");
 
 class MVPQuestion extends MVPFrame
 {
-    protected $ILOs = array("graph","equation","chemicalEquation","staticimage");
+    protected $ILOs = array("graph","equation","chemicalEquation","staticimage","youtube");
     protected $mode = null;
     protected $lastCorrectAnswer = null;
     protected $lastQuestion = null;

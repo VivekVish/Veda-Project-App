@@ -20,7 +20,7 @@ class MVPQuestionEditor extends MVPFrame
                                             array("optgroup"=>"Chemistry Equation","group"=>array(
                                                     array("value"=>"wordMultChoice","text"=>"Multiple Choice"),
                                                     array("value"=>"wordFillInTheBlank","text"=>"Fill-in-the-blank"))));
-    protected $ILOs = array("graph","equation","chemicalEquation","staticimage");
+    protected $ILOs = array("graph","equation","chemicalEquation","staticimage","youtube");
     protected $section = null;
     protected $lesson = null;
     

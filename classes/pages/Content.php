@@ -6,7 +6,7 @@ class Content extends Frame
 {
     protected $path = null;
     protected $name = null;
-    protected $ILOs = array("graph","equation","chemicalEquation","staticimage");
+    protected $ILOs = array("graph","equation","chemicalEquation","staticimage","youtube");
     
     public function __construct($bodyTemplates, $cssFiles, $scriptFiles, $ieScriptFiles, $fullnameScriptFiles)
     {
