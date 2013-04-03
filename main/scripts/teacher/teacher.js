@@ -27,21 +27,27 @@ function addTeacherFunctionality()
             })
         }
     }
-    
+    /*
     addTrainingCheckbox("roleplay","Roleplay");
     addTrainingCheckbox("jobaide","Job Aide");
     addTrainingCheckbox("studentparticipation","Student Participation");
     addTrainingCheckbox("discussion","Discussion");
+    */
+    $('.infoBox').each(function()
+    {
+        addTrainingCheckbox($(this).attr('data-infoboxtype'),$(this).attr('data-infoboxtype'));
+    })
     
     $('footer').prepend('<div id="pagenav"><ul><li id="submitContent"><a>Submit</a></li></ul></div>');
     
     $('#submitContent').click(function()
     {
         var payload = {path:$('#content').attr('data-location')};
-        $('#teachertrainingmanual ul li input').each(function()
+        $('#trainingmanuallink ul li input').each(function()
         {
-            payload[$(this).attr('id')] = $(this).is(':checked')
+            payload[$(this).attr('id')] = $(this).is(':checked');
         });
+        
         $.ajax({url:'resources/submitLessonPlanTrainingManual.php', data:payload, type:'POST', success: function(data)
         {
             new Message(data);

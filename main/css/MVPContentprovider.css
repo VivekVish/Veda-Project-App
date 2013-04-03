@@ -209,3 +209,9 @@ nav#coursenav
 {
     margin-top: 40px;
 }
+
+#lightbox label[for=infoBoxLabel]
+{
+    margin-left: 2.5px;
+    display: block;
+}
