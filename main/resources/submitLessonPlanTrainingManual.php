@@ -14,10 +14,12 @@ $api->setDataType();
 
 $uriArr = explode("/",trim($_REQUEST['path'],"/"));
 $lessonPlan = json_decode($api->get(sprintf("/%s/%s/%s/",$uriArr[0],$uriArr[1],$uriArr[2])));
+$payloadArray = $_REQUEST;
+unset($payloadArray['path']);
+$payload = json_encode($payloadArray);
 
 if($lessonPlan->username==$userSession->getUsername())
 {
-    $payload = json_encode(array("showroleplay"=>$_REQUEST['showroleplay'],"showjobaide"=>$_REQUEST['showjobaide'],"showstudentparticipation"=>$_REQUEST['showstudentparticipation'],"showdiscussion"=>$_REQUEST['showdiscussion']));
     $uri = $_REQUEST['path'];
     $result = $api->post($uri,$payload);
 

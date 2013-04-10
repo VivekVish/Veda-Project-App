@@ -49,17 +49,20 @@ navbar.prototype.processPosition = function(navBarLocation)
                     if(value=="trainingmanual")
                     {
                         var additionName = "Training Manual";
+                        var listId = "trainingmanuallink";
                     }
                     else if(value=="roleplay")
                     {
                         additionName = "Roleplay";
+                        listId = "roleplaylink";
                     }
                     else if(value=="video")
                     {
                         additionName = "Video";
+                        listId = "videolink";
                     }
-                    
-                    $('#coursenav>div>ul').append('<li><a href="'+additionLinkLocation+'">'+additionName+'</a></li>');
+
+                    $('#coursenav>div>ul').append('<li id="'+listId+'"><a href="'+additionLinkLocation+'">'+additionName+'</a></li>');
                 });
             }});
         }
@@ -93,21 +96,25 @@ navbar.prototype.processPosition = function(navBarLocation)
                     if(value=="trainingmanual")
                     {
                         var additionName = "Training Manual";
+                        var listId = "trainingmanuallink";
                     }
                     else if(value=="roleplay")
                     {
                         additionName = "Roleplay";
+                        listId = "roleplaylink";
                     }
                     else if(value=="video")
                     {
                         additionName = "Video";
+                        listId = "videolink";
                     }
                     else if(value=="Quiz")
                     {
                         additionName = "Quiz";
+                        listId = "quizlink";
                     }
                     
-                    $('#coursenav>div>ul').append('<li><a href="'+additionLinkLocation+'">'+additionName+'</a></li>');
+                    $('#coursenav>div>ul').append('<li id="'+listId+'"><a href="'+additionLinkLocation+'">'+additionName+'</a></li>');
                 });
             }});
         }
