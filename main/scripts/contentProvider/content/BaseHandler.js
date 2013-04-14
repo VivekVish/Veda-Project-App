@@ -533,6 +533,13 @@ BaseHandler.prototype.handleGeneralEvent=function(e)
                         materialProvider.formatTextStyle("underline");
                     }
                     break;
+                case 86:
+                    if(thisObject.keyPressed['ctrl']&&thisObject.keyPressed['shift'])
+                    {
+                        e.preventDefault();
+                        youtube.editMode();
+                    }
+                    break;
                 case 88:
                     if(thisObject.keyPressed['shift']&&thisObject.keyPressed['ctrl'])
                     {

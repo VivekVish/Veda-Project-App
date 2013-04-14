@@ -333,7 +333,7 @@ var staticimage =
         function createImage()
         {
             if(!staticimage.createImageStarted&&$('#imageHolder').find('img').size()>0)
-			{
+            {
                 function afterILOCreation()
                 {
                     staticimageILO.display(targetImage);
@@ -344,46 +344,46 @@ var staticimage =
                     $('#overlay').fadeOut('fast',function() {$(this).remove();});
                 }
                 
-				staticimage.createImageStarted = true;
+                staticimage.createImageStarted = true;
 
                 var ILOArray = {'type':'staticimage','version':'1.0','attributes':{'width':$('#imageWidth').val()/100,'frame':$("#imageHolder").attr("data-frame"),'position':$('input[name="imagePosition"]:checked').val()},'content':{'file':$('#imageHolder').attr('data-imagefile'),'caption':$('#imageCaption').val()}};
 
-				if(typeof(targetImage) == 'undefined' || $('#content').find(targetImage).size()==0)
-				{
-					targetImage = document.createElement('div');
+                if(typeof(targetImage) == 'undefined' || $('#content').find(targetImage).size()==0)
+                {
+                    targetImage = document.createElement('div');
                     ilo.insertILO(insertionPoint,targetImage,'after');
-					ilo.createILO(targetImage,ILOArray,afterILOCreation, function(targetImage){staticimage.createImageStarted = false;$(targetImage).remove();}, [targetImage]);	
-				}
-				else
-				{
-					ilo.editILO($(targetImage).attr('id'),ILOArray,afterILOCreation, function(){staticimage.createImageStarted = false;});
-				}
+                    ilo.createILO(targetImage,ILOArray,afterILOCreation, function(targetImage){staticimage.createImageStarted = false;$(targetImage).remove();}, [targetImage]);	
+                }
+                else
+                {
+                    ilo.editILO($(targetImage).attr('id'),ILOArray,afterILOCreation, function(){staticimage.createImageStarted = false;});
+                }
                 
-				checkValidWidth();
+                checkValidWidth();
 				
-			}
+            }
         }
         
         function cancel()
         {
             delete ILOContents.ILOArray['ilo-1'];
             $('#lightbox').fadeOut('fast',function() {$(this).remove();});
-			$('#overlay').fadeOut('fast',function() {$(this).remove();});
+            $('#overlay').fadeOut('fast',function() {$(this).remove();});
             rangeTraverse.setCurrentRange(currentRange);
             
         }
 		
-		$('#imageEditorHolder button.create').click(function()
-		{
-			createImage();
-		});
-		
-		$('#imageEditorHolder button.cancel').click(function()
-		{
-			cancel();
-		});
+        $('#imageEditorHolder button.create').click(function()
+        {
+            createImage();
+        });
+
+        $('#imageEditorHolder button.cancel').click(function()
+        {
+            cancel();
+        });
         
-         $('#imageEditorHolder input[type="text"]').keydown(function(e)
+        $('#imageEditorHolder input[type="text"]').keydown(function(e)
         {
             switch(e.keyCode)
             {

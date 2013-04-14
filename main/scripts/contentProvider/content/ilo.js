@@ -151,11 +151,11 @@ var ilo =
         {
             if(data=="no")
             {
-                    ILOExists = false;
+                ILOExists = false;
             }
             else if(data=="yes")
             {
-                    ILOExists = true;
+                ILOExists = true;
             }
 
             if(ILOExists)

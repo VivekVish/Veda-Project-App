@@ -749,10 +749,10 @@ BaseProvider.prototype.construct = function()
 		staticimage.editMode();
 	});
     
-    // Insert Video
-    $('#insertVideo').click(function()
+        // Insert Video
+        $('#insertVideo').click(function()
 	{
-		youtubevideo.editMode();
+            youtube.editMode();
 	});
     
     // Insert Citatoin
