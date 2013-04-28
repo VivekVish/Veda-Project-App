@@ -61,7 +61,7 @@ class Mutex {
         if(flock($fileHandle, LOCK_EX)){
             flock($fileHandle, LOCK_UN);
             fclose($fileHandle);
-            $this->writeablePath = $path;
+            return $path;
         } else {
             throw new Exception("Cannot establish lock on temporary file.");
         }

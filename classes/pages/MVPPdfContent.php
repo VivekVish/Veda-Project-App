@@ -8,10 +8,12 @@ class MVPPdfContent extends MVPFrame
     const PhantomJS_Linux_i386 = 'phantomjs-lin32';
     const PhantomJS_Windows_i386 = 'phantomjs-win32.exe';
     
+    const PhantomJS_Timeout = 180;
+    
     private $phantom_js = '../vendors/PhantomJS/';
     private $render_script = '../vendors/PhantomJS/rasterize.js';
     private $pdf_path = './pdf';
-    private $pdf_url = 'pdf';
+    
     
     private $allowed_hosts = array(
         '/^veda-app\.local$/',
@@ -34,6 +36,8 @@ class MVPPdfContent extends MVPFrame
     
     public function display()
     {
+        require_once 'lib/mutex.php';
+        
         $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         
         $url_info = parse_url($url);
@@ -56,34 +60,42 @@ class MVPPdfContent extends MVPFrame
         $pdf_file = preg_replace('/\W+/', '_', $url_info['query']).'.pdf';
         $full_path = $this->pdf_path . '/' . $pdf_file;
         
-        if(file_exists($full_path))
+        if(file_exists($full_path) && filesize($full_path))
         {
-            $mtime_diff = filemtime($full_path) - time();
-            if(!filesize($full_path) && $mtime_diff > 60)
-            {
-                unlink($full_path);
-            }
-            else
-            {
-                $max_wait = 60; // Let's wait a minute
-                while(!filesize($full_path) && $max_wait--)
-                {
-                    sleep(1);
-                    clearstatcache(true, $full_path);
-                }
-                if(!filesize($full_path))
-                    unlink($full_path);
-            }
+            $this->dumpPdf($pdf_file, $full_path);
+            return;
         }
         
-        if(!file_exists($full_path))
+        $mutex = new Mutex($pdf_file);
+        $now = time();
+        // Wait until get a lock
+        while(!$mutex->getLock())
         {
-            // Create the file first to prevent process lock
-            touch($full_path);
-            $command = sprintf('%s %s %s %s A4', $this->phantom_js, escapeshellarg($this->render_script), escapeshellarg($url), escapeshellarg($full_path));
-            $o = shell_exec($command);
-        } 
+            // Sleep for 0.5 seconds
+            usleep(500);
+            // Check against timeouts
+            if((time()-$now) > self::PhantomJS_Timeout)
+                die('Timeout reached when generating PDF');
+        }
         
+        // Remove if there is a zero-sized file
+        @unlink($full_path);
+        
+        clearstatcache(true, $full_path);
+        
+        // Create the file first to prevent process lock
+        touch($full_path);
+        $command = sprintf('%s %s %s %s A4', $this->phantom_js, escapeshellarg($this->render_script), escapeshellarg($url), escapeshellarg($full_path)); 
+        $o = shell_exec($command);
+        
+        // Release lock
+        $mutex->releaseLock();
+        
+        $this->dumpPdf($pdf_file, $full_path);
+    }
+    
+    public function dumpPdf($pdf_file, $full_path)
+    {
         header('Content-disposition: attachment; filename='.$pdf_file);
         header('Content-type: application/pdf');
         readfile($full_path);
@@ -93,5 +105,5 @@ class MVPPdfContent extends MVPFrame
     {
     }
 }
-
+ 
 ?>
