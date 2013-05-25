@@ -4,6 +4,4 @@ config/sec.inc.php
 main/scripts/MathJax/*
 main/img/contentImages/*
 main/img/contentImages/
-main/pdf
-main/v2.exe
-main/veda-installer.exe
+/main/pdf
