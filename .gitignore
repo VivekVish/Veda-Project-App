@@ -3,4 +3,5 @@ templates_c/*
 config/sec.inc.php
 main/scripts/MathJax/*
 main/img/contentImages/*
+main/img/contentImages/
 /main/pdf
