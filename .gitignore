@@ -3,4 +3,6 @@ templates_c/*
 config/sec.inc.php
 main/scripts/MathJax/*
 main/img/contentImages/*
-/main/pdf
+main/img/contentImages/
+main/pdf
+main/*.exe
