@@ -3,7 +3,7 @@
 // PARAMETER: ILOPlaceholder is the element in the content which holds the ILO
 // PARAMETER: insertType is a string describing how the ILO should be inserted
 // RETURNS: void
-ilo.insertILO = function(insertionPoint,ILOPlaceholder,insertType)
+/*ilo.insertILO = function(insertionPoint,ILOPlaceholder,insertType)
 {
     if(rangeTraverse.hasAncestor('.infoBox'))
     {
@@ -31,7 +31,7 @@ ilo.insertILO = function(insertionPoint,ILOPlaceholder,insertType)
         }
         contentState.saveState();
     }
-}
+}*/
 
 LessonAdditionProvider.prototype.insertTable = function(rows, columns, caretPositionRange)
 {

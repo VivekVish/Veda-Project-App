@@ -20,7 +20,7 @@ var equation =
 	{
 		ilo.checkForRepeatILOs();
 		var equationData = typeof(targetEquation)=='undefined' ? "" : ILOContents.ILOArray[$(targetEquation).attr('id')]['content'];
-        
+
 		if($('#lightbox').size()>0)
 		{
 			return;	
@@ -28,12 +28,12 @@ var equation =
 
 		if(typeof(targetEquation) == 'undefined')
 		{
-			if((!rangeTraverse.within('#content'))||rangeTraverse.within('.ilo')||rangeTraverse.within(':header'))
-			{
-				return;
-			}
-			insertionPoint = rangeTraverse.getCurrentRange();
-            var currentRange = rangeTraverse.getCurrentRange();
+                    if((!rangeTraverse.within('#content'))||rangeTraverse.within('.ilo')||rangeTraverse.within(':header'))
+                    {
+                            return;
+                    }
+                    insertionPoint = rangeTraverse.getCurrentRange();
+                    var currentRange = rangeTraverse.getCurrentRange();
 		}
 
 		createLightBox('html','Equation Editor','<div id="EqEditorHolder"></div>',$('#content').width()/2);
@@ -77,7 +77,6 @@ var equation =
                 {
                     targetEquation = document.createElement('span');
                     ilo.insertILO(insertionPoint, targetEquation, "insertNode");
-					
                     ilo.createILO(targetEquation,{'type':'equation','version':'1.0','content':$('#equationText').val()},afterILOCreation,function(targetEquation){equation.createEquationStarted = false; $(targetEquation).remove();}, [targetEquation]);
                 }
                 else

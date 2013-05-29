@@ -76,12 +76,10 @@ class MVPPdfContent extends MVPFrame
             // Check against timeouts
             if((time()-$now) > self::PhantomJS_Timeout)
                 die('Timeout reached when generating PDF');
-        }
-        
+        }   
+      
         // Remove if there is a zero-sized file
         @unlink($full_path);
-        
-        clearstatcache(true, $full_path);
         
         // Create the file first to prevent process lock
         touch($full_path);
