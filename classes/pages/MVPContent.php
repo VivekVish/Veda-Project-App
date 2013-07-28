@@ -30,6 +30,7 @@ class MVPContent extends MVPFrame
         $GLOBALS['smarty']->assign("content", html_entity_decode($this->pageContent->content));
         $GLOBALS['smarty']->assign("location", $this->path);
         $GLOBALS['smarty']->assign("name", $this->name);
+        $GLOBALS['smarty']->assign("docname", preg_replace('/ Training Manual| Roleplay/',"",$this->name));
         
         parent::display();
     }
